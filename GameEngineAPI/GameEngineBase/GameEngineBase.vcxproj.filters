@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{8079784e-a612-4e40-b403-52ff7e78e008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{a0872c8f-23bd-4871-b8a6-965758731954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{50ef3683-08e6-4d40-8c79-7dd6043b7d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{2a30ddfe-ff2f-421e-938c-2336b5f3c0b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameEngineWindow.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineNameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngineWindow.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineNameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

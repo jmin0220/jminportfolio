@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="StardewContents.cpp" />
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>00Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>00Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>00Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>01Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>02Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingCredit.cpp">
+      <Filter>03Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="animals.cpp">
+      <Filter>02Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Chiecken.cpp">
+      <Filter>02Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Crops.cpp">
+      <Filter>02Play\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="Potato.cpp">
+      <Filter>02Play\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>02Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Mines.cpp">
+      <Filter>02Play\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Fishes.cpp">
+      <Filter>02Play\Fish</Filter>
+    </ClCompile>
+    <ClCompile Include="Bream.cpp">
+      <Filter>02Play\Fish</Filter>
+    </ClCompile>
+    <ClCompile Include="Copper.cpp">
+      <Filter>02Play\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGround.cpp">
+      <Filter>01Title</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StardewContents.h" />
+    <ClInclude Include="TitleLevel.h">
+      <Filter>00Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>00Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>00Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>01Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>02Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingCredit.h">
+      <Filter>03Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="animals.h">
+      <Filter>02Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="Chiecken.h">
+      <Filter>02Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="Crops.h">
+      <Filter>02Play\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="Potato.h">
+      <Filter>02Play\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>02Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Mines.h">
+      <Filter>02Play\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Fishes.h">
+      <Filter>02Play\Fish</Filter>
+    </ClInclude>
+    <ClInclude Include="Bream.h">
+      <Filter>02Play\Fish</Filter>
+    </ClInclude>
+    <ClInclude Include="Copper.h">
+      <Filter>02Play\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBackGround.h">
+      <Filter>01Title</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="01Title">
+      <UniqueIdentifier>{45daeef9-39cc-4f06-b2f5-0b4c0bfdcd55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00Level">
+      <UniqueIdentifier>{28095a85-3cd5-4d4b-9e57-2bc83bfaf0b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play">
+      <UniqueIdentifier>{8a17fef8-a49d-44a1-a474-aeb93f329f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Monster">
+      <UniqueIdentifier>{d36db7ee-75a8-497a-8869-08a3fe262001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03Ending">
+      <UniqueIdentifier>{333692ca-fce9-4319-ac1f-1e5a2d15c802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Animal">
+      <UniqueIdentifier>{c7d29261-0e1c-472e-b384-de69a59243ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Crop">
+      <UniqueIdentifier>{cbe1d534-e6ca-40d4-b9ee-84bc78cd49a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Mine">
+      <UniqueIdentifier>{a8c34d45-9f20-4134-822e-a17540ced57e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Fish">
+      <UniqueIdentifier>{c7f33d1d-1ff1-4e68-b48e-1f7d050c6159}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
