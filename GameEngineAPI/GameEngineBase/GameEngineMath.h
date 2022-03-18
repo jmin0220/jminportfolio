@@ -53,53 +53,53 @@ public:
 	}
 
 public:
-	bool IsZero2D()
+	bool IsZero2D() const
 	{
 		return x == 0.0f && y == 0.0f;
 	}
 
 	// 모든 멤버변수의 절반값
-	float4 Half()
+	float4 Half() const
 	{
 		return { x * 0.5f, y * 0.5f , z * 0.5f, 1.0f };
 	}
 
 public:
 	// float의 int캐스팅값
-	int ix()
+	int ix() const
 	{
 		return static_cast<int>(x);
 	}
 
-	int iy()
+	int iy() const
 	{
 		return static_cast<int>(y);
 	}
 
-	int iz()
+	int iz() const
 	{
 		return static_cast<int>(z);
 	}
 
-	int iw()
+	int iw() const
 	{
 		return static_cast<int>(w);
 	}
 
 	// float의 int캐스팅값의 절반
-	int hix()
+	int hix() const
 	{
 		return static_cast<int>(x * 0.5f);
 	}
 
-	int hiy()
+	int hiy() const
 	{
-		return static_cast<int>(x * 0.5f);
+		return static_cast<int>(y * 0.5f);
 	}
 
-	int hiz()
+	int hiz() const
 	{
-		return static_cast<int>(x * 0.5f);
+		return static_cast<int>(z * 0.5f);
 	}
 };
 

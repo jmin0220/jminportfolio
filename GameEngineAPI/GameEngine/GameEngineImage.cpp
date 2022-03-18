@@ -2,12 +2,41 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-GameEngineImage::GameEngineImage() 
+GameEngineImage::GameEngineImage()
+	: ImageDC_(nullptr)
 {
 }
 
 GameEngineImage::~GameEngineImage() 
 {
+	// window에서 할당해온 변수들은 릭으로 체크가 안되지만 삭제해줄것.
+	// 당연히 윈도우에게 할당해왔으므로 윈도우의 함수를 이용해서 지워야함.
+	if (nullptr != BitMap_)
+	{
+		DeleteObject(BitMap_);
+		BitMap_ = nullptr;
+	}
+
+	if (nullptr != OldBitMap_)
+	{
+		DeleteObject(OldBitMap_);
+		OldBitMap_ = nullptr;
+	}
+
+	if (nullptr != ImageDC_)
+	{
+		DeleteDC(ImageDC_);
+		ImageDC_ = nullptr;
+	}
+}
+
+bool GameEngineImage::Create(HDC _DC)
+{
+	ImageDC_ = _DC;
+
+	ImageScaleCheck();
+
+	return true;
 }
 
 bool GameEngineImage::Create(float4 _Scale)
@@ -39,9 +68,33 @@ bool GameEngineImage::Create(float4 _Scale)
 	return true;
 }
 
-
 void GameEngineImage::ImageScaleCheck()
 {
+	// DC 내부에 사용되고있는 현재 비트맵을 취득
+	HBITMAP CurrentBitMap = (HBITMAP)GetCurrentObject(ImageDC_, OBJ_BITMAP);
+
 	// BitMap_의 정보를 Info_에 저장
-	GetObject(BitMap_, sizeof(BITMAP), &Info_);
+	GetObject(CurrentBitMap, sizeof(BITMAP), &Info_);
+}
+
+void GameEngineImage::BitCopy(GameEngineImage* _Other)
+{
+	BitCopy(_Other, { 0, 0 }, { 0, 0 }, _Other->GetScale());
+}
+
+// 다른 이미지가 들어와서
+void GameEngineImage::BitCopy(GameEngineImage* _Other, const float4& _CopyPos, const float4& _OtherPivot, const float4& _OtherPivotScale)
+{
+	// DC -> DC복사 함수
+	BitBlt(
+		ImageDC_,              // 붙여넣기 할 변수
+		_CopyPos.ix(),         // 붙여넣기할 이미지의 위치 x
+		_CopyPos.iy(),	       // 붙여넣기할 이미지의 위치 y
+		_OtherPivotScale.ix(), // 내 이미지의 이 크기만큼 x
+		_OtherPivotScale.iy(), // 내 이미지의 이 크기만큼 y
+		_Other->ImageDC_,      // 복사할 변수
+		_OtherPivot.ix(),      // 복사할 이미지의 시작점X
+		_OtherPivot.iy(),      // 복사할 이미지의 시작점Y
+		SRCCOPY                // 복사하라는 명령어
+	);
 }
