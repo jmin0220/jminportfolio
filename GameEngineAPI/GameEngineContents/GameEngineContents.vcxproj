@@ -173,6 +173,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Clock.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Copper.h">
       <SubType>
       </SubType>
@@ -189,7 +193,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EnergyBar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Fishes.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="InventoryBar.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -225,11 +237,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleButtonLoadGame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleButtonExitGame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleButtonNewGame.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -244,6 +268,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Chiecken.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -263,7 +291,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EnergyBar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Fishes.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="InventoryBar.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -299,11 +335,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TitleButtonLoadGame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleButtonExitGame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleButtonNewGame.cpp">
       <SubType>
       </SubType>
     </ClCompile>

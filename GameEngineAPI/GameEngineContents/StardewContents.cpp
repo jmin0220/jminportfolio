@@ -28,7 +28,8 @@ void StardewContents::GameInit()
 
 void StardewContents::GameLoop()
 {
-
+	// 레벨 변경
+	ChangeLevel("Play");
 }
 
 void StardewContents::GameEnd()

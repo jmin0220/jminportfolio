@@ -12,9 +12,9 @@ TitleLogo::~TitleLogo()
 
 void TitleLogo::Start()
 {
-	// 타이틀로그의 위치와 크기
-	SetPosition({640, 257});
-	SetScale({ 400, 186});
+	// 타이틀로고의 위치와 크기
+	SetPosition({640, 252});
+	SetScale({ 796, 374});
 }
 
 void TitleLogo::Render()

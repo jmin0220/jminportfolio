@@ -53,6 +53,24 @@
     <ClCompile Include="TitleBackGround.cpp">
       <Filter>01Title</Filter>
     </ClCompile>
+    <ClCompile Include="TitleButtonNewGame.cpp">
+      <Filter>01Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleButtonLoadGame.cpp">
+      <Filter>01Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleButtonExitGame.cpp">
+      <Filter>01Title</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBar.cpp">
+      <Filter>02Play\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>02Play\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergyBar.cpp">
+      <Filter>02Play\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -107,6 +125,24 @@
     <ClInclude Include="TitleBackGround.h">
       <Filter>01Title</Filter>
     </ClInclude>
+    <ClInclude Include="TitleButtonNewGame.h">
+      <Filter>01Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButtonLoadGame.h">
+      <Filter>01Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButtonExitGame.h">
+      <Filter>01Title</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBar.h">
+      <Filter>02Play\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>02Play\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="EnergyBar.h">
+      <Filter>02Play\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">
@@ -135,6 +171,9 @@
     </Filter>
     <Filter Include="02Play\Fish">
       <UniqueIdentifier>{c7f33d1d-1ff1-4e68-b48e-1f7d050c6159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Interface">
+      <UniqueIdentifier>{7d14fb72-1e23-44d8-b8f7-4fb4669f4c58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
