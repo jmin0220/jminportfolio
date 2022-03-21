@@ -20,7 +20,7 @@ void StardewContents::GameInit()
 	// 리소스를 다 로드하지 못하는 상황이 올수가 없다.
 
 	GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\GameEngineAPI\\Resources\\Image\\Idle.bmp", "Idle.bmp");
-
+	// GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\resource\\textures_bmp\\environment\\Bushes.bmp", "Idle.bmp");
 	// 레벨 생성
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
