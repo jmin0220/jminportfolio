@@ -17,6 +17,12 @@
     <ClInclude Include="GameEngineImageManager.h">
       <Filter>Resource\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRenderer.h">
+      <Filter>Actor\SubObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp" />
@@ -35,6 +41,9 @@
     <ClCompile Include="GameEngineImageManager.cpp">
       <Filter>Resource\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRenderer.cpp">
+      <Filter>Actor\SubObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -48,6 +57,12 @@
     </Filter>
     <Filter Include="Resource\Manager">
       <UniqueIdentifier>{8ce328e3-f1ff-4c07-b9b3-31e073c8fab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\SubObject">
+      <UniqueIdentifier>{e659020a-56a4-4f23-bcc9-fd88a2c427ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{8166f47f-8ca2-4298-9cf4-f962d86570fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ public:
 	GameEngine& operator=(const GameEngine& _Other) = delete;
 	GameEngine& operator=(GameEngine&& _Other) noexcept = delete;
 
-	static inline GameEngineImage* BackBuffer()
+	static inline GameEngineImage* BackBufferImage()
 	{
 		return BackBufferImage_;
 	}

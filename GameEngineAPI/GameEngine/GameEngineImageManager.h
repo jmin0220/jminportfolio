@@ -26,8 +26,15 @@ public:
 		Inst_ = nullptr;
 	}
 
-	GameEngineImage* Create(const std::string& _Name, float4 _Scale);
+	// AllRes에서 이미지 찾기
+	GameEngineImage* Find(const std::string& _Name);
+
+	// 비어있는 이미지를 생성
+	GameEngineImage* Create(const std::string& _Name, const float4 _Scale);
 	GameEngineImage* Create(const std::string& _Name, HDC _DC);
+
+	// 이미지 로드
+	GameEngineImage* Load(const std::string& _Path, const std::string& _Name);
 
 private:
 	// constrcuter destructer
@@ -43,6 +50,7 @@ private:
 protected:
 
 private:
+	// 생성된 이미지를 모두 저장하는 map
 	std::map<std::string, GameEngineImage*> AllRes;
 };
 

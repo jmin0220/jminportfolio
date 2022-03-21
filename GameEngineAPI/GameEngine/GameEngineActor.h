@@ -1,8 +1,11 @@
 #pragma once
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include "GameEngineEnum.h"
+#include <list>
 
 // 설명 :
+class GameEngineRenderer;
 class GameEngineLevel;
 class GameEngineActor : public GameEngineNameObject
 {
@@ -58,5 +61,12 @@ private:
 	{
 		Level_ = _Level;
 	}
+
+public:
+	// 렌더러생성
+	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+
+private:
+	std::list<GameEngineRenderer*> RenderList_;
 };
 
