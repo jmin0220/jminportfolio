@@ -88,6 +88,8 @@ void GameEngine::EngineLoop()
 	CurrentLevel_->Update();
 	CurrentLevel_->ActorUpdate();
 	CurrentLevel_->ActorRender();
+	
+	// 백버퍼를 메인DC에 복사
 	WindowMainImage_->BitCopy(BackBufferImage_);
 }
 

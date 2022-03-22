@@ -75,6 +75,16 @@ void GameEngineLevel::ActorRender()
 		StartActor = Group.begin();
 		EndActor = Group.end();
 
+		// GameEngineRenderer에 저장된 이미지 렌더링
+		for (; StartActor != EndActor; ++StartActor)
+		{
+			(*StartActor)->Rendering();
+		}
+
+		StartActor = Group.begin();
+		EndActor = Group.end();
+
+		// 각 Actor에 오버라이드된 Render함수로 설정된 이미지 렌더링
 		for (; StartActor != EndActor; ++StartActor)
 		{
 			(*StartActor)->Render();

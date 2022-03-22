@@ -34,6 +34,7 @@ public:
 	GameEngineImage* Create(const std::string& _Name, HDC _DC);
 
 	// 이미지 로드
+	GameEngineImage* Load(const std::string& _Path);
 	GameEngineImage* Load(const std::string& _Path, const std::string& _Name);
 
 private:

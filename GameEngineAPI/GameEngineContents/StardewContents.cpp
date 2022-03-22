@@ -17,23 +17,22 @@ void StardewContents::GameInit()
 {
 	// 윈도우의 초기 크기 세팅
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
-	// 리소스를 다 로드하지 못하는 상황이 올수가 없다.
-
+	
 	GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\GameEngineAPI\\Resources\\Image\\Idle.bmp", "Idle.bmp");
-	// GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\resource\\textures_bmp\\environment\\Bushes.bmp", "Idle.bmp");
+	// GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\resource\\textures_bmp\\environment\\Bushes.bmp", "Bushes.bmp");
+
 	// 레벨 생성
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
 
 	// 레벨 변경
-	ChangeLevel("Title");
+	ChangeLevel("Play");
 }
 
 void StardewContents::GameLoop()
 {
-	// 레벨 변경
-	ChangeLevel("Play");
+
 }
 
 void StardewContents::GameEnd()

@@ -16,19 +16,19 @@ void Player::Start()
 	SetPosition({ 688, 352 });
 	SetScale({ 56, 120 });
 
-	CreateRenderer("Idel.bmp");
+	CreateRenderer("Idle.bmp");
 }
 
-void Player::Render()
-{
-	// DebugRectRender();
-
-	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find("Idle.bmp");
-
-	if (nullptr == FindImage)
-	{
-		MsgBoxAssert("이미지 로딩 실패");
-	}
-
-	GameEngine::BackBufferImage()->BitCopyCenter(FindImage, GetPosition());
-}
+//void Player::Render()
+//{
+//	// DebugRectRender();
+//
+//	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find("Idle.bmp");
+//
+//	if (nullptr == FindImage)
+//	{
+//		MsgBoxAssert("이미지 로딩 실패");
+//	}
+//
+//	GameEngine::BackBufferImage()->BitCopyCenter(FindImage, GetPosition());
+//}

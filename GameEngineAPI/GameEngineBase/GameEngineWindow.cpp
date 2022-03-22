@@ -12,7 +12,9 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
     case WM_DESTROY:
         // 윈도우 종료, 루프 종료
         GameEngineWindow::GetInst().Off();
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        //return DefWindowProc(hWnd, message, wParam, lParam);
+        break;
+
     // 윈도우 화면에 무엇인가 그려질 경우
     case WM_PAINT:
     {
@@ -20,13 +22,22 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
         HDC hdc = BeginPaint(hWnd, &ps);
 
         EndPaint(hWnd, &ps);
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    default:
+        
+        //return DefWindowProc(hWnd, message, wParam, lParam);
         break;
     }
+    case WM_CLOSE:
+    {
+        GameEngineWindow::GetInst().Off();
 
-    return DefWindowProc(hWnd, message, wParam, lParam);
+        break;
+    }
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+
+    //return DefWindowProc(hWnd, message, wParam, lParam);
+    return 0;
 }
 
 GameEngineWindow* GameEngineWindow::Inst_ = new GameEngineWindow();
@@ -136,7 +147,7 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
         // GetMessage는 메세지가 없으면 다음 실행을 기다림. 게임에는 부적합.
         // PM_NOREMOVE 메세지 실행후 스택에서 메세지를 제거하지 않음.
         // PM_REMONVE  메세지 실행후 스택에서 메세지를 제거함.
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        if (0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             // 키보드의 입력이 문자일경우 WM_KEYDOWN로부터 WM_CHAR(입력된 문자)를 반환하는 함수.
             TranslateMessage(&msg);
