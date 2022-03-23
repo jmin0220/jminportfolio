@@ -3,6 +3,7 @@
 #include "Clock.h"
 #include "Player.h"
 #include "EnergyBar.h"
+#include "InventoryBar.h"
 
 enum class ORDER
 {
@@ -33,6 +34,8 @@ void PlayLevel::Update()
 void PlayLevel::LevelChangeStart()
 {
 	CreateActor<Player>("Player", (int)ORDER::PLAYER);
+
+	CreateActor<InventoryBar>("InventoryBar", (int)ORDER::UI);
 	CreateActor<Clock>("Clock", (int)ORDER::UI);
 	CreateActor<EnergyBar>("EnergyBar", (int)ORDER::UI);
 }

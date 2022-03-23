@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class InventoryBar
+class InventoryBar : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -15,6 +16,7 @@ public:
 	InventoryBar& operator=(InventoryBar&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
 
 private:
 

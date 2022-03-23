@@ -12,7 +12,7 @@ void TitleButtonLoadGame::Start()
 {
 	// LoadGame버튼의 위치와 크기
 	SetPosition({ 640, 608 });
-	SetScale({ 222, 174 });
+	CreateRendererToScale("GameLoad.bmp", { 222, 174 });
 }
 
 void TitleButtonLoadGame::Render()

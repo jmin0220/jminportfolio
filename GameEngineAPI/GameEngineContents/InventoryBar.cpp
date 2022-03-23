@@ -9,3 +9,12 @@ InventoryBar::~InventoryBar()
 {
 }
 
+void InventoryBar::Start()
+{
+	// InventoryBar인터페이스렌더링
+	// 상단
+	SetPosition({ 640, 55 });
+	//하단
+	//SetPosition({ 640, 663 });
+	CreateRenderer("InventoryBar.bmp");
+}

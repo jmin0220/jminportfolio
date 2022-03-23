@@ -10,12 +10,12 @@ Clock::~Clock()
 
 void Clock::Start()
 {
-	// Clock인터페이스의 위치와 크기
-	SetPosition({ 1125, 157 });
-	SetScale({ 288, 292 });
+	// Clock인터페이스렌더링
+	SetPosition({ 1125, 129 });	
+	CreateRendererToScale("Clock.bmp", { 288, 236 });
 }
 
 void Clock::Render()
 {
-	DebugRectRender();
+	// DebugRectRender();
 }

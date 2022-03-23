@@ -39,6 +39,16 @@ public:
 		ScaleMode_ = _Mode;
 	}
 
+	// 이미지의 크기대로 출력
+	void SetImageScale();
+
+	// 유저가 설정한 크기대로 출력
+	inline void SetScale(const float4& _Scale)
+	{
+		ScaleMode_ = RenderScaleMode::User;
+		RenderScale_ = _Scale;
+	}
+
 	void SetImage(const std::string& _Name);
 
 protected:
