@@ -23,7 +23,7 @@ void GameEngineRenderer::SetImageScale()
 {
 	if (nullptr == Image_)
 	{
-		MsgBoxAssert("존재하지 않는 이미지로 크기를 조절하려고 했습니다.");
+		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_EXIST);
 		return;
 	}
 
@@ -37,7 +37,7 @@ void GameEngineRenderer::SetImage(const std::string& _Name)
 
 	if (nullptr == FindImage)
 	{
-		MsgBoxAssertString(_Name + "존재하지 않는 이미지를 랜더러에 세팅하려고 했습니다.");
+		MsgBoxAssertString(_Name + DEBUG_MSG_IMAGE_NOT_EXIST_SET_RENDERER);
 		return;
 	}
 
@@ -48,7 +48,7 @@ void GameEngineRenderer::Render()
 {
 	if (nullptr == Image_)
 	{
-		MsgBoxAssert("렌더러에 이미지가 설정되어있지 않습니다.");
+		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_SET_RENDERER);
 		return;
 	}
 

@@ -8,6 +8,11 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 
+enum class ORDER
+{
+	BACKGROUND,
+	UI
+};
 TitleLevel::TitleLevel() 
 {
 }
@@ -18,23 +23,23 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
-	CreateActor<TitleBackGround>("TitleBackGround", 0);
-	CreateActor<TitleLogo>("TitleLogo", 1);
-	CreateActor<TitleButtonNewGame>("TitleButtonNewGame", 1);
-	CreateActor<TitleButtonLoadGame>("TitleButtonLoadGame", 1);
-	CreateActor<TitleButtonExitGame>("TitleButtonExitGame", 1);
+	CreateActor<TitleBackGround>(ACTOR_TITLE_BACKGROUND, (int)ORDER::BACKGROUND);
+	CreateActor<TitleLogo>(ACTOR_TITLE_LOGO, (int)ORDER::UI);
+	CreateActor<TitleButtonNewGame>(ACTOR_TITLE_BUTTON_NEW, (int)ORDER::UI);
+	CreateActor<TitleButtonLoadGame>(ACTOR_TITLE_BUTTON_LOAD, (int)ORDER::UI);
+	CreateActor<TitleButtonExitGame>(ACTOR_TITLE_BUTTON_EXIT, (int)ORDER::UI);
 
-	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
+	if (false == GameEngineInput::GetInst()->IsKey(LEVEL_CHANGE))
 	{
-		GameEngineInput::GetInst()->CreateKey("LevelChange", VK_LBUTTON);
+		GameEngineInput::GetInst()->CreateKey(LEVEL_CHANGE, VK_LBUTTON);
 	}
 }
 
 void TitleLevel::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Play");
+		GameEngine::GlobalEngine().ChangeLevel(LEVEL_PLAY);
 	}
 	// GameEngine::GlobalEngine().ChangeLevel("Play");
 }

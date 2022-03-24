@@ -11,8 +11,8 @@ Clock::~Clock()
 void Clock::Start()
 {
 	// Clock인터페이스렌더링
-	SetPosition({ 1125, 129 });	
-	CreateRendererToScale("Clock.bmp", { 288, 236 });
+	SetPosition({ IMAGE_CLOCK_POS_W, IMAGE_CLOCK_POS_H });
+	CreateRendererToScale("Clock.bmp", { IMAGE_CLOCK_SIZE_W, IMAGE_CLOCK_SIZE_H });
 }
 
 void Clock::Render()

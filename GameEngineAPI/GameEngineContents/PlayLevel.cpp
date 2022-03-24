@@ -33,9 +33,9 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart()
 {
-	CreateActor<Player>("Player", (int)ORDER::PLAYER);
+	CreateActor<Player>(ACTOR_PLAYER, (int)ORDER::PLAYER);
 
-	CreateActor<InventoryBar>("InventoryBar", (int)ORDER::UI);
-	CreateActor<Clock>("Clock", (int)ORDER::UI);
-	CreateActor<EnergyBar>("EnergyBar", (int)ORDER::UI);
+	CreateActor<InventoryBar>(ACTOR_UI_INVENTORY_BAR, (int)ORDER::UI);
+	CreateActor<Clock>(ACTOR_UI_CLOCK, (int)ORDER::UI);
+	CreateActor<EnergyBar>(ACTOR_UI_ENERGYBAR, (int)ORDER::UI);
 }

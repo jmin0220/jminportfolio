@@ -44,7 +44,7 @@ GameEngineImage* GameEngineImageManager::Create(const std::string& _Name, HDC _D
 
 	if (AllRes.end() != AllRes.find(EngineName))
 	{
-		MsgBoxAssert("You tried make Image that is Already made");
+		MsgBoxAssert(DEBUG_MSG_IMAGE_ALREADY_EXIST);
 		return nullptr;
 	}
 
@@ -54,7 +54,7 @@ GameEngineImage* GameEngineImageManager::Create(const std::string& _Name, HDC _D
 	if (false == NewImage->Create(_DC))
 	{
 		delete NewImage;
-		MsgBoxAssert((EngineName + " make Image failure.").c_str());
+		MsgBoxAssert((EngineName + DEBUG_MSG_IMAGE_CREATE_FAILURE).c_str());
 		return nullptr;
 	}
 
@@ -69,7 +69,7 @@ GameEngineImage* GameEngineImageManager::Create(const std::string& _Name, const 
 
 	if (AllRes.end() != AllRes.find(EngineName))
 	{
-		MsgBoxAssert("You tried make Image that is Already made");
+		MsgBoxAssert(DEBUG_MSG_IMAGE_ALREADY_EXIST);
 		return nullptr;
 	}
 
@@ -79,7 +79,7 @@ GameEngineImage* GameEngineImageManager::Create(const std::string& _Name, const 
 	if (false == NewImage->Create(_Scale))
 	{
 		delete NewImage;
-		MsgBoxAssert((EngineName + " make Image failure.").c_str());
+		MsgBoxAssert((EngineName + DEBUG_MSG_IMAGE_CREATE_FAILURE).c_str());
 		return nullptr;
 	}
 
@@ -100,7 +100,7 @@ GameEngineImage* GameEngineImageManager::Load(const std::string& _Path, const st
 
 	if (AllRes.end() != AllRes.find(EngineName))
 	{
-		MsgBoxAssert("이미 존재하는 이름의 이미지를 다시 생성하려 했습니다.");
+		MsgBoxAssert(DEBUG_MSG_IMAGE_ALREADY_EXIST);
 		return nullptr;
 	}
 
@@ -110,7 +110,7 @@ GameEngineImage* GameEngineImageManager::Load(const std::string& _Path, const st
 	if (false == NewImage->Load(_Path))
 	{
 		delete NewImage;
-		MsgBoxAssert((EngineName + "이미지를 생성하는데 실패했습니다.").c_str());
+		MsgBoxAssert((EngineName + DEBUG_MSG_IMAGE_CREATE_FAILURE).c_str());
 		return nullptr;
 	}
 

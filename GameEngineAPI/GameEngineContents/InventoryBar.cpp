@@ -1,4 +1,5 @@
 #include "InventoryBar.h"
+#include "Player.h"
 
 // 인벤토리는 이렇게 만드는게 아닌듯
 InventoryBar::InventoryBar() 
@@ -13,8 +14,8 @@ void InventoryBar::Start()
 {
 	// InventoryBar인터페이스렌더링
 	// 상단
-	SetPosition({ 640, 55 });
+	SetPosition({ IMAGE_INVENTORYBAR_POS_UP_W, IMAGE_INVENTORYBAR_POS_UP_H });
 	//하단
-	//SetPosition({ 640, 663 });
+	//SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_W, IMAGE_INVENTORYBAR_POS_DOWN_H });
 	CreateRenderer("InventoryBar.bmp");
 }

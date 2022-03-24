@@ -22,13 +22,13 @@ void StardewContents::GameInit()
 
 	// 현재 디렉토리
 	GameEngineDirectory ResourcesDir;
-	ResourcesDir.MoveParent("GameEngineAPI");
-	ResourcesDir.Move("Resources");
-	ResourcesDir.Move("Image");
-	ResourcesDir.Move("tmp");
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_TMP);
 
 	// 폴더안에 모든 이미지 파일을 찾는다.
-	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
 	{
@@ -38,12 +38,12 @@ void StardewContents::GameInit()
 	// GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\resource\\textures_bmp\\environment\\Bushes.bmp", "Bushes.bmp");
 
 	// 레벨 생성
-	CreateLevel<TitleLevel>("Title");
-	CreateLevel<PlayLevel>("Play");
-	CreateLevel<EndingLevel>("Ending");
+	CreateLevel<TitleLevel>(LEVEL_TITLE);
+	CreateLevel<PlayLevel>(LEVEL_PLAY);
+	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨
-	ChangeLevel("Title");
+	ChangeLevel(LEVEL_TITLE);
 }
 
 void StardewContents::GameLoop()

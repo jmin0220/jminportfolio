@@ -96,7 +96,7 @@ void GameEngineWindow::CreateGameWindow(HINSTANCE _hInst, const std::string& _Ti
     // 윈도우 생성이 중복 실행되었을경우를 대비. 이미 생성되어있는 경우 함수 종료.
     if (nullptr != hInst_)
     {
-        MsgBoxAssert("윈도우를 중복하여 띄우려 했습니다.");
+        MsgBoxAssert(DEBUG_MSG_WINDOW_DUPLICATE);
         return;
     }
 
@@ -124,7 +124,7 @@ void GameEngineWindow::ShowGameWindow()
     // 윈도우가 생성되지 않았을경우 함수 종료
     if (nullptr == hWnd_)
     {
-        MsgBoxAssert("메인 윈도우가 만들어지지 않았습니다. 화면에 출력할 수 없습니다.");
+        MsgBoxAssert(DEBUG_MSG_WINDOW_NOT_CREATE);
         return;
     }
 

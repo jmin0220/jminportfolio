@@ -68,7 +68,7 @@ void GameEngineInput::CreateKey(std::string _Name, int _Key)
 {
 	if (AllInputKey_.end() != AllInputKey_.find(_Name))
 	{
-		MsgBoxAssert("This Key is Already exist");
+		MsgBoxAssert(DEBUG_MSG_KEY_EXIST);
 		return;
 	}
 
@@ -100,7 +100,7 @@ bool GameEngineInput::IsDown(std::string _Name)
 {
 	if (AllInputKey_.end() == AllInputKey_.find(_Name))
 	{
-		MsgBoxAssert("This Key is not Exist");
+		MsgBoxAssert(DEBUG_MSG_KEY_NOT_EXIST);
 		return false;
 	}
 
@@ -111,7 +111,7 @@ bool GameEngineInput::IsUp(std::string _Name)
 {
 	if (AllInputKey_.end() == AllInputKey_.find(_Name))
 	{
-		MsgBoxAssert("This Key is not Exist");
+		MsgBoxAssert(DEBUG_MSG_KEY_NOT_EXIST);
 		return false;
 	}
 
@@ -122,7 +122,7 @@ bool GameEngineInput::IsPress(std::string _Name)
 {
 	if (AllInputKey_.end() == AllInputKey_.find(_Name))
 	{
-		MsgBoxAssert("This Key is not Exist");
+		MsgBoxAssert(DEBUG_MSG_KEY_NOT_EXIST);
 		return false;
 	}
 
@@ -133,7 +133,7 @@ bool GameEngineInput::IsFree(std::string _Name)
 {
 	if (AllInputKey_.end() == AllInputKey_.find(_Name))
 	{
-		MsgBoxAssert("This Key is not Exist");
+		MsgBoxAssert(DEBUG_MSG_KEY_NOT_EXIST);
 		return false;
 	}
 

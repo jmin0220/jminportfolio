@@ -43,7 +43,7 @@ bool GameEngineImage::Create(float4 _Scale)
 {
 	if (true == _Scale.IsZero2D())
 	{
-		MsgBoxAssert("You tried maked 0 Size Image");
+		MsgBoxAssert(DEBUG_MSG_IMAGE_CREATE_ZEROSIZE);
 		return false;
 	}
 
@@ -56,7 +56,7 @@ bool GameEngineImage::Create(float4 _Scale)
 
 	if (nullptr == ImageDC_)
 	{
-		MsgBoxAssert("Make ImageDC failure");
+		MsgBoxAssert(DEBUG_MSG_DC_CREATE_FAILURE);
 	}
 
 	// 이전에 DC에 연결되어있던 HBITMAP(OldBitMap_)을 다른 HBITMAP(BitMap_)에 연결하고 이전HBITMAP을 반환
@@ -81,14 +81,14 @@ bool GameEngineImage::Load(const std::string& _Path)
 
 	if (nullptr == BitMap_)
 	{
-		MsgBoxAssertString(_Path + " 이미지 로드에 실패했습니다.");
+		MsgBoxAssertString(_Path + DEBUG_MSG_IMAGE_LOAD_FAILURE);
 	}
 
 	ImageDC_ = CreateCompatibleDC(nullptr);
 
 	if (nullptr == ImageDC_)
 	{
-		MsgBoxAssert("ImageDc 생성에 실패했습니다.");
+		MsgBoxAssert(DEBUG_MSG_DC_CREATE_FAILURE);
 	}
 
 	OldBitMap_ = (HBITMAP)SelectObject(ImageDC_, BitMap_);
