@@ -1,4 +1,5 @@
 #pragma once
+#include "GameEngineDebug.h"
 #include "GameEnginePath.h"
 
 class GameEngineFile;

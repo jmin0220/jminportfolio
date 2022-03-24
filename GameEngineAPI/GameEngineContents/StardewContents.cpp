@@ -42,7 +42,7 @@ void StardewContents::GameInit()
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
 
-	// 레벨 변경
+	// 시작레벨
 	ChangeLevel("Title");
 }
 

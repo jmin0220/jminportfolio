@@ -1,5 +1,4 @@
 #include "GameEngineDirectory.h"
-#include "GameEngineDebug.h"
 #include "GameEngineFile.h"
 #include "GameEngineString.h"
 
@@ -43,7 +42,7 @@ void GameEngineDirectory::Move(const std::string& _Name)
 
 	if (false == std::filesystem::exists(CheckPath))
 	{
-		MsgBoxAssertString(_Name + " Path is not exists");
+		MsgBoxAssertString(_Name + " Path is not exist");
 		return;
 	}
 
@@ -60,9 +59,9 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 	if (Ext != "")
 	{
 		GameEngineString::ToUpper(Ext);
-		if (std::string::npos == Ext.find("."))
+		if (std::string::npos == Ext.find(STRING_DOT))
 		{
-			Ext = "." + Ext;
+			Ext = STRING_DOT + Ext;
 		}
 	}
 

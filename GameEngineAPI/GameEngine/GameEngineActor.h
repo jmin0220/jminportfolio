@@ -42,6 +42,10 @@ public:
 		Scale_ = _Value;
 	}
 
+	inline void SetMove(float4 _Value)
+	{
+		Position_ += _Value;
+	}
 
 protected:
 	virtual void Start() = 0;

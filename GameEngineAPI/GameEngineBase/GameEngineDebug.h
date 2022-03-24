@@ -1,4 +1,5 @@
 #pragma once
+#include "GameEngineCustomStringSet.h"
 #include <crtdbg.h>
 #include <string>
 #include <Windows.h>
@@ -29,9 +30,9 @@ private:
 
 // 종료함수 매크로 작성
 #define MsgBoxAssert(Text) 	MessageBeep(0); \
-MessageBoxA(nullptr, Text, "Error", MB_OK); \
+MessageBoxA(nullptr, Text, DEBUG_ERROR, MB_OK); \
 assert(false);
 
 #define MsgBoxAssertString(Text) 	MessageBeep(0); \
-MessageBoxA(nullptr, (Text).c_str(), "Error", MB_OK); \
+MessageBoxA(nullptr, (Text).c_str(), DEBUG_ERROR, MB_OK); \
 assert(false); 

@@ -2,6 +2,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include "GameEngineLevel.h"
 #include "GameEngineImageManager.h"
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 std::map<std::string, GameEngineLevel*> GameEngine::AllLevel_;
 GameEngineLevel* GameEngine::CurrentLevel_    = nullptr;
@@ -58,6 +60,8 @@ void GameEngine::EngineInit()
 
 void GameEngine::EngineLoop()
 {
+	GameEngineTime::GetInst()->Update();
+
 	// 1프레임
 	UserContents_->GameLoop();
 
@@ -77,6 +81,7 @@ void GameEngine::EngineLoop()
 		}
 
 		NextLevel_ = nullptr;
+		GameEngineTime::GetInst()->Reset();
 	}
 
 		// 에러 판정
@@ -85,8 +90,14 @@ void GameEngine::EngineLoop()
 		MsgBoxAssert("Current Level is NULL => GameEngine Loop Error");
 	}
 
+	// 실행시간 갱신
+	GameEngineInput::GetInst()->Update();
+
+	// 레벨 갱신
 	CurrentLevel_->Update();
 	CurrentLevel_->ActorUpdate();
+
+	// 액터 렌더링
 	CurrentLevel_->ActorRender();
 	
 	// 백버퍼를 메인DC에 복사
@@ -114,6 +125,8 @@ void GameEngine::EngineEnd()
 	GameEngineImageManager::Destroy();
 
 	GameEngineWindow::Destroy();
+	GameEngineInput::Destroy();
+	GameEngineTime::Destroy();
 }
 
 // 레벨 전환

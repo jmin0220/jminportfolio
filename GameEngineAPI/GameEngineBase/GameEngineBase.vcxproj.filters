@@ -19,6 +19,9 @@
     <Filter Include="IO">
       <UniqueIdentifier>{5a12bda4-0154-40b6-a7ae-fd87ab8a77ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Custom">
+      <UniqueIdentifier>{4c4e155c-19ec-45b3-a7cf-d5a6911a4109}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineWindow.cpp">
@@ -45,6 +48,12 @@
     <ClCompile Include="GameEnginePath.cpp">
       <Filter>IO</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineInput.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTime.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -70,6 +79,15 @@
     </ClInclude>
     <ClInclude Include="GameEnginePath.h">
       <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInput.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTime.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCustomStringSet.h">
+      <Filter>Custom</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
