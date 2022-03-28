@@ -19,6 +19,7 @@ protected:
 
 private:
 	float Speed_;
+	int Direction_;
 
 	void Start() override;
 	void Update() override;
