@@ -14,9 +14,11 @@
 
 // 디렉토리
 #define DIR_PARENT "GameEngineAPI"
+#define DIR_PLAYER "Player"
 #define DIR_RESOURCES "Resources"
 #define DIR_IMAGE "Image"
-#define DIR_TMP "tmp"
+#define DIR_INTERFACE "Interface"
+#define DIR_TOOL "Tool"
 
 // 이미지
 #define IMAGE_CLOCK_POS_H 129
@@ -25,6 +27,12 @@
 #define IMAGE_CLOCK_SIZE_W 288
 #define IMAGE_ENERGYBAR_POS_H 591
 #define IMAGE_ENERGYBAR_POS_W 1249
+#define IMAGE_PLAYER_CLOTH "PlayerCloth.bmp"
+#define IMAGE_PLAYER_HAIR "PlayerHair.bmp"
+#define IMAGE_PLAYER_HAT "PlayerHat.bmp"
+#define IMAGE_PLAYER_MASK "PlayerMask.bmp"
+#define IMAGE_PLAYER_MAN_BODY "PlayerManBody.bmp"
+#define IMAGE_PLAYER_WOMAN_BODY "PlayerWomanBody.bmp"
 #define IMAGE_INVENTORYBAR_POS_UP_H 55
 #define IMAGE_INVENTORYBAR_POS_UP_W 640
 #define IMAGE_INVENTORYBAR_POS_DOWN_H 663

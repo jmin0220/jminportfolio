@@ -30,7 +30,7 @@ void TitleLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE))
 	{
-		//GameEngine::GlobalEngine().ChangeLevel(LEVEL_PLAY);
+		GameEngine::GlobalEngine().ChangeLevel(LEVEL_PLAY);
 	}
 	// GameEngine::GlobalEngine().ChangeLevel("Play");
 }
