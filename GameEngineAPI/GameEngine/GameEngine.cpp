@@ -102,6 +102,8 @@ void GameEngine::EngineLoop()
 	
 	// 백버퍼를 메인DC에 복사
 	WindowMainImage_->BitCopy(BackBufferImage_);
+
+	CurrentLevel_->ActorRelease();
 }
 
 // 프로그램 종료
@@ -124,9 +126,9 @@ void GameEngine::EngineEnd()
 
 	GameEngineImageManager::Destroy();
 
-	GameEngineWindow::Destroy();
 	GameEngineInput::Destroy();
 	GameEngineTime::Destroy();
+	GameEngineWindow::Destroy();
 }
 
 // 레벨 전환

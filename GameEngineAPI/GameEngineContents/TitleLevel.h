@@ -16,6 +16,7 @@ public:
 	TitleLevel& operator=(TitleLevel&& _Other) noexcept = delete;
 
 protected:
+	void LevelChangeStart() override;
 	void Loading() override;
 	void Update() override;
 

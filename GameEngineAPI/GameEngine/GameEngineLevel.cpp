@@ -52,7 +52,44 @@ void GameEngineLevel::ActorUpdate()
 
 		for (; StartActor != EndActor; ++StartActor)
 		{
+			(*StartActor)->ReleaseUpdate();
+			if (false == (*StartActor)->IsUpdate())
+			{
+				continue;
+			}
+
 			(*StartActor)->Update();
+		}
+	}
+}
+
+void GameEngineLevel::ActorRelease()
+{
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd;
+
+	std::list<GameEngineActor*>::iterator StartActor;
+	std::list<GameEngineActor*>::iterator EndActor;
+
+	GroupStart = AllActor_.begin();
+	GroupEnd = AllActor_.end();
+
+	for (; GroupStart != GroupEnd; ++GroupStart)
+	{
+		std::list<GameEngineActor*>& Group = GroupStart->second;
+
+		StartActor = Group.begin();
+		EndActor = Group.end();
+		for (; StartActor != EndActor; )
+		{
+			if (true == (*StartActor)->IsDeath())
+			{
+				delete* StartActor;
+				StartActor = Group.erase(StartActor);
+				continue;
+			}
+
+			++StartActor;
 		}
 	}
 }
@@ -78,6 +115,11 @@ void GameEngineLevel::ActorRender()
 		// GameEngineRenderer에 저장된 이미지 렌더링
 		for (; StartActor != EndActor; ++StartActor)
 		{
+			if (false == (*StartActor)->IsUpdate())
+			{
+				continue;
+			}
+
 			(*StartActor)->Rendering();
 		}
 
@@ -87,6 +129,11 @@ void GameEngineLevel::ActorRender()
 		// 각 Actor에 오버라이드된 Render함수로 설정된 이미지 렌더링
 		for (; StartActor != EndActor; ++StartActor)
 		{
+			if (false == (*StartActor)->IsUpdate())
+			{
+				continue;
+			}
+
 			(*StartActor)->Render();
 		}
 	}

@@ -17,5 +17,5 @@ void TitleButtonLoadGame::Start()
 
 void TitleButtonLoadGame::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
 }

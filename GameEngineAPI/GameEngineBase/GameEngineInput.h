@@ -59,13 +59,13 @@ private:
 
 public:
 	void Update();
-	void CreateKey(std::string _Name, int _Key);
+	void CreateKey(const std::string& _Name, int _Key);
 
-	bool IsDown(std::string _Name);
-	bool IsUp(std::string _Name);
-	bool IsPress(std::string _Name);
-	bool IsFree(std::string _Name);
-	bool IsKey(std::string _Name);
+	bool IsDown(const std::string& _Name);
+	bool IsUp(const std::string& _Name);
+	bool IsPress(const std::string& _Name);
+	bool IsFree(const std::string& _Name);
+	bool IsKey(const std::string& _Name);
 
 protected:
 

@@ -185,12 +185,29 @@ void GameEngineImage::TransCopy(GameEngineImage* _Other, const float4& _CopyPos,
 	);
 }
 
-void GameEngineImage::TransCopyCenterScale(GameEngineImage* _Other, const float4& _CopyPos, const float4& _RenderScale, unsigned int _TransColor)
+void GameEngineImage::Cut(const float4& _CutSize)
 {
-	TransCopy(_Other, _CopyPos - _RenderScale.Half(), _RenderScale, float4{ 0, 0 }, _Other->GetScale(), _TransColor);
-}
+	// 크기가 나누어 떨어지지 않는 경우 에러
+	if (0 != (GetScale().ix() % _CutSize.ix()))
+	{
+		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_DIVISIBLE_SCALE);
+	}
 
-void GameEngineImage::TransCopyCenter(GameEngineImage* _Other, const float4& _CopyPos, unsigned int _TransColor)
-{
-	TransCopy(_Other, _CopyPos - _Other->GetScale().Half(), _Other->GetScale(), float4{ 0, 0 }, _Other->GetScale(), _TransColor);
+	if (0 != (GetScale().iy() % _CutSize.iy()))
+	{
+		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_DIVISIBLE_SCALE);
+	}
+
+	int XCount = GetScale().ix() / _CutSize.ix();
+	int YCount = GetScale().iy() / _CutSize.iy();
+
+	for (int y = 0; y < YCount; y++)
+	{
+		for (int x = 0; x < XCount; x++)
+		{
+			CutPivot_.push_back({ static_cast<float>(x * _CutSize.ix()), static_cast<float>(y * _CutSize.iy()) });
+			CutScale_.push_back(_CutSize);
+		}
+	}
+
 }

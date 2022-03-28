@@ -33,6 +33,7 @@
 #define IMAGE_TITLE_BUTTON_W 222
 #define IMAGE_TITLE_LOGO_H 374
 #define IMAGE_TITLE_LOGO_W 796
+#define IMAGE_TOOL_SET1 "Tools_set1.bmp"
 #define IMAGE_EXT_BMP "Bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
@@ -63,8 +64,8 @@
 #define WINDOW_GAMEWINDOW "GameWindow"
 #define WINDOW_MAINDC "WindowMain"
 
-#define WINDOW_SIZE_W 1280
 #define WINDOW_SIZE_H 720
+#define WINDOW_SIZE_W 1280
 
 
 
@@ -81,6 +82,7 @@
 #define DEBUG_MSG_IMAGE_CREATE_FAILURE " Create Image failure"
 #define DEBUG_MSG_IMAGE_CREATE_ZEROSIZE "You tried Create 0 Size Image"
 #define DEBUG_MSG_IMAGE_LOAD_FAILURE " Image Load Failure"
+#define DEBUG_MSG_IMAGE_NOT_DIVISIBLE_SCALE "Scale is Not Divisible Number"
 #define DEBUG_MSG_IMAGE_NOT_SET_RENDERER "This Image is not setting in Renderer"
 #define DEBUG_MSG_IMAGE_NOT_EXIST "This Image is not Exist"
 #define DEBUG_MSG_IMAGE_NOT_EXIST_SET_RENDERER " Tried to Set a Non-Existent Image on the Renderer"

@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include <Windows.h>
+#include <vector>
 
 // 설명 :
 class GameEngineImage : public GameEngineNameObject
@@ -41,12 +42,33 @@ public:
 	void BitCopyBotPivot(GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot);
 	void BitCopy(GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot);
 
-	// TrnasCopy
-	void TransCopyCenterScale(GameEngineImage* _Other, const float4& _CopyPos, const float4& _RenderScale, unsigned int _TransColor);
-	void TransCopyCenter(GameEngineImage* _Other, const float4& _CopyPos, unsigned int _TransColor);
-		void TransCopy(GameEngineImage* _Other, const float4& _CopyPos,
-		const float4& _CopyScale,
-		const float4& _OtherPivot, const float4& _OtherScale, unsigned int _TransColor);
+	void TransCopy(GameEngineImage* _Other, const float4& _CopyPos,
+                   const float4& _CopyScale, const float4& _OtherPivot,
+                   const float4& _OtherScale, unsigned int _TransColor);
+
+	void Cut(const float4& _CutSize);
+
+	// 잘려져있는 이미지인가를 판별
+	bool IsCut()
+	{
+		return 0 != CutPivot_.size();
+	}
+
+	float4 GetCutPivot(size_t _Index)
+	{
+		return CutPivot_[_Index];
+	}
+
+	float4 GetCutScale(size_t _Index)
+	{
+		return CutScale_[_Index];
+	}
+
+	void Cut(const float4& _CutScale, const float4& _CutPos)
+	{
+		CutScale_.push_back(_CutScale);
+		CutPivot_.push_back(_CutPos);
+	}
 
 protected:
 
@@ -56,6 +78,9 @@ private:
 	// 비트맵의 핸들
 	HBITMAP BitMap_;
 	HBITMAP OldBitMap_;
+
+	std::vector<float4> CutPivot_;
+	std::vector<float4> CutScale_;
 
 	void ImageScaleCheck();
 };

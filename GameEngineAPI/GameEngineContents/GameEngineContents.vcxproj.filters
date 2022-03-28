@@ -5,9 +5,6 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>00Level</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>00Level</Filter>
-    </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>00Level</Filter>
     </ClCompile>
@@ -71,13 +68,19 @@
     <ClCompile Include="EnergyBar.cpp">
       <Filter>02Play\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>02Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="HoeDefault.cpp">
+      <Filter>02Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
     <ClInclude Include="TitleLevel.h">
-      <Filter>00Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayLevel.h">
       <Filter>00Level</Filter>
     </ClInclude>
     <ClInclude Include="EndingLevel.h">
@@ -143,6 +146,15 @@
     <ClInclude Include="EnergyBar.h">
       <Filter>02Play\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>02Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="HoeDefault.h">
+      <Filter>02Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">
@@ -174,6 +186,12 @@
     </Filter>
     <Filter Include="02Play\Interface">
       <UniqueIdentifier>{7d14fb72-1e23-44d8-b8f7-4fb4669f4c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Tool">
+      <UniqueIdentifier>{230d5058-335d-4364-b437-a7fcd2a60fba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00Level\PlayLevel">
+      <UniqueIdentifier>{8725b542-7582-4a41-9d0c-886214cb8641}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

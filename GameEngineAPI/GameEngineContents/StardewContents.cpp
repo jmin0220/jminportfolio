@@ -25,6 +25,7 @@ void StardewContents::GameInit()
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
 	ResourcesDir.Move(DIR_IMAGE);
+	// 임시폴더
 	ResourcesDir.Move(DIR_TMP);
 
 	// 폴더안에 모든 이미지 파일을 찾는다.
@@ -34,8 +35,9 @@ void StardewContents::GameInit()
 	{
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
-	// GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\GameEngineAPI\\Resources\\Image\\Idle.bmp", "Idle.bmp");
-	// GameEngineImageManager::GetInst()->Load("C:\\Users\\JungminLee\\Documents\\assortrock\\portfolio\\jminportfolio\\resource\\textures_bmp\\environment\\Bushes.bmp", "Bushes.bmp");
+
+	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET1);
+	Image->Cut({ 16, 32 });
 
 	// 레벨 생성
 	CreateLevel<TitleLevel>(LEVEL_TITLE);

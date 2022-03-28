@@ -27,7 +27,7 @@ void GameEngineTime::Update()
 	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&CurrentCount_));
 
 	// (현재 카운터 값 - 직전 카운터값) / 현재PC의 초당카운터 빈도
-	RealDeltaTime_ = static_cast<double>(CurrentCount_) - static_cast<double>(PrevCount_) / static_cast<double>(SecondCount_);
+	RealDeltaTime_ = (static_cast<double>(CurrentCount_) - static_cast<double>(PrevCount_)) / static_cast<double>(SecondCount_);
 
 	// 다음 프레임 계산을 위해 현재 카운터값을 PrevCount_에 저장
 	PrevCount_ = CurrentCount_;

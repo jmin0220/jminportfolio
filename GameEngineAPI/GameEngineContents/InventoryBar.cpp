@@ -18,4 +18,7 @@ void InventoryBar::Start()
 	//하단
 	//SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_W, IMAGE_INVENTORYBAR_POS_DOWN_H });
 	CreateRenderer("InventoryBar.bmp");
+
+
+	// 아이콘의 크기는 약 3.6배?
 }

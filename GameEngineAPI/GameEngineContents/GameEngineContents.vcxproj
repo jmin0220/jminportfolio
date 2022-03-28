@@ -205,6 +205,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="HoeDefault.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="InventoryBar.h">
       <SubType>
       </SubType>
@@ -261,6 +265,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Tool.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animals.cpp">
@@ -300,6 +308,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Fishes.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="HoeDefault.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -356,6 +368,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleButtonNewGame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
       <SubType>
       </SubType>
     </ClCompile>
