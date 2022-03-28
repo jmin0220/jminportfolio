@@ -51,14 +51,17 @@ public:
 
 	void SetImage(const std::string& _Name);
 
-	void SetIndex(size_t _Index);
+	void SetIndex(size_t _Index, float4 _Scale = {-1.0f, -1.0f });
 
 protected:
 	void Render();
 
 private:
+	// 출력할 이미지
 	GameEngineImage* Image_;
+	// 출력할 이미지의 기준점(Pivot)
 	RenderPivot PivotType_;
+	// 이미지크기대로 또는 사용자가 설정한 크기로
 	RenderScaleMode ScaleMode_;
 
 	float4 RenderPivot_;

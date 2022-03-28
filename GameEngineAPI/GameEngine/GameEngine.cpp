@@ -82,6 +82,10 @@ void GameEngine::EngineLoop()
 
 		NextLevel_ = nullptr;
 		GameEngineTime::GetInst()->Reset();
+
+		// 레벨 전환시 화면 클리어
+		Rectangle(WindowMainImage_->ImageDC(), 0, 0, WindowMainImage_->GetScale().ix(), WindowMainImage_->GetScale().iy());
+		Rectangle(BackBufferImage_->ImageDC(), 0, 0, BackBufferImage_->GetScale().ix(), BackBufferImage_->GetScale().iy());
 	}
 
 		// 에러 판정

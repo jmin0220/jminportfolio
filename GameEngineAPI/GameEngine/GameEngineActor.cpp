@@ -24,7 +24,7 @@ GameEngineActor::~GameEngineActor()
 	}
 }
 
-
+// 디버그용 렌더러
 void GameEngineActor::DebugRectRender()
 {
 	GameEngineRect DebugRect(Position_, Scale_);
@@ -38,17 +38,32 @@ void GameEngineActor::DebugRectRender()
 	);
 }
 
+// 이미지를 넣지않고 렌더러를 생성
+GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType /*= RenderPivot::CENTER*/,
+	const float4& _PivotPos /*= { 0,0 }*/)
+{
+	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
+
+	NewRenderer->SetActor(this);
+	NewRenderer->SetPivot(_PivotPos);
+	NewRenderer->SetType(_PivotType);
+
+	RenderList_.push_back(NewRenderer);
+	return NewRenderer;
+}
+
+
+// 이미지만 넣고 렌더러 생성
 GameEngineRenderer* GameEngineActor::CreateRenderer(
 	const std::string& _Image,
-	RenderPivot _PivotType,
-	const float4& _PivotPos /*디폴트 { 0,0 }*/
+	RenderPivot _PivotType /* = RenderPivot::CENTER */,
+	const float4& _PivotPos /* = { 0,0 } */
 )
 {
 	GameEngineRenderer*NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
 	NewRenderer->SetImage(_Image);	
-	NewRenderer->SetImageScale();
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetType(_PivotType);
 
@@ -57,6 +72,7 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	return NewRenderer;
 }
 
+// _Scale에 따라 이미지를 변형하여 렌더러 생성
 GameEngineRenderer* GameEngineActor::CreateRendererToScale(
 	const std::string& _Image, const float4& _Scale,
 	RenderPivot _PivotType /*= RenderPivot::CENTER*/, const float4& _PivotPos /*= { 0,0 }*/
@@ -74,6 +90,7 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(
 	return NewRenderer;
 }
 
+// RenderList에 추가된 액터를 그리기
 void GameEngineActor::Rendering()
 {
 	StartRenderIter = RenderList_.begin();
