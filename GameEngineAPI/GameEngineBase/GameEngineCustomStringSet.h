@@ -19,6 +19,7 @@
 #define DIR_IMAGE "Image"
 #define DIR_INTERFACE "Interface"
 #define DIR_TOOL "Tool"
+#define DIR_MAP "Map"
 
 // ¿ÃπÃ¡ˆ
 #define IMAGE_CLOCK_POS_H 129

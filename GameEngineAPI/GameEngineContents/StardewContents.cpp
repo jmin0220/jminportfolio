@@ -48,6 +48,19 @@ void StardewContents::GameInit()
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_WOMAN_BODY);
 	Image->Cut({ 16, 32 });
 
+	// 맵
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_MAP);
+
+	AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
 	// 인터페이스
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
