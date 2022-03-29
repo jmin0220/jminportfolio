@@ -7,7 +7,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 #include <GameEngine/GameEngineLevel.h>
-#include "HoeDefault.h"
+#include "HoeBasic.h"
 
 Player::Player() 
 	:Speed_(100.0f)

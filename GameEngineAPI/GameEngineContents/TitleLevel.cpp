@@ -5,14 +5,10 @@
 #include "TitleButtonNewGame.h"
 #include "TitleButtonLoadGame.h"
 #include "TitleButtonExitGame.h"
+#include "ContentsEnums.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 
-enum class ORDER
-{
-	BACKGROUND,
-	UI
-};
 TitleLevel::TitleLevel() 
 {
 }

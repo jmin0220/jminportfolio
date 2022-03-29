@@ -181,6 +181,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsEnums.h" />
     <ClInclude Include="Copper.h">
       <SubType>
       </SubType>
@@ -205,7 +206,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="HoeDefault.h">
+    <ClInclude Include="HoeBasic.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -311,7 +312,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="HoeDefault.cpp">
+    <ClCompile Include="HoeBasic.cpp">
       <SubType>
       </SubType>
     </ClCompile>

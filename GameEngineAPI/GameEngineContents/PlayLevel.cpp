@@ -4,14 +4,7 @@
 #include "Player.h"
 #include "EnergyBar.h"
 #include "InventoryBar.h"
-
-enum class ORDER
-{
-	BACKGROUND,
-	PLAYER,
-	MONSTER,
-	UI
-};
+#include "ContentsEnums.h"
 
 PlayLevel::PlayLevel() 
 {

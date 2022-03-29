@@ -71,7 +71,7 @@
     <ClCompile Include="Tool.cpp">
       <Filter>02Play\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="HoeDefault.cpp">
+    <ClCompile Include="HoeBasic.cpp">
       <Filter>02Play\Tool</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
@@ -149,11 +149,14 @@
     <ClInclude Include="Tool.h">
       <Filter>02Play\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="HoeDefault.h">
+    <ClInclude Include="HoeBasic.h">
       <Filter>02Play\Tool</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
       <Filter>00Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnums.h">
+      <Filter>99Etc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +195,9 @@
     </Filter>
     <Filter Include="00Level\PlayLevel">
       <UniqueIdentifier>{8725b542-7582-4a41-9d0c-886214cb8641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99Etc">
+      <UniqueIdentifier>{c903b0a6-d41e-4c61-bdfe-4afd2c65f5d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

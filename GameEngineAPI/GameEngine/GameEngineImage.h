@@ -48,6 +48,8 @@ public:
 
 	void Cut(const float4& _CutSize);
 
+	void CutCount(int _x, int _y);
+
 	// 잘려져있는 이미지인가를 판별
 	bool IsCut()
 	{

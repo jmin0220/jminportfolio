@@ -185,6 +185,12 @@ void GameEngineImage::TransCopy(GameEngineImage* _Other, const float4& _CopyPos,
 	);
 }
 
+void GameEngineImage::CutCount(int _x, int _y)
+{
+	float4 Scale = { GetScale().x / _x, GetScale().y / _y };
+	Cut(Scale);
+}
+
 void GameEngineImage::Cut(const float4& _CutSize)
 {
 	// 크기가 나누어 떨어지지 않는 경우 에러
