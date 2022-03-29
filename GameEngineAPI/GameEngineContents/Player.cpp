@@ -10,8 +10,12 @@
 #include "HoeBasic.h"
 
 Player::Player() 
-	:Speed_(100.0f)
-	, Direction_(0)
+	:Speed_(200.0f)
+	, DirectionBody_(0)
+	, DirectionCloth_(0)
+	, DirectionHair_(0)
+	, DirectionHat_(0)
+	, DirectionMask_(0)
 {
 }
 
@@ -29,21 +33,23 @@ void Player::Start()
 	// 몸통
 	GameEngineRenderer* Renderer;
 	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(Direction_);
+	Renderer->SetIndex(DirectionBody_);
 	// 팔
 	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(Direction_ + 6);
+	Renderer->SetIndex(DirectionBody_ + 6);
 	// 바지
 	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(Direction_ + 18);
+	Renderer->SetIndex(DirectionBody_ + 18);
+	// 머리카락
 	Renderer = CreateRenderer(IMAGE_PLAYER_HAIR);
-	Renderer->SetIndex(Direction_);
+	Renderer->SetIndex(DirectionHair_);
+
 	//Renderer = CreateRenderer(IMAGE_PLAYER_CLOTH);
 	//Renderer->SetIndex(Direction_);
 	//Renderer = CreateRenderer(IMAGE_PLAYER_HAT);
-	//Renderer->SetIndex(Direction_);
+	//Renderer->SetIndex(DirectionHat_);
 	//Renderer = CreateRenderer(IMAGE_PLAYER_MASK);
-	//Renderer->SetIndex(Direction_);
+	//Renderer->SetIndex(DirectionMask_);
 
 	if (false == GameEngineInput::GetInst()->IsKey(KEY_MOVE_LEFT))
 	{
@@ -61,41 +67,60 @@ void Player::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
 	{
-		//HoeDefault* Ptr = GetLevel()->CreateActor<HoeDefault>();
-		//Ptr->SetPosition(GetPosition());
+		HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
+		Ptr->SetPosition(GetPosition());
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
 	{
-		Direction_ = 24;
+		DirectionBody_ = 24;
+		DirectionHair_ = 8;
+		DirectionHat_ = 12;
+		DirectionMask_ = 8;
+		
 		SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
 	{
-		Direction_ = 24;
+		DirectionBody_ = 24;
+		DirectionHair_ = 8;
+		DirectionHat_ = 24;
+		DirectionMask_ = 8;
+
 		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
 	{
-		Direction_ = 36;
+		DirectionBody_ = 48;
+		DirectionHair_ = 16;
+		DirectionHat_ = 36;
+
+		// 출력 안함
+		DirectionMask_ = 48;
+
 		SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
 	{
-		Direction_ = 0;
+		DirectionBody_ = 0;
+		DirectionHair_ = 0;
+		DirectionHat_ = 0;
+		DirectionMask_ = 0;
+
 		SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 
 	GameEngineRenderer* Renderer;
 	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(Direction_);
+	Renderer->SetIndex(DirectionBody_);
 	// 팔
 	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(Direction_ + 6);
+	Renderer->SetIndex(DirectionBody_ + 6);
 	// 바지
 	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(Direction_ + 18);
+	Renderer->SetIndex(DirectionBody_ + 18);
+	// 머리
 	Renderer = CreateRenderer(IMAGE_PLAYER_HAIR);
-	Renderer->SetIndex(Direction_);
+	Renderer->SetIndex(DirectionHair_);
 }
 
 void Player::Render()

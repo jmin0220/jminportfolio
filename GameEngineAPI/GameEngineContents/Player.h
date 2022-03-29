@@ -19,7 +19,11 @@ protected:
 
 private:
 	float Speed_;
-	int Direction_;
+	int DirectionBody_;
+	int DirectionHair_;
+	int DirectionCloth_;
+	int DirectionHat_;
+	int DirectionMask_;
 
 	void Start() override;
 	void Update() override;

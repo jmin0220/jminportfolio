@@ -36,17 +36,17 @@ void StardewContents::GameInit()
 	}
 
 	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_CLOTH);
-	Image->Cut({ 8, 8 }); 
+	Image->Cut({ 24, 24 }); 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAIR);
-	Image->Cut({ 16, 32 }); 
+	Image->Cut({ 48, 96 }); 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAT);
-	Image->Cut({ 20, 20 }); 
+	Image->Cut({ 60, 60 }); 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MASK);
-	Image->Cut({ 16, 16 }); 
+	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_BODY);
-	Image->Cut({ 16, 32 }); 
+	Image->Cut({ 48, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_WOMAN_BODY);
-	Image->Cut({ 16, 32 });
+	Image->Cut({ 48, 96 });
 
 	// ¸Ê
 	ResourcesDir.MoveParent(DIR_PARENT);
@@ -80,6 +80,7 @@ void StardewContents::GameInit()
 	ResourcesDir.Move(DIR_IMAGE);
 	ResourcesDir.Move(DIR_TOOL);
 
+
 	AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
@@ -88,12 +89,12 @@ void StardewContents::GameInit()
 	}
 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET1);
-	Image->Cut({ 16, 32 });
+	Image->Cut({ 48, 96 });
 
 
 
 	// ·¹º§ »ý¼º
-	CreateLevel<TitleLevel>(LEVEL_TITLE);
+	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>(LEVEL_PLAY);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 

@@ -47,9 +47,6 @@
     <ClCompile Include="Copper.cpp">
       <Filter>02Play\Mine</Filter>
     </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp">
-      <Filter>01Title</Filter>
-    </ClCompile>
     <ClCompile Include="TitleButtonNewGame.cpp">
       <Filter>01Title</Filter>
     </ClCompile>
@@ -76,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>99Etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +125,6 @@
     <ClInclude Include="Copper.h">
       <Filter>02Play\Mine</Filter>
     </ClInclude>
-    <ClInclude Include="TitleBackGround.h">
-      <Filter>01Title</Filter>
-    </ClInclude>
     <ClInclude Include="TitleButtonNewGame.h">
       <Filter>01Title</Filter>
     </ClInclude>
@@ -156,6 +153,9 @@
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnums.h">
+      <Filter>99Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
       <Filter>99Etc</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,8 @@
 #include "EnergyBar.h"
 #include "InventoryBar.h"
 #include "ContentsEnums.h"
+#include "BackGround.h"
+#include <GameEngine/GameEngineRenderer.h>
 
 PlayLevel::PlayLevel() 
 {
@@ -26,6 +28,9 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart()
 {
+	BackGround* backGround = CreateActor<BackGround>((int)ORDER::BACKGROUND);
+	backGround->GetRenderer()->SetImage("FarmBack.bmp");
+
 	CreateActor<Player>((int)ORDER::PLAYER);
 
 	CreateActor<InventoryBar>((int)ORDER::UI);

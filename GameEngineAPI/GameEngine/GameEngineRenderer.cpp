@@ -106,6 +106,7 @@ void GameEngineRenderer::SetIndex(size_t _Index, float4 _Scale)
 /////////////////////////////////////// 애니메이션
 
 
+// 애니메이션 전환
 void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 {
 	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
@@ -119,6 +120,7 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 	CurrentAnimation_ = &FindIter->second;
 }
 
+// 애니메이션 생성
 void GameEngineRenderer::CreateAnimation(
 	const std::string& _Image,
 	const std::string& _Name,
@@ -142,7 +144,6 @@ void GameEngineRenderer::CreateAnimation(
 	}
 
 	//FrameAnimation Animation;
-	//Animation.insert(std::make_pair(, FrameAnimation()));
 	FrameAnimation& NewAnimation = Animations_[_Name];
 	NewAnimation.Renderer_ = this;
 	NewAnimation.Image_ = FindImage;
