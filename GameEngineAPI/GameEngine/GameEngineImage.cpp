@@ -215,5 +215,10 @@ void GameEngineImage::Cut(const float4& _CutSize)
 			CutScale_.push_back(_CutSize);
 		}
 	}
+}
 
+// DC에서 범위의 픽셀을 취득
+int GameEngineImage::GetImagePixel(int _x, int _y)
+{
+	return GetPixel(ImageDC_, _x, _y);
 }

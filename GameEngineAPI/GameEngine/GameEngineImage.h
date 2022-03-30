@@ -51,26 +51,43 @@ public:
 	void CutCount(int _x, int _y);
 
 	// 잘려져있는 이미지인가를 판별
-	bool IsCut()
+	inline bool IsCut()
 	{
 		return 0 != CutPivot_.size();
 	}
 
-	float4 GetCutPivot(size_t _Index)
+	// 몇장의 이미지로 잘려져있는가 취득
+	inline size_t GetCutCount()
+	{
+		return CutPivot_.size();
+	}
+
+	// 잘려진 기준점 취득
+	inline float4 GetCutPivot(size_t _Index)
 	{
 		return CutPivot_[_Index];
 	}
 
-	float4 GetCutScale(size_t _Index)
+	// 잘려진 기준의 스케일취득
+	inline float4 GetCutScale(size_t _Index)
 	{
 		return CutScale_[_Index];
 	}
 
+	// 자르기
 	void Cut(const float4& _CutScale, const float4& _CutPos)
 	{
 		CutScale_.push_back(_CutScale);
 		CutPivot_.push_back(_CutPos);
 	}
+
+	// DC에서 범위의 픽셀을 취득
+	inline int GetImagePixel(const float4& _Pos)
+	{
+		return GetImagePixel(_Pos.ix(), _Pos.iy());
+	}
+
+	int GetImagePixel(int _x, int _y);
 
 protected:
 

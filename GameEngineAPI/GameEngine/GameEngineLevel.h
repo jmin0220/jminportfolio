@@ -1,7 +1,8 @@
 #pragma once
-#include <GameEngineBase/GameEngineNameObject.h>
 #include <list>
 #include <map>
+#include <GameEngineBase/GameEngineNameObject.h>
+#include <GameEngineBase/GameEngineMath.h>
 
 class GameEngine;
 class GameEngineActor;
@@ -37,6 +38,21 @@ public:
 		return NewActor;
 	}
 
+	inline float4 GetCameraPos()
+	{
+		return CameraPos_;
+	}
+
+	inline void MoveCameraPos(const float4& _Value)
+	{
+		CameraPos_ += _Value;
+	}
+
+	inline void SetCameraPos(const float4& _Value)
+	{
+		CameraPos_ = _Value;
+	}
+
 protected:
 	// 시점함수. 엔진에서 어떠한 사건이 일어나는 시점, 단계.
 	virtual void Loading() = 0;
@@ -50,6 +66,8 @@ protected:
 
 private:
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+
+	float4 CameraPos_;
 
 	void ActorUpdate();
 	void ActorRender();

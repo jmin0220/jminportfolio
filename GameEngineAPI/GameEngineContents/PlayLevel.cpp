@@ -29,6 +29,9 @@ void PlayLevel::Update()
 void PlayLevel::LevelChangeStart()
 {
 	BackGround* backGround = CreateActor<BackGround>((int)ORDER::BACKGROUND);
+
+	// 이미지의 좌상단이 0,0이 되도록
+	backGround->SetPosition({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	backGround->GetRenderer()->SetImage("FarmBack.bmp");
 
 	CreateActor<Player>((int)ORDER::PLAYER);

@@ -1,6 +1,7 @@
 #include "GameEngineRenderer.h"
 #include "GameEngineImageManager.h"
 #include "GameEngine.h"
+#include "GameEngineLevel.h"
 #include <GameEngineBase/GameEngineDebug.h>
 
 #pragma comment(lib, "msimg32.lib")
@@ -11,6 +12,7 @@ GameEngineRenderer::GameEngineRenderer()
 	, ScaleMode_(RenderScaleMode::Image)
 	, TransColor_(RGB(255, 0, 255))	// 마젠타
 	, RenderImagePivot_({0, 0})
+	, IsCameraEffect_(true)
 {
 }
 
@@ -63,12 +65,22 @@ void GameEngineRenderer::Render()
 
 	float4 RenderPos = GetActor()->GetPosition() + RenderPivot_;
 
+	if (true == IsCameraEffect_)
+	{
+		RenderPos -= GetActor()->GetLevel()->GetCameraPos();
+	}
+
 	switch (PivotType_)
 	{
 	case RenderPivot::CENTER:
 		GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - RenderScale_.Half(), RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.y *= 2.0f;
+		GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+	}
 		break;
 	default:
 		break;
@@ -76,7 +88,7 @@ void GameEngineRenderer::Render()
 }
 
 
-void GameEngineRenderer::SetIndex(size_t _Index, float4 _Scale)
+void GameEngineRenderer::SetIndex(size_t _Index, const float4& _Scale)
 {
 	// 이미지가 잘려져있지 않은 원본 상태
 	if (false == Image_->IsCut())
@@ -85,20 +97,19 @@ void GameEngineRenderer::SetIndex(size_t _Index, float4 _Scale)
 		return;
 	}
 
-	RenderImagePivot_ = Image_->GetCutPivot(_Index);
-	RenderScale_ = Image_->GetCutScale(_Index);
-	RenderImageScale_ = Image_->GetCutScale(_Index);
-
-	// _Scale가 없을 경우 이미지 크기대로 출력
-	if (-1.0f == _Scale.x ||
-		-1.0f == _Scale.y)
+	// _Scale을 지정해주지 않을경우, Cut할때 설정된 스케일로 출력
+	if (_Scale.x <= 0 || _Scale.y <= 0)
 	{
 		RenderScale_ = Image_->GetCutScale(_Index);
 	}
+	// 지정된 _Scale로 출력
 	else
 	{
 		RenderScale_ = _Scale;
 	}
+
+	RenderImagePivot_ = Image_->GetCutPivot(_Index);
+	RenderImageScale_ = Image_->GetCutScale(_Index);
 }
 
 

@@ -95,7 +95,7 @@ void GameEngine::EngineLoop()
 	}
 
 	// 실행시간 갱신
-	GameEngineInput::GetInst()->Update();
+	GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
 
 	// 레벨 갱신
 	CurrentLevel_->Update();

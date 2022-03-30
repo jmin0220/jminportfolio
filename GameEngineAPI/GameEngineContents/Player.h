@@ -25,6 +25,9 @@ private:
 	int DirectionHat_;
 	int DirectionMask_;
 
+	float4 ClothPos_;
+	float4 CameraPos_;
+
 	void Start() override;
 	void Update() override;
 	void Render() override;

@@ -15,7 +15,7 @@ public:
 
 	// constrcuter destructer
 	GameEngineActor();
-	~GameEngineActor();
+	virtual ~GameEngineActor();
 
 	// delete Function
 	GameEngineActor(const GameEngineActor& _Other) = delete;
@@ -58,6 +58,7 @@ protected:
 	virtual void Update() {};
 	virtual void Render() {};
 
+	// 디버그용 4각형
 	void DebugRectRender();
 
 private:
@@ -73,11 +74,11 @@ private:
 	}
 
 public:
-	// 렌더러생성	
+	// 렌더러를 이미지 크기에 맞춰 생성
 	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-
+	
+	// 렌더러를 유저가 정한 크기에 맞춰 생성
 	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& _Scale, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 
 	void Rendering();

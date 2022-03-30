@@ -60,6 +60,11 @@
 #define MATH_VERTICAL_SPD 1.0f
 #define MATH_HORIZON_SPD 1.0f
 
+
+// ¸Ê
+#define MAP_FARM_SIZE_H 3120.0f
+#define MAP_FARM_SIZE_W 3840.0f
+
 // ¹®ÀÚ¿­
 #define STRING_DOT "."
 

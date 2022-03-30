@@ -37,6 +37,8 @@ private:
 		bool Up_;
 		// 키가 안눌려있을 때
 		bool Free_;
+		// 입력된 시간
+		float Time_;
 
 		// 눌려있는 키에 대한 정보
 		int Key_;
@@ -46,7 +48,7 @@ private:
 			return 0 != GetAsyncKeyState(Key_);
 		}
 
-		void Update();
+		void Update(float _DeltaTime);
 
 		void Reset()
 		{
@@ -58,9 +60,10 @@ private:
 	};
 
 public:
-	void Update();
+	void Update(float _DeltaTime = 0.0f);
 	void CreateKey(const std::string& _Name, int _Key);
 
+	float GetTime(const std::string& _Name);
 	bool IsDown(const std::string& _Name);
 	bool IsUp(const std::string& _Name);
 	bool IsPress(const std::string& _Name);

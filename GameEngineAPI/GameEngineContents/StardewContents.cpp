@@ -45,8 +45,8 @@ void StardewContents::GameInit()
 	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_BODY);
 	Image->Cut({ 48, 96 });
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_WOMAN_BODY);
-	Image->Cut({ 48, 96 });
+	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_WOMAN_BODY);
+	//Image->Cut({ 48, 96 });
 
 	// ¸Ê
 	ResourcesDir.MoveParent(DIR_PARENT);
