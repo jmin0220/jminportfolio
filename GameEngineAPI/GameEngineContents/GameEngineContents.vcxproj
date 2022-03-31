@@ -202,6 +202,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FarmLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Fishes.h">
       <SubType>
       </SubType>
@@ -305,6 +309,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EnergyBar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FarmLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

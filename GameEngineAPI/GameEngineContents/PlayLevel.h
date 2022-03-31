@@ -1,4 +1,9 @@
 #pragma once
+#include "BackGround.h"
+#include "Clock.h"
+#include "InventoryBar.h"
+#include "EnergyBar.h"
+#include "Player.h"
 #include <GameEngine/GameEngineLevel.h>
 
 // Ό³Έν :
@@ -18,9 +23,14 @@ public:
 protected:
 	void Loading() override;
 	void Update() override;
-	void LevelChangeStart() override;
+	void CameraUpdate();
+
+	static Player* Player_;
+	static BackGround* BackGround_;
+	static InventoryBar* InventoryBar_;
+	static Clock* Clock_;
+	static EnergyBar* EnergyBar_;
 
 private:
-
 };
 

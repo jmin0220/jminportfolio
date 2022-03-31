@@ -19,14 +19,15 @@ protected:
 
 private:
 	float Speed_;
-	int DirectionBody_;
-	int DirectionHair_;
-	int DirectionCloth_;
-	int DirectionHat_;
-	int DirectionMask_;
 
 	float4 ClothPos_;
 	float4 CameraPos_;
+
+	GameEngineRenderer* RendererBody_;
+	GameEngineRenderer* RendererArms_;
+	GameEngineRenderer* RendererLegs_;
+	GameEngineRenderer* RendererHair_;
+	GameEngineRenderer* RendererCloth_;
 
 	void Start() override;
 	void Update() override;

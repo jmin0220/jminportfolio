@@ -77,6 +77,9 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>99Etc</Filter>
     </ClCompile>
+    <ClCompile Include="FarmLevel.cpp">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>99Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmLevel.h">
+      <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

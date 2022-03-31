@@ -220,5 +220,26 @@ void GameEngineImage::Cut(const float4& _CutSize)
 // DC에서 범위의 픽셀을 취득
 int GameEngineImage::GetImagePixel(int _x, int _y)
 {
+	// 화면 바깥일경우
+	if (0 > _x)
+	{
+		return RGB(0, 0, 0);
+	}
+
+	if (0 > _y)
+	{
+		return RGB(0, 0, 0);
+	}
+
+	if (GetScale().ix() <= _x)
+	{
+		return RGB(0, 0, 0);
+	}
+
+	if (GetScale().iy() <= _y)
+	{
+		return RGB(0, 0, 0);
+	}
+
 	return GetPixel(ImageDC_, _x, _y);
 }

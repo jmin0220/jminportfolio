@@ -27,9 +27,8 @@ void TitleLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE))
 	{
-		GameEngine::GlobalEngine().ChangeLevel(LEVEL_PLAY);
+		GameEngine::GlobalEngine().ChangeLevel(LEVEL_FARM);
 	}
-	// GameEngine::GlobalEngine().ChangeLevel("Play");
 }
 
 void TitleLevel::LevelChangeStart()
@@ -42,8 +41,6 @@ void TitleLevel::LevelChangeStart()
 	CreateActor<TitleButtonLoadGame>((int)ORDER::UI);
 	CreateActor<TitleButtonExitGame>((int)ORDER::UI);
 
-	if (false == GameEngineInput::GetInst()->IsKey(LEVEL_CHANGE))
-	{
-		GameEngineInput::GetInst()->CreateKey(LEVEL_CHANGE, VK_LBUTTON);
-	}
+	GameEngineInput::GetInst()->CreateKey(LEVEL_CHANGE, '1');
+
 }

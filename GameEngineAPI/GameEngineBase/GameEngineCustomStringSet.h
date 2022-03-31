@@ -71,6 +71,7 @@
 // 레벨
 #define LEVEL_CHANGE "LevelChange"
 #define LEVEL_TITLE "TitleLevel"
+#define LEVEL_FARM "FarmLevel"
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_ENDING "EndingLevel"
 
@@ -83,7 +84,16 @@
 #define WINDOW_SIZE_W 1280
 
 
+// 애니메이션
+#define ANIM_IDLE_DOWN "IdleDown"
+#define ANIM_IDLE_RIGHT "IdleRight"
+#define ANIM_IDLE_LEFT "IdleLeft"
+#define ANIM_IDLE_UP "IdleUp"
 
+#define ANIM_WALK_DOWN "WalkDown"
+#define ANIM_WALK_RIGHT "WalkRight"
+#define ANIM_WALK_LEFT "WalkLeft"
+#define ANIM_WALK_UP "WalkUp"
 
 
 

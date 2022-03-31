@@ -6,17 +6,13 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
 
-#include <GameEngine/GameEngineLevel.h>
+//#include <GameEngine/GameEngineLevel.h>
+#include "PlayLevel.h"
 #include "HoeBasic.h"
 
 Player::Player() 
 	:Speed_(200.0f)
-	, DirectionBody_(0)
-	, DirectionCloth_(0)
-	, DirectionHair_(0)
-	, DirectionHat_(0)
-	, DirectionMask_(0)
-	, ClothPos_({0.0f, 8.0f})
+	, ClothPos_({0.0f, 9.0f})
 {
 }
 
@@ -26,33 +22,78 @@ Player::~Player()
 
 void Player::Start()
 {
+	int directionDown = 0;
+	int directionRight = 24;
+	int directionLeft = 48;
+	int directionUp = 72;
+
 	// Player의 위치와 크기
 	SetPosition({1000.0f, 1000.0f});
 	
 
 	// 플레이어 캐릭터 렌더링
-	// 몸통
-	GameEngineRenderer* Renderer;
-	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(DirectionBody_);
-	// 팔
-	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(DirectionBody_ + 6);
-	// 바지
-	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(DirectionBody_ + 18);
-	// 머리카락
-	Renderer = CreateRenderer(IMAGE_PLAYER_HAIR);
-	Renderer->SetIndex(DirectionHair_);
-	// 옷
-	Renderer = CreateRenderer(IMAGE_PLAYER_CLOTH);
-	Renderer->SetPivot(ClothPos_);
-	Renderer->SetIndex(DirectionCloth_);
-	//Renderer = CreateRenderer(IMAGE_PLAYER_HAT);
-	//Renderer->SetIndex(DirectionHat_);
-	//Renderer = CreateRenderer(IMAGE_PLAYER_MASK);
-	//Renderer->SetIndex(DirectionMask_);
+	RendererBody_ = CreateRenderer();
+	RendererArms_ = CreateRenderer();
+	RendererLegs_ = CreateRenderer();
+	RendererHair_ = CreateRenderer();
+	RendererCloth_ = CreateRenderer();
+	RendererCloth_->SetPivot(ClothPos_);
 
+	// Idle
+	// 몸통
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 0 + directionDown, 0 + directionDown, 0.2f, false);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 0 + directionRight, 0 + directionRight, 0.2f, false);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 0 + directionLeft, 0 + directionLeft, 0.2f, false);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 0 + directionUp, 0 + directionUp, 0.2f, false);
+	// 팔
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 6 + directionDown, 6 + directionDown, 0.2f, false);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 6 + directionRight, 6 + directionRight, 0.2f, false);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 6 + directionLeft, 6 + directionLeft, 0.2f, false);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 6 + directionUp, 6 + directionUp, 0.2f, false);
+	// 다리
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 18 + directionDown, 18 + directionDown, 0.2f, false);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 18 + directionRight, 18 + directionRight, 0.2f, false);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 18 + directionLeft, 18 + directionLeft, 0.2f, false);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 18 + directionUp, 18 + directionUp, 0.2f, false);
+
+	// Walk
+	// 몸
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_DOWN, 1 + directionDown, 2 + directionDown, 0.2f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_RIGHT, 1 + directionRight, 2 + directionRight, 0.2f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 1 + directionLeft, 2 + directionLeft, 0.2f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 1 + directionUp, 2 + directionUp, 0.2f, true);
+	// 팔
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_DOWN, 6 + directionDown, 7 + directionDown, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_RIGHT, 6 + directionRight, 7 + directionRight, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 6 + directionLeft, 7 + directionLeft, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 6 + directionUp, 7 + directionUp, 0.2f, true);
+	// 다리
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_DOWN, 19 + directionDown, 20 + directionDown, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_RIGHT, 19 + directionRight, 20 + directionRight, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 19 + directionLeft, 20 + directionLeft, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 19 + directionUp, 20 + directionUp, 0.2f, true);
+
+	// Hair
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_RIGHT, 8, 8, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_LEFT, 16, 16, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_UP, 24, 24, 0.0f, false);
+
+	// Cloth
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_RIGHT, 16, 16, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_LEFT, 32, 32, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_UP, 48, 48, 0.0f, false);
+
+	// 초기 애니메이션
+	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
+	RendererArms_->ChangeAnimation(ANIM_IDLE_DOWN);
+	RendererLegs_->ChangeAnimation(ANIM_IDLE_DOWN);
+	RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
+	RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
+
+
+	// 키설정
 	if (false == GameEngineInput::GetInst()->IsKey(KEY_MOVE_LEFT))
 	{
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_LEFT, 'A');
@@ -76,66 +117,87 @@ void Player::Update()
 		HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
 		Ptr->SetPosition(GetPosition());
 	}
-	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
+	else
 	{
-		DirectionBody_ = 24;
-		DirectionHair_ = 8;
-		DirectionCloth_ = 16;
-		DirectionHat_ = 12;
-		DirectionMask_ = 8;
+		if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_RIGHT))
+		{
+			RendererBody_->ChangeAnimation(ANIM_IDLE_RIGHT);
+			RendererArms_->ChangeAnimation(ANIM_IDLE_RIGHT);
+			RendererLegs_->ChangeAnimation(ANIM_IDLE_RIGHT);
 
-		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_);
+			RendererHair_->ChangeAnimation(ANIM_IDLE_RIGHT);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_RIGHT);
+		}
+		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT))
+		{
+			RendererBody_->ChangeAnimation(ANIM_IDLE_LEFT);
+			RendererArms_->ChangeAnimation(ANIM_IDLE_LEFT);
+			RendererLegs_->ChangeAnimation(ANIM_IDLE_LEFT);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_LEFT);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_LEFT);
+		}
+		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP))
+		{
+			RendererBody_->ChangeAnimation(ANIM_IDLE_UP);
+			RendererArms_->ChangeAnimation(ANIM_IDLE_UP);
+			RendererLegs_->ChangeAnimation(ANIM_IDLE_UP);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_UP);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_UP);
+		}
+		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_DOWN))
+		{
+			RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
+			RendererArms_->ChangeAnimation(ANIM_IDLE_DOWN);
+			RendererLegs_->ChangeAnimation(ANIM_IDLE_DOWN);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
+		{
+			RendererBody_->ChangeAnimation(ANIM_WALK_RIGHT);
+			RendererArms_->ChangeAnimation(ANIM_WALK_RIGHT);
+			RendererLegs_->ChangeAnimation(ANIM_WALK_RIGHT);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_RIGHT);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_RIGHT);
+			SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_);
+		}
+		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
+		{
+			RendererBody_->ChangeAnimation(ANIM_WALK_LEFT);
+			RendererArms_->ChangeAnimation(ANIM_WALK_LEFT);
+			RendererLegs_->ChangeAnimation(ANIM_WALK_LEFT);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_LEFT);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_LEFT);
+			SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_);
+		}
+		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
+		{
+			RendererBody_->ChangeAnimation(ANIM_WALK_UP);
+			RendererArms_->ChangeAnimation(ANIM_WALK_UP);
+			RendererLegs_->ChangeAnimation(ANIM_WALK_UP);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_UP);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_UP);
+			SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+		}
+		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
+		{
+			RendererBody_->ChangeAnimation(ANIM_WALK_DOWN);
+			RendererArms_->ChangeAnimation(ANIM_WALK_DOWN);
+			RendererLegs_->ChangeAnimation(ANIM_WALK_DOWN);
+
+			RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
+			RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
+			SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
+		}
 	}
-	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
-	{
-		DirectionBody_ = 48;
-		DirectionHair_ = 16;
-		DirectionCloth_ = 32;
-		DirectionHat_ = 24;
-		DirectionMask_ = 8;
-				
-		SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_);
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
-	{
-		DirectionBody_ = 72;
-		DirectionHair_ = 24;
-		DirectionCloth_ = 48;
-		DirectionHat_ = 36;
-
-		// 출력 안함
-		DirectionMask_ = 48;
-
-		SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
-	{
-		DirectionBody_ = 0;
-		DirectionHair_ = 0;
-		DirectionCloth_ = 0;
-		DirectionHat_ = 0;
-		DirectionMask_ = 0;
-
-		SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
-	}
-
-	// 이미지
-	GameEngineRenderer* Renderer;
-	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(DirectionBody_);
-	// 팔
-	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(DirectionBody_ + 6);
-	// 바지
-	Renderer = CreateRenderer(IMAGE_PLAYER_MAN_BODY);
-	Renderer->SetIndex(DirectionBody_ + 18);
-	// 머리
-	Renderer = CreateRenderer(IMAGE_PLAYER_HAIR);
-	Renderer->SetIndex(DirectionHair_);
-	// 옷
-	Renderer = CreateRenderer(IMAGE_PLAYER_CLOTH);
-	Renderer->SetPivot(ClothPos_);
-	Renderer->SetIndex(DirectionCloth_);
 
 
 	// 플레이어의 위치에 맞춰서 카메라 이동
@@ -146,15 +208,6 @@ void Player::Update()
 		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
 	}
 
-	if (GetPosition().iy() <= CameraPos_.y + GameEngineWindow::GetInst().GetScale().Half().iy() - 100.0f)
-	{
-		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy() - 100.0f;
-	}
-	else if (GetPosition().iy() >= CameraPos_.y + GameEngineWindow::GetInst().GetScale().Half().iy() + 100.0f)
-	{
-		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy() - 100.0f;
-	}
-
 	if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
 		&& GetPosition().ix() <= MAP_FARM_SIZE_W - GameEngineWindow::GetInst().GetScale().Half().ix()))
 	{
@@ -163,7 +216,6 @@ void Player::Update()
 
 	// 카메라 위치 갱신
 	GetLevel()->SetCameraPos(CameraPos_);
-
 }
 
 void Player::Render()

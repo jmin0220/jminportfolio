@@ -1,6 +1,6 @@
 #include "StardewContents.h"
 #include "TitleLevel.h"
-#include "PlayLevel.h"
+#include "FarmLevel.h"
 #include "EndingLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -94,8 +94,9 @@ void StardewContents::GameInit()
 
 
 	// 레벨 생성
-	CreateLevel<TitleLevel>("TitleLevel");
-	CreateLevel<PlayLevel>(LEVEL_PLAY);
+	CreateLevel<TitleLevel>(LEVEL_TITLE);
+	// CreateLevel<PlayLevel>(LEVEL_PLAY);
+	CreateLevel<FarmLevel>(LEVEL_FARM);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨

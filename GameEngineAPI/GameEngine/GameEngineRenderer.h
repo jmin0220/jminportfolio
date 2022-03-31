@@ -59,11 +59,24 @@ public:
 
 	void SetIndex(size_t _Index, const float4& _Scale = {-1.0f, -1.0f });
 
+	inline void CameraEffectOff()
+	{
+		IsCameraEffect_ = false;
+	}
+
+	inline void CameraEffectOn()
+	{
+		IsCameraEffect_ = true;
+	}
+
 protected:
 	void Render();
 
 private:
 	friend class FrameAnimation;
+
+	// 카메라 효과 사용유무
+	bool IsCameraEffect_;
 
 	// 출력할 이미지
 	GameEngineImage* Image_;
@@ -83,8 +96,6 @@ private:
 	float4 RenderImagePivot_;
 
 	unsigned int TransColor_;
-
-	bool IsCameraEffect_;
 
 
 
@@ -129,7 +140,6 @@ private:
 public:
 	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
-	// 옵션을 
 	void ChangeAnimation(const std::string& _Name);
 
 

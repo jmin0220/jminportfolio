@@ -1,7 +1,9 @@
 #include "GameEngineActor.h"
 #include "GameEngine/GameEngine.h"
 #include <GameEngineBase/GameEngineWindow.h>
-#include <GameEngine/GameEngineRenderer.h>
+#include "GameEngineRenderer.h"
+#include "GameEngineCollision.h"
+#include "GameEngineLevel.h"
 
 GameEngineActor::GameEngineActor() 
 	: Level_(nullptr)
@@ -45,7 +47,7 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType /*= R
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
-	NewRenderer->SetPivot({ 0.0f, 0.0f });
+	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetPivotType(_PivotType);
 
 	RenderList_.push_back(NewRenderer);
@@ -100,4 +102,12 @@ void GameEngineActor::Rendering()
 	{
 		(*StartRenderIter)->Render();
 	}
+}
+
+GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupName, float4 _Scale, float4 _Pivot /*= { 0, 0 }*/)
+{
+	GameEngineCollision* NewCollision = new GameEngineCollision();
+	GetLevel()->AddCollision(_GroupName, NewCollision);
+
+	return NewCollision;
 }
