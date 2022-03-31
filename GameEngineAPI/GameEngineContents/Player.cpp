@@ -70,6 +70,7 @@ void Player::Start()
 
 void Player::Update()
 {
+	// 키 입력
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
 	{
 		HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
@@ -136,12 +137,22 @@ void Player::Update()
 	Renderer->SetPivot(ClothPos_);
 	Renderer->SetIndex(DirectionCloth_);
 
+
 	// 플레이어의 위치에 맞춰서 카메라 이동
 	// 플레이어가 카메라가 움직이는 범위 안에 있을경우 카메라 좌표 갱신
 	if ((GetPosition().iy() >= GameEngineWindow::GetInst().GetScale().Half().iy()
-		&& GetPosition().iy() <= MAP_FARM_SIZE_H - GameEngineWindow::GetInst().GetScale().Half().iy()))
+		    && GetPosition().iy() <= MAP_FARM_SIZE_H - GameEngineWindow::GetInst().GetScale().Half().iy()))
 	{
 		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
+	}
+
+	if (GetPosition().iy() <= CameraPos_.y + GameEngineWindow::GetInst().GetScale().Half().iy() - 100.0f)
+	{
+		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy() - 100.0f;
+	}
+	else if (GetPosition().iy() >= CameraPos_.y + GameEngineWindow::GetInst().GetScale().Half().iy() + 100.0f)
+	{
+		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy() - 100.0f;
 	}
 
 	if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
