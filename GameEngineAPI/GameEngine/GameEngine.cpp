@@ -101,6 +101,9 @@ void GameEngine::EngineLoop()
 	CurrentLevel_->Update();
 	CurrentLevel_->ActorUpdate();
 
+	// 충돌 처리
+	CurrentLevel_->CollisionDebugRender();
+
 	// 액터 렌더링
 	CurrentLevel_->ActorRender();
 	

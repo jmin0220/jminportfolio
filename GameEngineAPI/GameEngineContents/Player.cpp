@@ -28,7 +28,8 @@ void Player::Start()
 	int directionUp = 72;
 
 	// Player의 위치와 크기
-	SetPosition({1000.0f, 1000.0f});
+	SetPosition({0.0f, 0.0f});
+	
 	
 
 	// 플레이어 캐릭터 렌더링

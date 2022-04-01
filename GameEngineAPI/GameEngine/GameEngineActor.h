@@ -1,4 +1,5 @@
 #pragma once
+#include "GameEngineLevel.h"
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineUpdateObject.h>
 #include <GameEngineBase/GameEngineMath.h>
@@ -27,6 +28,12 @@ public:
 	inline GameEngineLevel* GetLevel()
 	{
 		return Level_;
+	}
+
+	// 화면에서 액터의 위치
+	inline float4 GetCameraEffectPosition()
+	{
+		return Position_ - GetLevel()->GetCameraPos();
 	}
 
 	inline float4 GetPosition()
@@ -58,6 +65,8 @@ protected:
 	virtual void Start() = 0;
 	virtual void Update() {};
 	virtual void Render() {};
+
+	void Release();
 
 	// 디버그용 4각형
 	void DebugRectRender();

@@ -27,7 +27,7 @@ void TitleLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE))
 	{
-		GameEngine::GlobalEngine().ChangeLevel(LEVEL_FARM);
+		GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 	}
 }
 
