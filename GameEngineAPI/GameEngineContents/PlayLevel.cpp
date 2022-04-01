@@ -2,7 +2,7 @@
 #include "GameEngine/GameEngine.h"
 #include "Clock.h"
 #include "EnergyBar.h"
-#include "InventoryBar.h"
+#include "Inventory.h"
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
@@ -11,7 +11,7 @@
 BackGround* PlayLevel::BackGround_;
 
 // UI±¸¼º
-InventoryBar* PlayLevel::InventoryBar_;
+Inventory* PlayLevel::Inventory_;
 Clock* PlayLevel::Clock_;
 EnergyBar* PlayLevel::EnergyBar_;
 
@@ -21,7 +21,7 @@ Player* PlayLevel::Player_;
 PlayLevel::PlayLevel()
 {
 	BackGround_ = CreateActor<BackGround>((int)ORDER::BACKGROUND);
-	InventoryBar_ = CreateActor<InventoryBar>((int)ORDER::UI);
+	Inventory_ = CreateActor<Inventory>((int)ORDER::UI);
 	Clock_ = CreateActor<Clock>((int)ORDER::UI);
 	EnergyBar_ = CreateActor<EnergyBar>((int)ORDER::UI);
 	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
@@ -30,6 +30,7 @@ PlayLevel::PlayLevel()
 PlayLevel::~PlayLevel() 
 {
 }
+
 void PlayLevel::Loading()
 {
 	

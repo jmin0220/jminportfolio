@@ -1,7 +1,7 @@
 #pragma once
 #include "BackGround.h"
 #include "Clock.h"
-#include "InventoryBar.h"
+#include "Inventory.h"
 #include "EnergyBar.h"
 #include "Player.h"
 #include <GameEngine/GameEngineLevel.h>
@@ -27,7 +27,7 @@ protected:
 
 	static Player* Player_;
 	static BackGround* BackGround_;
-	static InventoryBar* InventoryBar_;
+	static Inventory* Inventory_;
 	static Clock* Clock_;
 	static EnergyBar* EnergyBar_;
 

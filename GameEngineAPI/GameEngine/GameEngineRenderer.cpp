@@ -164,8 +164,6 @@ void GameEngineRenderer::CreateAnimation(
 	NewAnimation.CurrentInterTime_ = _InterTime;
 	NewAnimation.InterTime_ = _InterTime;
 	NewAnimation.Loop_ = _Loop;
-
-
 }
 
 void GameEngineRenderer::FrameAnimation::Update()

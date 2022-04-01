@@ -56,7 +56,7 @@
     <ClCompile Include="TitleButtonExitGame.cpp">
       <Filter>01Title</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryBar.cpp">
+    <ClCompile Include="Inventory.cpp">
       <Filter>02Play\Interface</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
@@ -79,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="FarmLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>02Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +140,7 @@
     <ClInclude Include="TitleButtonExitGame.h">
       <Filter>01Title</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryBar.h">
+    <ClInclude Include="Inventory.h">
       <Filter>02Play\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Clock.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="FarmLevel.h">
       <Filter>00Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>02Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

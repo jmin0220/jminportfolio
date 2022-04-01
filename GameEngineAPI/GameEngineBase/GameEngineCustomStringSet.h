@@ -4,7 +4,7 @@
 
 #define ACTOR_UI_CLOCK "Clock"
 #define ACTOR_UI_ENERGYBAR "EnergyBar"
-#define ACTOR_UI_INVENTORY_BAR "InventoryBar"
+#define ACTOR_UI_INVENTORY "Inventory"
 
 #define ACTOR_TITLE_BACKGROUND "TitleBackGround"
 #define ACTOR_TITLE_BUTTON_NEW "TitleButtonNewGame"
@@ -34,17 +34,21 @@
 #define IMAGE_PLAYER_MASK "PlayerMask.bmp"
 #define IMAGE_PLAYER_MAN_BODY "PlayerManBody.bmp"
 #define IMAGE_PLAYER_WOMAN_BODY "PlayerWomanBody.bmp"
+#define IMAGE_INVENTORY_BAR "InventoryBar.bmp"
+#define IMAGE_INVENTORY_EXTEND "InventoryExtend.bmp"
+#define IMAGE_INVENTORY_SELECT "InventorySelectBox.bmp"
 #define IMAGE_INVENTORYBAR_POS_UP_X 640
 #define IMAGE_INVENTORYBAR_POS_UP_Y 55
 #define IMAGE_INVENTORYBAR_POS_DOWN_X 640
 #define IMAGE_INVENTORYBAR_POS_DOWN_Y 663
+#define IMAGE_INVENTORY_EXT_POS_X 640
+#define IMAGE_INVENTORY_EXT_POS_Y 563
 #define IMAGE_TITLE_BUTTON_H 174
 #define IMAGE_TITLE_BUTTON_W 222
 #define IMAGE_TITLE_BACKGOUND "MainBackground.bmp"
 #define IMAGE_TITLE_LOGO_H 374
 #define IMAGE_TITLE_LOGO_W 796
 #define IMAGE_TOOL_SET1 "Tools_set1.bmp"
-#define IMAGE_EXT_BMP "Bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
 
@@ -54,6 +58,20 @@
 #define KEY_MOVE_UP "MoveUp"
 #define KEY_MOVE_DOWN "MoveDown"
 #define KEY_INTERACT "Interact"
+
+#define KEY_INVEN_SELECT_1 "INVEN_SEL_1"
+#define KEY_INVEN_SELECT_2 "INVEN_SEL_2"
+#define KEY_INVEN_SELECT_3 "INVEN_SEL_3"
+#define KEY_INVEN_SELECT_4 "INVEN_SEL_4"
+#define KEY_INVEN_SELECT_5 "INVEN_SEL_5"
+#define KEY_INVEN_SELECT_6 "INVEN_SEL_6"
+#define KEY_INVEN_SELECT_7 "INVEN_SEL_7"
+#define KEY_INVEN_SELECT_8 "INVEN_SEL_8"
+#define KEY_INVEN_SELECT_9 "INVEN_SEL_9"
+#define KEY_INVEN_SELECT_0 "INVEN_SEL_0"
+#define KEY_INVEN_SELECT_11 "INVEN_SEL_11"
+#define KEY_INVEN_SELECT_12 "INVEN_SEL_12"
+#define KEY_INVEN_EXTEND "INVEN_EXTEND"
 
 
 // ¼öÇÐ

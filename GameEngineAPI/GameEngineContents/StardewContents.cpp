@@ -28,7 +28,7 @@ void StardewContents::GameInit()
 	ResourcesDir.Move(DIR_PLAYER);
 
 	// 폴더안에 모든 이미지 파일을 찾는다.
-	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
+	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
 	{
@@ -54,7 +54,7 @@ void StardewContents::GameInit()
 	ResourcesDir.Move(DIR_IMAGE);
 	ResourcesDir.Move(DIR_MAP);
 
-	AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
 	{
@@ -67,7 +67,7 @@ void StardewContents::GameInit()
 	ResourcesDir.Move(DIR_IMAGE);
 	ResourcesDir.Move(DIR_INTERFACE);
 		
-	AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
 	{
@@ -81,7 +81,7 @@ void StardewContents::GameInit()
 	ResourcesDir.Move(DIR_TOOL);
 
 
-	AllImageFileList = ResourcesDir.GetAllFile(IMAGE_EXT_BMP);
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
 	{

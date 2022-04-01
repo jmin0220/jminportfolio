@@ -1,10 +1,11 @@
 #pragma once
+#include "Item.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
 
 // Ό³Έν :
-class Tool : public GameEngineActor
+class Tool : public Item
 {
 public:
 	// constrcuter destructer
