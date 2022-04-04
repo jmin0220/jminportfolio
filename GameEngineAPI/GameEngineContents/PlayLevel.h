@@ -24,15 +24,14 @@ protected:
 	void Loading() override;
 	void Update() override;
 
-	static Player* Player_;
-	static BackGround* BackGround_;
-	static BackGround* BGBuilding_;
-	static BackGround* BGBuildingCollision_;
-	static BackGround* BGFront_;
-	static BackGround* BGAlwaysFront_;
-	static Inventory* Inventory_;
-	static Clock* Clock_;
-	static EnergyBar* EnergyBar_;
+	Player* Player_;
+	BackGround* BackGround_;
+	BackGround* BGBuilding_;
+	BackGround* BGFront_;
+	BackGround* BGAlwaysFront_;
+	Inventory* Inventory_;
+	Clock* Clock_;
+	EnergyBar* EnergyBar_;
 
 private:
 };

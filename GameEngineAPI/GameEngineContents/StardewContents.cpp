@@ -1,6 +1,7 @@
 #include "StardewContents.h"
 #include "TitleLevel.h"
 #include "FarmLevel.h"
+#include "FarmBuildingLevel.h"
 #include "TownLevel.h"
 #include "EndingLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
@@ -49,6 +50,22 @@ void StardewContents::GameInit()
 	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_WOMAN_BODY);
 	//Image->Cut({ 48, 96 });
 
+
+	// 건물
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_BUILDING);
+
+	// 폴더안에 모든 이미지 파일을 찾는다.
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
+
 	// 맵
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
@@ -61,6 +78,7 @@ void StardewContents::GameInit()
 	{
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
+
 
 	// 인터페이스
 	ResourcesDir.MoveParent(DIR_PARENT);
@@ -75,12 +93,12 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+
 	// 툴
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
 	ResourcesDir.Move(DIR_IMAGE);
 	ResourcesDir.Move(DIR_TOOL);
-
 
 	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
@@ -96,12 +114,13 @@ void StardewContents::GameInit()
 
 	// 레벨 생성
 	CreateLevel<TitleLevel>(LEVEL_TITLE);
-	CreateLevel<TownLevel>(LEVEL_TOWN);
 	CreateLevel<FarmLevel>(LEVEL_FARM);
+	CreateLevel<FarmBuildingLevel>(LEVEL_FARMBUILDING);
+	CreateLevel<TownLevel>(LEVEL_TOWN);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨
-	ChangeLevel(LEVEL_FARM);
+	ChangeLevel(LEVEL_TITLE);
 }
 
 void StardewContents::GameLoop()

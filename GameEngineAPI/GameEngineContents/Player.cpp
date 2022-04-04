@@ -4,8 +4,10 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
-
-//#include <GameEngine/GameEngineLevel.h>
+#include <GameEngine/GameEngineCollision.h>
+#include <GameEngine/GameEngineImageManager.h>
+#include <GameEngine/GameEngineLevel.h>
+#include <vector>
 #include "PlayLevel.h"
 #include "HoeBasic.h"
 
@@ -75,10 +77,6 @@ void Player::PlayerAnimationInit()
 	int directionRight = 27;
 	int directionLeft = 54;
 	int directionUp = 81;
-
-
-	// Player의 위치와 크기
-	SetPosition({ 700.0f, 700.0f });
 
 	// 플레이어 캐릭터 렌더링
 	RendererBody_ = CreateRenderer();
@@ -214,6 +212,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_RIGHT);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_RIGHT);
+
+			ColWallCheck(float4::ZERO);
 		}
 		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT))
 		{
@@ -223,6 +223,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_LEFT);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_LEFT);
+
+			ColWallCheck(float4::ZERO);
 		}
 		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP))
 		{
@@ -241,6 +243,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
+
+			ColWallCheck(float4::ZERO);
 		}
 
 
@@ -252,7 +256,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_RIGHT);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_RIGHT);
-			SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_);
+
+			ColWallCheck(float4::RIGHT);
 		}
 		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
 		{
@@ -262,7 +267,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_LEFT);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_LEFT);
-			SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_);
+
+			ColWallCheck(float4::LEFT);
 		}
 		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
 		{
@@ -272,7 +278,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_UP);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_UP);
-			SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+
+			ColWallCheck(float4::UP);
 		}
 		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
 		{
@@ -282,7 +289,8 @@ void Player::PlayerControl()
 
 			RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
 			RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
-			SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
+
+			ColWallCheck(float4::DOWN);
 		}
 	}
 }
@@ -293,12 +301,12 @@ void Player::UpdateCamera()
 	float CurrentLevelH = 0.0f;
 	float CurrentLevelW = 0.0f;
 
-	if (GetLevel()->GetNameCopy() == LEVEL_FARM)
+	if (GetCurrentLevel() == LEVEL_FARM)
 	{
 		CurrentLevelH = MAP_FARM_SIZE_H;
 		CurrentLevelW = MAP_FARM_SIZE_W;
 	}
-	else if (GetLevel()->GetNameCopy() == LEVEL_TOWN)
+	else if (GetCurrentLevel() == LEVEL_TOWN)
 	{
 		CurrentLevelH = MAP_TOWN_SIZE_H;
 		CurrentLevelW = MAP_TOWN_SIZE_W;
@@ -320,4 +328,73 @@ void Player::UpdateCamera()
 
 	// 카메라 위치 갱신
 	GetLevel()->SetCameraPos(CameraPos_);
+}
+
+void Player::ColWallCheck(float4 _MoveDir)
+{
+	float4 MoveDir_ = _MoveDir;
+
+	// 컬리전맵 취득
+	if (GetCurrentLevel() == LEVEL_FARM)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_COLLISION); 
+	}
+	else if (GetCurrentLevel() == LEVEL_TOWN)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_COLLISION);
+	}
+	else if (GetCurrentLevel() == LEVEL_FARMBUILDING)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARMBUILDING_COLLISION);
+	}
+
+	if (nullptr == MapColImage_)
+	{
+		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+	}
+
+	float4 NextPos = GetPosition() + (MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
+	float4 CheckPos = NextPos + float4(0.0f, 20.0f);
+
+	int Color = MapColImage_->GetImagePixel(CheckPos);
+	
+	// 충돌판정
+	if (RGB(0, 0, 0) != Color)
+	{
+		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
+	}
+
+	if (GetCurrentLevel() == LEVEL_FARM)
+	{
+		// 타운으로 이동
+		if (RGB(255, 0, 0) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
+		}
+		else if (RGB(0, 255, 0) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel(LEVEL_FARMBUILDING);
+		}
+	}
+	else if (GetCurrentLevel() == LEVEL_TOWN)
+	{
+		// 타운으로 이동
+		if (RGB(255, 0, 0) == Color)
+		{
+			// 농장으로 이동
+			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
+		}
+		else if (RGB(0, 0, 255) == Color)
+		{
+			// GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
+		}
+	}
+	else if (GetCurrentLevel() == LEVEL_FARMBUILDING)
+	{
+		// 농장으로 이동
+		if (RGB(255, 0, 0) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
+		}
+	}
 }

@@ -20,6 +20,7 @@
 #define DIR_INTERFACE "Interface"
 #define DIR_TOOL "Tool"
 #define DIR_MAP "Map"
+#define DIR_BUILDING "Building"
 
 // 이미지
 #define IMAGE_CLOCK_POS_H 129
@@ -28,6 +29,7 @@
 #define IMAGE_CLOCK_SIZE_W 288
 #define IMAGE_ENERGYBAR_POS_H 591
 #define IMAGE_ENERGYBAR_POS_W 1249
+#define IMAGE_FARM_BUILDING "FarmBuildings.bmp"
 #define IMAGE_PLAYER_CLOTH "PlayerCloth.bmp"
 #define IMAGE_PLAYER_HAIR "PlayerHair.bmp"
 #define IMAGE_PLAYER_HAT "PlayerHat.bmp"
@@ -92,7 +94,16 @@
 #define MAP_TOWN_COLLISION "TownBuildingCollision.bmp"
 #define MAP_TOWN_SIZE_H 5281.0f
 #define MAP_TOWN_SIZE_W 5760.0f
+// 농장 오두막
+#define MAP_FARMBUILDING_BACKGROUND "FarmBuildingBack.bmp"
+#define MAP_FARMBUILDING_BUILDING "FarmBuildingBuilding.bmp"
+#define MAP_FARMBUILDING_FRONT "FarmBuildingFront.bmp"
+#define MAP_FARMBUILDING_COLLISION "FarmBuildingBuildingCollision.bmp"
+#define MAP_FARMBUILDING_SIZE_H 414.0f
+#define MAP_FARMBUILDING_SIZE_W 414.0f
 
+// 컬리전
+#define COL_GROUP_WALL "Wall"
 
 // 레벨
 #define LEVEL_CHANGE_FARM "LevelChangeFarm"
@@ -100,6 +111,7 @@
 #define LEVEL_TITLE "TitleLevel"
 #define LEVEL_TOWN "TownLevel"
 #define LEVEL_FARM "FarmLevel"
+#define LEVEL_FARMBUILDING "FarmBuildingLevel"
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_ENDING "EndingLevel"
 

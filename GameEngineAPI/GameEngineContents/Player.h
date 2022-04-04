@@ -1,7 +1,10 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <string>
 
 // Ό³Έν :
+class GameEngineImage;
+class GameEngineCollision;
 class Player : public GameEngineActor
 {
 public:
@@ -14,6 +17,7 @@ public:
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
+
 
 protected:
 
@@ -29,6 +33,9 @@ private:
 	GameEngineRenderer* RendererHair_;
 	GameEngineRenderer* RendererCloth_;
 
+	GameEngineImage* MapColImage_;
+	GameEngineCollision* PlayerCollision;
+
 	void Start() override;
 	void Update() override;
 	void Render() override;
@@ -37,5 +44,12 @@ private:
 	void PlayerKeyInit();
 	void PlayerControl();
 	void UpdateCamera();
+
+	void ColWallCheck(float4 _MoveDir);
+
+	inline std::string GetCurrentLevel()
+	{
+		return GetLevel()->GetNameCopy();
+	}
 };
 
