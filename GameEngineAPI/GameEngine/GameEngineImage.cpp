@@ -43,7 +43,7 @@ bool GameEngineImage::Create(float4 _Scale)
 {
 	if (true == _Scale.IsZero2D())
 	{
-		MsgBoxAssert(DEBUG_MSG_IMAGE_CREATE_ZEROSIZE);
+		MsgBoxAssert("You tried Create 0 Size Image");
 		return false;
 	}
 
@@ -56,7 +56,7 @@ bool GameEngineImage::Create(float4 _Scale)
 
 	if (nullptr == ImageDC_)
 	{
-		MsgBoxAssert(DEBUG_MSG_DC_CREATE_FAILURE);
+		MsgBoxAssert("Create ImageDC failure");
 	}
 
 	// 이전에 DC에 연결되어있던 HBITMAP(OldBitMap_)을 다른 HBITMAP(BitMap_)에 연결하고 이전HBITMAP을 반환
@@ -81,14 +81,14 @@ bool GameEngineImage::Load(const std::string& _Path)
 
 	if (nullptr == BitMap_)
 	{
-		MsgBoxAssertString(_Path + DEBUG_MSG_IMAGE_LOAD_FAILURE);
+		MsgBoxAssertString(_Path + " Image Load Failure");
 	}
 
 	ImageDC_ = CreateCompatibleDC(nullptr);
 
 	if (nullptr == ImageDC_)
 	{
-		MsgBoxAssert(DEBUG_MSG_DC_CREATE_FAILURE);
+		MsgBoxAssert("Create ImageDC failure");
 	}
 
 	OldBitMap_ = (HBITMAP)SelectObject(ImageDC_, BitMap_);
@@ -196,12 +196,12 @@ void GameEngineImage::Cut(const float4& _CutSize)
 	// 크기가 나누어 떨어지지 않는 경우 에러
 	if (0 != (GetScale().ix() % _CutSize.ix()))
 	{
-		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_DIVISIBLE_SCALE);
+		MsgBoxAssert("Scale is Not Divisible Number");
 	}
 
 	if (0 != (GetScale().iy() % _CutSize.iy()))
 	{
-		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_DIVISIBLE_SCALE);
+		MsgBoxAssert("Scale is Not Divisible Number");
 	}
 
 	int XCount = GetScale().ix() / _CutSize.ix();

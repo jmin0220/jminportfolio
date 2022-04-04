@@ -25,7 +25,7 @@ void GameEngineRenderer::SetImageScale()
 {
 	if (nullptr == Image_)
 	{
-		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_EXIST);
+		MsgBoxAssert("This Image is not Exist");
 		return;
 	}
 
@@ -41,7 +41,7 @@ void GameEngineRenderer::SetImage(const std::string& _Name)
 
 	if (nullptr == FindImage)
 	{
-		MsgBoxAssertString(_Name + DEBUG_MSG_IMAGE_NOT_EXIST_SET_RENDERER);
+		MsgBoxAssertString(_Name + " Tried to Set a Non-Existent Image on the Renderer");
 		return;
 	}
 
@@ -59,7 +59,7 @@ void GameEngineRenderer::Render()
 
 	if (nullptr == Image_)
 	{
-		MsgBoxAssert(DEBUG_MSG_IMAGE_NOT_SET_RENDERER);
+		MsgBoxAssert(" Tried to Set a Non-Existent Image on the Renderer");
 		return;
 	}
 
@@ -190,4 +190,24 @@ void GameEngineRenderer::FrameAnimation::Update()
 
 	Renderer_->Image_ = Image_;
 	Renderer_->SetIndex(CurrentFrame_);
+}
+
+void GameEngineRenderer::SetOrder(int _Order)
+{
+	if (nullptr == GetActor())
+	{
+		MsgBoxAssert("액터가 세팅되지 않습니다.");
+	}
+
+	if (nullptr == GetActor()->GetLevel())
+	{
+		MsgBoxAssert("레벨이 세팅되지 않았습니다.");
+	}
+
+	if (_Order == GetOrder())
+	{
+		return;
+	}
+
+	GetActor()->GetLevel()->ChangeRenderOrder(this, _Order);
 }

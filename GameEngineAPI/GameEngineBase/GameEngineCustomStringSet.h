@@ -58,7 +58,9 @@
 #define KEY_MOVE_UP "MoveUp"
 #define KEY_MOVE_DOWN "MoveDown"
 #define KEY_INTERACT "Interact"
+#define KEY_INVEN_EXTEND "INVEN_EXTEND"
 
+// 인벤토리 선택 단축키
 #define KEY_INVEN_SELECT_1 "INVEN_SEL_1"
 #define KEY_INVEN_SELECT_2 "INVEN_SEL_2"
 #define KEY_INVEN_SELECT_3 "INVEN_SEL_3"
@@ -71,24 +73,32 @@
 #define KEY_INVEN_SELECT_0 "INVEN_SEL_0"
 #define KEY_INVEN_SELECT_11 "INVEN_SEL_11"
 #define KEY_INVEN_SELECT_12 "INVEN_SEL_12"
-#define KEY_INVEN_EXTEND "INVEN_EXTEND"
-
-
-// 수학
-#define MATH_VERTICAL_SPD 1.0f
-#define MATH_HORIZON_SPD 1.0f
 
 
 // 맵
+// 농장
+#define MAP_FARM_BACKGORUND "FarmBack.bmp"
+#define MAP_FARM_BUILDING "FarmBuilding.bmp"
+#define MAP_FARM_FRONT "FarmFront.bmp"
+#define MAP_FARM_ALWAYSFRONT "FarmAlwaysfront.bmp"
+#define MAP_FARM_COLLISION "FarmBuildingCollision.bmp"
 #define MAP_FARM_SIZE_H 3120.0f
 #define MAP_FARM_SIZE_W 3840.0f
+// 타운
+#define MAP_TOWN_BACKGORUND "TownBack.bmp"
+#define MAP_TOWN_BUILDING "TownBuilding.bmp"
+#define MAP_TOWN_FRONT "TownFront.bmp"
+#define MAP_TOWN_ALWAYSFRONT "TownAlwaysfront.bmp"
+#define MAP_TOWN_COLLISION "TownBuildingCollision.bmp"
+#define MAP_TOWN_SIZE_H 5281.0f
+#define MAP_TOWN_SIZE_W 5760.0f
 
-// 문자열
-#define STRING_DOT "."
 
 // 레벨
-#define LEVEL_CHANGE "LevelChange"
+#define LEVEL_CHANGE_FARM "LevelChangeFarm"
+#define LEVEL_CHANGE_TOWN "LevelChangeTown"
 #define LEVEL_TITLE "TitleLevel"
+#define LEVEL_TOWN "TownLevel"
 #define LEVEL_FARM "FarmLevel"
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_ENDING "EndingLevel"
@@ -112,31 +122,13 @@
 #define ANIM_WALK_RIGHT "WalkRight"
 #define ANIM_WALK_LEFT "WalkLeft"
 #define ANIM_WALK_UP "WalkUp"
-
-
-
-
-// 디버그 메세지
-#define DEBUG_MSG_DC_CREATE_FAILURE "Create ImageDC failure"
-
-#define DEBUG_MSG_GENGINE_NOT_START "GEngine ERROR Engine is NOT Start"
-
-#define DEBUG_MSG_IMAGE_ALREADY_EXIST "You tried Create Image that is Already Created"
-#define DEBUG_MSG_IMAGE_CREATE_FAILURE " Create Image failure"
-#define DEBUG_MSG_IMAGE_CREATE_ZEROSIZE "You tried Create 0 Size Image"
-#define DEBUG_MSG_IMAGE_LOAD_FAILURE " Image Load Failure"
-#define DEBUG_MSG_IMAGE_NOT_DIVISIBLE_SCALE "Scale is Not Divisible Number"
-#define DEBUG_MSG_IMAGE_NOT_SET_RENDERER "This Image is not setting in Renderer"
-#define DEBUG_MSG_IMAGE_NOT_EXIST "This Image is not Exist"
-#define DEBUG_MSG_IMAGE_NOT_EXIST_SET_RENDERER " Tried to Set a Non-Existent Image on the Renderer"
-
-#define DEBUG_MSG_KEY_EXIST "This Key is Already exist"
-#define DEBUG_MSG_KEY_NOT_EXIST "This Key is not Exist" 
-
-#define DEBUG_MSG_LEVEL_CURRENT_NULL "Current Level is NULL => GameEngine Loop Error"
-#define DEBUG_MSG_LEVEL_FIND_FAILURE "Level Find Error"
-
-#define DEBUG_MSG_WINDOW_DUPLICATE "Create a duplicate window"
-#define DEBUG_MSG_WINDOW_NOT_CREATE "Main Window is not Created"
-
-#define DEBUG_ERROR "Error"
+// 세로로 휘두르기
+#define ANIM_HIT_HORIZON_DOWN "HitHorizonDown"
+#define ANIM_HIT_HORIZON_RIGHT "HitHorizonRight"
+#define ANIM_HIT_HORIZON_LEFT "HitHorizonLeft"
+#define ANIM_HIT_HORIZON_UP "HitHorizonUp"
+// 가로로 휘두르기
+#define ANIM_HIT_VERTICAL_DOWN "HitVerticalDown"
+#define ANIM_HIT_VERTICAL_RIGHT "HitVerticalRight"
+#define ANIM_HIT_VERTICAL_LEFT "HitVerticalLeft"
+#define ANIM_HIT_VERTICAL_UP "HitVerticalUp"

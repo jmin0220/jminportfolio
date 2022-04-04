@@ -57,15 +57,28 @@ void GameEngineActor::DebugRectRender()
 }
 
 // 이미지를 넣지않고 렌더러를 생성
-GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType /*= RenderPivot::CENTER*/,
+GameEngineRenderer* GameEngineActor::CreateRenderer(
+	int _Order, /*= static_cast<int>(EngineMax::RENDERORDERMAX)*/
+	RenderPivot _PivotType /*= RenderPivot::CENTER*/,
 	const float4& _PivotPos /*= { 0,0 }*/)
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
+
+	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
+	{
+		NewRenderer->SetOrder(_Order);
+	}
+	else
+	{
+		NewRenderer->SetOrder(GetOrder());
+	}
+
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetPivotType(_PivotType);
 
+	GetLevel()->AddRenderer(NewRenderer);
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
@@ -74,6 +87,7 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType /*= R
 // 이미지만 넣고 렌더러 생성
 GameEngineRenderer* GameEngineActor::CreateRenderer(
 	const std::string& _Image,
+	int _Order, /*= static_cast<int>(EngineMax::RENDERORDERMAX)*/
 	RenderPivot _PivotType /* = RenderPivot::CENTER */,
 	const float4& _PivotPos /* = { 0,0 } */
 )
@@ -81,9 +95,20 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	GameEngineRenderer*NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
+
+	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
+	{
+		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
+	}
+	else
+	{
+		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
+	}
+
 	NewRenderer->SetImage(_Image);	
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetPivotType(_PivotType);
+	GetLevel()->AddRenderer(NewRenderer);
 
 	RenderList_.push_back(NewRenderer);
 
@@ -92,17 +117,30 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 
 // _Scale에 따라 이미지를 변형하여 렌더러 생성
 GameEngineRenderer* GameEngineActor::CreateRendererToScale(
-	const std::string& _Image, const float4& _Scale,
+	const std::string& _Image,
+	const float4& _Scale,
+	int _Order, /*= static_cast<int>(EngineMax::RENDERORDERMAX)*/
 	RenderPivot _PivotType /*= RenderPivot::CENTER*/, const float4& _PivotPos /*= { 0,0 }*/
 )
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
+
+	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
+	{
+		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
+	}
+	else
+	{
+		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
+	}
+
 	NewRenderer->SetImage(_Image);
 	NewRenderer->SetScale(_Scale);
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetPivotType(_PivotType);
+	GetLevel()->AddRenderer(NewRenderer);
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;

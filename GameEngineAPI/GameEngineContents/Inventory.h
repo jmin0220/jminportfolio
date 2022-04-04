@@ -32,7 +32,7 @@ private:
 
 	void ControlSelectBox();
 	void ExtendInventoryOn();
-	void AddItemToInventory(Item* _item);
+	void AddItemToInventory(Item& _item);
 
 private:
 	Item* InventoryList_[36];

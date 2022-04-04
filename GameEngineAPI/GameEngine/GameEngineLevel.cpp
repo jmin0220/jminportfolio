@@ -1,6 +1,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineActor.h"
 #include "GameENgineCollision.h"
+#include "GameEngineRenderer.h"
 
 GameEngineLevel::GameEngineLevel() 
 	: CameraPos_(float4::ZERO)
@@ -66,46 +67,59 @@ void GameEngineLevel::ActorUpdate()
 }
 
 void GameEngineLevel::ActorRender()
-{
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd;
-
-	std::list<GameEngineActor*>::iterator StartActor;
-	std::list<GameEngineActor*>::iterator EndActor;
-
-	GroupStart = AllActor_.begin();
-	GroupEnd = AllActor_.end();
-
-	for (; GroupStart != GroupEnd; ++GroupStart)
+{	
+	// 랜더러 랜더
 	{
-		std::list<GameEngineActor*>& Group = GroupStart->second;
+		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupStart = AllRenderer_.begin();
+		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupEnd = AllRenderer_.end();
 
-		StartActor = Group.begin();
-		EndActor = Group.end();
+		std::list<GameEngineRenderer*>::iterator StartRenderer;
+		std::list<GameEngineRenderer*>::iterator EndRenderer;
 
-		// GameEngineRenderer에 저장된 이미지 렌더링
-		for (; StartActor != EndActor; ++StartActor)
+		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
-			if (false == (*StartActor)->IsUpdate())
+			std::list<GameEngineRenderer*>& Group = GroupStart->second;
+			StartRenderer = Group.begin();
+			EndRenderer = Group.end();
+			for (; StartRenderer != EndRenderer; ++StartRenderer)
 			{
-				continue;
-			}
+				if (false == (*StartRenderer)->IsUpdate())
+				{
+					continue;
+				}
 
-			(*StartActor)->Rendering();
+				(*StartRenderer)->Render();
+			}
 		}
+	}
 
-		StartActor = Group.begin();
-		EndActor = Group.end();
+	{
+		std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;
+		std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd;
 
-		// 각 Actor에 오버라이드된 Render함수로 설정된 이미지 렌더링
-		for (; StartActor != EndActor; ++StartActor)
+		std::list<GameEngineActor*>::iterator StartActor;
+		std::list<GameEngineActor*>::iterator EndActor;
+
+		GroupStart = AllActor_.begin();
+		GroupEnd = AllActor_.end();
+
+		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
-			if (false == (*StartActor)->IsUpdate())
-			{
-				continue;
-			}
+			std::list<GameEngineActor*>& Group = GroupStart->second;
 
-			(*StartActor)->Render();
+			StartActor = Group.begin();
+			EndActor = Group.end();
+
+			// 각 Actor에 오버라이드된 Render함수로 설정된 이미지 렌더링
+			for (; StartActor != EndActor; ++StartActor)
+			{
+				if (false == (*StartActor)->IsUpdate())
+				{
+					continue;
+				}
+
+				(*StartActor)->Render();
+			}
 		}
 	}
 }
@@ -201,6 +215,23 @@ void GameEngineLevel::ActorRelease()
 	}
 
 }
+
+void GameEngineLevel::AddRenderer(GameEngineRenderer* _Renderer)
+{
+	AllRenderer_[_Renderer->GetOrder()].push_back(_Renderer);
+}
+
+
+void GameEngineLevel::ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder)
+{
+	AllRenderer_[_Renderer->GetOrder()].remove(_Renderer);
+
+	_Renderer->GameEngineUpdateObject::SetOrder(_NewOrder);
+
+	AllRenderer_[_Renderer->GetOrder()].push_back(_Renderer);
+
+}
+
 
 void GameEngineLevel::AddCollision(const std::string& _GroupName
 	, GameEngineCollision* _Collision)

@@ -12,7 +12,7 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
     case WM_DESTROY:
         // 윈도우 종료, 루프 종료
         GameEngineWindow::GetInst().Off();
-        //return DefWindowProc(hWnd, message, wParam, lParam);
+
         break;
 
     // 윈도우 화면에 무엇인가 그려질 경우
@@ -23,7 +23,6 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 
         EndPaint(hWnd, &ps);
         
-        //return DefWindowProc(hWnd, message, wParam, lParam);
         break;
     }
     case WM_CLOSE:
@@ -96,7 +95,7 @@ void GameEngineWindow::CreateGameWindow(HINSTANCE _hInst, const std::string& _Ti
     // 윈도우 생성이 중복 실행되었을경우를 대비. 이미 생성되어있는 경우 함수 종료.
     if (nullptr != hInst_)
     {
-        MsgBoxAssert(DEBUG_MSG_WINDOW_DUPLICATE);
+        MsgBoxAssert("Create a duplicate window");
         return;
     }
 
@@ -124,7 +123,7 @@ void GameEngineWindow::ShowGameWindow()
     // 윈도우가 생성되지 않았을경우 함수 종료
     if (nullptr == hWnd_)
     {
-        MsgBoxAssert(DEBUG_MSG_WINDOW_NOT_CREATE);
+        MsgBoxAssert("Main Window is not Created");
         return;
     }
 

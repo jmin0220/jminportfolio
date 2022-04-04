@@ -25,9 +25,13 @@ void TitleLevel::Loading()
 
 void TitleLevel::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE))
+	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE_FARM))
 	{
 		GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
+	}
+	if (true == GameEngineInput::GetInst()->IsPress(LEVEL_CHANGE_TOWN))
+	{
+		GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
 	}
 }
 
@@ -41,6 +45,7 @@ void TitleLevel::LevelChangeStart()
 	CreateActor<TitleButtonLoadGame>((int)ORDER::UI);
 	CreateActor<TitleButtonExitGame>((int)ORDER::UI);
 
-	GameEngineInput::GetInst()->CreateKey(LEVEL_CHANGE, '1');
+	GameEngineInput::GetInst()->CreateKey(LEVEL_CHANGE_FARM, '1');
+	GameEngineInput::GetInst()->CreateKey(LEVEL_CHANGE_TOWN, '2');
 
 }

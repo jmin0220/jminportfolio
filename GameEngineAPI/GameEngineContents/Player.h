@@ -36,5 +36,6 @@ private:
 	void PlayerAnimationInit();
 	void PlayerKeyInit();
 	void PlayerControl();
+	void UpdateCamera();
 };
 

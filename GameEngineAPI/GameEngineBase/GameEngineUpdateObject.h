@@ -62,9 +62,20 @@ public:
 		}
 	}
 
+	inline int GetOrder()
+	{
+		return Order_;
+	}
+
+	virtual inline void SetOrder(int _Order)
+	{
+		Order_ = _Order;
+	}
+
 protected:
 
 private:
+	int Order_;
 	// 오브젝트가 Release할때까지의 시간
 	float DeathTime_;
 	// Release트리거 설정

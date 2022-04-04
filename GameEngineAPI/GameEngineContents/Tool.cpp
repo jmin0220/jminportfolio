@@ -7,4 +7,3 @@ Tool::Tool()
 Tool::~Tool() 
 {
 }
-

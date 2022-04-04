@@ -83,6 +83,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>02Play</Filter>
     </ClCompile>
+    <ClCompile Include="TownLevel.cpp">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>02Play</Filter>
+    </ClInclude>
+    <ClInclude Include="TownLevel.h">
+      <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

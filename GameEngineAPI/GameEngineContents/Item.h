@@ -17,9 +17,21 @@ public:
 	Item& operator=(const Item& _Other) = delete;
 	Item& operator=(Item&& _Other) noexcept = delete;
 
+	GameEngineRenderer* GetIconRenderer()
+	{
+		return IconRenderer;
+	}
+	
 protected:
 
-private:
 
+private:
+	// 아이템이 인벤토리에 들어가있을때의 아이콘 이미지
+	GameEngineRenderer* IconRenderer;
+
+	void SetIconRenderer(GameEngineRenderer& _IconRenderer)
+	{
+		IconRenderer = &_IconRenderer;
+	};
 };
 

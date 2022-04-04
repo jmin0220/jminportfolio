@@ -1,7 +1,6 @@
 #include "Player.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
-#include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -32,27 +31,15 @@ void Player::Start()
 
 void Player::Update()
 {
+	// 카메라 갱신
+	UpdateCamera();
+
 	// 키 입력
 	PlayerControl();
 
-	// 플레이어의 위치에 맞춰서 카메라 이동
-	// 플레이어가 카메라가 움직이는 범위 안에 있을경우 카메라 좌표 갱신
-	if ((GetPosition().iy() >= GameEngineWindow::GetInst().GetScale().Half().iy()
-		    && GetPosition().iy() <= MAP_FARM_SIZE_H - GameEngineWindow::GetInst().GetScale().Half().iy()))
-	{
-		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
-	}
-
-	if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
-		&& GetPosition().ix() <= MAP_FARM_SIZE_W - GameEngineWindow::GetInst().GetScale().Half().ix()))
-	{
-		CameraPos_.x = GetPosition().ix() - GameEngineWindow::GetInst().GetScale().Half().ix();
-	}
-
-	// 카메라 위치 갱신
-	GetLevel()->SetCameraPos(CameraPos_);
 }
 
+// 랜더링
 void Player::Render()
 {
 	// DebugRectRender();
@@ -67,7 +54,7 @@ void Player::Render()
 	//GameEngine::BackBufferImage()->BitCopyCenter(FindImage, GetPosition());
 }
 
-
+// 애니메이션 초기화
 void Player::PlayerAnimationInit()
 {
 	/*
@@ -91,7 +78,7 @@ void Player::PlayerAnimationInit()
 
 
 	// Player의 위치와 크기
-	SetPosition({ 100.0f, 100.0f });
+	SetPosition({ 700.0f, 700.0f });
 
 	// 플레이어 캐릭터 렌더링
 	RendererBody_ = CreateRenderer();
@@ -141,6 +128,37 @@ void Player::PlayerAnimationInit()
 	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 20 + directionLeft, 23 + directionLeft, 0.2f, true);
 	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 20 + directionUp, 23 + directionUp, 0.2f, true);
 
+	// 세로로 휘두르기
+	// 몸통
+	// 16라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 0 + directionDown, 0 + directionDown, 0.2f, false);
+	//// 11라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 0 + directionRight, 0 + directionRight, 0.2f, false);
+	//// 12라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 0 + directionLeft, 0 + directionLeft, 0.2f, false);
+	//// 9라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 0 + directionUp, 0 + directionUp, 0.2f, false);
+
+	//// 팔
+	//// 다리
+
+
+	//// 가로로 휘두르기
+	//// 몸통
+	//// 6라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 0 + directionDown, 0 + directionDown, 0.2f, false);
+	//// 7라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 0 + directionRight, 0 + directionRight, 0.2f, false);
+	//// 8라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 0 + directionLeft, 0 + directionLeft, 0.2f, false);
+	//// 9라인
+	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 0 + directionUp, 0 + directionUp, 0.2f, false);
+
+	// 팔
+	// 다리
+
+
+
 	// Hair
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_RIGHT, 8, 8, 0.0f, false);
@@ -162,6 +180,7 @@ void Player::PlayerAnimationInit()
 
 }
 
+// 조작키 초기화
 void Player::PlayerKeyInit()
 {
 	// 키설정
@@ -177,12 +196,13 @@ void Player::PlayerKeyInit()
 	}
 }
 
+// 키입력
 void Player::PlayerControl()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
 	{
-		HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
-		Ptr->SetPosition(GetPosition());
+		//HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
+		//Ptr->SetPosition(GetPosition());
 	}
 	else
 	{
@@ -265,4 +285,39 @@ void Player::PlayerControl()
 			SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
 		}
 	}
+}
+
+// 카메라 이동
+void Player::UpdateCamera()
+{
+	float CurrentLevelH = 0.0f;
+	float CurrentLevelW = 0.0f;
+
+	if (GetLevel()->GetNameCopy() == LEVEL_FARM)
+	{
+		CurrentLevelH = MAP_FARM_SIZE_H;
+		CurrentLevelW = MAP_FARM_SIZE_W;
+	}
+	else if (GetLevel()->GetNameCopy() == LEVEL_TOWN)
+	{
+		CurrentLevelH = MAP_TOWN_SIZE_H;
+		CurrentLevelW = MAP_TOWN_SIZE_W;
+	}
+
+	// 플레이어의 위치에 맞춰서 카메라 이동
+	// 플레이어가 카메라가 움직이는 범위 안에 있을경우 카메라 좌표 갱신
+	if ((GetPosition().iy() >= GameEngineWindow::GetInst().GetScale().Half().iy()
+		&& GetPosition().iy() <= CurrentLevelH - GameEngineWindow::GetInst().GetScale().Half().iy()))
+	{
+		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
+	}
+
+	if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
+		&& GetPosition().ix() <= CurrentLevelW - GameEngineWindow::GetInst().GetScale().Half().ix()))
+	{
+		CameraPos_.x = GetPosition().ix() - GameEngineWindow::GetInst().GetScale().Half().ix();
+	}
+
+	// 카메라 위치 갱신
+	GetLevel()->SetCameraPos(CameraPos_);
 }

@@ -159,15 +159,15 @@ void Inventory::ControlSelectBox()
 }
 
 // Å×½ºÆ®
-void Inventory::AddItemToInventory(Item* _item)
+void Inventory::AddItemToInventory(Item& _item)
 {
-	Item* item = _item;
+	Item& item = _item;
 
 	for (size_t i = 0; i < 36 ; i++)
 	{
 		if (nullptr == InventoryList_[i])
 		{
-			InventoryList_[i] = item;
+			InventoryList_[i] = &item;
 		}
 	}
 }

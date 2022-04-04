@@ -43,7 +43,7 @@ void GameEngine::GameEnd()
 // 윈도우 창 생성
 void GameEngine::WindowCreate()
 {
-	GameEngineWindow::GetInst().CreateGameWindow(nullptr, WINDOW_GAMEWINDOW);
+	GameEngineWindow::GetInst().CreateGameWindow(nullptr, "GameWindow");
 	GameEngineWindow::GetInst().ShowGameWindow();
 	GameEngineWindow::GetInst().MessageLoop(EngineInit, EngineLoop);
 }
@@ -54,8 +54,8 @@ void GameEngine::EngineInit()
 	UserContents_->GameInit();
 
 	// 윈도우 크기만큼의 버퍼를 생성
-	WindowMainImage_ = GameEngineImageManager::GetInst()->Create(WINDOW_MAINDC, GameEngineWindow::GetHDC());
-	BackBufferImage_ = GameEngineImageManager::GetInst()->Create(WINDOW_BACKBUFFER, GameEngineWindow::GetScale());
+	WindowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
+	BackBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 }
 
 void GameEngine::EngineLoop()
@@ -91,7 +91,7 @@ void GameEngine::EngineLoop()
 		// 에러 판정
 	if (nullptr == CurrentLevel_)
 	{
-		MsgBoxAssert(DEBUG_MSG_LEVEL_CURRENT_NULL);
+		MsgBoxAssert("Current Level is NULL => GameEngine Loop Error");
 	}
 
 	// 실행시간 갱신
@@ -145,7 +145,7 @@ void GameEngine::ChangeLevel(const std::string& _Name)
 
 	if (AllLevel_.end() == FindIter)
 	{
-		MsgBoxAssert(DEBUG_MSG_LEVEL_FIND_FAILURE);
+		MsgBoxAssert("Level Find Error");
 		return;
 	}
 

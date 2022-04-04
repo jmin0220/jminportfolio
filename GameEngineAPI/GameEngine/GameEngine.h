@@ -53,7 +53,7 @@ public:
 	{
 		if (nullptr == UserContents_)
 		{
-			MsgBoxAssert(DEBUG_MSG_GENGINE_NOT_START);
+			MsgBoxAssert("GEngine ERROR Engine is NOT Start");
 		}
 
 		return *UserContents_;
