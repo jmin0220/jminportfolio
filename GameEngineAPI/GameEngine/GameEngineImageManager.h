@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineImage.h"
+#include "GameEngineFolderImage.h"
 #include <GameEngineBase/GameEngineMath.h>
 #include <map>
 
@@ -38,6 +39,20 @@ public:
 	GameEngineImage* Load(const std::string& _Path, const std::string& _Name);
 
 private:
+	// 생성된 이미지를 모두 저장하는 map
+	std::map<std::string, GameEngineImage*> AllRes;
+
+// 폴더 이미지
+public:
+	GameEngineFolderImage* FolderImageFind(const std::string& _Name);
+	GameEngineFolderImage* FolderImageLoad(const std::string& _Path);
+	GameEngineFolderImage* FolderImageLoad(const std::string& _Path, const std::string& _Name);
+
+
+private:
+	std::map<std::string, GameEngineFolderImage*> AllFolderRes;
+
+private:
 	// constrcuter destructer
 	GameEngineImageManager();
 	~GameEngineImageManager();
@@ -48,10 +63,5 @@ private:
 	GameEngineImageManager& operator=(const GameEngineImageManager& _Other) = delete;
 	GameEngineImageManager& operator=(GameEngineImageManager&& _Other) noexcept = delete;
 
-protected:
-
-private:
-	// 생성된 이미지를 모두 저장하는 map
-	std::map<std::string, GameEngineImage*> AllRes;
 };
 

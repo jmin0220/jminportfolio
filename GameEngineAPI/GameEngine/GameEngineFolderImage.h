@@ -21,6 +21,11 @@ public:
 
 	bool Load(const std::string& _Path);
 
+	inline GameEngineImage* GetImage(size_t _Index) const
+	{
+		return Images_[_Index];
+	}
+
 private:
 	std::vector<GameEngineImage*> Images_;
 

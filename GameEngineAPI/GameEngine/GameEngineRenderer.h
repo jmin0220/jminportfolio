@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEngineActorSubObject.h"
 #include "GameEngineEnum.h"
+#include "GameEngineFolderImage.h"
 #include <map>
 
 // 설명 :
@@ -104,17 +105,19 @@ private:
 
 /////////////////////////////// 애니메이션 클래스
 private:
-	class FrameAnimation
+	class FrameAnimation : public GameEngineNameObject
 	{
 	public:
 		GameEngineRenderer* Renderer_;
 		GameEngineImage* Image_;
+		GameEngineFolderImage* FolderImage_;
 		int CurrentFrame_;
 		int StartFrame_;
 		int EndFrame_;
 		float CurrentInterTime_;
 		float InterTime_;
-		bool Loop_;
+		bool Loop_ = false;
+		bool IsEnd;
 
 	public:
 		FrameAnimation()
@@ -135,6 +138,7 @@ private:
 
 		void Reset()
 		{
+			IsEnd = false;
 			CurrentFrame_ = StartFrame_;
 			CurrentInterTime_ = InterTime_;
 		}
@@ -143,8 +147,13 @@ private:
 public:
 	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
+	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+
 	void ChangeAnimation(const std::string& _Name);
 
+	bool IsEndAnimation();
+
+	bool IsAnimationName(const std::string& _Name);
 
 private:
 	std::map<std::string, FrameAnimation> Animations_;

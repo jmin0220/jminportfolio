@@ -190,6 +190,7 @@ void GameEngineActor::Release()
 			}
 
 			delete (*StartIter);
+			(*StartIter) = nullptr;
 			StartIter = RenderList_.erase(StartIter);
 		}
 	}
@@ -207,6 +208,7 @@ void GameEngineActor::Release()
 			}
 
 			delete (*StartIter);
+			(*StartIter) = nullptr;
 			StartIter = CollisionList_.erase(StartIter);
 		}
 	}
