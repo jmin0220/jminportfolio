@@ -24,17 +24,21 @@ void FarmLevel::LevelChangeStart()
 	CreateActor<FarmBuilding>((int)ORDER::BUIDING);
 
 	// 이미지의 좌상단이 0,0이 되도록
-	BackGround_->SetPosition({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
+	BackGround_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_FARM_BACKGORUND);
-	BGBuilding_->SetPosition({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
+	BackGround_->TileMap_.TileRangeSetting(80, 65, { 48, 48});
+	
+	BGBuilding_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_FARM_BUILDING);
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
-	BGFront_->SetPosition({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
+
+	BGFront_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BGFront_->GetRenderer()->SetImage(MAP_FARM_FRONT);
-	BGAlwaysFront_->SetPosition({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
+	BGAlwaysFront_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BGAlwaysFront_->GetRenderer()->SetImage(MAP_FARM_ALWAYSFRONT);
 	
 	this->Player_->SetPosition({ 3200.0f, 800.0f });
+	this->Player_->SetTileMap(&BackGround_->TileMap_);
 }
 
 void FarmLevel::Loading()

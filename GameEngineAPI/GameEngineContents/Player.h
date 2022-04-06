@@ -1,10 +1,12 @@
 #pragma once
+#include "ContentsEnums.h"
 #include <GameEngine/GameEngineActor.h>
 #include <string>
 
 // Ό³Έν :
 class GameEngineImage;
 class GameEngineCollision;
+class GameEngineRendererTileMap;
 class Player : public GameEngineActor
 {
 public:
@@ -18,8 +20,10 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-
-protected:
+	inline void SetTileMap(GameEngineRendererTileMap* _TileMap)
+	{
+		TileMap_ = _TileMap;
+	}
 
 private:
 	float Speed_;
@@ -32,6 +36,8 @@ private:
 	GameEngineRenderer* RendererLegs_;
 	GameEngineRenderer* RendererHair_;
 	GameEngineRenderer* RendererCloth_;
+
+	GameEngineRendererTileMap* TileMap_;
 
 	GameEngineImage* MapColImage_;
 	GameEngineCollision* PlayerCollision;
@@ -51,5 +57,25 @@ private:
 	{
 		return GetLevel()->GetNameCopy();
 	}
+
+//private:
+//	PlayerState CurState_;
+//
+	bool IsMoveKey();
+//	void KeyMove();
+//
+//public:
+//	void ChangeState(PlayerState _State);
+//	void StateUpdate();
+//
+//private:
+//	void IdleUpdate();
+//	void ActionUpdate();
+//	void MoveUpdate();
+//
+//	void IdleStart();
+//	void ActionStart();
+//	void MoveStart();
+	
 };
 

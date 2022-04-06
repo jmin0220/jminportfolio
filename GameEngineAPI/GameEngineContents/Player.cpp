@@ -194,11 +194,30 @@ void Player::PlayerKeyInit()
 	}
 }
 
+// 아무키도 눌리지 않았다면 false
+// 아무키든 눌렸다면 true
+bool Player::IsMoveKey()
+{
+	if (false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_LEFT) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_RIGHT) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_UP) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_DOWN) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_INTERACT)
+		)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 // 키입력
 void Player::PlayerControl()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
 	{
+		TileMap_->CreateTile(GetPosition(), "FarmBuildings.bmp");
+		
 		//HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
 		//Ptr->SetPosition(GetPosition());
 	}

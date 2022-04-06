@@ -39,6 +39,7 @@ void TitleLevel::LevelChangeStart()
 {
 	BackGround* backGround = CreateActor<BackGround>((int)ORDER::BACKGROUND);
 	backGround->GetRenderer()->SetImage(IMAGE_TITLE_BACKGOUND);
+	backGround->GetRenderer()->SetPivot(backGround->GetRenderer()->GetImage()->GetScale().Half());
 
 	CreateActor<TitleLogo>((int)ORDER::UI);
 	CreateActor<TitleButtonNewGame>((int)ORDER::UI);

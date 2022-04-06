@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRendererTileMap.h>
 
 // Ό³Έν :
 class BackGround : public GameEngineActor
@@ -19,6 +20,8 @@ public:
 	{
 		return Image_;
 	}
+
+	GameEngineRendererTileMap TileMap_;
 
 protected:
 	void Start() override;

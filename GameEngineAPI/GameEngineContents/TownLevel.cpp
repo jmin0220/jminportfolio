@@ -20,14 +20,17 @@ TownLevel::~TownLevel()
 void TownLevel::LevelChangeStart()
 {
 	// 이미지의 좌상단이 0,0이 되도록
-	BackGround_->SetPosition({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
+	BackGround_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_TOWN_BACKGORUND);
-	BGBuilding_->SetPosition({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
+	BackGround_->TileMap_.TileRangeSetting(80, 65, { 48, 48 });
+
+	BGBuilding_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_TOWN_BUILDING);
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
-	BGFront_->SetPosition({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
+
+	BGFront_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BGFront_->GetRenderer()->SetImage(MAP_TOWN_FRONT);
-	BGAlwaysFront_->SetPosition({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
+	BGAlwaysFront_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BGAlwaysFront_->GetRenderer()->SetImage(MAP_TOWN_ALWAYSFRONT);
 
 	this->Player_->SetPosition({ 700.0f, 2600.0f });

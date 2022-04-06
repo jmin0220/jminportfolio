@@ -21,6 +21,7 @@ class GameEngineRendererTileMap
 	GameEngineActor* Master_;
 
 public:
+	// 타일맵을 맵 전체에 생성
 	void TileRangeSetting(int _X, int _Y, float4 _TileSize)
 	{
 		if (0 >= _X)
@@ -51,6 +52,7 @@ public:
 		TileSizeHalf_ = _TileSize.Half();
 	}
 
+	// 위치의 타일을 취득
 	GameEngineRenderer* GetTile(int _X, int _Y)
 	{
 		if (0 > _X)
@@ -81,6 +83,7 @@ public:
 		return GetTile(_X, _Y) == nullptr;
 	}
 
+	// _Pos위치에 _Image의 비트맵을 생성
 	GameEngineRenderer* CreateTile(const float4& _Pos, const std::string& _Image, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX));
 
 	// 타일이미지가 1장1장 있을때
@@ -90,8 +93,9 @@ public:
 	GameEngineRenderer* CreateTile(int _X, int _Y, const std::string& _Image, int Index, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX));
 	void DeleteTile(int _X, int _Y);
 
-	// 0,0(원점) 기준으로 위치해야하는 포지션을 
+	// 0,0(원점) 기준으로 해당 위치의 타일의 중심 좌표를 취득
 	float4 GetWorldPostion(int _X, int _Y);
+
 	TileIndex GetTileIndex(const float4& _Pos);
 
 public:
