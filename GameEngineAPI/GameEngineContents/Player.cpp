@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayLevel.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -8,8 +9,6 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
-#include "PlayLevel.h"
-#include "HoeBasic.h"
 
 Player::Player() 
 	:Speed_(200.0f)
@@ -36,24 +35,55 @@ void Player::Update()
 	// 카메라 갱신
 	UpdateCamera();
 
-	// 키 입력
-	PlayerControl();
-
+	// 상태 업데이트
+	StateUpdate();
 }
 
-// 랜더링
-void Player::Render()
+// 상태 업데이트
+void Player::StateUpdate()
 {
-	// DebugRectRender();
+	switch (CurState_)
+	{
+	case PlayerState::Idle:
+		IdleUpdate();
+		break;
+	case PlayerState::Action:
+		ActionUpdate();
+		break;
+	case PlayerState::Move:
+		MoveUpdate();
+		break;
+	case PlayerState::Max:
+		break;
+	default:
+		break;
+	}
+}
 
-	//GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find("Idle.bmp");
+// 상태 변경
+void Player::StateChange(PlayerState _State)
+{
+	if (CurState_ != _State)
+	{
+		switch (_State)
+		{
+		case PlayerState::Idle:
+			IdleStart();
+			break;
+		case PlayerState::Action:
+			ActionStart();
+			break;
+		case PlayerState::Move:
+			MoveStart();
+			break;
+		case PlayerState::Max:
+			break;
+		default:
+			break;
+		}
+	}
 
-	//if (nullptr == FindImage)
-	//{
-	//	MsgBoxAssert("이미지 로딩 실패");
-	//}
-
-	//GameEngine::BackBufferImage()->BitCopyCenter(FindImage, GetPosition());
+	CurState_ = _State;
 }
 
 // 애니메이션 초기화
@@ -79,11 +109,11 @@ void Player::PlayerAnimationInit()
 	int directionUp = 81;
 
 	// 플레이어 캐릭터 렌더링
-	RendererBody_ = CreateRenderer();
-	RendererLegs_ = CreateRenderer();
-	RendererCloth_ = CreateRenderer();
-	RendererHair_ = CreateRenderer();
-	RendererArms_ = CreateRenderer();
+	RendererBody_ = CreateRenderer((int)ORDER::PLAYER);
+	RendererLegs_ = CreateRenderer((int)ORDER::PLAYER);
+	RendererCloth_ = CreateRenderer((int)ORDER::PLAYER);
+	RendererHair_ = CreateRenderer((int)ORDER::PLAYER);
+	RendererArms_ = CreateRenderer((int)ORDER::PLAYER);
 
 	RendererCloth_->SetPivot(ClothPos_);
 
@@ -158,16 +188,28 @@ void Player::PlayerAnimationInit()
 
 
 	// Hair
+	// Idle
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_RIGHT, 8, 8, 0.0f, false);
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_LEFT, 16, 16, 0.0f, false);
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_UP, 24, 24, 0.0f, false);
+	// Walk
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_DOWN, 0, 0, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_RIGHT, 8, 8, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_LEFT, 16, 16, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_UP, 24, 24, 0.0f, false);
 
 	// Cloth
+	// Idel
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_RIGHT, 16, 16, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_LEFT, 32, 32, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_UP, 48, 48, 0.0f, false);
+	// Walk
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_DOWN, 0, 0, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_RIGHT, 16, 16, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_LEFT, 32, 32, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_UP, 48, 48, 0.0f, false);
 
 	// 초기 애니메이션
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
@@ -176,6 +218,16 @@ void Player::PlayerAnimationInit()
 	RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
 	RendererArms_->ChangeAnimation(ANIM_IDLE_DOWN);
 
+}
+
+// 애니메이션 전환
+void Player::PlayerAnimationChange(const std::string& _Name)
+{
+	RendererBody_->ChangeAnimation(_Name);
+	RendererLegs_->ChangeAnimation(_Name);
+	RendererHair_->ChangeAnimation(_Name);
+	RendererCloth_->ChangeAnimation(_Name);
+	RendererArms_->ChangeAnimation(_Name);
 }
 
 // 조작키 초기화
@@ -191,126 +243,6 @@ void Player::PlayerKeyInit()
 
 		// 왼클릭했을때의 상호작용
 		GameEngineInput::GetInst()->CreateKey(KEY_INTERACT, VK_LBUTTON);
-	}
-}
-
-// 아무키도 눌리지 않았다면 false
-// 아무키든 눌렸다면 true
-bool Player::IsMoveKey()
-{
-	if (false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_LEFT) &&
-		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_RIGHT) &&
-		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_UP) &&
-		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_DOWN) &&
-		false == GameEngineInput::GetInst()->IsDown(KEY_INTERACT)
-		)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-// 키입력
-void Player::PlayerControl()
-{
-	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
-	{
-		TileMap_->CreateTile(GetPosition(), "FarmBuildings.bmp");
-		
-		//HoeBasic* Ptr = GetLevel()->CreateActor<HoeBasic>();
-		//Ptr->SetPosition(GetPosition());
-	}
-	else
-	{
-		if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_RIGHT))
-		{
-			RendererBody_->ChangeAnimation(ANIM_IDLE_RIGHT);
-			RendererArms_->ChangeAnimation(ANIM_IDLE_RIGHT);
-			RendererLegs_->ChangeAnimation(ANIM_IDLE_RIGHT);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_RIGHT);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_RIGHT);
-
-			ColWallCheck(float4::ZERO);
-		}
-		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT))
-		{
-			RendererBody_->ChangeAnimation(ANIM_IDLE_LEFT);
-			RendererArms_->ChangeAnimation(ANIM_IDLE_LEFT);
-			RendererLegs_->ChangeAnimation(ANIM_IDLE_LEFT);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_LEFT);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_LEFT);
-
-			ColWallCheck(float4::ZERO);
-		}
-		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP))
-		{
-			RendererBody_->ChangeAnimation(ANIM_IDLE_UP);
-			RendererArms_->ChangeAnimation(ANIM_IDLE_UP);
-			RendererLegs_->ChangeAnimation(ANIM_IDLE_UP);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_UP);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_UP);
-		}
-		else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_DOWN))
-		{
-			RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
-			RendererArms_->ChangeAnimation(ANIM_IDLE_DOWN);
-			RendererLegs_->ChangeAnimation(ANIM_IDLE_DOWN);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
-
-			ColWallCheck(float4::ZERO);
-		}
-
-
-		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
-		{
-			RendererBody_->ChangeAnimation(ANIM_WALK_RIGHT);
-			RendererArms_->ChangeAnimation(ANIM_WALK_RIGHT);
-			RendererLegs_->ChangeAnimation(ANIM_WALK_RIGHT);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_RIGHT);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_RIGHT);
-
-			ColWallCheck(float4::RIGHT);
-		}
-		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
-		{
-			RendererBody_->ChangeAnimation(ANIM_WALK_LEFT);
-			RendererArms_->ChangeAnimation(ANIM_WALK_LEFT);
-			RendererLegs_->ChangeAnimation(ANIM_WALK_LEFT);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_LEFT);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_LEFT);
-
-			ColWallCheck(float4::LEFT);
-		}
-		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
-		{
-			RendererBody_->ChangeAnimation(ANIM_WALK_UP);
-			RendererArms_->ChangeAnimation(ANIM_WALK_UP);
-			RendererLegs_->ChangeAnimation(ANIM_WALK_UP);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_UP);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_UP);
-
-			ColWallCheck(float4::UP);
-		}
-		if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
-		{
-			RendererBody_->ChangeAnimation(ANIM_WALK_DOWN);
-			RendererArms_->ChangeAnimation(ANIM_WALK_DOWN);
-			RendererLegs_->ChangeAnimation(ANIM_WALK_DOWN);
-
-			RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
-			RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
-
-			ColWallCheck(float4::DOWN);
-		}
 	}
 }
 
@@ -349,9 +281,11 @@ void Player::UpdateCamera()
 	GetLevel()->SetCameraPos(CameraPos_);
 }
 
+// 충돌체크
 void Player::ColWallCheck(float4 _MoveDir)
 {
-	float4 MoveDir_ = _MoveDir;
+	float4 MoveDir = _MoveDir;
+	float4 CheckLength = MoveDir * GameEngineTime::GetDeltaTime() * Speed_;
 
 	// 컬리전맵 취득
 	if (GetCurrentLevel() == LEVEL_FARM)
@@ -372,7 +306,7 @@ void Player::ColWallCheck(float4 _MoveDir)
 		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
 	}
 
-	float4 NextPos = GetPosition() + (MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
+	float4 NextPos = GetPosition() + CheckLength;
 	float4 CheckPos = NextPos + float4(0.0f, 20.0f);
 
 	int Color = MapColImage_->GetImagePixel(CheckPos);
@@ -380,7 +314,7 @@ void Player::ColWallCheck(float4 _MoveDir)
 	// 충돌판정
 	if (RGB(0, 0, 0) != Color)
 	{
-		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
+		SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 
 	if (GetCurrentLevel() == LEVEL_FARM)
@@ -416,4 +350,60 @@ void Player::ColWallCheck(float4 _MoveDir)
 			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
 	}
+}
+
+// 눌리지 않게 된 키가 있을경우 True
+bool Player::IsMoveKeyUp()
+{
+	if (false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT) &&
+		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_RIGHT) &&
+		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP) &&
+		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_DOWN)
+		)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+// 눌리게 된 키가 있을경우 True
+bool Player::IsMoveKeyDown()
+{
+	if (false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_LEFT) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_RIGHT) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_UP) &&
+		false == GameEngineInput::GetInst()->IsDown(KEY_MOVE_DOWN)
+		)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+// 눌리고 있는 키가 있을경우 True
+bool Player::IsMoveKeyPress()
+{
+	if (false == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT) &&
+		false == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT) &&
+		false == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP) &&
+		false == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN)
+		)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+// 액션키가 눌릴경우 True
+bool Player::IsActionKeyDown()
+{
+	if (false == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
+	{
+		return false;
+	}
+
+	return true;
 }

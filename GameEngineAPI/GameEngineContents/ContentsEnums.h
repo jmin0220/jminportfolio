@@ -11,7 +11,7 @@ enum class ORDER
 	UI
 }; 
 
-enum PlayerState
+enum class PlayerState
 {
 	Idle,
 	Action,

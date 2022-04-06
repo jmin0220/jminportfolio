@@ -44,11 +44,10 @@ private:
 
 	void Start() override;
 	void Update() override;
-	void Render() override;
 
 	void PlayerAnimationInit();
+	void PlayerAnimationChange(const std::string& _Name);
 	void PlayerKeyInit();
-	void PlayerControl();
 	void UpdateCamera();
 
 	void ColWallCheck(float4 _MoveDir);
@@ -58,24 +57,27 @@ private:
 		return GetLevel()->GetNameCopy();
 	}
 
-//private:
-//	PlayerState CurState_;
-//
-	bool IsMoveKey();
-//	void KeyMove();
-//
-//public:
-//	void ChangeState(PlayerState _State);
-//	void StateUpdate();
-//
-//private:
-//	void IdleUpdate();
-//	void ActionUpdate();
-//	void MoveUpdate();
-//
-//	void IdleStart();
-//	void ActionStart();
-//	void MoveStart();
+private:
+	PlayerState CurState_;
+
+	bool IsMoveKeyUp();
+	bool IsMoveKeyDown();
+	bool IsMoveKeyPress();
+
+	bool IsActionKeyDown();
+
+public:
+	void StateChange(PlayerState _State);
+	void StateUpdate();
+
+private:
+	void IdleUpdate();
+	void ActionUpdate();
+	void MoveUpdate();
+
+	void IdleStart();
+	void ActionStart();
+	void MoveStart();
 	
 };
 

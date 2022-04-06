@@ -92,6 +92,9 @@
     <ClCompile Include="FarmBuildingLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>02Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
