@@ -51,7 +51,6 @@ private:
 	void UpdateCamera();
 
 	void ColWallCheck(float4 _MoveDir);
-	void ColRenderOrderCheck();
 
 	inline std::string GetCurrentLevel()
 	{
@@ -68,6 +67,7 @@ private:
 	bool IsActionKeyDown();
 
 public:
+	bool ColRenderOrderCheck();
 	void StateChange(PlayerState _State);
 	void StateUpdate();
 

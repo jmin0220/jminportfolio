@@ -67,6 +67,7 @@ public:
 		return Order_;
 	}
 
+	// 렌더러가 생성될 시점의 Order 설정
 	virtual inline void SetOrder(int _Order)
 	{
 		Order_ = _Order;

@@ -2,6 +2,7 @@
 #include "GameEngineActorSubObject.h"
 #include "GameEngineEnum.h"
 #include "GameEngineFolderImage.h"
+#include <GameEngineBase/GameEngineDebug.h>
 #include <map>
 
 // 설명 :
@@ -71,6 +72,7 @@ public:
 		IsCameraEffect_ = true;
 	}
 
+	// 렌더러가 생성된 후의 Order설정
 	void SetOrder(int _Order) override;
 
 protected:

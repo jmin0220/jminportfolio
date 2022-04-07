@@ -9,7 +9,7 @@ FarmLevel::FarmLevel()
 	// ¹è°æ
 	BackGround_ = CreateActor<BackGround>((int)ORDER::BACKGROUND);
 	BGBuilding_ = CreateActor<BackGround>((int)ORDER::BUIDING);
-	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONT);
+	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONTA);
 	BGAlwaysFront_ = CreateActor<BackGround>((int)ORDER::ALWAYSFRONT);
 }
 
@@ -44,7 +44,9 @@ void FarmLevel::LevelChangeStart()
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
 	
 	this->Player_->SetPosition({ 3200.0f, 800.0f });
+	//this->Player_->SetPosition({ 0.0f, 0.0f });
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
+
 }
 
 void FarmLevel::Loading()
@@ -54,5 +56,12 @@ void FarmLevel::Loading()
 
 void FarmLevel::Update()
 {
-	// CameraUpdate();
+	if (false == this->Player_->ColRenderOrderCheck())
+	{
+		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTA);
+	}
+	else
+	{
+		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTB);
+	}
 }

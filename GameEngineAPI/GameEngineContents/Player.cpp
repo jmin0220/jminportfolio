@@ -5,7 +5,6 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
-#include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
@@ -265,27 +264,46 @@ void Player::UpdateCamera()
 
 	// 플레이어의 위치에 맞춰서 카메라 이동
 	// 플레이어가 카메라가 움직이는 범위 안에 있을경우 카메라 좌표 갱신
-	if ((GetPosition().iy() >= GameEngineWindow::GetInst().GetScale().Half().iy()
-		&& GetPosition().iy() <= CurrentLevelH - GameEngineWindow::GetInst().GetScale().Half().iy()))
-	{
-		CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
-	}
+	//if ((GetPosition().iy() >= GameEngineWindow::GetInst().GetScale().Half().iy()
+	//	&& GetPosition().iy() <= CurrentLevelH - GameEngineWindow::GetInst().GetScale().Half().iy()))
+	//{
+	//	CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
+	//}
+	//if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
+	//	&& GetPosition().ix() <= CurrentLevelW - GameEngineWindow::GetInst().GetScale().Half().ix()))
+	//{
+	//	CameraPos_.x = GetPosition().ix() - GameEngineWindow::GetInst().GetScale().Half().ix();
+	//}
 
-	if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
-		&& GetPosition().ix() <= CurrentLevelW - GameEngineWindow::GetInst().GetScale().Half().ix()))
+	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();
+
+	// 카메라가 맵 범위를 벗어났을경우 재위치
+	if (CameraPos_.x <= 0)
 	{
-		CameraPos_.x = GetPosition().ix() - GameEngineWindow::GetInst().GetScale().Half().ix();
+		CameraPos_.x = 0;
+	}
+	if (CameraPos_.x >= CurrentLevelW - GameEngineWindow::GetInst().GetScale().ix())
+	{
+		CameraPos_.x = CurrentLevelW - GameEngineWindow::GetInst().GetScale().ix();
+	}
+	if (CameraPos_.y <= 0)
+	{
+		CameraPos_.y = 0;
+	}
+	if (CameraPos_.y >= CurrentLevelH - GameEngineWindow::GetInst().GetScale().iy())
+	{
+		CameraPos_.y = CurrentLevelH - GameEngineWindow::GetInst().GetScale().iy();
 	}
 
 	// 카메라 위치 갱신
 	GetLevel()->SetCameraPos(CameraPos_);
 }
 
-
-void Player::ColRenderOrderCheck()
+// 플레이어의 위치에 따라서 Front맵의 렌더링 순서를 유동적으로 변경
+bool Player::ColRenderOrderCheck()
 {
-	float4 CheckLengthLeft = {GetPosition().x - (TILEMAP_SIZE /2), GetPosition().y};
-	float4 CheckLengthRight = { GetPosition().x + (TILEMAP_SIZE / 2), GetPosition().y };
+	float4 CheckLengthLeft = {GetPosition().x - (TILEMAP_SIZE), GetPosition().y};
+	float4 CheckLengthRight = { GetPosition().x + (TILEMAP_SIZE), GetPosition().y };
 
 	// 컬리전맵 취득
 	if (GetCurrentLevel() == LEVEL_FARM)
@@ -302,11 +320,28 @@ void Player::ColRenderOrderCheck()
 		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
 	}
 
-	// 임시코드
-	float4 CheckPos = CheckLengthLeft + float4(0.0f, 20.0f);
-	float4 CheckPos = CheckLengthRight + float4(0.0f, 20.0f);
+	// 왼쪽
+	float4 CheckPos = CheckLengthLeft + float4(0.0f, 48.0f);
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 
+	// 충돌판정
+	if (RGB(255, 0, 0) == Color)
+	{
+		return true;
+	}
+
+	// 오른쪽
+	CheckPos = CheckLengthRight + float4(0.0f, 20.0f);
+	Color = MapColImage_->GetImagePixel(CheckPos);
+
+	if (RGB(255, 0, 0) == Color)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 // 충돌체크

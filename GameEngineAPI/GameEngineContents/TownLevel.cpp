@@ -8,7 +8,7 @@ TownLevel::TownLevel()
 	// ¹è°æ
 	BackGround_ = CreateActor<BackGround>((int)ORDER::BACKGROUND);
 	BGBuilding_ = CreateActor<BackGround>((int)ORDER::BUIDING);
-	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONT);
+	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONTA);
 	BGAlwaysFront_ = CreateActor<BackGround>((int)ORDER::ALWAYSFRONT);
 }
 
