@@ -84,6 +84,7 @@
 #define MAP_FARM_FRONT "FarmFront.bmp"
 #define MAP_FARM_ALWAYSFRONT "FarmAlwaysfront.bmp"
 #define MAP_FARM_COLLISION "FarmBuildingCollision.bmp"
+#define MAP_FARM_RENDER_ORDER_COLLISION "FarmFrontCollision.bmp"
 #define MAP_FARM_SIZE_H 3120.0f
 #define MAP_FARM_SIZE_W 3840.0f
 // 타운
@@ -92,6 +93,7 @@
 #define MAP_TOWN_FRONT "TownFront.bmp"
 #define MAP_TOWN_ALWAYSFRONT "TownAlwaysfront.bmp"
 #define MAP_TOWN_COLLISION "TownBuildingCollision.bmp"
+#define MAP_TOWN_RENDER_ORDER_COLLISION "TownFrontCollision.bmp"
 #define MAP_TOWN_SIZE_H 5281.0f
 #define MAP_TOWN_SIZE_W 5760.0f
 // 농장 오두막
@@ -104,7 +106,10 @@
 
 // 컬리전
 #define COL_GROUP_WALL "Wall"
+#define COL_GROUP_RENDER_ORDER "RenderOrder"
 
+// 타일맵
+#define TILEMAP_SIZE 48
 // 레벨
 #define LEVEL_CHANGE_FARM "LevelChangeFarm"
 #define LEVEL_CHANGE_TOWN "LevelChangeTown"

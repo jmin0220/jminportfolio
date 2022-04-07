@@ -51,6 +51,7 @@ private:
 	void UpdateCamera();
 
 	void ColWallCheck(float4 _MoveDir);
+	void ColRenderOrderCheck();
 
 	inline std::string GetCurrentLevel()
 	{

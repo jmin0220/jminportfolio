@@ -281,6 +281,34 @@ void Player::UpdateCamera()
 	GetLevel()->SetCameraPos(CameraPos_);
 }
 
+
+void Player::ColRenderOrderCheck()
+{
+	float4 CheckLengthLeft = {GetPosition().x - (TILEMAP_SIZE /2), GetPosition().y};
+	float4 CheckLengthRight = { GetPosition().x + (TILEMAP_SIZE / 2), GetPosition().y };
+
+	// 컬리전맵 취득
+	if (GetCurrentLevel() == LEVEL_FARM)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_RENDER_ORDER_COLLISION);
+	}
+	else if (GetCurrentLevel() == LEVEL_TOWN)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_RENDER_ORDER_COLLISION);
+	}
+
+	if (nullptr == MapColImage_)
+	{
+		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+	}
+
+	// 임시코드
+	float4 CheckPos = CheckLengthLeft + float4(0.0f, 20.0f);
+	float4 CheckPos = CheckLengthRight + float4(0.0f, 20.0f);
+	int Color = MapColImage_->GetImagePixel(CheckPos);
+
+}
+
 // 충돌체크
 void Player::ColWallCheck(float4 _MoveDir)
 {
