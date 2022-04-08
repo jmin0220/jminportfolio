@@ -11,9 +11,6 @@
     <ClInclude Include="GameEngineImage.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineSound.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineImageManager.h">
       <Filter>Resource\Manager</Filter>
     </ClInclude>
@@ -45,9 +42,6 @@
       <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineImage.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineSound.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineImageManager.cpp">

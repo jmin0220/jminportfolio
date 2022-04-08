@@ -17,6 +17,7 @@
 #define DIR_PLAYER "Player"
 #define DIR_RESOURCES "Resources"
 #define DIR_IMAGE "Image"
+#define DIR_SOUND "Sound"
 #define DIR_INTERFACE "Interface"
 #define DIR_TOOL "Tool"
 #define DIR_MAP "Map"

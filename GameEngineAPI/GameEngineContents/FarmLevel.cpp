@@ -42,7 +42,11 @@ void FarmLevel::LevelChangeStart()
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
 	// 플레이어와 건물의 렌더링 순서
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
-	
+
+	// 사운드 설정
+	BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
+	Time = 5.0f;
+
 	this->Player_->SetPosition({ 3200.0f, 800.0f });
 	//this->Player_->SetPosition({ 0.0f, 0.0f });
 	this->Player_->SetTileMap(&BackGround_->TileMap_);

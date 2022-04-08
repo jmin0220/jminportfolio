@@ -4,6 +4,7 @@
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 std::map<std::string, GameEngineLevel*> GameEngine::AllLevel_;
 GameEngineLevel* GameEngine::CurrentLevel_    = nullptr;
@@ -96,6 +97,8 @@ void GameEngine::EngineLoop()
 
 	// 실행시간 갱신
 	GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
+	// 사운드 갱신
+	GameEngineSound::Update();
 
 	// 레벨 갱신
 	CurrentLevel_->Update();
@@ -131,6 +134,8 @@ void GameEngine::EngineEnd()
 		delete StartIter->second;
 	}
 
+
+	GameEngineSound::AllResourcesDestroy();
 	GameEngineImageManager::Destroy();
 
 	GameEngineInput::Destroy();

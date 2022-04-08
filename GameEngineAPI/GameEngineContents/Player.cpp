@@ -262,19 +262,6 @@ void Player::UpdateCamera()
 		CurrentLevelW = MAP_TOWN_SIZE_W;
 	}
 
-	// 플레이어의 위치에 맞춰서 카메라 이동
-	// 플레이어가 카메라가 움직이는 범위 안에 있을경우 카메라 좌표 갱신
-	//if ((GetPosition().iy() >= GameEngineWindow::GetInst().GetScale().Half().iy()
-	//	&& GetPosition().iy() <= CurrentLevelH - GameEngineWindow::GetInst().GetScale().Half().iy()))
-	//{
-	//	CameraPos_.y = GetPosition().iy() - GameEngineWindow::GetInst().GetScale().Half().iy();
-	//}
-	//if ((GetPosition().ix() >= GameEngineWindow::GetInst().GetScale().Half().ix()
-	//	&& GetPosition().ix() <= CurrentLevelW - GameEngineWindow::GetInst().GetScale().Half().ix()))
-	//{
-	//	CameraPos_.x = GetPosition().ix() - GameEngineWindow::GetInst().GetScale().Half().ix();
-	//}
-
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();
 
 	// 카메라가 맵 범위를 벗어났을경우 재위치

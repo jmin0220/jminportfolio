@@ -8,6 +8,7 @@
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 StardewContents::StardewContents() 
 {
@@ -109,6 +110,18 @@ void StardewContents::GameInit()
 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET1);
 	Image->Cut({ 48, 96 });
+
+	//»ç¿îµå
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_SOUND);
+
+	AllImageFileList = ResourcesDir.GetAllFile();
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
+	}
 
 
 

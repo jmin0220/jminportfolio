@@ -25,9 +25,14 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
-	
 }
 
 void PlayLevel::Update()
 {
+	Time -= GameEngineTime::GetDeltaTime();
+
+	if (0 >= Time)
+	{
+		BgmPlayer.Stop();
+	}
 }
