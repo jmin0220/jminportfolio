@@ -12,6 +12,7 @@
 Player::Player() 
 	:Speed_(200.0f)
 	, ClothPos_({0.0f, 9.0f})
+	, MoveDir_(float4::DOWN)
 {
 }
 
@@ -120,6 +121,8 @@ void Player::PlayerAnimationInit()
 	IMAGE_PLAYER_MAN_BODY파일
 	7 / 7 / 6 / 7 = 1줄에 27스프라이트로 구성.
 	*/
+	int SpriteLineNum = 27;
+	int up, down, left, right;
 
 	// Idle
 	// 몸통
@@ -156,33 +159,55 @@ void Player::PlayerAnimationInit()
 	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 20 + directionUp, 23 + directionUp, 0.2f, true);
 
 	// 세로로 휘두르기
+	down = 16 * SpriteLineNum;
+	right = 11 * SpriteLineNum;
+	left = 12 * SpriteLineNum;
+	up = 9 * SpriteLineNum;
 	// 몸통
 	// 16라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 0 + directionDown, 0 + directionDown, 0.2f, false);
-	//// 11라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 0 + directionRight, 0 + directionRight, 0.2f, false);
-	//// 12라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 0 + directionLeft, 0 + directionLeft, 0.2f, false);
-	//// 9라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 0 + directionUp, 0 + directionUp, 0.2f, false);
-
-	//// 팔
-	//// 다리
-
-
-	//// 가로로 휘두르기
-	//// 몸통
-	//// 6라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 0 + directionDown, 0 + directionDown, 0.2f, false);
-	//// 7라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 0 + directionRight, 0 + directionRight, 0.2f, false);
-	//// 8라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 0 + directionLeft, 0 + directionLeft, 0.2f, false);
-	//// 9라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 0 + directionUp, 0 + directionUp, 0.2f, false);
-
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_DOWN, down, down + 6, 0.2f, true);
+	// 11라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_RIGHT, right, right + 6, 0.2f, true);
+	// 12라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_LEFT, left, left + 6, 0.2f, true);
+	// 9라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_UP, up, up + 6, 0.2f, true);
 	// 팔
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_DOWN, down + 7, down + 7 + 6, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_RIGHT, right + 7, right + 7 + 6, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_LEFT, left + 7, left + 7 + 6, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_UP, up + 7, up + 7 + 6, 0.2f, true);
 	// 다리
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_DOWN, down + 20, down + 20 + 6, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_RIGHT, right + 20, right + 20 + 6, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_LEFT, left + 20, left + 20 + 6, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_UP, up + 20, up + 20 + 6, 0.2f, true);
+
+
+	// 가로로 휘두르기
+	down = 5 * SpriteLineNum;
+	right = 6 * SpriteLineNum;
+	left = 7 * SpriteLineNum;
+	up = 8 * SpriteLineNum;
+	// 몸통
+	// 6라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_DOWN, down, down + 6, 0.2f, true);
+	// 7라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_RIGHT, right, right + 6, 0.2f, true);
+	// 8라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_LEFT, left, left + 6, 0.2f, true);
+	// 9라인
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_UP, up, up + 6, 0.2f, true);
+	// 팔
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_DOWN, down + 7, down + 7 + 6, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_RIGHT, right + 7, right + 7 + 6, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_LEFT, left + 7, left + 7 + 6, 0.2f, true);
+	RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_UP, up + 7, up + 7 + 6, 0.2f, true);
+	// 다리
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_DOWN, down + 20, down + 20 + 6, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_RIGHT, right + 20, right + 20 + 6, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_LEFT, left + 20, left + 20 + 6, 0.2f, true);
+	RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_UP, up + 20, up + 20 + 6, 0.2f, true);
 
 
 
@@ -197,9 +222,14 @@ void Player::PlayerAnimationInit()
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_RIGHT, 8, 8, 0.0f, false);
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_LEFT, 16, 16, 0.0f, false);
 	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_UP, 24, 24, 0.0f, false);
+	// 액션
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_DOWN, 0, 0, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_RIGHT, 8, 8, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_LEFT, 16, 16, 0.0f, false);
+	RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_UP, 24, 24, 0.0f, false);
 
 	// Cloth
-	// Idel
+	// Idle
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_RIGHT, 16, 16, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_LEFT, 32, 32, 0.0f, false);
@@ -209,6 +239,11 @@ void Player::PlayerAnimationInit()
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_RIGHT, 16, 16, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_LEFT, 32, 32, 0.0f, false);
 	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_UP, 48, 48, 0.0f, false);
+
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_DOWN, 0, 0, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_RIGHT, 16, 16, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_LEFT, 32, 32, 0.0f, false);
+	RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_UP, 48, 48, 0.0f, false);
 
 	// 초기 애니메이션
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
@@ -334,8 +369,8 @@ bool Player::ColRenderOrderCheck()
 // 충돌체크
 void Player::ColWallCheck(float4 _MoveDir)
 {
-	float4 MoveDir = _MoveDir;
-	float4 CheckLength = MoveDir * GameEngineTime::GetDeltaTime() * Speed_;
+	MoveDir_ = _MoveDir;
+	float4 CheckLength = MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_;
 
 	// 컬리전맵 취득
 	if (GetCurrentLevel() == LEVEL_FARM)
@@ -364,7 +399,7 @@ void Player::ColWallCheck(float4 _MoveDir)
 	// 충돌판정
 	if (RGB(0, 0, 0) != Color)
 	{
-		SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
+		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 
 	if (GetCurrentLevel() == LEVEL_FARM)

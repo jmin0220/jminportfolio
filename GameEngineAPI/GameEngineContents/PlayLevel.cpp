@@ -7,6 +7,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include "Hoe.h"
 
 PlayLevel::PlayLevel()
 {
@@ -17,6 +18,11 @@ PlayLevel::PlayLevel()
 
 	// Ä³¸¯ÅÍ
 	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+
+
+
+	Hoe* hoeTest = CreateActor<Hoe>();
+	Inventory_->AddItemToInventory(*hoeTest);
 }
 
 PlayLevel::~PlayLevel() 

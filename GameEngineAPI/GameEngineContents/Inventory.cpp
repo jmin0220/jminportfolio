@@ -5,9 +5,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineInput.h>
-
-// 테스트용
-#include "HoeBasic.h"
+#include "Hoe.h"
+#include "Axe.h"
+#include "Sythe.h"
 
 Inventory::Inventory() 
 	: RendererInven_(nullptr)
@@ -19,6 +19,14 @@ Inventory::Inventory()
 
 Inventory::~Inventory() 
 {
+	for (size_t i = 0; i < 36; i++)
+	{
+		if (nullptr != InventoryList_[i])
+		{
+			delete InventoryList_[i];
+			InventoryList_[i] = nullptr;
+		}
+	}
 }
 
 void Inventory::Start()
@@ -38,6 +46,42 @@ void Inventory::Start()
 	RendererInven_->CameraEffectOff();
 	RendererSelectBox_->CameraEffectOff();
 
+	InitKey();
+
+
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		// 인벤에 아이템의 정보를 집어넣음.
+		// 아이콘은 아이템과 별개로 넣어야하는가?
+		// 중복되는 아이템의 갯수는?
+		// 
+		InventoryList_[i] = new Item();
+		// 이부분도 다시 생각해봐야할듯
+		InventoryList_[i]->SetIconRenderer(*CreateRenderer("Empty.bmp", (int)ORDER::UIICONS));
+		InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
+	}
+}
+
+void Inventory::Update()
+{
+	// 인벤토리창 On/Off
+	ExtendInventoryOn();
+
+	// 키 입력
+	ControlSelectBox();
+
+	// 아이콘 업데이트
+	IconUpdate();
+}
+
+void Inventory::SetPos(float4 _Pos)
+{
+
+}
+
+void Inventory::InitKey()
+{
 	// 키 설정
 	if (false == GameEngineInput::GetInst()->IsKey(KEY_INVEN_SELECT_1))
 	{
@@ -56,21 +100,6 @@ void Inventory::Start()
 
 		GameEngineInput::GetInst()->CreateKey(KEY_INVEN_EXTEND, 'i');
 	}
-}
-
-void Inventory::Update()
-{
-	// 인벤토리창 On/Off
-	ExtendInventoryOn();
-
-	// 키 입력
-	ControlSelectBox();
-
-}
-
-void Inventory::SetPos(float4 _Pos)
-{
-
 }
 
 void Inventory::ExtendInventoryOn()
@@ -163,11 +192,30 @@ void Inventory::AddItemToInventory(Item& _item)
 {
 	Item& item = _item;
 
-	for (size_t i = 0; i < 36 ; i++)
+	for (size_t i = 0; i < 36; i++)
 	{
 		if (nullptr == InventoryList_[i])
 		{
 			InventoryList_[i] = &item;
+			
+
+			break;
+		}
+	}
+}
+
+void Inventory::IconUpdate()
+{
+	for (size_t i = 0; i < 36; i++)
+	{
+		if (InventoryList_[i] == nullptr)
+		{
+			continue;
+		}
+		else
+		{
+			//InventoryList_[i]->SetIconRenderer(InventoryList_[i]->GetIconRenderer());
+			InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
 		}
 	}
 }

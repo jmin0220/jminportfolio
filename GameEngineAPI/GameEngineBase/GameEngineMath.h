@@ -176,6 +176,18 @@ public:
 		return *this;
 	}
 
+	bool operator==(const float4& _Other)
+	{
+		if (x == _Other.x && y == _Other.y && z == _Other.z)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 public:
 	float4()

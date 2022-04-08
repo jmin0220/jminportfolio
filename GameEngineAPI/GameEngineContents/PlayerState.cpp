@@ -33,10 +33,13 @@ void Player::IdleUpdate()
 // 클릭했을때 상태
 void Player::ActionUpdate()
 {
+	// TODO::애니메이션이 제대로 종료되지 않음.
 	// 애니메이션이 종료되면 Idle로 전환
-	if (true == RendererBody_->IsEndAnimation())
+	if (true == RendererBody_->IsEndAnimation()
+		|| true == RendererArms_->IsEndAnimation()
+		|| true == RendererLegs_->IsEndAnimation())
 	{
-		TileMap_->CreateTile(GetPosition(), IMAGE_FARM_BUILDING);
+		//TileMap_->CreateTile(GetPosition(), IMAGE_FARM_BUILDING);
 		StateChange(PlayerState::Idle);
 	}
 }
@@ -85,39 +88,45 @@ void Player::MoveUpdate()
 
 
 //////////////////////////////////////// State
-
 void Player::IdleStart()
 {
 	// 정지 상태에서 방향
-	if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_RIGHT))
+	if (float4::RIGHT == MoveDir_)
 	{
 		PlayerAnimationChange(ANIM_IDLE_RIGHT);
-
-		ColWallCheck(float4::ZERO);
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT))
+	if (float4::LEFT == MoveDir_)
 	{
 		PlayerAnimationChange(ANIM_IDLE_LEFT);
-
-		ColWallCheck(float4::ZERO);
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP))
+	if (float4::UP == MoveDir_)
 	{
 		PlayerAnimationChange(ANIM_IDLE_UP);
-
-		ColWallCheck(float4::ZERO);
 	}
-	else if (true == GameEngineInput::GetInst()->IsUp(KEY_MOVE_DOWN))
+	if (float4::DOWN == MoveDir_)
 	{
 		PlayerAnimationChange(ANIM_IDLE_DOWN);
-
-		ColWallCheck(float4::ZERO);
 	}
 }
 
 void Player::ActionStart()
 {
-
+	if (float4::RIGHT == MoveDir_)
+	{
+		PlayerAnimationChange(ANIM_HIT_HORIZON_RIGHT);
+	}
+	if (float4::LEFT == MoveDir_)
+	{
+		PlayerAnimationChange(ANIM_HIT_HORIZON_LEFT);
+	}
+	if (float4::UP == MoveDir_)
+	{
+		PlayerAnimationChange(ANIM_HIT_HORIZON_UP);
+	}
+	if (float4::DOWN == MoveDir_)
+	{
+		PlayerAnimationChange(ANIM_HIT_HORIZON_DOWN);
+	}
 }
 
 void Player::MoveStart()

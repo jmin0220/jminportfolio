@@ -147,21 +147,21 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(
 }
 
 // RenderList에 추가된 액터를 그리기
-void GameEngineActor::Rendering()
-{
-	StartRenderIter = RenderList_.begin();
-	EndRenderIter = RenderList_.end();
-
-	for (; StartRenderIter != EndRenderIter; ++StartRenderIter)
-	{
-		if (false == (*StartRenderIter)->IsUpdate())
-		{
-			continue;
-		}
-
-		(*StartRenderIter)->Render();
-	}
-}
+//void GameEngineActor::Rendering()
+//{
+//	StartRenderIter = RenderList_.begin();
+//	EndRenderIter = RenderList_.end();
+//
+//	for (; StartRenderIter != EndRenderIter; ++StartRenderIter)
+//	{
+//		if (false == (*StartRenderIter)->IsUpdate())
+//		{
+//			continue;
+//		}
+//
+//		(*StartRenderIter)->Render();
+//	}
+//}
 
 GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupName, float4 _Scale, float4 _Pivot /*= { 0, 0 }*/)
 {

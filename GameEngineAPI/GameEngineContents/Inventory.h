@@ -17,6 +17,7 @@ public:
 	Inventory& operator=(Inventory&& _Other) noexcept = delete;
 
 	void SetPos(float4 _Pos);
+	void AddItemToInventory(Item& _item);
 
 protected:
 	void Start() override;
@@ -30,9 +31,11 @@ private:
 	GameEngineRenderer* RendererInven_;
 	GameEngineRenderer* RendererSelectBox_;
 
+	void InitKey();
+	void IconUpdate();
+
 	void ControlSelectBox();
 	void ExtendInventoryOn();
-	void AddItemToInventory(Item& _item);
 
 private:
 	Item* InventoryList_[36];

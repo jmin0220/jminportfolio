@@ -104,12 +104,12 @@ void GameEngine::EngineLoop()
 	CurrentLevel_->Update();
 	CurrentLevel_->ActorUpdate();
 
-	// 충돌 처리
-	CurrentLevel_->CollisionDebugRender();
-
 	// 액터 렌더링
 	CurrentLevel_->ActorRender();
-	
+
+	// 충돌 처리 디버깅
+	// CurrentLevel_->CollisionDebugRender();
+
 	// 백버퍼를 메인DC에 복사
 	WindowMainImage_->BitCopy(BackBufferImage_);
 

@@ -9,7 +9,8 @@ enum class ORDER
 	FRONTB,			// 플레이어를 가릴 경우의 Front 배경
 	MONSTER,
 	ALWAYSFRONT,	// 배경
-	UI
+	UI,
+	UIICONS			// UI위에 쓰여질 아이콘, 글자들
 }; 
 
 enum class PlayerState

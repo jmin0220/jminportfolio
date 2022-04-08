@@ -68,7 +68,7 @@
     <ClCompile Include="Tool.cpp">
       <Filter>02Play\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="HoeBasic.cpp">
+    <ClCompile Include="Hoe.cpp">
       <Filter>02Play\Tool</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
@@ -94,6 +94,12 @@
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>02Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>02Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Sythe.cpp">
+      <Filter>02Play\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +170,7 @@
     <ClInclude Include="Tool.h">
       <Filter>02Play\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="HoeBasic.h">
+    <ClInclude Include="Hoe.h">
       <Filter>02Play\Tool</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
@@ -190,6 +196,12 @@
     </ClInclude>
     <ClInclude Include="FarmBuildingLevel.h">
       <Filter>00Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>02Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Sythe.h">
+      <Filter>02Play\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

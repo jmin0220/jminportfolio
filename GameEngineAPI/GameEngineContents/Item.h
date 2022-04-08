@@ -17,21 +17,24 @@ public:
 	Item& operator=(const Item& _Other) = delete;
 	Item& operator=(Item&& _Other) noexcept = delete;
 
-	GameEngineRenderer* GetIconRenderer()
+	GameEngineRenderer& GetIconRenderer()
 	{
-		return IconRenderer;
+		return *IconRenderer_;
 	}
-	
-protected:
-
-
-private:
-	// 아이템이 인벤토리에 들어가있을때의 아이콘 이미지
-	GameEngineRenderer* IconRenderer;
 
 	void SetIconRenderer(GameEngineRenderer& _IconRenderer)
 	{
-		IconRenderer = &_IconRenderer;
+		IconRenderer_ = &_IconRenderer;
 	};
+	
+protected:
+	// 아이템이 필드에서 보일때 이미지
+	GameEngineRenderer* ItemRenderer_;
+	// 아이템이 인벤토리에 들어가있을때의 아이콘 이미지
+	GameEngineRenderer* IconRenderer_;
+
+
+private:
+	void Start() override;
 };
 

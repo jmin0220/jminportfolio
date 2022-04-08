@@ -26,7 +26,9 @@ public:
 	}
 
 private:
-	float Speed_;
+	float Speed_; 
+	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.
+	float4 MoveDir_;
 
 	float4 ClothPos_;
 	float4 CameraPos_;
