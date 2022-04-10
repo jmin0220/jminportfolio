@@ -30,14 +30,16 @@ private:
 	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.
 	float4 MoveDir_;
 
-	float4 ClothPos_;
+	// TODO::삭제
+	// float4 ClothPos_;
 	float4 CameraPos_;
 
 	GameEngineRenderer* RendererBody_;
-	GameEngineRenderer* RendererArms_;
-	GameEngineRenderer* RendererLegs_;
-	GameEngineRenderer* RendererHair_;
-	GameEngineRenderer* RendererCloth_;
+	// TODO::삭제
+	//GameEngineRenderer* RendererArms_;
+	//GameEngineRenderer* RendererLegs_;
+	//GameEngineRenderer* RendererHair_;
+	//GameEngineRenderer* RendererCloth_;
 
 	GameEngineRendererTileMap* TileMap_;
 
@@ -82,5 +84,8 @@ private:
 	void ActionStart();
 	void MoveStart();
 	
+
+	// 아이템 관련된 멤버
+private:
 };
 

@@ -45,7 +45,6 @@ void FarmLevel::LevelChangeStart()
 
 	// 사운드 설정
 	BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
-	Time = 5.0f;
 
 	this->Player_->SetPosition({ 3200.0f, 800.0f });
 	//this->Player_->SetPosition({ 0.0f, 0.0f });

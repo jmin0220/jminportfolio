@@ -20,6 +20,7 @@
 #define DIR_SOUND "Sound"
 #define DIR_INTERFACE "Interface"
 #define DIR_TOOL "Tool"
+#define DIR_TILESET "Tileset"
 #define DIR_MAP "Map"
 #define DIR_BUILDING "Building"
 
@@ -37,6 +38,7 @@
 #define IMAGE_PLAYER_MASK "PlayerMask.bmp"
 #define IMAGE_PLAYER_MAN_BODY "PlayerManBody.bmp"
 #define IMAGE_PLAYER_WOMAN_BODY "PlayerWomanBody.bmp"
+#define IMAGE_PLAYER_MAN_TOTAL "PlayerManBodyTotal.bmp"
 #define IMAGE_INVENTORY_BAR "InventoryBar.bmp"
 #define IMAGE_INVENTORY_EXTEND "InventoryExtend.bmp"
 #define IMAGE_INVENTORY_SELECT "InventorySelectBox.bmp"
@@ -54,6 +56,8 @@
 #define IMAGE_TOOL_SET1 "Tools_set1.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
+
+#define IMAGE_TILESET_DIRT "Dirt.bmp"
 
 // 키 입력
 #define KEY_MOVE_LEFT "MoveLeft"
@@ -104,6 +108,15 @@
 #define MAP_FARMBUILDING_COLLISION "FarmBuildingBuildingCollision.bmp"
 #define MAP_FARMBUILDING_SIZE_H 414.0f
 #define MAP_FARMBUILDING_SIZE_W 414.0f
+// 해변
+#define MAP_BEACH_BACKGORUND "BeachBack.bmp"
+#define MAP_BEACH_BUILDING "BeachBuilding.bmp"
+#define MAP_BEACH_FRONT "BeachFront.bmp"
+#define MAP_BEACH_ALWAYSFRONT "BeachAlwaysfront.bmp"
+#define MAP_BEACH_COLLISION "BeachBuildingCollision.bmp"
+#define MAP_BEACH_RENDER_ORDER_COLLISION "BeachFrontCollision.bmp"
+#define MAP_BEACH_SIZE_H 2397.0f
+#define MAP_BEACH_SIZE_W 4992.0f
 
 // 컬리전
 #define COL_GROUP_WALL "Wall"
@@ -117,6 +130,7 @@
 #define LEVEL_TITLE "TitleLevel"
 #define LEVEL_TOWN "TownLevel"
 #define LEVEL_FARM "FarmLevel"
+#define LEVEL_BEACH "BeachLevel"
 #define LEVEL_FARMBUILDING "FarmBuildingLevel"
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_ENDING "EndingLevel"

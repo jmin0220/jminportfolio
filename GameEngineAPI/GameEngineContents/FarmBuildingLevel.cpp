@@ -44,5 +44,12 @@ void FarmBuildingLevel::Loading()
 
 void FarmBuildingLevel::Update()
 {
-
+	if (false == this->Player_->ColRenderOrderCheck())
+	{
+		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTA);
+	}
+	else
+	{
+		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTB);
+	}
 }

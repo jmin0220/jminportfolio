@@ -35,10 +35,15 @@ void Player::ActionUpdate()
 {
 	// TODO::애니메이션이 제대로 종료되지 않음.
 	// 애니메이션이 종료되면 Idle로 전환
-	if (true == RendererBody_->IsEndAnimation()
-		|| true == RendererArms_->IsEndAnimation()
-		|| true == RendererLegs_->IsEndAnimation())
+	if (true == RendererBody_->IsEndAnimation())
 	{
+		float4 CheckLength = MoveDir_ * 24;
+		float4 Pos = GetPosition() + CheckLength;
+		
+		TileMap_->CreateTile(static_cast<int>(Pos.x / TILEMAP_SIZE), static_cast<int>(Pos.y / TILEMAP_SIZE)
+			                 , IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA);
+
+		// TODO::삭제
 		//TileMap_->CreateTile(GetPosition(), IMAGE_FARM_BUILDING);
 		StateChange(PlayerState::Idle);
 	}

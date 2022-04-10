@@ -101,6 +101,12 @@
     <ClCompile Include="Sythe.cpp">
       <Filter>02Play\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="Dirt.cpp">
+      <Filter>02Play\Tileset</Filter>
+    </ClCompile>
+    <ClCompile Include="BeachLevel.cpp">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -203,6 +209,12 @@
     <ClInclude Include="Sythe.h">
       <Filter>02Play\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="Dirt.h">
+      <Filter>02Play\Tileset</Filter>
+    </ClInclude>
+    <ClInclude Include="BeachLevel.h">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">
@@ -243,6 +255,9 @@
     </Filter>
     <Filter Include="99Etc">
       <UniqueIdentifier>{c903b0a6-d41e-4c61-bdfe-4afd2c65f5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Tileset">
+      <UniqueIdentifier>{abe0916d-33d2-4e56-a364-a31ac9e83ea2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

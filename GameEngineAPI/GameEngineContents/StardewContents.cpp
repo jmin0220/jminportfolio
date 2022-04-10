@@ -3,6 +3,7 @@
 #include "FarmLevel.h"
 #include "FarmBuildingLevel.h"
 #include "TownLevel.h"
+#include "BeachLevel.h"
 #include "EndingLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -38,18 +39,20 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
-	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_CLOTH);
-	Image->Cut({ 24, 24 }); 
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAIR);
-	Image->Cut({ 48, 96 }); 
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAT);
-	Image->Cut({ 60, 60 }); 
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MASK);
-	Image->Cut({ 48, 48 });
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_BODY);
-	Image->Cut({ 48, 96 });
-	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_WOMAN_BODY);
+	// TODO::삭제
+	//GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_CLOTH);
+	//Image->Cut({ 24, 24 }); 
+	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAIR);
+	//Image->Cut({ 48, 96 }); 
+	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAT);
+	//Image->Cut({ 60, 60 }); 
+	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MASK);
+	//Image->Cut({ 48, 48 });
+	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_BODY);
 	//Image->Cut({ 48, 96 });
+
+	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_TOTAL);
+	Image->Cut({ 48, 96 });
 
 
 	// 건물
@@ -79,6 +82,21 @@ void StardewContents::GameInit()
 	{
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
+
+	// 타일셋
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_TILESET);
+
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TILESET_DIRT);
+	Image->Cut({ 48, 48 });
 
 
 	// 인터페이스
@@ -130,6 +148,7 @@ void StardewContents::GameInit()
 	CreateLevel<FarmLevel>(LEVEL_FARM);
 	CreateLevel<FarmBuildingLevel>(LEVEL_FARMBUILDING);
 	CreateLevel<TownLevel>(LEVEL_TOWN);
+	CreateLevel<BeachLevel>(LEVEL_BEACH);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨

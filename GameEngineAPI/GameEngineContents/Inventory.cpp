@@ -56,10 +56,10 @@ void Inventory::Start()
 		// 아이콘은 아이템과 별개로 넣어야하는가?
 		// 중복되는 아이템의 갯수는?
 		// 
-		InventoryList_[i] = new Item();
-		// 이부분도 다시 생각해봐야할듯
-		InventoryList_[i]->SetIconRenderer(*CreateRenderer("Empty.bmp", (int)ORDER::UIICONS));
-		InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
+		//InventoryList_[i] = new Item();
+		//// 이부분도 다시 생각해봐야할듯
+		//InventoryList_[i]->SetIconRenderer(*CreateRenderer("Empty.bmp", (int)ORDER::UIICONS));
+		//InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
 	}
 }
 
@@ -190,32 +190,32 @@ void Inventory::ControlSelectBox()
 // 테스트
 void Inventory::AddItemToInventory(Item& _item)
 {
-	Item& item = _item;
+	//Item& item = _item;
 
-	for (size_t i = 0; i < 36; i++)
-	{
-		if (nullptr == InventoryList_[i])
-		{
-			InventoryList_[i] = &item;
-			
+	//for (size_t i = 0; i < 36; i++)
+	//{
+	//	if (nullptr == InventoryList_[i])
+	//	{
+	//		InventoryList_[i] = &item;
+	//		
 
-			break;
-		}
-	}
+	//		break;
+	//	}
+	//}
 }
 
 void Inventory::IconUpdate()
 {
-	for (size_t i = 0; i < 36; i++)
-	{
-		if (InventoryList_[i] == nullptr)
-		{
-			continue;
-		}
-		else
-		{
-			//InventoryList_[i]->SetIconRenderer(InventoryList_[i]->GetIconRenderer());
-			InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
-		}
-	}
+	//for (size_t i = 0; i < 36; i++)
+	//{
+	//	if (InventoryList_[i] == nullptr)
+	//	{
+	//		continue;
+	//	}
+	//	else
+	//	{
+	//		//InventoryList_[i]->SetIconRenderer(InventoryList_[i]->GetIconRenderer());
+	//		InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
+	//	}
+	//}
 }
