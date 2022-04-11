@@ -21,7 +21,7 @@ FarmLevel::~FarmLevel()
 void FarmLevel::LevelChangeStart()
 {
 	// 목장 오두막 생성
-	CreateActor<FarmBuilding>((int)ORDER::BUIDING);
+	FarmBuilding_ = CreateActor<FarmBuilding>((int)ORDER::FRONTA);
 
 	// 이미지의 좌상단이 0,0이 되도록
 	BackGround_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
@@ -66,9 +66,11 @@ void FarmLevel::Update()
 	if (false == this->Player_->ColRenderOrderCheck())
 	{
 		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTA);
+		FarmBuilding_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTA);
 	}
 	else
 	{
 		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTB);
+		FarmBuilding_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTB);
 	}
 }

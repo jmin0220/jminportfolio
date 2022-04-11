@@ -176,16 +176,16 @@ public:
 		return *this;
 	}
 
-	bool operator==(const float4& _Other)
+	bool CompareInt2D(const float4& _Value)
 	{
-		if (x == _Other.x && y == _Other.y && z == _Other.z)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return ix() == _Value.ix() && iy() == _Value.iy();
+	}
+
+	bool CompareInt3D(const float4& _Value)
+	{
+		return ix() == _Value.ix() &&
+			iy() == _Value.iy() &&
+			iz() == _Value.iz();
 	}
 
 

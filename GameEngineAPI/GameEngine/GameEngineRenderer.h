@@ -113,6 +113,7 @@ private:
 		GameEngineRenderer* Renderer_;
 		GameEngineImage* Image_;
 		GameEngineFolderImage* FolderImage_;
+		int TimeKey;
 		int CurrentFrame_;
 		int StartFrame_;
 		int EndFrame_;
@@ -129,8 +130,8 @@ private:
 			EndFrame_(-1),
 			CurrentInterTime_(0.1f),
 			InterTime_(0.1f),
-			Loop_(true)
-
+			Loop_(true),
+			TimeKey(0)
 		{
 
 		}
@@ -150,6 +151,8 @@ public:
 	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
 	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+
+	void CreateFolderAnimationTimeKey(const std::string& _Image, const std::string& _Name, int _TimeScaleKey, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
 	void ChangeAnimation(const std::string& _Name);
 

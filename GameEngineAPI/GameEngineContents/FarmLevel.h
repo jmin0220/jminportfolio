@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayLevel.h"
+#include "FarmBuilding.h"
 
 // Ό³Έν :
 class FarmLevel : public PlayLevel
@@ -22,6 +23,6 @@ protected:
 	void LevelChangeEnd() override;
 
 private:
-
+	FarmBuilding* FarmBuilding_;
 };
 

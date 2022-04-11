@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 
 // Ό³Έν :
 class GameEngineTime
@@ -29,6 +30,31 @@ public:
 		return Inst_->DeltaTime_;
 	}
 
+	static inline float GetDeltaTime(int _Key)
+	{
+		return Inst_->DeltaTime_ * Inst_->GetTimeScale(_Key);
+	}
+
+	void SetTimeScale(int _Key, float _TimeScale)
+	{
+		if (TimeScale_.end() == TimeScale_.find(_Key))
+		{
+			_TimeScale = 1.0f;
+		}
+
+		TimeScale_[_Key] = _TimeScale;
+	}
+
+	float GetTimeScale(int _Key)
+	{
+		if (TimeScale_.end() == TimeScale_.find(_Key))
+		{
+			TimeScale_[_Key] = 1.0f;
+		}
+
+		return TimeScale_[_Key];
+	}
+
 protected:
 
 private:
@@ -41,6 +67,7 @@ private:
 	// constrcuter destructer
 	GameEngineTime();
 	~GameEngineTime();
+	std::map<int, float> TimeScale_;
 
 	// delete Function
 	GameEngineTime(const GameEngineTime& _Other) = delete;

@@ -38,7 +38,7 @@ void Player::ActionUpdate()
 	if (true == RendererBody_->IsEndAnimation())
 	{
 		float4 CheckLength = MoveDir_ * 24;
-		float4 Pos = GetPosition() + CheckLength;
+		float4 Pos = { GetPosition().x + CheckLength.x, GetPosition().y + CheckLength.y + 12.0f };
 		
 		TileMap_->CreateTile(static_cast<int>(Pos.x / TILEMAP_SIZE), static_cast<int>(Pos.y / TILEMAP_SIZE)
 			                 , IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA);
@@ -96,19 +96,19 @@ void Player::MoveUpdate()
 void Player::IdleStart()
 {
 	// 정지 상태에서 방향
-	if (float4::RIGHT == MoveDir_)
+	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_IDLE_RIGHT);
 	}
-	if (float4::LEFT == MoveDir_)
+	if (float4::LEFT.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_IDLE_LEFT);
 	}
-	if (float4::UP == MoveDir_)
+	if (float4::UP.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_IDLE_UP);
 	}
-	if (float4::DOWN == MoveDir_)
+	if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_IDLE_DOWN);
 	}
@@ -116,19 +116,19 @@ void Player::IdleStart()
 
 void Player::ActionStart()
 {
-	if (float4::RIGHT == MoveDir_)
+	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_HIT_HORIZON_RIGHT);
 	}
-	if (float4::LEFT == MoveDir_)
+	if (float4::LEFT.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_HIT_HORIZON_LEFT);
 	}
-	if (float4::UP == MoveDir_)
+	if (float4::UP.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_HIT_HORIZON_UP);
 	}
-	if (float4::DOWN == MoveDir_)
+	if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_HIT_HORIZON_DOWN);
 	}

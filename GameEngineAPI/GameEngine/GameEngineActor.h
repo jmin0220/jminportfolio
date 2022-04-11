@@ -62,6 +62,8 @@ public:
 		Position_ += _Value;
 	}
 
+	void SetOrder(int _Order) override;
+
 protected:
 	virtual void Start() = 0;
 	virtual void Update() {};

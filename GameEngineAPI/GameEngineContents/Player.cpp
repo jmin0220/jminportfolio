@@ -9,7 +9,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
 
-float4 Player::NextLevelPos_ = { 3200.0f, 800.0f };
+float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 
 Player::Player() 
 	:Speed_(500.0f)
@@ -257,6 +257,8 @@ void Player::PlayerAnimationInit()
 	// 1줄에 6개의 스프라이트
 	int oneline = 6;
 	RendererBody_ = CreateRenderer(IMAGE_PLAYER_MAN_TOTAL, (int)ORDER::PLAYER);
+	RendererBody_->SetPivot({ 0.0f, -24.0f, });
+
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_IDLE_DOWN, 0, 0, 0.2f, false);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_IDLE_RIGHT, 1 * oneline, 1 * oneline, 0.2f, false);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_IDLE_LEFT, 2 * oneline, 2 * oneline, 0.2f, false);
@@ -356,9 +358,6 @@ void Player::UpdateCamera()
 // 플레이어의 위치에 따라서 Front맵의 렌더링 순서를 유동적으로 변경
 bool Player::ColRenderOrderCheck()
 {
-	float4 CheckLengthLeft = {GetPosition().x - (TILEMAP_SIZE), GetPosition().y};
-	float4 CheckLengthRight = { GetPosition().x + (TILEMAP_SIZE), GetPosition().y };
-
 	// 컬리전맵 취득
 	if (GetCurrentLevel() == LEVEL_FARM)
 	{
@@ -379,7 +378,7 @@ bool Player::ColRenderOrderCheck()
 	}
 
 	// 왼쪽
-	float4 CheckPos = CheckLengthLeft + float4(48.0f, 0.0f);
+	float4 CheckPos = { GetPosition().x - (TILEMAP_SIZE), GetPosition().y };
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 
 	// 충돌판정
@@ -389,7 +388,36 @@ bool Player::ColRenderOrderCheck()
 	}
 
 	// 오른쪽
-	CheckPos = CheckLengthRight + float4(48.0f, 0.0f);
+	CheckPos = { GetPosition().x + (TILEMAP_SIZE), GetPosition().y };
+	Color = MapColImage_->GetImagePixel(CheckPos);
+
+	// 충돌판정
+	if (RGB(255, 0, 0) == Color)
+	{
+		return true;
+	}
+
+	// 위
+	CheckPos = { GetPosition().x, GetPosition().y - ((TILEMAP_SIZE) / 2) };
+	Color = MapColImage_->GetImagePixel(CheckPos);
+
+	// 충돌판정
+	if (RGB(255, 0, 0) == Color)
+	{
+		return true;
+	}
+
+	// 아래
+	CheckPos = { GetPosition().x, GetPosition().y + ((TILEMAP_SIZE) / 2) };
+	Color = MapColImage_->GetImagePixel(CheckPos);
+
+	if (RGB(255, 0, 0) == Color)
+	{
+		return true;
+	}
+
+	// 플레이어의 위치
+	CheckPos = GetPosition();
 	Color = MapColImage_->GetImagePixel(CheckPos);
 
 	if (RGB(255, 0, 0) == Color)
@@ -433,7 +461,6 @@ void Player::ColWallCheck(float4 _MoveDir)
 	}
 
 	float4 NextPos = GetPosition() + CheckLength;
-	// float4 CheckPos = NextPos + float4(0.0f, 24.0f);
 	float4 CheckPos = SetCheckPos(NextPos);
 
 	int Color = MapColImage_->GetImagePixel(CheckPos);
@@ -455,8 +482,9 @@ void Player::ColWallCheck(float4 _MoveDir)
 		}
 		else if (RGB(0, 255, 0) == Color)
 		{
-			SetNextLevelPos({ MAP_FARMBUILDING_SIZE_W / 2, MAP_FARMBUILDING_SIZE_H / 2 });
-			GameEngine::GetInst().ChangeLevel(LEVEL_FARMBUILDING);
+			// 안할수도
+			//SetNextLevelPos({ MAP_FARMBUILDING_SIZE_W / 2, MAP_FARMBUILDING_SIZE_H / 2 });
+			//GameEngine::GetInst().ChangeLevel(LEVEL_FARMBUILDING);
 		}
 	}
 	else if (GetCurrentLevel() == LEVEL_TOWN)
@@ -495,9 +523,21 @@ void Player::ColWallCheck(float4 _MoveDir)
 
 float4 Player::SetCheckPos(float4 _NextPos)
 {
-	if (MoveDir_ == float4::DOWN)
+	if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
 		return _NextPos + float4(0.0f, 24.0f);
+	}
+	if (float4::RIGHT.CompareInt2D(MoveDir_))
+	{
+		return _NextPos + float4(24.0f, 24.0f);
+	}
+	if (float4::LEFT.CompareInt2D(MoveDir_))
+	{
+		return _NextPos + float4(-24.0f, 24.0f);
+	}
+	if (float4::UP.CompareInt2D(MoveDir_))
+	{
+		return _NextPos + float4(0.0f, -0.0f);
 	}
 }
 

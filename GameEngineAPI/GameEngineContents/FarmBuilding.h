@@ -17,10 +17,16 @@ public:
 	FarmBuilding& operator=(const FarmBuilding& _Other) = delete;
 	FarmBuilding& operator=(FarmBuilding&& _Other) noexcept = delete;
 
+	GameEngineRenderer* GetRenderer()
+	{
+		return Image_;
+	}
+
 protected:
 	void Start() override;
 
 private:
+	GameEngineRenderer* Image_;
 
 };
 
