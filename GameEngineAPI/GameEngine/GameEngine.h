@@ -62,6 +62,12 @@ public:
 	// 레벨 전환
 	void ChangeLevel(const std::string& _Name);
 
+	// 이전 레벨정보 취득
+	static inline GameEngineLevel* GetPrevLevel()
+	{
+		return PrevLevel_;
+	}
+
 protected:
 	// 레벨 생성함수
 	template<typename LevelType>
@@ -79,6 +85,7 @@ private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
 	static GameEngineLevel* CurrentLevel_;
 	static GameEngineLevel* NextLevel_;
+	static GameEngineLevel* PrevLevel_;
 	static GameEngine*      UserContents_;
 
 	static GameEngineImage* WindowMainImage_;

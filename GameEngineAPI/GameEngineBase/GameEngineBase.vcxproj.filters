@@ -72,6 +72,9 @@
     <ClCompile Include="GameEngineSound.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRandom.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">

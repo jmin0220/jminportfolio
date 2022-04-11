@@ -9,9 +9,12 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
 
+float4 Player::NextLevelPos_ = { 3200.0f, 800.0f };
+
 Player::Player() 
 	:Speed_(500.0f)
 	, MoveDir_(float4::DOWN)
+	, NextLevel_("")
 {
 }
 
@@ -376,7 +379,7 @@ bool Player::ColRenderOrderCheck()
 	}
 
 	// 왼쪽
-	float4 CheckPos = CheckLengthLeft + float4(0.0f, 48.0f);
+	float4 CheckPos = CheckLengthLeft + float4(48.0f, 0.0f);
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 
 	// 충돌판정
@@ -386,7 +389,7 @@ bool Player::ColRenderOrderCheck()
 	}
 
 	// 오른쪽
-	CheckPos = CheckLengthRight + float4(0.0f, 20.0f);
+	CheckPos = CheckLengthRight + float4(48.0f, 0.0f);
 	Color = MapColImage_->GetImagePixel(CheckPos);
 
 	if (RGB(255, 0, 0) == Color)
@@ -430,7 +433,8 @@ void Player::ColWallCheck(float4 _MoveDir)
 	}
 
 	float4 NextPos = GetPosition() + CheckLength;
-	float4 CheckPos = NextPos + float4(0.0f, 20.0f);
+	// float4 CheckPos = NextPos + float4(0.0f, 24.0f);
+	float4 CheckPos = SetCheckPos(NextPos);
 
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 	
@@ -440,15 +444,18 @@ void Player::ColWallCheck(float4 _MoveDir)
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
 	}
 
+
 	if (GetCurrentLevel() == LEVEL_FARM)
 	{
 		// 타운으로 이동
 		if (RGB(255, 0, 0) == Color)
 		{
+			SetNextLevelPos({ 300.0f, 2600.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
 		}
 		else if (RGB(0, 255, 0) == Color)
 		{
+			SetNextLevelPos({ MAP_FARMBUILDING_SIZE_W / 2, MAP_FARMBUILDING_SIZE_H / 2 });
 			GameEngine::GetInst().ChangeLevel(LEVEL_FARMBUILDING);
 		}
 	}
@@ -458,10 +465,12 @@ void Player::ColWallCheck(float4 _MoveDir)
 		if (RGB(255, 0, 0) == Color)
 		{
 			// 농장으로 이동
-			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
+			SetNextLevelPos({ 3200.0f, 800.0f });
+			NextLevel_ = LEVEL_FARM;
 		}
 		else if (RGB(0, 0, 255) == Color)
 		{
+			SetNextLevelPos({ 1870.0f, 50.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_BEACH);
 		}
 	}
@@ -470,8 +479,25 @@ void Player::ColWallCheck(float4 _MoveDir)
 		// 농장으로 이동
 		if (RGB(255, 0, 0) == Color)
 		{
+			SetNextLevelPos({ 3200.0f, 800.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
+	}
+	else if (GetCurrentLevel() == LEVEL_BEACH)
+	{
+		if (RGB(255, 0, 0) == Color)
+		{
+			SetNextLevelPos({ 2620.0f, 5180.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
+		}
+	}
+}
+
+float4 Player::SetCheckPos(float4 _NextPos)
+{
+	if (MoveDir_ == float4::DOWN)
+	{
+		return _NextPos + float4(0.0f, 24.0f);
 	}
 }
 

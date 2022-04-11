@@ -37,10 +37,14 @@ void TownLevel::LevelChangeStart()
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
 
-	this->Player_->SetPosition({ 300.0f, 2600.0f });
+	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 }
 
+void TownLevel::LevelChangeEnd()
+{
+
+}
 
 void TownLevel::Loading()
 {

@@ -36,8 +36,13 @@ void BeachLevel::LevelChangeStart()
 	// 플레이어와 건물의 렌더링 순서
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 0.0f, 0.0f });
 
-	this->Player_->SetPosition({ 1870.0f, 50.0f });
+	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
+
+}
+
+void BeachLevel::LevelChangeEnd()
+{
 
 }
 

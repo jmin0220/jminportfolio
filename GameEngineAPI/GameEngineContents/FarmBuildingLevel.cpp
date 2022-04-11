@@ -32,7 +32,6 @@ void FarmBuildingLevel::LevelChangeStart()
 	// 컬리전 설정
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
 
-	this->Player_->SetPosition({ MAP_FARMBUILDING_SIZE_W / 2, MAP_FARMBUILDING_SIZE_H / 2 });
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 }
 

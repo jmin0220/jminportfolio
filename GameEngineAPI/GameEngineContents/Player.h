@@ -25,10 +25,28 @@ public:
 		TileMap_ = _TileMap;
 	}
 
+	inline std::string GetNextLevel()
+	{
+		return NextLevel_;
+	}
+
+	inline float4 GetNextLevelPos()
+	{
+		return NextLevelPos_;
+	}
+
+	inline void SetNextLevelPos(float4 _Pos)
+	{
+		NextLevelPos_ = _Pos;
+	}
+
 private:
 	float Speed_; 
 	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.
 	float4 MoveDir_;
+
+	std::string NextLevel_;
+	static float4 NextLevelPos_;
 
 	// TODO::삭제
 	// float4 ClothPos_;
@@ -53,6 +71,8 @@ private:
 	void PlayerAnimationChange(const std::string& _Name);
 	void PlayerKeyInit();
 	void UpdateCamera();
+
+	float4 SetCheckPos(float4 _NextPos);
 
 	void ColWallCheck(float4 _MoveDir);
 
