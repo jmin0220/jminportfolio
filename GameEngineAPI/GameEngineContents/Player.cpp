@@ -477,7 +477,7 @@ void Player::ColWallCheck(float4 _MoveDir)
 		// 타운으로 이동
 		if (RGB(255, 0, 0) == Color)
 		{
-			SetNextLevelPos({ 300.0f, 2600.0f });
+			SetNextLevelPos({ 200.0f, 2600.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
 		}
 		else if (RGB(0, 255, 0) == Color)
@@ -493,8 +493,8 @@ void Player::ColWallCheck(float4 _MoveDir)
 		if (RGB(255, 0, 0) == Color)
 		{
 			// 농장으로 이동
-			SetNextLevelPos({ 3200.0f, 800.0f });
-			NextLevel_ = LEVEL_FARM;
+			SetNextLevelPos({ 3730.0f, 850.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
 		else if (RGB(0, 0, 255) == Color)
 		{
