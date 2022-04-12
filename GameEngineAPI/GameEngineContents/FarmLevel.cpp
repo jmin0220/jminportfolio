@@ -11,6 +11,9 @@ FarmLevel::FarmLevel()
 	BGBuilding_ = CreateActor<BackGround>((int)ORDER::BUIDING);
 	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONTA);
 	BGAlwaysFront_ = CreateActor<BackGround>((int)ORDER::ALWAYSFRONT);
+
+	// 플레이어가 처음 시작하는 맵이므로 PlayerInit를 한번 실행.
+	this->Player_->PlayerInit();
 }
 
 FarmLevel::~FarmLevel() 

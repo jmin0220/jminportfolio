@@ -146,7 +146,6 @@ void StardewContents::GameInit()
 	// 레벨 생성
 	CreateLevel<TitleLevel>(LEVEL_TITLE);
 	CreateLevel<FarmLevel>(LEVEL_FARM);
-	CreateLevel<FarmBuildingLevel>(LEVEL_FARMBUILDING);
 	CreateLevel<TownLevel>(LEVEL_TOWN);
 	CreateLevel<BeachLevel>(LEVEL_BEACH);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);

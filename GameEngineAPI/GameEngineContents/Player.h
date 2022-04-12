@@ -56,6 +56,8 @@ public:
 		NextLevelPos_ = _Pos;
 	}
 
+	void PlayerInit();
+
 private:
 	float Speed_; 
 	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.

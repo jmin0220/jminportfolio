@@ -28,6 +28,14 @@ Player::~Player()
 {
 }
 
+void Player::PlayerInit()
+{
+
+	// 인벤토리 초기설정
+	Hoe* hoe = this->GetLevel()->CreateActor<Hoe>((int)ORDER::UIICONS);;
+	Inventory_->AddItemToInventory(*hoe);
+}
+
 void Player::Start()
 {
 	// UI
@@ -41,10 +49,6 @@ void Player::Start()
 	PlayerKeyInit();
 	// 카메라 위치 초기화
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
-
-	// 인벤토리 초기설정
-	Hoe* hoe = this->GetLevel()->CreateActor<Hoe>((int)ORDER::UIICONS);;
-	Inventory_->AddItemToInventory(*hoe);
 }
 
 void Player::Update()
