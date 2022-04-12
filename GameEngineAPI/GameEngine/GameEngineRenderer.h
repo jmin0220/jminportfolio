@@ -33,6 +33,11 @@ public:
 		RenderPivot_ = _Pos;
 	}
 
+	inline float4 GetPivot()
+	{
+		return RenderPivot_;
+	}
+
 	inline void SetPivotType(const RenderPivot& _Type)
 	{
 		PivotType_ = _Type;
@@ -46,6 +51,11 @@ public:
 	// 이미지의 크기대로 출력
 	void SetImageScale();
 
+	inline float4 GetImageScale()
+	{
+		return RenderImageScale_;
+	}
+
 	// 유저가 설정한 크기대로 출력
 	inline void SetScale(const float4& _Scale)
 	{
@@ -53,14 +63,20 @@ public:
 		RenderScale_ = _Scale;
 	}
 
+	inline float4 GetScale()
+	{
+		return RenderScale_;
+	}
+
 	inline GameEngineImage* GetImage()
 	{
 		return Image_;
 	}
 
-	void SetImage(const std::string& _Name);
-
-	void SetIndex(size_t _Index, const float4& _Scale = {-1.0f, -1.0f });
+	inline float4 GetImagePivot()
+	{
+		return RenderImagePivot_;
+	}
 
 	inline void CameraEffectOff()
 	{
@@ -71,6 +87,11 @@ public:
 	{
 		IsCameraEffect_ = true;
 	}
+
+
+	void SetImage(const std::string& _Name);
+
+	void SetIndex(size_t _Index, const float4& _Scale = { -1.0f, -1.0f });
 
 	// 렌더러가 생성된 후의 Order설정
 	void SetOrder(int _Order) override;

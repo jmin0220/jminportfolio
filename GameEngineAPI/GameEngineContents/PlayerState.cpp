@@ -39,8 +39,9 @@ void Player::ActionUpdate()
 		float4 CheckLength = MoveDir_ * 24;
 		float4 Pos = { GetPosition().x + CheckLength.x, GetPosition().y + CheckLength.y + 12.0f };
 		
-		TileMap_->CreateTile(static_cast<int>(Pos.x / TILEMAP_SIZE), static_cast<int>(Pos.y / TILEMAP_SIZE)
+		FarmTile* Tile = TileMap_->CreateTile<FarmTile>(static_cast<int>(Pos.x / TILEMAP_SIZE), static_cast<int>(Pos.y / TILEMAP_SIZE)
 			                 , IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA);
+		Tile->TileState_ = 0;
 
 		StateChange(PlayerState::Idle);
 	}

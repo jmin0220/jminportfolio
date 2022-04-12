@@ -31,6 +31,7 @@ void GameEngineRenderer::SetImageScale()
 	ScaleMode_ = RenderScaleMode::Image;
 	RenderScale_ = Image_->GetScale();
 	RenderImageScale_ = Image_->GetScale();
+	RenderImagePivot_ = float4::ZERO;
 }
 
 // 이미지 설정

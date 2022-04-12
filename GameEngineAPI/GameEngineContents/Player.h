@@ -2,6 +2,13 @@
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineActor.h>
 #include <string>
+#include <GameEngine/GameEngineRendererTileMap.h>
+
+class FarmTile : public Tile
+{
+public:
+	int TileState_;
+};
 
 // Ό³Έν :
 class GameEngineImage;
