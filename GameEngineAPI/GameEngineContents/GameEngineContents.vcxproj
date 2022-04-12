@@ -282,6 +282,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TileStateTable.h" />
     <ClInclude Include="TitleButtonLoadGame.h">
       <SubType>
       </SubType>

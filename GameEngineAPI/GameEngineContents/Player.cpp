@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayLevel.h"
+#include "TileStateTable.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -595,4 +596,15 @@ bool Player::IsActionKeyDown()
 	}
 
 	return true;
+}
+
+
+void Player::CreatePlayerTileIndex(float4 _Pos)
+{
+	// 鸥老 积己
+	PlayerTileIndex* Tile = TileMap_->CreateTile<PlayerTileIndex>(static_cast<int>(_Pos.x / TILEMAP_SIZE), static_cast<int>(_Pos.y / TILEMAP_SIZE)
+		, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA);
+
+	// 积己等 鸥老狼 沥焊甫 历厘
+	Tile->SetTileState_((int)TileState::Hollow);
 }

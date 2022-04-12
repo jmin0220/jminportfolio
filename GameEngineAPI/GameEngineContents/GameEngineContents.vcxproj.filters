@@ -215,6 +215,9 @@
     <ClInclude Include="BeachLevel.h">
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
+    <ClInclude Include="TileStateTable.h">
+      <Filter>99Etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">

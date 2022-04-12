@@ -78,6 +78,17 @@ public:
 		return RenderImagePivot_;
 	}
 
+	// ¾ËÆÄ°ª
+	inline void SetAlpha(unsigned int _Alpha)
+	{
+		Alpha_ = _Alpha;
+
+		if (Alpha_ >= 255)
+		{
+			Alpha_ = 255;
+		}
+	}
+
 	inline void CameraEffectOff()
 	{
 		IsCameraEffect_ = false;
@@ -123,6 +134,7 @@ private:
 	float4 RenderImagePivot_;
 
 	unsigned int TransColor_;
+	unsigned int Alpha_;
 
 
 

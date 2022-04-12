@@ -4,9 +4,14 @@
 #include <string>
 #include <GameEngine/GameEngineRendererTileMap.h>
 
-class FarmTile : public Tile
+class PlayerTileIndex : public Tile
 {
 public:
+	inline void SetTileState_(int _TileState)
+	{
+		TileState_ = _TileState;
+	}
+private:
 	int TileState_;
 };
 
@@ -67,6 +72,7 @@ private:
 	//GameEngineRenderer* RendererCloth_;
 
 	GameEngineRendererTileMap* TileMap_;
+	std::map<int, std::list<PlayerTileIndex>> AllTiles_;
 
 	GameEngineImage* MapColImage_;
 	GameEngineCollision* PlayerCollision;
@@ -78,6 +84,8 @@ private:
 	void PlayerAnimationChange(const std::string& _Name);
 	void PlayerKeyInit();
 	void UpdateCamera();
+
+	void CreatePlayerTileIndex(float4 _Pos);
 
 	float4 SetCheckPos(float4 _NextPos);
 
