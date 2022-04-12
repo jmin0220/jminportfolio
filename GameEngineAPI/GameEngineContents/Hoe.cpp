@@ -16,6 +16,7 @@ void Hoe::Start()
 
 	IconRenderer_ = CreateRenderer(IMAGE_TOOL_SET1);
 	IconRenderer_->SetIndex(5);
+	IconRenderer_->CameraEffectOff();
 }
 
 void Hoe::Update()

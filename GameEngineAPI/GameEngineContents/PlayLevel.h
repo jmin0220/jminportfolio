@@ -34,9 +34,6 @@ protected:
 	BackGround* BGBuilding_;
 	BackGround* BGFront_;
 	BackGround* BGAlwaysFront_;
-	Inventory* Inventory_;
-	Clock* Clock_;
-	EnergyBar* EnergyBar_;
 
 private:
 };

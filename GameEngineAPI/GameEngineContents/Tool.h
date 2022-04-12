@@ -10,7 +10,7 @@ class Tool : public Item
 public:
 	// constrcuter destructer
 	Tool();
-	~Tool();
+	virtual ~Tool();
 
 	// delete Function
 	Tool(const Tool& _Other) = delete;

@@ -26,7 +26,6 @@ public:
 	}
 };
 
-// 설명 : 제한이 있는 타일맵을 이야기.
 class GameEngineImage;
 class GameEngineRendererTileMap
 {

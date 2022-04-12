@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "PlayLevel.h"
 #include "TileStateTable.h"
+#include "Item.h"
+#include "Hoe.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -11,6 +13,9 @@
 #include <vector>
 
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
+Inventory* Player::Inventory_;
+Clock* Player::Clock_;
+EnergyBar* Player::EnergyBar_;
 
 Player::Player() 
 	:Speed_(500.0f)
@@ -25,12 +30,21 @@ Player::~Player()
 
 void Player::Start()
 {
+	// UI
+	Inventory_ = this->GetLevel()->CreateActor<Inventory>((int)ORDER::UI);
+	Clock_ = this->GetLevel()->CreateActor<Clock>((int)ORDER::UI);
+	EnergyBar_ = this->GetLevel()->CreateActor<EnergyBar>((int)ORDER::UI);
+
+	// 애니메이션 초기화
 	PlayerAnimationInit();
+	// 키설정 초기화
 	PlayerKeyInit();
-
-
 	// 카메라 위치 초기화
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
+
+	// 인벤토리 초기설정
+	Hoe* hoe = this->GetLevel()->CreateActor<Hoe>((int)ORDER::UIICONS);;
+	Inventory_->AddItemToInventory(*hoe);
 }
 
 void Player::Update()

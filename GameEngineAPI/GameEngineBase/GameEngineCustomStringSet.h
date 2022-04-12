@@ -42,6 +42,7 @@
 #define IMAGE_INVENTORY_BAR "InventoryBar.bmp"
 #define IMAGE_INVENTORY_EXTEND "InventoryExtend.bmp"
 #define IMAGE_INVENTORY_SELECT "InventorySelectBox.bmp"
+#define IMAGE_INVENTORY_EMPTY "Empty.bmp"
 #define IMAGE_INVENTORYBAR_POS_UP_X 640
 #define IMAGE_INVENTORYBAR_POS_UP_Y 55
 #define IMAGE_INVENTORYBAR_POS_DOWN_X 640
@@ -124,6 +125,7 @@
 
 // ≈∏¿œ∏ 
 #define TILEMAP_SIZE 48
+
 // ∑π∫ß
 #define LEVEL_CHANGE_FARM "LevelChangeFarm"
 #define LEVEL_CHANGE_TOWN "LevelChangeTown"

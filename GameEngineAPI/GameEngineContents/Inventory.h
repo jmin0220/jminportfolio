@@ -24,20 +24,19 @@ protected:
 	void Update() override;
 
 private:
-	char SelectBoxHotkey_;
-	float4 Pos_;
-	bool ExtendFlg;
+	static char SelectBoxHotkey_;
+	static float4 Pos_;
+	static bool ExtendFlg;
 
 	GameEngineRenderer* RendererInven_;
 	GameEngineRenderer* RendererSelectBox_;
 
 	void InitKey();
-	void IconUpdate();
 
 	void ControlSelectBox();
 	void ExtendInventoryOn();
 
 private:
-	Item* InventoryList_[36];
+	static Item* InventoryList_[36];
 };
 

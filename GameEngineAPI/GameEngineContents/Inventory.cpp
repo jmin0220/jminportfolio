@@ -5,15 +5,19 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineString.h>
 #include "Hoe.h"
 #include "Axe.h"
 #include "Sythe.h"
 
+char Inventory::SelectBoxHotkey_;
+float4 Inventory::Pos_;
+bool Inventory::ExtendFlg;
+Item* Inventory::InventoryList_[36];
+
 Inventory::Inventory() 
 	: RendererInven_(nullptr)
 	, RendererSelectBox_(nullptr)
-	, SelectBoxHotkey_(0)
-	, ExtendFlg(false)
 {
 }
 
@@ -21,11 +25,17 @@ Inventory::~Inventory()
 {
 	for (size_t i = 0; i < 36; i++)
 	{
-		if (nullptr != InventoryList_[i])
-		{
-			delete InventoryList_[i];
-			InventoryList_[i] = nullptr;
-		}
+		// 다른 아이템(액터)가 들어있지 않은 경우에만 delete
+		//if (InventoryList_[i] != nullptr)
+		//{
+		//	if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() != GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
+		//	{
+		//		InventoryList_[i] = nullptr;
+		//	}
+
+		//}
+		delete InventoryList_[i];
+		InventoryList_[i] = nullptr;
 	}
 }
 
@@ -49,17 +59,26 @@ void Inventory::Start()
 	InitKey();
 
 
-
-	for (size_t i = 0; i < 12; i++)
+	if (InventoryList_[0] == nullptr)
 	{
-		// 인벤에 아이템의 정보를 집어넣음.
-		// 아이콘은 아이템과 별개로 넣어야하는가?
-		// 중복되는 아이템의 갯수는?
-		// 
-		//InventoryList_[i] = new Item();
-		//// 이부분도 다시 생각해봐야할듯
-		//InventoryList_[i]->SetIconRenderer(*CreateRenderer("Empty.bmp", (int)ORDER::UIICONS));
-		//InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
+		for (size_t i = 0; i < 36; i++)
+		{
+			// 인벤에 아이템의 정보를 집어넣음.
+			// 비어있는 인벤토리 생성
+			InventoryList_[i] = new Item;
+			InventoryList_[i]->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
+			InventoryList_[i]->GetIconRenderer().CameraEffectOff();
+			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
+
+			if (i < 12)
+			{
+				InventoryList_[i]->GetIconRenderer().On();
+			}
+			else
+			{
+				InventoryList_[i]->GetIconRenderer().Off();
+			}
+		}
 	}
 }
 
@@ -70,15 +89,8 @@ void Inventory::Update()
 
 	// 키 입력
 	ControlSelectBox();
-
-	// 아이콘 업데이트
-	IconUpdate();
 }
 
-void Inventory::SetPos(float4 _Pos)
-{
-
-}
 
 void Inventory::InitKey()
 {
@@ -187,35 +199,26 @@ void Inventory::ControlSelectBox()
 
 }
 
+void Inventory::SetPos(float4 _Pos)
+{
+
+}
+
 // 테스트
 void Inventory::AddItemToInventory(Item& _item)
 {
-	//Item& item = _item;
+	Item& item = _item;
 
-	//for (size_t i = 0; i < 36; i++)
-	//{
-	//	if (nullptr == InventoryList_[i])
-	//	{
-	//		InventoryList_[i] = &item;
-	//		
-
-	//		break;
-	//	}
-	//}
-}
-
-void Inventory::IconUpdate()
-{
-	//for (size_t i = 0; i < 36; i++)
-	//{
-	//	if (InventoryList_[i] == nullptr)
-	//	{
-	//		continue;
-	//	}
-	//	else
-	//	{
-	//		//InventoryList_[i]->SetIconRenderer(InventoryList_[i]->GetIconRenderer());
-	//		InventoryList_[i]->SetPosition({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
-	//	}
-	//}
+	for (size_t i = 0; i < 36; i++)
+	{
+		// 아이콘은 인벤토리에서 아이템의 위치를 표시
+		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
+		if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
+		{
+			InventoryList_[i] = &item;
+			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
+			
+			break;
+		}
+	}
 }

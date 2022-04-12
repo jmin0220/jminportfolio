@@ -1,8 +1,12 @@
 #pragma once
+#include <string>
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineActor.h>
-#include <string>
 #include <GameEngine/GameEngineRendererTileMap.h>
+#include "Item.h"
+#include "Clock.h"
+#include "EnergyBar.h"
+#include "Inventory.h"
 
 class PlayerTileIndex : public Tile
 {
@@ -122,5 +126,8 @@ private:
 
 	// 아이템 관련된 멤버
 private:
+	static Inventory* Inventory_;
+	static Clock* Clock_;
+	static EnergyBar* EnergyBar_;
 };
 
