@@ -49,6 +49,12 @@ public:
 		return Inst_->Scale_;
 	}
 
+	// 임시추가
+	static inline HWND GetHWND()
+	{
+		return Inst_->hWnd_;
+	}
+
 protected:
 
 private:

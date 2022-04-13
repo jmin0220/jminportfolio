@@ -127,6 +127,7 @@ void Player::IdleStart()
 
 void Player::ActionStart()
 {
+	// TODO::문자열 분리 후 결합하여 애니메이션으로 넘겨줌.
 	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
 		PlayerAnimationChange(ANIM_HIT_HORIZON_RIGHT);

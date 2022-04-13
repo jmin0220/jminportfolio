@@ -81,6 +81,8 @@ void Inventory::Start()
 			}
 		}
 	}
+
+	SelectItem(0);
 }
 
 void Inventory::Update()

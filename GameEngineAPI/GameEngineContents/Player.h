@@ -3,6 +3,8 @@
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
+#include <GameEngineBase/GameEngineTime.h>
+#include "Mouse.h"
 #include "Item.h"
 #include "Clock.h"
 #include "EnergyBar.h"
@@ -92,6 +94,8 @@ private:
 
 	// Å° ÀÔ·Â
 private:
+	Mouse* Mouse_;
+
 	bool IsMoveKeyUp();
 	bool IsMoveKeyDown();
 	bool IsMoveKeyPress();
@@ -131,4 +135,9 @@ public:
 	{
 		AllTiles_ = _AllTiles;
 	}
+
+private:
+	int PlayerTime_;
+
+	void TimeUpdate();
 };

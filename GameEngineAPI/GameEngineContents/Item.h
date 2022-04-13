@@ -27,6 +27,11 @@ public:
 	{
 		IconRenderer_ = &_IconRenderer;
 	};
+
+	GameEngineRenderer& GetItemRenderer()
+	{
+		return *ItemRenderer_;
+	}
 	
 	std::string GetItenName() const
 	{
@@ -40,6 +45,12 @@ protected:
 	GameEngineRenderer* IconRenderer_;
 
 	std::string ItemName_;
+
+	// 장비가능한 아이템인가
+	bool IsEuipment;
+
+	// 중첩되는 아이템의 경우 갯수 세기
+	int ItemCount_;
 
 private:
 	void Start() override;

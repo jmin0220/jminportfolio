@@ -47,6 +47,7 @@ void Player::PlayerInit()
 void Player::Start()
 {
 	// UI
+	Mouse_ = this->GetLevel()->CreateActor<Mouse>((int)ORDER::UIMOUSE);
 	Inventory_ = this->GetLevel()->CreateActor<Inventory>((int)ORDER::UI);
 	Clock_ = this->GetLevel()->CreateActor<Clock>((int)ORDER::UI);
 	EnergyBar_ = this->GetLevel()->CreateActor<EnergyBar>((int)ORDER::UI);
@@ -330,9 +331,6 @@ void Player::PlayerKeyInit()
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_RIGHT, 'D');
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_UP, 'W');
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_DOWN, 'S');
-
-		// 왼클릭했을때의 상호작용
-		GameEngineInput::GetInst()->CreateKey(KEY_INTERACT, VK_LBUTTON);
 	}
 }
 

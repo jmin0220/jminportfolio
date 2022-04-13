@@ -254,6 +254,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -402,6 +403,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

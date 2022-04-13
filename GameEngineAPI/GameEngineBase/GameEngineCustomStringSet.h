@@ -49,6 +49,7 @@
 #define IMAGE_INVENTORYBAR_POS_DOWN_Y 663
 #define IMAGE_INVENTORY_EXT_POS_X 640
 #define IMAGE_INVENTORY_EXT_POS_Y 563
+#define IMAGE_MOUSE_CURSOR "MouseCursor.bmp"
 #define IMAGE_TITLE_BUTTON_H 174
 #define IMAGE_TITLE_BUTTON_W 222
 #define IMAGE_TITLE_BACKGOUND "MainBackground.bmp"
@@ -68,7 +69,7 @@
 #define KEY_MOVE_UP "MoveUp"
 #define KEY_MOVE_DOWN "MoveDown"
 #define KEY_INTERACT "Interact"
-#define KEY_INVEN_EXTEND "INVEN_EXTEND"
+#define KEY_INVEN_EXTEND "InventoryExtend"
 
 // 인벤토리 선택 단축키
 #define KEY_INVEN_SELECT_1 "INVEN_SEL_1"
@@ -124,6 +125,7 @@
 // 컬리전
 #define COL_GROUP_WALL "Wall"
 #define COL_GROUP_RENDER_ORDER "RenderOrder"
+#define COL_GROUP_MOUSE "Mouse"
 
 // 타일맵
 #define TILEMAP_SIZE 48

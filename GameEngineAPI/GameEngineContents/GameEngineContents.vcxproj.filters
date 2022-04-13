@@ -110,6 +110,9 @@
     <ClCompile Include="WateringCan.cpp">
       <Filter>02Play\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>99Etc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -225,6 +228,9 @@
       <Filter>02Play\Tool</Filter>
     </ClInclude>
     <ClInclude Include="PlayerTileIndex.h">
+      <Filter>99Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
       <Filter>99Etc</Filter>
     </ClInclude>
   </ItemGroup>
