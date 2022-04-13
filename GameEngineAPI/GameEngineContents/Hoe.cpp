@@ -3,6 +3,7 @@
 
 Hoe::Hoe() 
 {
+	ItemName_ = ITEM_NAME_HOE;
 }
 
 Hoe::~Hoe() 

@@ -22,7 +22,7 @@ void TownLevel::LevelChangeStart()
 	// 이미지의 좌상단이 0,0이 되도록
 	BackGround_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_TOWN_BACKGORUND);
-	BackGround_->TileMap_.TileRangeSetting(80, 65, { TILEMAP_SIZE, TILEMAP_SIZE });
+	BackGround_->TileMap_.TileRangeSetting(120, 110, { TILEMAP_SIZE, TILEMAP_SIZE });
 
 	BGBuilding_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_TOWN_BUILDING);
@@ -37,8 +37,11 @@ void TownLevel::LevelChangeStart()
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
 
+	TileRangeSetting(120, 110);
+
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
+	this->Player_->SetAllTiles(this->AllTiles_);
 }
 
 void TownLevel::LevelChangeEnd()

@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -27,12 +28,18 @@ public:
 		IconRenderer_ = &_IconRenderer;
 	};
 	
+	std::string GetItenName() const
+	{
+		return ItemName_;
+	}
+
 protected:
 	// 아이템이 필드에서 보일때 이미지
 	GameEngineRenderer* ItemRenderer_;
 	// 아이템이 인벤토리에 들어가있을때의 아이콘 이미지
 	GameEngineRenderer* IconRenderer_;
 
+	std::string ItemName_;
 
 private:
 	void Start() override;

@@ -45,5 +45,11 @@ private:
 
 private:
 	static Item* InventoryList_[36];
+
+	inline void SelectItem(int i)
+	{
+		SelectBoxHotkey_ = i;
+		SelectedItem_ = InventoryList_[i]->GetItenName();
+	}
 };
 

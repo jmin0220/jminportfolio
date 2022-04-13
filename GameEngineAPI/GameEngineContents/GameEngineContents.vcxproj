@@ -258,6 +258,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PlayerTileIndex.h" />
     <ClInclude Include="PlayLevel.h">
       <SubType>
       </SubType>
@@ -308,6 +309,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TownLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="WateringCan.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -451,6 +456,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TownLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="WateringCan.cpp">
       <SubType>
       </SubType>
     </ClCompile>

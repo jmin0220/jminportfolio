@@ -14,6 +14,7 @@ char Inventory::SelectBoxHotkey_;
 float4 Inventory::Pos_;
 bool Inventory::ExtendFlg;
 Item* Inventory::InventoryList_[36];
+std::string Inventory::SelectedItem_;
 
 Inventory::Inventory() 
 	: RendererInven_(nullptr)
@@ -141,51 +142,51 @@ void Inventory::ControlSelectBox()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_1))
 	{
-		SelectBoxHotkey_ = 0;
+		SelectItem(0);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_2))
 	{
-		SelectBoxHotkey_ = 1;
+		SelectItem(1);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_3))
 	{
-		SelectBoxHotkey_ = 2;
+		SelectItem(2);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_4))
 	{
-		SelectBoxHotkey_ = 3;
+		SelectItem(3);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_5))
 	{
-		SelectBoxHotkey_ = 4;
+		SelectItem(4);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_6))
 	{
-		SelectBoxHotkey_ = 5;
+		SelectItem(5);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_7))
 	{
-		SelectBoxHotkey_ = 6;
+		SelectItem(6);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_8))
 	{
-		SelectBoxHotkey_ = 7;
+		SelectItem(7);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_9))
 	{
-		SelectBoxHotkey_ = 8;
+		SelectItem(8);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_0))
 	{
-		SelectBoxHotkey_ = 9;
+		SelectItem(9);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_11))
 	{
-		SelectBoxHotkey_ = 10;
+		SelectItem(10);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_12))
 	{
-		SelectBoxHotkey_ = 11;
+		SelectItem(11);
 	}
 
 	if (false == ExtendFlg)

@@ -49,8 +49,11 @@ void FarmLevel::LevelChangeStart()
 	// 사운드 설정
 	BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
 
+	TileRangeSetting(80, 65);
+
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
+	this->Player_->SetAllTiles(this->AllTiles_);
 
 }
 

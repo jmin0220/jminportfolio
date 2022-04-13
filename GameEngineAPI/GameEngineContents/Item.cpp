@@ -3,6 +3,7 @@
 
 Item::Item() 
 {
+	ItemName_ = "Empty";
 }
 
 Item::~Item() 

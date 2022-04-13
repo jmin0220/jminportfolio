@@ -107,6 +107,9 @@
     <ClCompile Include="BeachLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
     </ClCompile>
+    <ClCompile Include="WateringCan.cpp">
+      <Filter>02Play\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -216,6 +219,12 @@
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
     <ClInclude Include="TileStateTable.h">
+      <Filter>99Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="WateringCan.h">
+      <Filter>02Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTileIndex.h">
       <Filter>99Etc</Filter>
     </ClInclude>
   </ItemGroup>

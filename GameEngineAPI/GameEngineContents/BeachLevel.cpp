@@ -19,7 +19,7 @@ void BeachLevel::LevelChangeStart()
 	// 이미지의 좌상단이 0,0이 되도록
 	BackGround_->GetRenderer()->SetPivot({ MAP_BEACH_SIZE_W / 2, MAP_BEACH_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_BEACH_BACKGORUND);
-	BackGround_->TileMap_.TileRangeSetting(80, 65, { TILEMAP_SIZE, TILEMAP_SIZE });
+	BackGround_->TileMap_.TileRangeSetting(104, 49, { TILEMAP_SIZE, TILEMAP_SIZE });
 
 	BGBuilding_->GetRenderer()->SetPivot({ MAP_BEACH_SIZE_W / 2, MAP_BEACH_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_BEACH_BUILDING);
@@ -36,8 +36,11 @@ void BeachLevel::LevelChangeStart()
 	// 플레이어와 건물의 렌더링 순서
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 0.0f, 0.0f });
 
+	TileRangeSetting(104, 49);
+
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
+	this->Player_->SetAllTiles(this->AllTiles_);
 
 }
 

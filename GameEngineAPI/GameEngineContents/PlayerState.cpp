@@ -33,14 +33,27 @@ void Player::IdleUpdate()
 // 클릭했을때 상태
 void Player::ActionUpdate()
 {
+	
 	// 애니메이션이 종료되면 Idle로 전환
 	if (true == RendererBody_->IsEndAnimation())
 	{
 		float4 CheckLength = MoveDir_ * 24;
 		float4 Pos = { GetPosition().x + CheckLength.x, GetPosition().y + CheckLength.y + 12.0f };
 		
-		// 타일생성
-		CreatePlayerTileIndex(Pos);
+		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
+		{
+			// 타일생성
+			CreatePlayerTileIndex(Pos, IMAGE_TILESET_DIRT);
+		}
+		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
+		{
+			// 몰루
+		}
+		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
+		{
+			// 타일생성
+			CreatePlayerTileIndex(Pos, IMAGE_TILESET_DIRTWATERY);
+		}
 
 		// Idle로 상태 전환
 		StateChange(PlayerState::Idle);

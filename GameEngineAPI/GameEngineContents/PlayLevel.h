@@ -4,6 +4,7 @@
 #include "Inventory.h"
 #include "EnergyBar.h"
 #include "Player.h"
+#include "PlayerTileIndex.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 
@@ -25,6 +26,8 @@ public:
 
 	GameEngineSoundPlayer BgmPlayer;
 
+	std::vector<std::vector<PlayerTileIndex*>> AllTiles_;
+
 protected:
 	void Loading() override;
 	void Update() override;
@@ -34,6 +37,9 @@ protected:
 	BackGround* BGBuilding_;
 	BackGround* BGFront_;
 	BackGround* BGAlwaysFront_;
+
+	// 타일 초기화
+	void TileRangeSetting(int _X, int _Y);
 
 private:
 };

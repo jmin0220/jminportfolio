@@ -97,6 +97,8 @@ void StardewContents::GameInit()
 	}
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TILESET_DIRT);
 	Image->Cut({ 48, 48 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TILESET_DIRTWATERY);
+	Image->Cut({ 48, 48 });
 
 
 	// 인터페이스
@@ -127,6 +129,8 @@ void StardewContents::GameInit()
 	}
 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET1);
+	Image->Cut({ 48, 96 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
 	Image->Cut({ 48, 96 });
 
 	//사운드

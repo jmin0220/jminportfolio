@@ -24,5 +24,6 @@ protected:
 
 private:
 	FarmBuilding* FarmBuilding_;
+
 };
 

@@ -55,10 +55,12 @@
 #define IMAGE_TITLE_LOGO_H 374
 #define IMAGE_TITLE_LOGO_W 796
 #define IMAGE_TOOL_SET1 "Tools_set1.bmp"
+#define IMAGE_TOOL_SET2 "Tools_set2.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
 
 #define IMAGE_TILESET_DIRT "Dirt.bmp"
+#define IMAGE_TILESET_DIRTWATERY "DirtWatery.bmp"
 
 // 키 입력
 #define KEY_MOVE_LEFT "MoveLeft"
@@ -100,7 +102,7 @@
 #define MAP_TOWN_ALWAYSFRONT "TownAlwaysfront.bmp"
 #define MAP_TOWN_COLLISION "TownBuildingCollision.bmp"
 #define MAP_TOWN_RENDER_ORDER_COLLISION "TownFrontCollision.bmp"
-#define MAP_TOWN_SIZE_H 5281.0f
+#define MAP_TOWN_SIZE_H 5280.0f
 #define MAP_TOWN_SIZE_W 5760.0f
 // 농장 오두막
 #define MAP_FARMBUILDING_BACKGROUND "FarmBuildingBack.bmp"
@@ -166,3 +168,9 @@
 #define ANIM_HIT_VERTICAL_RIGHT "HitVerticalRight"
 #define ANIM_HIT_VERTICAL_LEFT "HitVerticalLeft"
 #define ANIM_HIT_VERTICAL_UP "HitVerticalUp"
+
+
+// 아이템
+#define ITEM_NAME_HOE "Hoe"
+#define ITEM_NAME_AXE "Axe"
+#define ITEM_NAME_WATERINGCAN "WateringCan"

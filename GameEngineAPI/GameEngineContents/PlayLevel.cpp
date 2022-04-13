@@ -31,3 +31,31 @@ void PlayLevel::Update()
 		BgmPlayer.Stop();
 	}
 }
+
+
+void PlayLevel::TileRangeSetting(int _X, int _Y)
+{
+	if (0 >= _X)
+	{
+		MsgBoxAssert("0개인 타일맵을 만들수 없습니다.");
+		return;
+	}
+
+	if (0 >= _Y)
+	{
+		MsgBoxAssert("0개인 타일맵을 만들수 없습니다.");
+		return;
+	}
+
+	AllTiles_.resize(_Y);
+
+	for (size_t y = 0; y < AllTiles_.size(); y++)
+	{
+		AllTiles_[y].resize(_X);
+
+		for (size_t x = 0; x < AllTiles_[y].size(); x++)
+		{
+			AllTiles_[y][x] = nullptr;
+		}
+	}
+}

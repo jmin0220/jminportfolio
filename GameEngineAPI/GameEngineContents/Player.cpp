@@ -3,6 +3,8 @@
 #include "TileStateTable.h"
 #include "Item.h"
 #include "Hoe.h"
+#include "Axe.h"
+#include "WateringCan.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -32,8 +34,14 @@ void Player::PlayerInit()
 {
 
 	// 인벤토리 초기설정
-	Hoe* hoe = this->GetLevel()->CreateActor<Hoe>((int)ORDER::UIICONS);;
+	Hoe* hoe = this->GetLevel()->CreateActor<Hoe>((int)ORDER::UIICONS);
 	Inventory_->AddItemToInventory(*hoe);
+
+	Axe* axe = this->GetLevel()->CreateActor<Axe>((int)ORDER::UIICONS);
+	Inventory_->AddItemToInventory(*axe);
+
+	WateringCan* wateringCan = this->GetLevel()->CreateActor<WateringCan>((int)ORDER::UIICONS);
+	Inventory_->AddItemToInventory(*wateringCan);
 }
 
 void Player::Start()
@@ -558,6 +566,8 @@ float4 Player::SetCheckPos(float4 _NextPos)
 	{
 		return _NextPos + float4(0.0f, -0.0f);
 	}
+
+	return float4::ZERO;
 }
 
 // 눌리지 않게 된 키가 있을경우 True
@@ -617,12 +627,35 @@ bool Player::IsActionKeyDown()
 }
 
 
-void Player::CreatePlayerTileIndex(float4 _Pos)
+void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
 {
-	// 타일 생성
-	PlayerTileIndex* Tile = TileMap_->CreateTile<PlayerTileIndex>(static_cast<int>(_Pos.x / TILEMAP_SIZE), static_cast<int>(_Pos.y / TILEMAP_SIZE)
-		, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA);
+	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
+	int PosY = static_cast<int>(_Pos.y / TILEMAP_SIZE);
 
-	// 생성된 타일의 정보를 저장
-	Tile->SetTileState_((int)TileState::Hollow);
+	if (IMAGE_TILESET_DIRTWATERY == _TileMapImageName)
+	{
+		if (nullptr != AllTiles_[PosY][PosX] 
+			&& AllTiles_[PosY][PosX]->GetTileState() == (int)TileState::Hollow)
+		{
+			// 타일 생성
+			SetTile(PosX, PosY,
+				TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TileState::Hollow);
+		}
+		else
+		{
+			return;
+		}
+	}
+	else
+	{
+		// 타일 생성
+		SetTile(PosX, PosY,
+			TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TileState::Hollow);
+	}
+}
+
+void Player::SetTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
+{
+	AllTiles_[y][x] = _TileMap;
+	AllTiles_[y][x]->SetTileState_(_TileState);
 }
