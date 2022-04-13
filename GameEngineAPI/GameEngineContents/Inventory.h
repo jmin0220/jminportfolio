@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include <string>
 #include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
@@ -19,12 +20,18 @@ public:
 	void SetPos(float4 _Pos);
 	void AddItemToInventory(Item& _item);
 
+	inline std::string GetSelectedItem()
+	{
+		return SelectedItem_;
+	}
+
 protected:
 	void Start() override;
 	void Update() override;
 
 private:
 	static char SelectBoxHotkey_;
+	static std::string SelectedItem_;
 	static float4 Pos_;
 	static bool ExtendFlg;
 

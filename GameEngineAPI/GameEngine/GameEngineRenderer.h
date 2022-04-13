@@ -99,6 +99,25 @@ public:
 		IsCameraEffect_ = true;
 	}
 
+	void SetPause(bool _Value)
+	{
+		Pause_ = _Value;
+	}
+
+	void PauseOn()
+	{
+		Pause_ = true;
+	}
+
+	void PauseOff()
+	{
+		Pause_ = false;
+	}
+
+	void PauseSwitch()
+	{
+		Pause_ = !Pause_;
+	}
 
 	void SetImage(const std::string& _Name);
 
@@ -115,6 +134,7 @@ private:
 
 	// 카메라 효과 사용유무
 	bool IsCameraEffect_;
+	bool Pause_;
 
 	// 출력할 이미지
 	GameEngineImage* Image_;
@@ -142,6 +162,11 @@ private:
 private:
 	class FrameAnimation : public GameEngineNameObject
 	{
+	private:
+		friend GameEngineRenderer;
+		//friend std::map<std::string, FrameAnimation>;
+		//friend std::pair<std::string, FrameAnimation>;
+
 	public:
 		GameEngineRenderer* Renderer_;
 		GameEngineImage* Image_;
@@ -156,15 +181,39 @@ private:
 		bool IsEnd;
 
 	public:
+		inline int WorldCurrentFrame() const
+		{
+			return CurrentFrame_;
+		}
+
+		inline int WorldStartFrame() const
+		{
+			return StartFrame_;
+		}
+
+		inline int WorldEndFrame() const
+		{
+			return EndFrame_;
+		}
+
+		inline int LocalCurrentFrame() const
+		{
+			return StartFrame_ - CurrentFrame_;
+		}
+
+	public:
 		FrameAnimation()
 			: Image_(nullptr),
+			Renderer_(nullptr),
+			FolderImage_(nullptr),
+			TimeKey(0),
 			CurrentFrame_(-1),
 			StartFrame_(-1),
 			EndFrame_(-1),
 			CurrentInterTime_(0.1f),
 			InterTime_(0.1f),
 			Loop_(true),
-			TimeKey(0)
+			IsEnd(false)
 		{
 
 		}
@@ -192,6 +241,13 @@ public:
 	bool IsEndAnimation();
 
 	bool IsAnimationName(const std::string& _Name);
+
+	const FrameAnimation* FindAnimation(const std::string& _Name);
+
+	inline const FrameAnimation* CurrentAnimation()
+	{
+		return CurrentAnimation_;
+	}
 
 private:
 	std::map<std::string, FrameAnimation> Animations_;
