@@ -67,19 +67,34 @@ public:
 		CameraPos_ = _Value;
 	}
 
+	// 액터 찾기
+	template<typename ConvertType>
+	ConvertType* FindActor(const std::string& _Name)
+	{
+		return dynamic_cast<ConvertType*>(FindActor(_Name));
+	}
+
+	GameEngineActor* FindActor(const std::string& _Name);
+
+	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
+
 protected:
 	// 시점함수. 엔진에서 어떠한 사건이 일어나는 시점, 단계.
 	virtual void Loading() = 0;
 	virtual void Update() = 0;
 
 	// 레벨이 변경될때 호출될 함수.
-	// 레벨이 시작될 때
+	// 레벨이 시작될 때	
+	void ActorLevelChangeStart();
 	virtual void LevelChangeStart() {};
 	// 레벨이 종료될 때
+	void ActorLevelChangeEnd();
 	virtual void LevelChangeEnd() {};
 
 private:
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+
+	std::map<std::string, GameEngineActor*> RegistActor_;
 
 	std::vector<ChangeOrderItem> ChangeOrderList;
 

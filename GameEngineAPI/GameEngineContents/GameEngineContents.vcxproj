@@ -246,6 +246,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ItemTable.h" />
     <ClInclude Include="Mines.h">
       <SubType>
       </SubType>

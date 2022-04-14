@@ -114,7 +114,6 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
-
 	// 툴
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
@@ -132,6 +131,34 @@ void StardewContents::GameInit()
 	Image->Cut({ 48, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
 	Image->Cut({ 48, 96 });
+
+
+
+	// ENVIRONMENT
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_ENVIRONMENT);
+
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_CROPS);
+	Image->Cut({ 48, 96 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FISHING);
+	Image->Cut({ 72, 72 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FORAGE);
+	Image->Cut({ 72, 72 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_MAPLETREE);
+	Image->Cut({ 144, 312 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_OAKTREE);
+	Image->Cut({ 144, 312 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_PINETREE);
+	Image->Cut({ 144, 312 });
 
 	//사운드
 	ResourcesDir.MoveParent(DIR_PARENT);

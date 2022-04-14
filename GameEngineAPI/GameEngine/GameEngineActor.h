@@ -68,11 +68,16 @@ protected:
 	virtual void Start() = 0;
 	virtual void Update() {};
 	virtual void Render() {};
+	
+	virtual void LevelChangeStart() {}
+	virtual void LevelChangeEnd() {}
 
 	void Release();
 
 	// 디버그용 4각형
 	void DebugRectRender();
+
+	void LevelRegist(std::string _RegistName = "");
 
 private:
 	// 현재 액터가 생성되어있는 레벨

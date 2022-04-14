@@ -9,6 +9,7 @@
 #include "Hoe.h"
 #include "Axe.h"
 #include "Sythe.h"
+#include "ItemTable.h"
 
 char Inventory::SelectBoxHotkey_;
 float4 Inventory::Pos_;
@@ -26,15 +27,6 @@ Inventory::~Inventory()
 {
 	for (size_t i = 0; i < 36; i++)
 	{
-		// 다른 아이템(액터)가 들어있지 않은 경우에만 delete
-		//if (InventoryList_[i] != nullptr)
-		//{
-		//	if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() != GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
-		//	{
-		//		InventoryList_[i] = nullptr;
-		//	}
-
-		//}
 		delete InventoryList_[i];
 		InventoryList_[i] = nullptr;
 	}
@@ -67,7 +59,7 @@ void Inventory::Start()
 			// 인벤에 아이템의 정보를 집어넣음.
 			// 비어있는 인벤토리 생성
 			InventoryList_[i] = new Item;
-			InventoryList_[i]->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
+			InventoryList_[i]->SetIconRenderer((int)ITEMTABLE::EMPTY);
 			InventoryList_[i]->GetIconRenderer().CameraEffectOff();
 			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
 
@@ -208,17 +200,15 @@ void Inventory::SetPos(float4 _Pos)
 }
 
 // 테스트
-void Inventory::AddItemToInventory(Item& _item)
+void Inventory::AddItemToInventory(int _ItemNum)
 {
-	Item& item = _item;
-
 	for (size_t i = 0; i < 36; i++)
 	{
 		// 아이콘은 인벤토리에서 아이템의 위치를 표시
 		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
 		if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
 		{
-			InventoryList_[i] = &item;
+			InventoryList_[i]->SetIconRenderer(_ItemNum);
 			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
 			
 			break;

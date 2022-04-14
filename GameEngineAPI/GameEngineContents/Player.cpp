@@ -1,10 +1,8 @@
 #include "Player.h"
 #include "PlayLevel.h"
 #include "TileStateTable.h"
+#include "ItemTable.h"
 #include "Item.h"
-#include "Hoe.h"
-#include "Axe.h"
-#include "WateringCan.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -13,6 +11,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
+
 
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 Inventory* Player::Inventory_;
@@ -34,14 +33,9 @@ void Player::PlayerInit()
 {
 
 	// 인벤토리 초기설정
-	Hoe* hoe = this->GetLevel()->CreateActor<Hoe>((int)ORDER::UIICONS);
-	Inventory_->AddItemToInventory(*hoe);
-
-	Axe* axe = this->GetLevel()->CreateActor<Axe>((int)ORDER::UIICONS);
-	Inventory_->AddItemToInventory(*axe);
-
-	WateringCan* wateringCan = this->GetLevel()->CreateActor<WateringCan>((int)ORDER::UIICONS);
-	Inventory_->AddItemToInventory(*wateringCan);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 }
 
 void Player::Start()
@@ -633,11 +627,11 @@ void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
 	if (IMAGE_TILESET_DIRTWATERY == _TileMapImageName)
 	{
 		if (nullptr != AllTiles_[PosY][PosX] 
-			&& AllTiles_[PosY][PosX]->GetTileState() == (int)TileState::Hollow)
+			&& AllTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::Hollow)
 		{
 			// 타일 생성
 			SetTile(PosX, PosY,
-				TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TileState::Hollow);
+				TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TILESTATE::Hollow);
 		}
 		else
 		{
@@ -648,7 +642,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
 	{
 		// 타일 생성
 		SetTile(PosX, PosY,
-			TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TileState::Hollow);
+			TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TILESTATE::Hollow);
 	}
 }
 

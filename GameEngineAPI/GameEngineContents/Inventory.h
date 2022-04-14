@@ -18,7 +18,7 @@ public:
 	Inventory& operator=(Inventory&& _Other) noexcept = delete;
 
 	void SetPos(float4 _Pos);
-	void AddItemToInventory(Item& _item);
+	void AddItemToInventory(int _ItemNum);
 
 	inline std::string GetSelectedItem()
 	{
@@ -49,7 +49,7 @@ private:
 	inline void SelectItem(int i)
 	{
 		SelectBoxHotkey_ = i;
-		SelectedItem_ = InventoryList_[i]->GetItenName();
+		SelectedItem_ = InventoryList_[i]->GetItemName();
 	}
 };
 

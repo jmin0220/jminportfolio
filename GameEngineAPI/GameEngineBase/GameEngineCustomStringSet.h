@@ -20,6 +20,7 @@
 #define DIR_SOUND "Sound"
 #define DIR_INTERFACE "Interface"
 #define DIR_TOOL "Tool"
+#define DIR_ENVIRONMENT "Environment"
 #define DIR_TILESET "Tileset"
 #define DIR_MAP "Map"
 #define DIR_BUILDING "Building"
@@ -59,6 +60,13 @@
 #define IMAGE_TOOL_SET2 "Tools_set2.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
+
+#define IMAGE_ENVIRONMENT_CROPS "Crops.bmp"
+#define IMAGE_ENVIRONMENT_FISHING "Fishing.bmp"
+#define IMAGE_ENVIRONMENT_FORAGE "Forage.bmp"
+#define IMAGE_ENVIRONMENT_MAPLETREE "MapleTree.bmp"
+#define IMAGE_ENVIRONMENT_OAKTREE "OakTree.bmp"
+#define IMAGE_ENVIRONMENT_PINETREE "PineTree.bmp"
 
 #define IMAGE_TILESET_DIRT "Dirt.bmp"
 #define IMAGE_TILESET_DIRTWATERY "DirtWatery.bmp"
@@ -173,6 +181,7 @@
 
 
 // æ∆¿Ã≈€
+#define ITEM_NAME_EMPTY "Empty"
 #define ITEM_NAME_HOE "Hoe"
 #define ITEM_NAME_AXE "Axe"
 #define ITEM_NAME_WATERINGCAN "WateringCan"

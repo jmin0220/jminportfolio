@@ -1,6 +1,6 @@
 #pragma once
 
-enum class TileState
+enum class TILESTATE
 {
 	None,		// 파낼 수 있음
 	Grass,		// 파낼 수 없음

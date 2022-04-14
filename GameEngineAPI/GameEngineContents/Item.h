@@ -18,25 +18,24 @@ public:
 	Item& operator=(const Item& _Other) = delete;
 	Item& operator=(Item&& _Other) noexcept = delete;
 
+	void SetIconRenderer(int _ItemNum);
+
 	GameEngineRenderer& GetIconRenderer()
 	{
 		return *IconRenderer_;
 	}
-
-	void SetIconRenderer(GameEngineRenderer& _IconRenderer)
-	{
-		IconRenderer_ = &_IconRenderer;
-	};
 
 	GameEngineRenderer& GetItemRenderer()
 	{
 		return *ItemRenderer_;
 	}
 	
-	std::string GetItenName() const
+	std::string GetItemName() const
 	{
 		return ItemName_;
 	}
+
+
 
 protected:
 	// 아이템이 필드에서 보일때 이미지
@@ -45,12 +44,6 @@ protected:
 	GameEngineRenderer* IconRenderer_;
 
 	std::string ItemName_;
-
-	// 장비가능한 아이템인가
-	bool IsEuipment;
-
-	// 중첩되는 아이템의 경우 갯수 세기
-	int ItemCount_;
 
 private:
 	void Start() override;
