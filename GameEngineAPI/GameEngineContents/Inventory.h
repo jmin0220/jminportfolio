@@ -35,7 +35,9 @@ private:
 	static float4 Pos_;
 	static bool ExtendFlg;
 
+	// 인벤토리 UI
 	GameEngineRenderer* RendererInven_;
+	// 선택된 아이템 가이드박스
 	GameEngineRenderer* RendererSelectBox_;
 
 	void InitKey();
@@ -44,7 +46,8 @@ private:
 	void ExtendInventoryOn();
 
 private:
-	static Item* InventoryList_[36];
+	// 저장되어있는 아이템의 정보
+	Item* InventoryList_[36];
 
 	inline void SelectItem(int i)
 	{

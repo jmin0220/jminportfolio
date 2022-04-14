@@ -65,12 +65,6 @@
     <ClCompile Include="EnergyBar.cpp">
       <Filter>02Play\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Tool.cpp">
-      <Filter>02Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="Hoe.cpp">
-      <Filter>02Play\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
     </ClCompile>
@@ -95,20 +89,11 @@
     <ClCompile Include="PlayerState.cpp">
       <Filter>02Play</Filter>
     </ClCompile>
-    <ClCompile Include="Axe.cpp">
-      <Filter>02Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="Sythe.cpp">
-      <Filter>02Play\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="Dirt.cpp">
       <Filter>02Play\Tileset</Filter>
     </ClCompile>
     <ClCompile Include="BeachLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="WateringCan.cpp">
-      <Filter>02Play\Tool</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>99Etc</Filter>
@@ -179,12 +164,6 @@
     <ClInclude Include="EnergyBar.h">
       <Filter>02Play\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Tool.h">
-      <Filter>02Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Hoe.h">
-      <Filter>02Play\Tool</Filter>
-    </ClInclude>
     <ClInclude Include="PlayLevel.h">
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
@@ -209,12 +188,6 @@
     <ClInclude Include="FarmBuildingLevel.h">
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="Axe.h">
-      <Filter>02Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Sythe.h">
-      <Filter>02Play\Tool</Filter>
-    </ClInclude>
     <ClInclude Include="Dirt.h">
       <Filter>02Play\Tileset</Filter>
     </ClInclude>
@@ -223,9 +196,6 @@
     </ClInclude>
     <ClInclude Include="TileStateTable.h">
       <Filter>99Etc</Filter>
-    </ClInclude>
-    <ClInclude Include="WateringCan.h">
-      <Filter>02Play\Tool</Filter>
     </ClInclude>
     <ClInclude Include="PlayerTileIndex.h">
       <Filter>99Etc</Filter>
@@ -267,9 +237,6 @@
     </Filter>
     <Filter Include="02Play\Interface">
       <UniqueIdentifier>{7d14fb72-1e23-44d8-b8f7-4fb4669f4c58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02Play\Tool">
-      <UniqueIdentifier>{230d5058-335d-4364-b437-a7fcd2a60fba}</UniqueIdentifier>
     </Filter>
     <Filter Include="00Level\PlayLevel">
       <UniqueIdentifier>{8725b542-7582-4a41-9d0c-886214cb8641}</UniqueIdentifier>

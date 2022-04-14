@@ -15,7 +15,7 @@ void Item::Start()
 {
 }
 
-void Item::SetIconRenderer(int _ItemNum)
+void Item::SetIconRendererImage(int _ItemNum)
 {
 	switch (_ItemNum)
 	{

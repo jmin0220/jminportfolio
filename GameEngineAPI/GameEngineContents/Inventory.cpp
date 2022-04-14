@@ -6,15 +6,11 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineString.h>
-#include "Hoe.h"
-#include "Axe.h"
-#include "Sythe.h"
 #include "ItemTable.h"
 
 char Inventory::SelectBoxHotkey_;
 float4 Inventory::Pos_;
 bool Inventory::ExtendFlg;
-Item* Inventory::InventoryList_[36];
 std::string Inventory::SelectedItem_;
 
 Inventory::Inventory() 
@@ -59,7 +55,7 @@ void Inventory::Start()
 			// 인벤에 아이템의 정보를 집어넣음.
 			// 비어있는 인벤토리 생성
 			InventoryList_[i] = new Item;
-			InventoryList_[i]->SetIconRenderer((int)ITEMTABLE::EMPTY);
+			InventoryList_[i]->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
 			InventoryList_[i]->GetIconRenderer().CameraEffectOff();
 			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
 
@@ -208,7 +204,7 @@ void Inventory::AddItemToInventory(int _ItemNum)
 		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
 		if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
 		{
-			InventoryList_[i]->SetIconRenderer(_ItemNum);
+			InventoryList_[i]->SetIconRendererImage(_ItemNum);
 			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
 			
 			break;

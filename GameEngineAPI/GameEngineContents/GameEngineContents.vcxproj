@@ -173,10 +173,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Axe.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="BeachLevel.h">
       <SubType>
       </SubType>
@@ -234,10 +230,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Hoe.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <SubType>
       </SubType>
@@ -281,10 +273,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Sythe.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="TileStateTable.h" />
     <ClInclude Include="TitleButtonLoadGame.h">
       <SubType>
@@ -306,25 +294,13 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Tool.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="TownLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="WateringCan.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animals.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Axe.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -384,10 +360,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Hoe.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <SubType>
       </SubType>
@@ -430,10 +402,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Sythe.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="TitleButtonLoadGame.cpp">
       <SubType>
       </SubType>
@@ -454,15 +422,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Tool.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="TownLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="WateringCan.cpp">
       <SubType>
       </SubType>
     </ClCompile>

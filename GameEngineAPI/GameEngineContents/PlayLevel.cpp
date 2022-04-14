@@ -4,7 +4,6 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineWindow.h>
-#include "Hoe.h"
 
 PlayLevel::PlayLevel()
 {
