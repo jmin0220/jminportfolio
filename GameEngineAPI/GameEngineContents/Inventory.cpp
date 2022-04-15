@@ -71,8 +71,6 @@ void Inventory::Start()
 	}
 
 	InitKey();
-
-	SelectItem(0);
 }
 
 void Inventory::Update()
@@ -95,9 +93,11 @@ void Inventory::InventoryInit()
 	{
 		memcpy(InventorySaver_, InventoryList_, sizeof(InventoryList_));
 	}
+
+	SelectItem(0);
 }
 
-
+// 키 초기화
 void Inventory::InitKey()
 {
 	// 키 설정
@@ -120,6 +120,7 @@ void Inventory::InitKey()
 	}
 }
 
+// 인벤토리 확장
 void Inventory::ExtendInventoryOn()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_EXTEND))
@@ -127,22 +128,25 @@ void Inventory::ExtendInventoryOn()
 		if (false == ExtendFlg)
 		{
 			ExtendFlg = true;
-			RendererSelectBox_->Off();
 			RendererInven_->SetImage(IMAGE_INVENTORY_EXTEND);
+
+			// 인벤토리바 위치
 			RendererInven_->SetPivot({ IMAGE_INVENTORY_EXT_POS_X , IMAGE_INVENTORY_EXT_POS_Y });
 		}
 		else
 		{
 			ExtendFlg = false;
-			RendererSelectBox_->On();
 			RendererInven_->SetImage(IMAGE_INVENTORY_BAR);
 
 			// 인벤토리바 위치
 			RendererInven_->SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X, IMAGE_INVENTORYBAR_POS_DOWN_Y });
 		}
+
+		ItemPosCalc();
 	}
 }
 
+// 키입력
 void Inventory::ControlSelectBox()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_SELECT_1))
@@ -200,31 +204,71 @@ void Inventory::ControlSelectBox()
 	}
 	else
 	{
-		RendererSelectBox_->SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)SelectBoxHotkey_)), IMAGE_INVENTORY_EXT_POS_Y - 70 });
+		RendererSelectBox_->SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)SelectBoxHotkey_)), IMAGE_INVENTORY_EXT_POS_Y - 65 });
 	}
 
 }
 
-void Inventory::SetPos(float4 _Pos)
+void Inventory::ItemPosCalc()
 {
+	float PosX = 0.0f;
+	float PosY = 0.0f;
 
+	if (false == ExtendFlg)
+	{
+		for (size_t i = 0; i < 12; i++)
+		{
+			PosX = IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i));
+			PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y - 18;
+
+			InventoryList_[i]->GetIconRenderer().SetPivot({ PosX, PosY });
+		}
+
+		for (size_t i = 12; i < 36; i++)
+		{
+			InventoryList_[i]->GetIconRenderer().Off();
+		}
+
+	}
+	else
+	{
+		for (size_t i = 0; i < 12; i++)
+		{
+			for (size_t j = 0; j < 3; j++)
+			{
+				PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)i));
+				PosY = IMAGE_INVENTORY_EXT_POS_Y - (87 - (64 * (float)j));
+
+				InventoryList_[i + (12 * j)]->GetIconRenderer().SetPivot({ PosX, PosY });
+				InventoryList_[i + (12 * j)]->GetIconRenderer().On();
+			}
+		}
+	}
 }
 
-// 테스트
-void Inventory::AddItemToInventory(int _ItemNum)
+// 인벤토리에 아이템 추가
+int Inventory::AddItemToInventory(int _ItemNum)
 {
+	int InsertSuccessFlg = 0;
+
 	for (size_t i = 0; i < 36; i++)
 	{
 		// 아이콘은 인벤토리에서 아이템의 위치를 표시
 		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
 		if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
 		{
-			InventoryList_[i]->SetIconRendererImage(_ItemNum);
-			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
-			
+			InventoryList_[i]->SetIconRendererInfo(_ItemNum);
+
+			InsertSuccessFlg = 1;
 			break;
 		}
 	}
+
+	ItemPosCalc();
+
+	// 넣었으면 1
+	// 못넣었으면 0
+	return InsertSuccessFlg;
 }
 
 void Inventory::LevelChangeStart()

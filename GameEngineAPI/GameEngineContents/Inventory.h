@@ -3,6 +3,7 @@
 #include <string>
 #include <cstring>
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineCollision.h>
 
 // 설명 :
 class Inventory : public GameEngineActor
@@ -21,7 +22,7 @@ public:
 	void InventoryInit();
 
 	void SetPos(float4 _Pos);
-	void AddItemToInventory(int _ItemNum);
+	int AddItemToInventory(int _ItemNum);
 
 	inline std::string GetSelectedItem()
 	{
@@ -60,15 +61,29 @@ private:
 
 	void ControlSelectBox();
 	void ExtendInventoryOn();
+	// 아이템의 위치 계산
+	void ItemPosCalc();
 
 private:
 	// 저장되어있는 아이템의 정보
 	Item* InventoryList_[36];
 
-	inline void SelectItem(int i)
+	void SelectItem(int i)
 	{
-		SelectBoxHotkey_ = i;
-		SelectedItem_ = InventoryList_[i]->GetItemName();
+		if (false == ExtendFlg)
+		{
+			SelectBoxHotkey_ = i;
+			SelectedItem_ = InventoryList_[i]->GetItemName();
+		}
 	}
+
+	// 충돌관련
+public:
+private:
+	// 인벤토리 UI관련 충돌처리
+	GameEngineCollision ColInventoryBar_;
+	// 인벤토리 1칸에 대한 충돌처리
+	GameEngineCollision ColInventoryBox_;
+
 };
 

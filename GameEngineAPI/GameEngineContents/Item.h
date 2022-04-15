@@ -18,7 +18,7 @@ public:
 	Item& operator=(const Item& _Other) = delete;
 	Item& operator=(Item&& _Other) noexcept = delete;
 
-	void SetIconRendererImage(int _ItemNum);
+	void SetIconRendererInfo(int _ItemNum);
 
 	inline void SetIconRenderer(GameEngineRenderer& _IconRenderer)
 	{
