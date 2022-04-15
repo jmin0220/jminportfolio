@@ -468,7 +468,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
 	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
 	int PosY = static_cast<int>(_Pos.y / TILEMAP_SIZE);
 
-	if (IMAGE_TILESET_DIRTWATERY == _TileMapImageName)
+	if (IMAGE_TILESET_DIRTWATERED == _TileMapImageName)
 	{
 		if (nullptr != AllTiles_[PosY][PosX] 
 			&& AllTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::Hollow)

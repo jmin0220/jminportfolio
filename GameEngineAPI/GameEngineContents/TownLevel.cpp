@@ -10,15 +10,7 @@ TownLevel::TownLevel()
 	BGBuilding_ = CreateActor<BackGround>((int)ORDER::BUIDING);
 	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONTA);
 	BGAlwaysFront_ = CreateActor<BackGround>((int)ORDER::ALWAYSFRONT);
-}
 
-TownLevel::~TownLevel() 
-{
-}
-
-
-void TownLevel::LevelChangeStart()
-{
 	// 이미지의 좌상단이 0,0이 되도록
 	BackGround_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_TOWN_BACKGORUND);
@@ -37,11 +29,21 @@ void TownLevel::LevelChangeStart()
 	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
 
+	this->Player_->SetTileMap(&BackGround_->TileMap_);
+
 	TileRangeSetting(120, 110);
+	this->Player_->SetAllTiles(this->AllTiles_);
+}
+
+TownLevel::~TownLevel() 
+{
+}
+
+
+void TownLevel::LevelChangeStart()
+{
 
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
-	this->Player_->SetTileMap(&BackGround_->TileMap_);
-	this->Player_->SetAllTiles(this->AllTiles_);
 }
 
 void TownLevel::LevelChangeEnd()

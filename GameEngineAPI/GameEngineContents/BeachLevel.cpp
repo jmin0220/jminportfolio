@@ -7,15 +7,7 @@ BeachLevel::BeachLevel()
 	BGBuilding_ = CreateActor<BackGround>((int)ORDER::BUIDING);
 	BGFront_ = CreateActor<BackGround>((int)ORDER::FRONTA);
 	BGAlwaysFront_ = CreateActor<BackGround>((int)ORDER::ALWAYSFRONT);
-}
 
-BeachLevel::~BeachLevel() 
-{
-}
-
-
-void BeachLevel::LevelChangeStart()
-{
 	// 이미지의 좌상단이 0,0이 되도록
 	BackGround_->GetRenderer()->SetPivot({ MAP_BEACH_SIZE_W / 2, MAP_BEACH_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_BEACH_BACKGORUND);
@@ -36,12 +28,21 @@ void BeachLevel::LevelChangeStart()
 	// 플레이어와 건물의 렌더링 순서
 	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 0.0f, 0.0f });
 
-	TileRangeSetting(104, 49);
 
-	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
-	this->Player_->SetAllTiles(this->AllTiles_);
 
+	TileRangeSetting(104, 49);
+	this->Player_->SetAllTiles(this->AllTiles_);
+}
+
+BeachLevel::~BeachLevel() 
+{
+}
+
+
+void BeachLevel::LevelChangeStart()
+{
+	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 }
 
 void BeachLevel::LevelChangeEnd()

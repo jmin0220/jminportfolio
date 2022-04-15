@@ -97,7 +97,7 @@ void StardewContents::GameInit()
 	}
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TILESET_DIRT);
 	Image->Cut({ 48, 48 });
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TILESET_DIRTWATERY);
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TILESET_DIRTWATERED);
 	Image->Cut({ 48, 48 });
 
 
@@ -147,18 +147,21 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	// Renderer->RenderPivot::BOT:
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_CROPS);
 	Image->Cut({ 48, 96 });
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FISHING);
-	Image->Cut({ 72, 72 });
-	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FORAGE);
-	Image->Cut({ 72, 72 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_MAPLETREE);
 	Image->Cut({ 144, 312 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_OAKTREE);
 	Image->Cut({ 144, 312 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_PINETREE);
 	Image->Cut({ 144, 312 });
+
+	// Renderer->RenderPivot::CENTER:
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FISHING);
+	Image->Cut({ 72, 72 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FORAGE);
+	Image->Cut({ 72, 72 });
 
 	//»ç¿îµå
 	ResourcesDir.MoveParent(DIR_PARENT);

@@ -126,18 +126,21 @@ private:
 
 	// 타일맵 관련
 private:
+	// 레벨의 타일맵을 저장
 	GameEngineRendererTileMap* TileMap_;
-
+	// 타일맵의 스테이터스를 저장
 	std::vector<std::vector<PlayerTileIndex*>> AllTiles_;
 	void SetTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
 public: 
+	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수
 	void SetAllTiles(std::vector<std::vector<PlayerTileIndex*>> _AllTiles)
 	{
 		AllTiles_ = _AllTiles;
 	}
 
+	// 시간 관련 
 private:
 	int PlayerTime_;
 
-	void TimeUpdate();
+	void TimeUpdate() {};
 };

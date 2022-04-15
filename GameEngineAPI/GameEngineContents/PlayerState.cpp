@@ -52,7 +52,7 @@ void Player::ActionUpdate()
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, IMAGE_TILESET_DIRTWATERY);
+			CreatePlayerTileIndex(Pos, IMAGE_TILESET_DIRTWATERED);
 		}
 
 		// Idle로 상태 전환

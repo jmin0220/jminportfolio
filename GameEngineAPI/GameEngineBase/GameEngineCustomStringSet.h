@@ -69,7 +69,7 @@
 #define IMAGE_ENVIRONMENT_PINETREE "PineTree.bmp"
 
 #define IMAGE_TILESET_DIRT "Dirt.bmp"
-#define IMAGE_TILESET_DIRTWATERY "DirtWatery.bmp"
+#define IMAGE_TILESET_DIRTWATERED "DirtWatered.bmp"
 
 // е╟ ют╥б
 #define KEY_MOVE_LEFT "MoveLeft"
