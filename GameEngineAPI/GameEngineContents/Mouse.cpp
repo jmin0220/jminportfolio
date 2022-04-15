@@ -42,7 +42,6 @@ void Mouse::Update()
 	CursorPos_.y = static_cast<float>(pt.y);
 
 	MousePoint_->GetActor()->SetPosition(CursorPos_);
-	
 }
 
 void Mouse::Render()
@@ -57,11 +56,9 @@ bool Mouse::IsMouseDown()
 bool Mouse::IsMousePress()
 {
 	return (GameEngineInput::GetInst()->IsPress(KEY_INTERACT));
-
 }
 
 bool Mouse::IsMouseFree()
 {
 	return (GameEngineInput::GetInst()->IsUp(KEY_INTERACT));
-
 }

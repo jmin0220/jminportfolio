@@ -32,6 +32,45 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 
 	Inventory_->InventoryInit();
 }
@@ -59,6 +98,9 @@ void Player::Update()
 
 	// 상태 업데이트
 	StateUpdate();
+
+	// 마우스 클릭 이벤트
+	ControlInventorySelectBoxWithMouse();
 }
 
 // 상태 업데이트
@@ -93,7 +135,21 @@ void Player::StateChange(PlayerState _State)
 			IdleStart();
 			break;
 		case PlayerState::Action:
-			ActionStart();
+			// 마우스가 인벤토리 바와 겹쳐있을 경우 상태를 Action으로 변경하지 않음
+			if (false == Inventory_->GetExtendFlg()
+				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect))
+			{
+				return;
+			}
+			else if(true == Inventory_->GetExtendFlg()
+				&&true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect))
+			{
+				return;
+			}
+			else
+			{
+				ActionStart();
+			}
 			break;
 		case PlayerState::Move:
 			MoveStart();
@@ -406,21 +462,6 @@ float4 Player::SetCheckPos(float4 _NextPos)
 	return float4::ZERO;
 }
 
-// 눌리지 않게 된 키가 있을경우 True
-bool Player::IsMoveKeyUp()
-{
-	if (false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT) &&
-		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_RIGHT) &&
-		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP) &&
-		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_DOWN)
-		)
-	{
-		return false;
-	}
-
-	return true;
-}
-
 // 눌리게 된 키가 있을경우 True
 bool Player::IsMoveKeyDown()
 {
@@ -451,6 +492,21 @@ bool Player::IsMoveKeyPress()
 	return true;
 }
 
+// 눌리지 않게 된 키가 있을경우 True
+bool Player::IsMoveKeyUp()
+{
+	if (false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_LEFT) &&
+		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_RIGHT) &&
+		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_UP) &&
+		false == GameEngineInput::GetInst()->IsUp(KEY_MOVE_DOWN)
+		)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 // 액션키가 눌릴경우 True
 bool Player::IsActionKeyDown()
 {
@@ -462,7 +518,58 @@ bool Player::IsActionKeyDown()
 	return true;
 }
 
+// 액션키가 눌리고 있을 경우
+bool Player::IsActionKeyPress()
+{
+	if (false == GameEngineInput::GetInst()->IsPress(KEY_INTERACT))
+	{
+		return false;
+	}
 
+	return true;
+}
+
+// 액션키가 떨어진 경우
+bool Player::IsActionKeyUp()
+{
+	if (false == GameEngineInput::GetInst()->IsUp(KEY_INTERACT))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void Player::ControlInventorySelectBoxWithMouse()
+{
+	if (true == IsActionKeyUp()
+		&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
+	{
+		// Collision배열에서 Collision의 순서는 실제 인벤토리의 아이템 순서와 항상 동일함.
+		// 인벤토리 1칸은 충돌체 1칸이고, 충돌한 충돌체의 정보를 알아낼 수 있음.
+		// 마우스와 충돌체가 충돌한 시점에서 가져온 충돌체의 정보를 비교하여,
+		// 0번부터 12번까지 검색해서 마우스와 충돌한 충돌체와 동일한 충돌체를 가지고 있는 
+		// Item의 번호로 SetItem함수를 호출함.
+		std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
+		std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			for (size_t i = 0; i < 12; i++)
+			{
+				if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
+				{
+					Inventory_->SelectItem(i);
+					MouseColResult_.clear();
+
+					return;
+				}
+			}
+		}
+	}
+}
+
+// 플레이어가 가지고있는 타일맵에서 타일을 생성
 void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
 {
 	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
@@ -490,6 +597,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
 	}
 }
 
+// 생성한 타일맵 정보를 플레이어에게 저장
 void Player::SetTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
 {
 	AllTiles_[y][x] = _TileMap;

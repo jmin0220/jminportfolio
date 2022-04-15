@@ -24,11 +24,7 @@ TownLevel::TownLevel()
 
 	BGAlwaysFront_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BGAlwaysFront_->GetRenderer()->SetImage(MAP_TOWN_ALWAYSFRONT);
-
-	// ÄÃ¸®Àü
-	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
-	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
-
+	
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 
 	TileRangeSetting(120, 110);

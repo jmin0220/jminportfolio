@@ -29,12 +29,6 @@ FarmLevel::FarmLevel()
 	BGAlwaysFront_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BGAlwaysFront_->GetRenderer()->SetImage(MAP_FARM_ALWAYSFRONT);
 
-
-	// 플레이어와 맵의 충돌 처리
-	BGBuilding_->CreateCollision(COL_GROUP_WALL, { 100.0f, 100.0f });
-	// 플레이어와 건물의 렌더링 순서
-	BGFront_->CreateCollision(COL_GROUP_RENDER_ORDER, { 100.0f, 100.0f });
-
 	// 사운드 설정
 	BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
 	this->Player_->SetTileMap(&BackGround_->TileMap_);

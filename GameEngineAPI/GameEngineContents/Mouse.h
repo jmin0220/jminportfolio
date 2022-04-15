@@ -22,12 +22,12 @@ public:
 protected:
 
 public:
-	GameEngineRenderer* Renderer() 
+	GameEngineRenderer* GetRenderer() 
 	{
 		return MousePoint_;
 	}
 
-	GameEngineCollision* Collision() {
+	GameEngineCollision* GetCollision() {
 		return MouseCollision_;
 	}
 
@@ -68,6 +68,5 @@ private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
-
 };
 

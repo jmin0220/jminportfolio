@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -59,7 +60,6 @@ public:
 	{
 		IndexNum_ = _IndexNum;
 	}
-
 
 protected:
 	// 아이템이 필드에서 보일때 이미지

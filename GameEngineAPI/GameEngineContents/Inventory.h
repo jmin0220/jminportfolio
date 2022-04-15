@@ -39,6 +39,22 @@ public:
 		memcpy(InventoryList_, _InventoryList, 36);
 	}
 
+	inline bool GetExtendFlg() const
+	{
+		return ExtendFlg_;
+	}
+
+	inline GameEngineCollision** GetInventoryNormalCol()
+	{
+		return ColInventoryNormalBox_;
+	}
+
+	inline GameEngineCollision** GetInventoryExtandCol()
+	{
+		return ColInventoryExtendBox_;
+	}
+
+	void SelectItem(int i);
 protected:
 	void Start() override;
 	void Update() override;
@@ -49,7 +65,7 @@ private:
 	static char SelectBoxHotkey_;
 	static std::string SelectedItem_;
 	static float4 Pos_;
-	static bool ExtendFlg;
+	static bool ExtendFlg_;
 	static Item* InventorySaver_[36];
 
 	// 인벤토리 UI
@@ -68,22 +84,19 @@ private:
 	// 저장되어있는 아이템의 정보
 	Item* InventoryList_[36];
 
-	void SelectItem(int i)
-	{
-		if (false == ExtendFlg)
-		{
-			SelectBoxHotkey_ = i;
-			SelectedItem_ = InventoryList_[i]->GetItemName();
-		}
-	}
 
 	// 충돌관련
 public:
+	
 private:
+	void CollisionInit();
+
 	// 인벤토리 UI관련 충돌처리
-	GameEngineCollision ColInventoryBar_;
+	GameEngineCollision* ColInventoryBar_;
+	GameEngineCollision* ColInventoryExtBar_;
 	// 인벤토리 1칸에 대한 충돌처리
-	GameEngineCollision ColInventoryBox_;
+	GameEngineCollision* ColInventoryNormalBox_[12];
+	GameEngineCollision* ColInventoryExtendBox_[36];
 
 };
 

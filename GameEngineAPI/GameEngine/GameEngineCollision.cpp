@@ -19,6 +19,7 @@ bool RectToRect(GameEngineCollision* _Left, GameEngineCollision* _Right)
 	return LeftRc.OverLap(RightRc);
 }
 
+
 class CollisionInit
 {
 public:
@@ -34,6 +35,7 @@ GameEngineCollision::GameEngineCollision()
 	: Pivot_(float4::ZERO),
 	Scale_(float4::ZERO)
 {
+	// 
 }
 
 GameEngineCollision::~GameEngineCollision()
@@ -50,7 +52,7 @@ bool GameEngineCollision::CollisionCheck(
 
 	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
 	{
-		MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
+		// MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
 
 		return false;
 	}
@@ -77,7 +79,6 @@ bool GameEngineCollision::CollisionCheck(
 	return false;
 }
 
-
 void GameEngineCollision::DebugRender()
 {
 	GameEngineRect DebugRect(GetActor()->GetCameraEffectPosition() + Pivot_, Scale_);
@@ -99,7 +100,7 @@ bool GameEngineCollision::CollisionResult(
 	CollisionType _Target /*= CollisionType::Circle*/
 )
 {
-	size_t StartSize = _TargetGroup.size();
+	size_t StartSize = _ColResult.size();
 
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
 

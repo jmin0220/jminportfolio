@@ -10,7 +10,7 @@
 
 char Inventory::SelectBoxHotkey_;
 float4 Inventory::Pos_;
-bool Inventory::ExtendFlg;
+bool Inventory::ExtendFlg_;
 std::string Inventory::SelectedItem_;
 Item* Inventory::InventorySaver_[36];
 
@@ -45,6 +45,7 @@ void Inventory::Start()
 
 	RendererInven_->CameraEffectOff();
 	RendererSelectBox_->CameraEffectOff();
+	
 
 	if (InventoryList_[0] == nullptr)
 	{
@@ -71,6 +72,7 @@ void Inventory::Start()
 	}
 
 	InitKey();
+	CollisionInit();
 }
 
 void Inventory::Update()
@@ -84,11 +86,6 @@ void Inventory::Update()
 
 void Inventory::InventoryInit()
 {
-	for (size_t i = 0; i < 36; i++)
-	{
-		InventorySaver_[i] = new Item;
-	}
-
 	if (InventoryList_[0]->GetItemName() != ITEM_NAME_EMPTY)
 	{
 		memcpy(InventorySaver_, InventoryList_, sizeof(InventoryList_));
@@ -120,14 +117,23 @@ void Inventory::InitKey()
 	}
 }
 
+void Inventory::SelectItem(int i)
+{
+	if (false == ExtendFlg_)
+	{
+		SelectBoxHotkey_ = i;
+		SelectedItem_ = InventoryList_[i]->GetItemName();
+	}
+}
+
 // 인벤토리 확장
 void Inventory::ExtendInventoryOn()
 {
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INVEN_EXTEND))
 	{
-		if (false == ExtendFlg)
+		if (false == ExtendFlg_)
 		{
-			ExtendFlg = true;
+			ExtendFlg_ = true;
 			RendererInven_->SetImage(IMAGE_INVENTORY_EXTEND);
 
 			// 인벤토리바 위치
@@ -135,7 +141,7 @@ void Inventory::ExtendInventoryOn()
 		}
 		else
 		{
-			ExtendFlg = false;
+			ExtendFlg_ = false;
 			RendererInven_->SetImage(IMAGE_INVENTORY_BAR);
 
 			// 인벤토리바 위치
@@ -198,7 +204,7 @@ void Inventory::ControlSelectBox()
 		SelectItem(11);
 	}
 
-	if (false == ExtendFlg)
+	if (false == ExtendFlg_)
 	{
 		RendererSelectBox_->SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)SelectBoxHotkey_)), IMAGE_INVENTORYBAR_POS_DOWN_Y });
 	}
@@ -209,12 +215,13 @@ void Inventory::ControlSelectBox()
 
 }
 
+// 아이템 렌더링
 void Inventory::ItemPosCalc()
 {
 	float PosX = 0.0f;
 	float PosY = 0.0f;
 
-	if (false == ExtendFlg)
+	if (false == ExtendFlg_)
 	{
 		for (size_t i = 0; i < 12; i++)
 		{
@@ -237,7 +244,7 @@ void Inventory::ItemPosCalc()
 			for (size_t j = 0; j < 3; j++)
 			{
 				PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)i));
-				PosY = IMAGE_INVENTORY_EXT_POS_Y - (87 - (64 * (float)j));
+				PosY = IMAGE_INVENTORY_EXT_POS_Y - (83 - (64 * (float)j)) + 4 * j;
 
 				InventoryList_[i + (12 * j)]->GetIconRenderer().SetPivot({ PosX, PosY });
 				InventoryList_[i + (12 * j)]->GetIconRenderer().On();
@@ -271,6 +278,36 @@ int Inventory::AddItemToInventory(int _ItemNum)
 	return InsertSuccessFlg;
 }
 
+// 컬리전
+void Inventory::CollisionInit()
+{
+	float PosX = 0.0f;
+	float PosY = 0.0f;
+
+	ColInventoryBar_ = CreateCollision(COL_GROUP_INVENTORY_BAR, { 800, 96 }, { IMAGE_INVENTORYBAR_POS_DOWN_X, IMAGE_INVENTORYBAR_POS_DOWN_Y });
+	ColInventoryExtBar_ = CreateCollision(COL_GROUP_INVENTORY_EXTEND_BAR, { 848, 272 }, { IMAGE_INVENTORY_EXT_POS_X, IMAGE_INVENTORY_EXT_POS_Y });
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		PosX = IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i));
+		PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y;
+
+		ColInventoryNormalBox_[i] = CreateCollision(COL_GROUP_INVENTORY_BOX, {64, 64}, { PosX, PosY });
+	}
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		for (size_t j = 0; j < 3; j++)
+		{
+			PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)i));
+			PosY = IMAGE_INVENTORY_EXT_POS_Y - (83 - (64 * (float)j)) + 4 * j;
+
+			ColInventoryExtendBox_[i] = CreateCollision(COL_GROUP_INVENTORY_EXTEND_BOX, {64, 64}, {PosX, PosY});
+		}
+	}
+}
+
+// 레벨 전환
 void Inventory::LevelChangeStart()
 {
 	// 이전 레벨의 정보를 가져오기

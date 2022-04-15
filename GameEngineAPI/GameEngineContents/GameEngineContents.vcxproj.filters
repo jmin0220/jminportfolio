@@ -93,7 +93,7 @@
       <Filter>00Level\PlayLevel</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <Filter>99Etc</Filter>
+      <Filter>02Play\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,11 +194,11 @@
     <ClInclude Include="PlayerTileIndex.h">
       <Filter>99Etc</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>99Etc</Filter>
-    </ClInclude>
     <ClInclude Include="ItemTable.h">
       <Filter>99Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>02Play\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

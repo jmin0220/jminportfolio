@@ -131,9 +131,11 @@
 #define MAP_BEACH_SIZE_W 4992.0f
 
 // 컬리전
-#define COL_GROUP_WALL "Wall"
-#define COL_GROUP_RENDER_ORDER "RenderOrder"
 #define COL_GROUP_MOUSE "Mouse"
+#define COL_GROUP_INVENTORY_BAR "InventoryBar"
+#define COL_GROUP_INVENTORY_EXTEND_BAR "InventoryExtendBar"
+#define COL_GROUP_INVENTORY_BOX "InventoryBox"
+#define COL_GROUP_INVENTORY_EXTEND_BOX "InventoryExtendBox"
 
 // 타일맵
 #define TILEMAP_SIZE 48
