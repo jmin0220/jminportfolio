@@ -20,26 +20,45 @@ public:
 
 	void SetIconRendererImage(int _ItemNum);
 
-	void SetIconRenderer(GameEngineRenderer& _IconRenderer)
+	inline void SetIconRenderer(GameEngineRenderer& _IconRenderer)
 	{
 		IconRenderer_ = &_IconRenderer;
 	};
 
-	GameEngineRenderer& GetIconRenderer()
+	inline void SetItemRenderer(GameEngineRenderer& _ItemRenderer)
+	{
+		ItemRenderer_ = &_ItemRenderer;
+	};
+
+	inline GameEngineRenderer& GetIconRenderer()
 	{
 		return *IconRenderer_;
 	}
 
-	GameEngineRenderer& GetItemRenderer()
+	inline GameEngineRenderer& GetItemRenderer()
 	{
 		return *ItemRenderer_;
 	}
 	
-	std::string GetItemName() const
+	inline std::string GetItemName() const
 	{
 		return ItemName_;
 	}
 
+	inline void SetItemName(std::string _Name)
+	{
+		ItemName_ = _Name;
+	}
+
+	inline int GetIndexNum()
+	{
+		return IndexNum_;
+	}
+
+	inline void SetIndexNum(int _IndexNum)
+	{
+		IndexNum_ = _IndexNum;
+	}
 
 
 protected:
@@ -49,6 +68,7 @@ protected:
 	GameEngineRenderer* IconRenderer_;
 
 	std::string ItemName_;
+	int IndexNum_;
 
 private:
 	void Start() override;

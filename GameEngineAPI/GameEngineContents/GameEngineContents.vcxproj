@@ -198,10 +198,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Dirt.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EndingCredit.h">
       <SubType>
       </SubType>
@@ -325,10 +321,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Crops.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Dirt.cpp">
       <SubType>
       </SubType>
     </ClCompile>

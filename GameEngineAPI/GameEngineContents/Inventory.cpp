@@ -12,6 +12,7 @@ char Inventory::SelectBoxHotkey_;
 float4 Inventory::Pos_;
 bool Inventory::ExtendFlg;
 std::string Inventory::SelectedItem_;
+Item* Inventory::InventorySaver_[36];
 
 Inventory::Inventory() 
 	: RendererInven_(nullptr)
@@ -45,9 +46,6 @@ void Inventory::Start()
 	RendererInven_->CameraEffectOff();
 	RendererSelectBox_->CameraEffectOff();
 
-	InitKey();
-
-
 	if (InventoryList_[0] == nullptr)
 	{
 		for (size_t i = 0; i < 36; i++)
@@ -56,8 +54,10 @@ void Inventory::Start()
 			// 비어있는 인벤토리 생성
 			InventoryList_[i] = new Item;
 			InventoryList_[i]->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
+			InventoryList_[i]->SetItemRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::PLAYER));
 			InventoryList_[i]->GetIconRenderer().CameraEffectOff();
 			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
+			InventoryList_[i]->SetItemName(ITEM_NAME_EMPTY);
 
 			if (i < 12)
 			{
@@ -70,6 +70,8 @@ void Inventory::Start()
 		}
 	}
 
+	InitKey();
+
 	SelectItem(0);
 }
 
@@ -80,6 +82,19 @@ void Inventory::Update()
 
 	// 키 입력
 	ControlSelectBox();
+}
+
+void Inventory::InventoryInit()
+{
+	for (size_t i = 0; i < 36; i++)
+	{
+		InventorySaver_[i] = new Item;
+	}
+
+	if (InventoryList_[0]->GetItemName() != ITEM_NAME_EMPTY)
+	{
+		memcpy(InventorySaver_, InventoryList_, sizeof(InventoryList_));
+	}
 }
 
 
@@ -209,5 +224,43 @@ void Inventory::AddItemToInventory(int _ItemNum)
 			
 			break;
 		}
+	}
+}
+
+void Inventory::LevelChangeStart()
+{
+	// 이전 레벨의 정보를 가져오기
+	for (size_t i = 0; i < 36; i++)
+	{
+		// 아이템 렌더러의 이미지를 복사
+		InventoryList_[i]->GetItemRenderer().SetImage(InventorySaver_[i]->GetItemRenderer().GetImage()->GetNameCopy());
+		// 아이콘 렌더러의 이미지를 복사
+		InventoryList_[i]->GetIconRenderer().SetImage(InventorySaver_[i]->GetIconRenderer().GetImage()->GetNameCopy());
+		// 해당 인벤토리에 들어있는 아이템 이름을 복사
+		InventoryList_[i]->SetItemName(InventorySaver_[i]->GetItemName());
+		// 이미지 인덱스 복사 및 설정
+		InventoryList_[i]->SetIndexNum(InventorySaver_[i]->GetIndexNum());
+
+		// 이미지가 비어있지 않을 경우에만 인덱스 설정 하기
+		if (InventoryList_[i]->GetItemName() != ITEM_NAME_EMPTY)
+		{
+			InventoryList_[i]->GetIconRenderer().SetIndex(InventorySaver_[i]->GetIndexNum());
+		}
+	}
+}
+
+void Inventory::LevelChangeEnd()
+{
+	// 다음 레벨에 정보를 넘겨주기
+	for (size_t i = 0; i < 36; i++)
+	{
+		// 아이템 렌더러의 이미지를 복사
+		InventorySaver_[i]->GetItemRenderer().SetImage(InventoryList_[i]->GetItemRenderer().GetImage()->GetNameCopy());
+		// 아이콘 렌더러의 이미지를 복사
+		InventorySaver_[i]->GetIconRenderer().SetImage(InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy());
+		// 해당 인벤토리에 들어있는 아이템 이름을 복사
+		InventorySaver_[i]->SetItemName(InventoryList_[i]->GetItemName());
+		// 이미지 인덱스 복사
+		InventorySaver_[i]->SetIndexNum(InventoryList_[i]->GetIndexNum());
 	}
 }

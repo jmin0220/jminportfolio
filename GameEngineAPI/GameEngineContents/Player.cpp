@@ -11,12 +11,9 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
-
+#include <cstring>
 
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
-Inventory* Player::Inventory_;
-Clock* Player::Clock_;
-EnergyBar* Player::EnergyBar_;
 
 Player::Player() 
 	:Speed_(500.0f)
@@ -31,18 +28,19 @@ Player::~Player()
 
 void Player::PlayerInit()
 {
-
 	// 인벤토리 초기설정
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+
+	Inventory_->InventoryInit();
 }
 
 void Player::Start()
 {
 	// UI
-	Mouse_ = this->GetLevel()->CreateActor<Mouse>((int)ORDER::UIMOUSE);
 	Inventory_ = this->GetLevel()->CreateActor<Inventory>((int)ORDER::UI);
+	Mouse_ = this->GetLevel()->CreateActor<Mouse>((int)ORDER::UIMOUSE);
 	Clock_ = this->GetLevel()->CreateActor<Clock>((int)ORDER::UI);
 	EnergyBar_ = this->GetLevel()->CreateActor<EnergyBar>((int)ORDER::UI);
 
@@ -127,155 +125,6 @@ void Player::PlayerAnimationInit()
 	7. Arms - Top layer
 	*/
 
-	// TODO::삭제
-	/*
-	//int directionDown = 0;
-	//int directionRight = 27;
-	//int directionLeft = 54;
-	//int directionUp = 81;
-
-	//// 플레이어 캐릭터 렌더링
-	//RendererBody_ = CreateRenderer((int)ORDER::PLAYER);
-	//RendererLegs_ = CreateRenderer((int)ORDER::PLAYER);
-	//RendererCloth_ = CreateRenderer((int)ORDER::PLAYER);
-	//RendererHair_ = CreateRenderer((int)ORDER::PLAYER);
-	//RendererArms_ = CreateRenderer((int)ORDER::PLAYER);
-
-	//IMAGE_PLAYER_MAN_BODY파일
-	//7 / 7 / 6 / 7 = 1줄에 27스프라이트로 구성.
-	//*
-	//int SpriteLineNum = 27;
-	//int up, down, left, right;
-
-	//// Idle
-	//// 몸통
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 0 + directionDown, 0 + directionDown, 0.2f, false);
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 0 + directionRight, 0 + directionRight, 0.2f, false);
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 0 + directionLeft, 0 + directionLeft, 0.2f, false);
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 0 + directionUp, 0 + directionUp, 0.2f, false);
-	//// 팔
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 7 + directionDown, 7 + directionDown, 0.2f, false);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 7 + directionRight, 7 + directionRight, 0.2f, false);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 7 + directionLeft, 7 + directionLeft, 0.2f, false);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 7 + directionUp, 7 + directionUp, 0.2f, false);
-	//// 다리
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_DOWN, 20 + directionDown, 20 + directionDown, 0.2f, false);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_RIGHT, 20 + directionRight, 20 + directionRight, 0.2f, false);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_LEFT, 20 + directionLeft, 20 + directionLeft, 0.2f, false);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_IDLE_UP, 20 + directionUp, 20 + directionUp, 0.2f, false);
-
-	//// Walk
-	//// 몸
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_DOWN, 0 + directionDown, 3 + directionDown, 0.2f, true);
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_RIGHT, 0 + directionRight, 3 + directionRight, 0.2f, true);
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 0 + directionLeft, 3 + directionLeft, 0.2f, true);
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 0 + directionUp, 3 + directionUp, 0.2f, true);
-	//// 팔
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_DOWN, 7 + directionDown, 10 + directionDown, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_RIGHT, 7 + directionRight, 10 + directionRight, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 7 + directionLeft, 10 + directionLeft, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 7 + directionUp, 10 + directionUp, 0.2f, true);
-	//// 다리
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_DOWN, 20 + directionDown, 23 + directionDown, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_RIGHT, 20 + directionRight, 23 + directionRight, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_LEFT, 20 + directionLeft, 23 + directionLeft, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_WALK_UP, 20 + directionUp, 23 + directionUp, 0.2f, true);
-
-	//// 세로로 휘두르기
-	//down = 16 * SpriteLineNum;
-	//right = 11 * SpriteLineNum;
-	//left = 12 * SpriteLineNum;
-	//up = 9 * SpriteLineNum;
-	//// 몸통
-	//// 16라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_DOWN, down, down + 6, 0.2f, true);
-	//// 11라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_RIGHT, right, right + 6, 0.2f, true);
-	//// 12라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_LEFT, left, left + 6, 0.2f, true);
-	//// 9라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_UP, up, up + 6, 0.2f, true);
-	//// 팔
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_DOWN, down + 7, down + 7 + 6, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_RIGHT, right + 7, right + 7 + 6, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_LEFT, left + 7, left + 7 + 6, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_UP, up + 7, up + 7 + 6, 0.2f, true);
-	//// 다리
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_DOWN, down + 20, down + 20 + 6, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_RIGHT, right + 20, right + 20 + 6, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_LEFT, left + 20, left + 20 + 6, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_HORIZON_UP, up + 20, up + 20 + 6, 0.2f, true);
-
-
-	//// 가로로 휘두르기
-	//down = 5 * SpriteLineNum;
-	//right = 6 * SpriteLineNum;
-	//left = 7 * SpriteLineNum;
-	//up = 8 * SpriteLineNum;
-	//// 몸통
-	//// 6라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_DOWN, down, down + 6, 0.2f, true);
-	//// 7라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_RIGHT, right, right + 6, 0.2f, true);
-	//// 8라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_LEFT, left, left + 6, 0.2f, true);
-	//// 9라인
-	//RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_UP, up, up + 6, 0.2f, true);
-	//// 팔
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_DOWN, down + 7, down + 7 + 6, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_RIGHT, right + 7, right + 7 + 6, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_LEFT, left + 7, left + 7 + 6, 0.2f, true);
-	//RendererArms_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_UP, up + 7, up + 7 + 6, 0.2f, true);
-	//// 다리
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_DOWN, down + 20, down + 20 + 6, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_RIGHT, right + 20, right + 20 + 6, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_LEFT, left + 20, left + 20 + 6, 0.2f, true);
-	//RendererLegs_->CreateAnimation(IMAGE_PLAYER_MAN_BODY, ANIM_HIT_VERTICAL_UP, up + 20, up + 20 + 6, 0.2f, true);
-
-
-
-	//// Hair
-	//// Idle
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_RIGHT, 8, 8, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_LEFT, 16, 16, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_IDLE_UP, 24, 24, 0.0f, false);
-	//// Walk
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_DOWN, 0, 0, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_RIGHT, 8, 8, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_LEFT, 16, 16, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_WALK_UP, 24, 24, 0.0f, false);
-	//// 액션
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_DOWN, 0, 0, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_RIGHT, 8, 8, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_LEFT, 16, 16, 0.0f, false);
-	//RendererHair_->CreateAnimation(IMAGE_PLAYER_HAIR, ANIM_HIT_HORIZON_UP, 24, 24, 0.0f, false);
-
-	//// Cloth
-	//// Idle
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_DOWN, 0, 0, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_RIGHT, 16, 16, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_LEFT, 32, 32, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_IDLE_UP, 48, 48, 0.0f, false);
-	//// Walk
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_DOWN, 0, 0, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_RIGHT, 16, 16, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_LEFT, 32, 32, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_WALK_UP, 48, 48, 0.0f, false);
-
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_DOWN, 0, 0, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_RIGHT, 16, 16, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_LEFT, 32, 32, 0.0f, false);
-	//RendererCloth_->CreateAnimation(IMAGE_PLAYER_CLOTH, ANIM_HIT_HORIZON_UP, 48, 48, 0.0f, false);
-
-	//// 초기 애니메이션
-	//RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
-	//RendererLegs_->ChangeAnimation(ANIM_IDLE_DOWN);
-	//RendererCloth_->ChangeAnimation(ANIM_IDLE_DOWN);
-	//RendererHair_->ChangeAnimation(ANIM_IDLE_DOWN);
-	//RendererArms_->ChangeAnimation(ANIM_IDLE_DOWN);
-    */
-
 	// 1줄에 6개의 스프라이트
 	int oneline = 6;
 	RendererBody_ = CreateRenderer(IMAGE_PLAYER_MAN_TOTAL, (int)ORDER::PLAYER);
@@ -308,11 +157,6 @@ void Player::PlayerAnimationInit()
 void Player::PlayerAnimationChange(const std::string& _Name)
 {
 	RendererBody_->ChangeAnimation(_Name);
-	// TODO::삭제
-	//RendererLegs_->ChangeAnimation(_Name);
-	//RendererHair_->ChangeAnimation(_Name);
-	//RendererCloth_->ChangeAnimation(_Name);
-	//RendererArms_->ChangeAnimation(_Name);
 }
 
 // 조작키 초기화

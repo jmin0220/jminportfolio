@@ -25,12 +25,12 @@ void Item::SetIconRendererImage(int _ItemNum)
 		break;
 	case (int)ITEMTABLE::HOE:
 		IconRenderer_->SetImage(IMAGE_TOOL_SET1);
-		IconRenderer_->SetIndex(5);
+		IndexNum_ = 5;
 		ItemName_ = ITEM_NAME_HOE;
 		break;
 	case (int)ITEMTABLE::AXE:
 		IconRenderer_->SetImage(IMAGE_TOOL_SET1);
-		IconRenderer_->SetIndex(89);
+		IndexNum_ = 89;
 		ItemName_ = ITEM_NAME_AXE;
 		break;
 	case (int)ITEMTABLE::SYTHE:
@@ -39,20 +39,20 @@ void Item::SetIconRendererImage(int _ItemNum)
 		break;
 	case (int)ITEMTABLE::WATERINGCAN:
 		IconRenderer_->SetImage(IMAGE_TOOL_SET2);
-		IconRenderer_->SetIndex(2);
+		IndexNum_ = 2;
 		ItemName_ = ITEM_NAME_WATERINGCAN;
 		break;
 	case (int)ITEMTABLE::OAKTREE:
 		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);
-		IconRenderer_->SetIndex(30);
+		IndexNum_ = 30;
 		break;
 	case (int)ITEMTABLE::MAPLETREE:
 		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);
-		IconRenderer_->SetIndex(31);
+		IndexNum_ = 31;
 		break;
 	case (int)ITEMTABLE::PINETREE:
 		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);
-		IconRenderer_->SetIndex(32);
+		IndexNum_ = 32;
 		break;
 	case (int)ITEMTABLE::PARSNIP:
 		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);
@@ -76,4 +76,6 @@ void Item::SetIconRendererImage(int _ItemNum)
 		IconRenderer_->SetImage(IMAGE_INVENTORY_EMPTY);
 		break;
 	}
+
+	IconRenderer_->SetIndex(IndexNum_);
 }

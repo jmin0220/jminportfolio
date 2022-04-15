@@ -120,9 +120,9 @@ private:
 
 	// 아이템 관련된 멤버
 private:
-	static Inventory* Inventory_;
-	static Clock* Clock_;
-	static EnergyBar* EnergyBar_;
+	Inventory* Inventory_;
+	Clock* Clock_;
+	EnergyBar* EnergyBar_;
 
 	// 타일맵 관련
 private:
