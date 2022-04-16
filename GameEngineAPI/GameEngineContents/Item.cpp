@@ -3,6 +3,7 @@
 #include "ContentsEnums.h"
 
 Item::Item() 
+	: ClickedFlg(false)
 {
 	ItemName_ = "Empty";
 }

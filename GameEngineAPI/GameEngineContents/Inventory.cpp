@@ -71,6 +71,10 @@ void Inventory::Start()
 		}
 	}
 
+	SwapItem_ = new Item;
+	SwapItem_->SetItemRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
+	SwapItem_->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
+
 	InitKey();
 	CollisionInit();
 }
@@ -82,6 +86,9 @@ void Inventory::Update()
 
 	// 키 입력
 	ControlSelectBox();
+
+	// 아이템 렌더링
+	ItemPosCalc();
 }
 
 void Inventory::InventoryInit()
@@ -117,6 +124,7 @@ void Inventory::InitKey()
 	}
 }
 
+// 아이템 선택
 void Inventory::SelectItem(int i)
 {
 	if (false == ExtendFlg_)
@@ -223,19 +231,29 @@ void Inventory::ItemPosCalc()
 
 	if (false == ExtendFlg_)
 	{
+
 		for (size_t i = 0; i < 12; i++)
 		{
-			PosX = IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i));
-			PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y - 18;
+			if (false == InventoryList_[i]->ClickedFlg)
+			{
+				PosX = IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i));
+				PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y - 18;
 
-			InventoryList_[i]->GetIconRenderer().SetPivot({ PosX, PosY });
+				InventoryList_[i]->GetIconRenderer().SetPivot({ PosX, PosY });
+			}
+			else
+			{
+				continue;
+			}
 		}
 
 		for (size_t i = 12; i < 36; i++)
 		{
-			InventoryList_[i]->GetIconRenderer().Off();
+			if (false == InventoryList_[i]->ClickedFlg)
+			{
+				InventoryList_[i]->GetIconRenderer().Off();
+			}
 		}
-
 	}
 	else
 	{
@@ -271,11 +289,29 @@ int Inventory::AddItemToInventory(int _ItemNum)
 		}
 	}
 
-	ItemPosCalc();
-
 	// 넣었으면 1
 	// 못넣었으면 0
 	return InsertSuccessFlg;
+}
+
+void Inventory::SwapItem(int _Origin, int _Target)
+{
+	SwapItem_->GetItemRenderer().SetImage(InventoryList_[_Target]->GetItemRenderer().GetImage()->GetNameCopy());
+	SwapItem_->GetIconRenderer().SetImage(InventoryList_[_Target]->GetIconRenderer().GetImage()->GetNameCopy());
+	SwapItem_->SetItemName(InventoryList_[_Target]->GetItemName());
+	SwapItem_->SetIndexNum(InventoryList_[_Target]->GetIndexNum());
+
+	InventoryList_[_Target]->GetItemRenderer().SetImage(InventoryList_[_Origin]->GetItemRenderer().GetImage()->GetNameCopy());
+	InventoryList_[_Target]->GetIconRenderer().SetImage(InventoryList_[_Origin]->GetIconRenderer().GetImage()->GetNameCopy());
+	InventoryList_[_Target]->SetItemName(InventoryList_[_Origin]->GetItemName());
+	InventoryList_[_Target]->SetIndexNum(InventoryList_[_Origin]->GetIndexNum());
+	InventoryList_[_Target]->GetIconRenderer().SetIndex(InventoryList_[_Origin]->GetIndexNum());
+
+	InventoryList_[_Origin]->GetItemRenderer().SetImage(SwapItem_->GetItemRenderer().GetImage()->GetNameCopy());
+	InventoryList_[_Origin]->GetIconRenderer().SetImage(SwapItem_->GetIconRenderer().GetImage()->GetNameCopy());
+	InventoryList_[_Origin]->SetItemName(SwapItem_->GetItemName());
+	InventoryList_[_Origin]->SetIndexNum(SwapItem_->GetIndexNum());
+	InventoryList_[_Origin]->GetIconRenderer().SetIndex(SwapItem_->GetIndexNum());
 }
 
 // 컬리전

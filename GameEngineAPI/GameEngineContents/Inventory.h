@@ -55,6 +55,8 @@ public:
 	}
 
 	void SelectItem(int i);
+	Item* SwapItem_;
+	void SwapItem(int _Origin, int _Target);
 protected:
 	void Start() override;
 	void Update() override;

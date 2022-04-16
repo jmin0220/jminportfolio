@@ -102,6 +102,8 @@ private:
 
 	// 키 입력
 private:
+	bool InventoryClickFlg_;
+	int ItemSelectOrigin, ItemSelectTarget;
 	Mouse* Mouse_;
 	std::vector<GameEngineCollision*> MouseColResult_;
 
@@ -139,7 +141,7 @@ private:
 	Clock* Clock_;
 	EnergyBar* EnergyBar_;
 
-	int Gold_;
+	static int Gold_;
 
 	// 타일맵 관련
 private:

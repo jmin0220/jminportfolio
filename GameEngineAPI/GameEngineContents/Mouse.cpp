@@ -21,7 +21,7 @@ void Mouse::Start()
 	MousePoint_->CameraEffectOff();
 
 
-	MouseCollision_ = CreateCollision(COL_GROUP_MOUSE, { 24, 30 });
+	MouseCollision_ = CreateCollision(COL_GROUP_MOUSE, { 12, 15}, { -12, -15 });
 
 	// 왼클릭했을때의 상호작용
 	if (false == GameEngineInput::GetInst()->IsKey(KEY_INTERACT))

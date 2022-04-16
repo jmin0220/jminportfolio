@@ -61,6 +61,8 @@ public:
 		IndexNum_ = _IndexNum;
 	}
 
+	bool ClickedFlg;
+
 protected:
 	// 아이템이 필드에서 보일때 이미지
 	GameEngineRenderer* ItemRenderer_;

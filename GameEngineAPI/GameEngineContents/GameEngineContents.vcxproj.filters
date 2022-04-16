@@ -35,17 +35,11 @@
     <ClCompile Include="Slime.cpp">
       <Filter>02Play\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Mines.cpp">
-      <Filter>02Play\Mine</Filter>
-    </ClCompile>
     <ClCompile Include="Fishes.cpp">
       <Filter>02Play\Fish</Filter>
     </ClCompile>
     <ClCompile Include="Bream.cpp">
       <Filter>02Play\Fish</Filter>
-    </ClCompile>
-    <ClCompile Include="Copper.cpp">
-      <Filter>02Play\Mine</Filter>
     </ClCompile>
     <ClCompile Include="TitleButtonNewGame.cpp">
       <Filter>01Title</Filter>
@@ -134,17 +128,11 @@
     <ClInclude Include="Slime.h">
       <Filter>02Play\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Mines.h">
-      <Filter>02Play\Mine</Filter>
-    </ClInclude>
     <ClInclude Include="Fishes.h">
       <Filter>02Play\Fish</Filter>
     </ClInclude>
     <ClInclude Include="Bream.h">
       <Filter>02Play\Fish</Filter>
-    </ClInclude>
-    <ClInclude Include="Copper.h">
-      <Filter>02Play\Mine</Filter>
     </ClInclude>
     <ClInclude Include="TitleButtonNewGame.h">
       <Filter>01Title</Filter>
@@ -228,9 +216,6 @@
     </Filter>
     <Filter Include="02Play\Crop">
       <UniqueIdentifier>{cbe1d534-e6ca-40d4-b9ee-84bc78cd49a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02Play\Mine">
-      <UniqueIdentifier>{a8c34d45-9f20-4134-822e-a17540ced57e}</UniqueIdentifier>
     </Filter>
     <Filter Include="02Play\Fish">
       <UniqueIdentifier>{c7f33d1d-1ff1-4e68-b48e-1f7d050c6159}</UniqueIdentifier>

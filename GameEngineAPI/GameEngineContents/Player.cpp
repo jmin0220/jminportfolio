@@ -14,12 +14,15 @@
 #include <cstring>
 
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
+int Player::Gold_ = 1234560;
 
 Player::Player() 
 	:Speed_(500.0f)
 	, MoveDir_(float4::DOWN)
 	, NextLevel_("")
-	, Gold_(12345678)
+	, InventoryClickFlg_(false)
+	, ItemSelectOrigin(-1)
+	, ItemSelectTarget(-1)
 {
 }
 
@@ -139,13 +142,15 @@ void Player::StateChange(PlayerState _State)
 			break;
 		case PlayerState::Action:
 			// 마우스가 인벤토리 바와 겹쳐있을 경우 상태를 Action으로 변경하지 않음
-			if (false == Inventory_->GetExtendFlg()
-				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect))
+			if (InventoryClickFlg_ == true || 
+				(false == Inventory_->GetExtendFlg()
+				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect)))
 			{
 				return;
 			}
-			else if(true == Inventory_->GetExtendFlg()
-				&&true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect))
+			else if(InventoryClickFlg_ == true || 
+				(true == Inventory_->GetExtendFlg()
+				&&true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect)))
 			{
 				return;
 			}
@@ -545,7 +550,41 @@ bool Player::IsActionKeyUp()
 
 void Player::ControlInventorySelectBoxWithMouse()
 {
-	if (true == IsActionKeyUp()
+	if (true == IsActionKeyDown()
+		&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
+	{
+		std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
+		std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			for (size_t i = 0; i < 12; i++)
+			{
+				if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
+				{
+					ItemSelectOrigin = i;
+					Inventory_->GetInventoryList()[i]->ClickedFlg = true;
+
+					break;
+				}
+			}
+		}
+
+		InventoryClickFlg_ = true;
+		// 충돌 결과 초기화
+		MouseColResult_.clear();
+	}
+
+	// 기존에 아이템이 선택되어있으면서 마우스를 누르고 있는 상태
+	if (true == IsActionKeyPress() && ItemSelectOrigin != -1)
+	{
+		// 아이템을 마우스에 따라다니도록 이동
+		Inventory_->GetInventoryList()[ItemSelectOrigin]->GetIconRenderer().SetPivot(Mouse_->GetPosition());
+	}
+
+
+	if (true == IsActionKeyUp() 
+		&& ItemSelectOrigin != -1
 		&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
 	{
 		// Collision배열에서 Collision의 순서는 실제 인벤토리의 아이템 순서와 항상 동일함.
@@ -562,13 +601,34 @@ void Player::ControlInventorySelectBoxWithMouse()
 			{
 				if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
 				{
-					Inventory_->SelectItem(i);
+					ItemSelectTarget = i;
+
+					if (ItemSelectOrigin == ItemSelectTarget)
+					{
+						Inventory_->SelectItem(i);
+						Inventory_->GetInventoryList()[i]->ClickedFlg = false;
+					}
+					else if (ItemSelectOrigin != ItemSelectTarget)
+					{
+						Inventory_->SwapItem(ItemSelectOrigin, ItemSelectTarget);
+						Inventory_->SelectItem(ItemSelectTarget);
+					}
+
+					// 충돌 결과 초기화
 					MouseColResult_.clear();
+					Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
+					Inventory_->GetInventoryList()[ItemSelectTarget]->ClickedFlg = false;
+					ItemSelectOrigin = -1, ItemSelectTarget = -1;
 
 					return;
 				}
 			}
 		}
+	}
+	else if (true == IsActionKeyUp())
+	{
+		Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
+		InventoryClickFlg_ = false;
 	}
 }
 
