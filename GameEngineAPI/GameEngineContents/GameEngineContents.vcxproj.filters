@@ -95,6 +95,9 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>02Play\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>99Etc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>02Play\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>99Etc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

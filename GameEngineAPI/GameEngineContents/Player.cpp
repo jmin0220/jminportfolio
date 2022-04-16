@@ -19,6 +19,7 @@ Player::Player()
 	:Speed_(500.0f)
 	, MoveDir_(float4::DOWN)
 	, NextLevel_("")
+	, Gold_(12345678)
 {
 }
 
@@ -93,6 +94,8 @@ void Player::Start()
 
 void Player::Update()
 {
+	Clock_->SetGold(Gold_);
+
 	// 카메라 갱신
 	UpdateCamera();
 

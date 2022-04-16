@@ -163,6 +163,24 @@ void StardewContents::GameInit()
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FORAGE);
 	Image->Cut({ 72, 72 });
 
+
+	// 폰트
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_FONT);
+
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_FONT_NUMBER);
+	Image->Cut({ 24, 48 });
+
+
 	//사운드
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);

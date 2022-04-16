@@ -139,6 +139,8 @@ private:
 	Clock* Clock_;
 	EnergyBar* EnergyBar_;
 
+	int Gold_;
+
 	// 타일맵 관련
 private:
 	// 플레이어가 가지고있을 타일 정보인덱스 생성

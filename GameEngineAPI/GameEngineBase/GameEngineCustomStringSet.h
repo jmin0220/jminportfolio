@@ -24,6 +24,7 @@
 #define DIR_TILESET "Tileset"
 #define DIR_MAP "Map"
 #define DIR_BUILDING "Building"
+#define DIR_FONT "Font"
 
 // ¿ÃπÃ¡ˆ
 #define IMAGE_CLOCK_POS_H 129
@@ -60,6 +61,7 @@
 #define IMAGE_TOOL_SET2 "Tools_set2.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
+#define IMAGE_FONT_NUMBER "FontNumber.bmp"
 
 #define IMAGE_ENVIRONMENT_CROPS "Crops.bmp"
 #define IMAGE_ENVIRONMENT_FISHING "Fishing.bmp"

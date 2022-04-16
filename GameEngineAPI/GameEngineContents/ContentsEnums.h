@@ -10,7 +10,8 @@ enum class ORDER
 	MONSTER,
 	ALWAYSFRONT,	// 배경
 	UI,
-	UIICONS,		// UI위에 쓰여질 아이콘, 글자들
+	UIICONS,		// UI위에 쓰여질 아이콘
+	UIFONT,			// 글자
 	UIMOUSE,		// 마우스 포인터 (최상위)	
 }; 
 
