@@ -34,6 +34,21 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
+	bool IsDebugModeOn()
+	{
+		IsDebug = true;
+	}
+
+	bool IsDebugModeOff()
+	{
+		IsDebug = false;
+	}
+
+	bool IsDebugModeSwitch()
+	{
+		IsDebug = !IsDebug;
+	}
+
 	// 액터 생성
 	template<typename ActorType>
 	ActorType* CreateActor( int _Order = 0, const std::string& _Name = "")
@@ -92,6 +107,7 @@ protected:
 	virtual void LevelChangeEnd() {};
 
 private:
+	static bool IsDebug;
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
 
 	std::map<std::string, GameEngineActor*> RegistActor_;

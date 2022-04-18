@@ -57,6 +57,7 @@ void GameEngineLevel::ActorUpdate()
 		for (; StartActor != EndActor; ++StartActor)
 		{
 			(*StartActor)->ReleaseUpdate();
+			(*StartActor)->AddAccTime(GameEngineTime::GetDeltaTime());
 			if (false == (*StartActor)->IsUpdate())
 			{
 				continue;

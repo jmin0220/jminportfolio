@@ -47,6 +47,22 @@ public:
 		return IsDeath_;
 	}
 
+	void AddAccTime(float _DeltaTime)
+	{
+		AccTime_ += _DeltaTime;
+	}
+
+	float GetAccTime()
+	{
+		return AccTime_;
+	}
+
+
+	void ReSetAccTime()
+	{
+		AccTime_ = 0.0f;
+	}
+
 	void ReleaseUpdate()
 	{
 		if (false == IsReleaseUpdate_)
@@ -81,6 +97,7 @@ private:
 	float DeathTime_;
 	// Release트리거 설정
 	bool IsReleaseUpdate_;
+	float AccTime_;
 
 	bool IsUpdate_;
 	bool IsDeath_;
