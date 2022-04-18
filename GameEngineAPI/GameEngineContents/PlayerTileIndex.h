@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineRendererTileMap.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 class PlayerTileIndex : public Tile
 {
@@ -33,6 +34,34 @@ public:
 	{
 		return Level_;
 	}
+
+	// 매 프레임 업데이트
+	inline void AddAccTime()
+	{
+		AccTime_ += GameEngineTime::GetDeltaTime();
+	}
+
+	inline float GetAccTime()
+	{
+		return AccTime_;
+	}
+
+	// 시간 초기화
+	inline void ReSetAccTime()
+	{
+		AccTime_ = 0.0f;
+	}
+
+	inline void SetIsTimeUpdate(bool _Flg)
+	{
+		IsTimeUpdate_ = _Flg;
+	}
+
+	inline bool GetIsTimeUpdate()
+	{
+		return IsTimeUpdate_;
+	}
+
 private:
 	// 타일에 무엇이 있는지
 	int TileState_;
@@ -41,4 +70,9 @@ private:
 	int Hp_ = 0;
 	// 성장등의 변화가 있는 경우
 	int Level_ = 0;
+
+	// 시간체크
+	float AccTime_;
+
+	bool IsTimeUpdate_ = false;
 };

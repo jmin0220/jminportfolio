@@ -78,6 +78,8 @@ void Player::Update()
 
 	// 마우스 클릭 이벤트
 	ControlInventorySelectBoxWithMouse();
+
+	// TODO::타일맵 업데이트 함수 만들기
 }
 
 // 상태 업데이트
@@ -591,6 +593,7 @@ void Player::ControlInventorySelectBoxWithMouse()
 	}
 }
 
+// 타일맵 생성
 void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 {
 	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
@@ -693,4 +696,6 @@ void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _Ti
 	GroundTiles_[y][x]->SetTileState((int)TILESTATE::PLANTED);
 	EnvironmentTiles_[y][x]->SetTileState(_TileState);
 	EnvironmentTiles_[y][x]->SetLevel(0);
+	EnvironmentTiles_[y][x]->ReSetAccTime();
+	EnvironmentTiles_[y][x]->SetIsTimeUpdate(true);
 }
