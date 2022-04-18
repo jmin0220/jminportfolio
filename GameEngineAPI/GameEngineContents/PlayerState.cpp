@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayLevel.h"
+#include "TileStateTable.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -33,8 +34,7 @@ void Player::IdleUpdate()
 // 클릭했을때 상태
 void Player::ActionUpdate()
 {
-	
-	// 애니메이션이 종료되면 Idle로 전환
+	// 애니메이션이 종료되면 액션 실행 후 Idle로 전환
 	if (true == RendererBody_->IsEndAnimation())
 	{
 		float4 CheckLength = MoveDir_ * 24;
@@ -43,16 +43,21 @@ void Player::ActionUpdate()
 		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, IMAGE_TILESET_DIRT);
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::Hollow);
+		}
+		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
+		{
+			// 타일생성
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::HollowWet);
 		}
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
 		{
 			// 몰루
 		}
-		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
+		else if (Inventory_->GetSelectedItem() == ITEM_NAME_PARSNIP)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, IMAGE_TILESET_DIRTWATERED);
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::PARSNIP);
 		}
 
 		// Idle로 상태 전환

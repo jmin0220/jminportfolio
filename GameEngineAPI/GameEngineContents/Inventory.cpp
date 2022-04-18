@@ -27,6 +27,12 @@ Inventory::~Inventory()
 		delete InventoryList_[i];
 		InventoryList_[i] = nullptr;
 	}
+
+	if (nullptr != SwapItem_)
+	{
+		delete SwapItem_;
+		SwapItem_ = nullptr;
+	}
 }
 
 void Inventory::Start()
@@ -237,7 +243,7 @@ void Inventory::ItemPosCalc()
 			if (false == InventoryList_[i]->ClickedFlg)
 			{
 				PosX = IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i));
-				PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y - 18;
+				PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y + 6;
 
 				InventoryList_[i]->GetIconRenderer().SetPivot({ PosX, PosY });
 			}

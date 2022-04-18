@@ -8,7 +8,6 @@ enum class ITEMTABLE
 	// 장비
 	HOE,			
 	AXE,
-	SYTHE,
 	WATERINGCAN,
 	// 나무
 	OAKTREE,

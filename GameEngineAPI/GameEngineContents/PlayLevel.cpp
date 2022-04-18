@@ -46,15 +46,26 @@ void PlayLevel::TileRangeSetting(int _X, int _Y)
 		return;
 	}
 
-	AllTiles_.resize(_Y);
+	GroundTiles_.resize(_Y);
+	EnvironmentTiles_.resize(_Y);
 
-	for (size_t y = 0; y < AllTiles_.size(); y++)
+	for (size_t y = 0; y < GroundTiles_.size(); y++)
 	{
-		AllTiles_[y].resize(_X);
+		GroundTiles_[y].resize(_X);
 
-		for (size_t x = 0; x < AllTiles_[y].size(); x++)
+		for (size_t x = 0; x < GroundTiles_[y].size(); x++)
 		{
-			AllTiles_[y][x] = nullptr;
+			GroundTiles_[y][x] = nullptr;
+		}
+	}
+
+	for (size_t y = 0; y < EnvironmentTiles_.size(); y++)
+	{
+		EnvironmentTiles_[y].resize(_X);
+
+		for (size_t x = 0; x < EnvironmentTiles_[y].size(); x++)
+		{
+			EnvironmentTiles_[y][x] = nullptr;
 		}
 	}
 }

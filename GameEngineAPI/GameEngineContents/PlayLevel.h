@@ -26,7 +26,8 @@ public:
 
 	GameEngineSoundPlayer BgmPlayer;
 
-	std::vector<std::vector<PlayerTileIndex*>> AllTiles_;
+	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
+	std::vector<std::vector<PlayerTileIndex*>> EnvironmentTiles_;
 
 protected:
 	void Loading() override;

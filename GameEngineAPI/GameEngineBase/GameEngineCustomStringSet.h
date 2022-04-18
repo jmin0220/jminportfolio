@@ -59,10 +59,12 @@
 #define IMAGE_TITLE_LOGO_W 796
 #define IMAGE_TOOL_SET1 "Tools_set1.bmp"
 #define IMAGE_TOOL_SET2 "Tools_set2.bmp"
+#define IMAGE_TOOL_ICON "ToolIcon.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
 #define IMAGE_FONT_NUMBER "FontNumber.bmp"
 
+#define IMAGE_ENVIRONMENT_SEED "Seed.bmp"
 #define IMAGE_ENVIRONMENT_CROPS "Crops.bmp"
 #define IMAGE_ENVIRONMENT_FISHING "Fishing.bmp"
 #define IMAGE_ENVIRONMENT_FORAGE "Forage.bmp"
@@ -115,13 +117,7 @@
 #define MAP_TOWN_RENDER_ORDER_COLLISION "TownFrontCollision.bmp"
 #define MAP_TOWN_SIZE_H 5280.0f
 #define MAP_TOWN_SIZE_W 5760.0f
-// 농장 오두막
-#define MAP_FARMBUILDING_BACKGROUND "FarmBuildingBack.bmp"
-#define MAP_FARMBUILDING_BUILDING "FarmBuildingBuilding.bmp"
-#define MAP_FARMBUILDING_FRONT "FarmBuildingFront.bmp"
-#define MAP_FARMBUILDING_COLLISION "FarmBuildingBuildingCollision.bmp"
-#define MAP_FARMBUILDING_SIZE_H 414.0f
-#define MAP_FARMBUILDING_SIZE_W 414.0f
+
 // 해변
 #define MAP_BEACH_BACKGORUND "BeachBack.bmp"
 #define MAP_BEACH_BUILDING "BeachBuilding.bmp"
@@ -149,7 +145,6 @@
 #define LEVEL_TOWN "TownLevel"
 #define LEVEL_FARM "FarmLevel"
 #define LEVEL_BEACH "BeachLevel"
-#define LEVEL_FARMBUILDING "FarmBuildingLevel"
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_ENDING "EndingLevel"
 
@@ -186,6 +181,19 @@
 
 // 아이템
 #define ITEM_NAME_EMPTY "Empty"
+// 장비
 #define ITEM_NAME_HOE "Hoe"
 #define ITEM_NAME_AXE "Axe"
 #define ITEM_NAME_WATERINGCAN "WateringCan"
+// 나무
+#define ITEM_NAME_OAKTREE "OakTree"
+#define ITEM_NAME_MAPLETREE "MapleTree"
+#define ITEM_NAME_PINETREE "PineTree"
+// 농작물
+#define ITEM_NAME_PARSNIP "Parsnip"
+#define ITEM_NAME_POTATO "Potato"
+#define ITEM_NAME_CORN "Corn"
+// 생선
+#define ITEM_NAME_PUFFERFISH "PufferFish"
+#define ITEM_NAME_ANCHOVY "Anchovy"
+#define ITEM_NAME_TUNA "Tuna"

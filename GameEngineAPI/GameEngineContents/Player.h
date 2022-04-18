@@ -31,7 +31,7 @@ public:
 	// 타일맵 설정
 	inline void SetTileMap(GameEngineRendererTileMap* _TileMap)
 	{
-		TileMap_ = _TileMap;
+		LevelTileMap_ = _TileMap;
 	}
 
 	// 다음 레벨 정보를 취득
@@ -148,20 +148,26 @@ private:
 	// 플레이어가 가지고있을 타일 정보인덱스 생성
 	// 타일의 랜더러는 각 레벨의 타일맵이 가지고 있지만,
 	// 해당 위치의 '상태'는 해당 레벨의 플레이어가 가지고 있음.
-	// 보이는 것과 상태가 일치하지 않을 수도 있다는 의미.
-	void CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName);
+	// 보이는 것과 상태가 일치하지 않을 수도 있다.
+	void CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex);
 
 	// 레벨의 타일맵을 저장
-	GameEngineRendererTileMap* TileMap_;
+	GameEngineRendererTileMap* LevelTileMap_;
 
 	// 타일맵의 스테이터스를 저장
-	std::vector<std::vector<PlayerTileIndex*>> AllTiles_;
-	void SetTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
+	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
+	std::vector<std::vector<PlayerTileIndex*>> EnvironmentTiles_;
+	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
+	void SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
 public: 
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수
-	void SetAllTiles(std::vector<std::vector<PlayerTileIndex*>> _AllTiles)
+	void SetGroundTiles(std::vector<std::vector<PlayerTileIndex*>> _GroundTiles)
 	{
-		AllTiles_ = _AllTiles;
+		GroundTiles_ = _GroundTiles;
+	}
+	void SetEnvironmentTiles(std::vector<std::vector<PlayerTileIndex*>> _EnvironmentTiles)
+	{
+		EnvironmentTiles_ = _EnvironmentTiles;
 	}
 
 	// TODO::시간 관련 

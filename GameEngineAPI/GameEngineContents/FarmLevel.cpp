@@ -34,7 +34,8 @@ FarmLevel::FarmLevel()
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 
 	TileRangeSetting(80, 65);
-	this->Player_->SetAllTiles(this->AllTiles_);
+	this->Player_->SetGroundTiles(this->GroundTiles_);
+	this->Player_->SetEnvironmentTiles(this->EnvironmentTiles_);
 
 	// 플레이어가 처음 시작하는 맵이므로 PlayerInit를 한번 실행.
 	this->Player_->PlayerInit();

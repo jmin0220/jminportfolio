@@ -35,36 +35,7 @@ void Player::PlayerInit()
 	// 인벤토리 초기설정
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
@@ -373,10 +344,6 @@ void Player::ColWallCheck(float4 _MoveDir)
 	{
 		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_COLLISION);
 	}
-	else if (GetCurrentLevel() == LEVEL_FARMBUILDING)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARMBUILDING_COLLISION);
-	}
 	else if (GetCurrentLevel() == LEVEL_BEACH)
 	{
 		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_COLLISION);
@@ -427,15 +394,6 @@ void Player::ColWallCheck(float4 _MoveDir)
 		{
 			SetNextLevelPos({ 1870.0f, 50.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_BEACH);
-		}
-	}
-	else if (GetCurrentLevel() == LEVEL_FARMBUILDING)
-	{
-		// 농장으로 이동
-		if (RGB(255, 0, 0) == Color)
-		{
-			SetNextLevelPos({ 3200.0f, 800.0f });
-			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
 	}
 	else if (GetCurrentLevel() == LEVEL_BEACH)
@@ -548,6 +506,7 @@ bool Player::IsActionKeyUp()
 	return true;
 }
 
+// 마우스로 인벤토리 조작하기
 void Player::ControlInventorySelectBoxWithMouse()
 {
 	if (true == IsActionKeyDown()
@@ -632,37 +591,105 @@ void Player::ControlInventorySelectBoxWithMouse()
 	}
 }
 
-// 플레이어가 가지고있는 타일맵에서 타일을 생성
-void Player::CreatePlayerTileIndex(float4 _Pos, std::string _TileMapImageName)
+void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 {
 	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
 	int PosY = static_cast<int>(_Pos.y / TILEMAP_SIZE);
 
-	if (IMAGE_TILESET_DIRTWATERED == _TileMapImageName)
+	switch (_EnvironemntTileIndex)
 	{
-		if (nullptr != AllTiles_[PosY][PosX] 
-			&& AllTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::Hollow)
+	case (int)TILESTATE::None:
+		break;
+	case (int)TILESTATE::Hollow:
+		SetGroundTile(PosX, PosY,
+			LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::Hollow);
+
+		break;
+	case (int)TILESTATE::HollowWet:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::Hollow)
 		{
 			// 타일 생성
-			SetTile(PosX, PosY,
-				TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TILESTATE::Hollow);
+			SetGroundTile(PosX, PosY,
+				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HollowWet);
 		}
-		else
+
+		break;
+	case (int)TILESTATE::OAKTREE:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
 		{
-			return;
+			// 타일 생성
+			SetGroundTile(PosX, PosY,
+				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HollowWet);
 		}
+
+		break;
+	case (int)TILESTATE::MAPLETREE:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+		{
+
+		}
+
+		break;
+	case (int)TILESTATE::PINETREE:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+		{
+
+		}
+
+		break;
+	case (int)TILESTATE::PARSNIP:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+		{
+			// 타일 생성
+			SetEnvironmentTile(PosX, PosY,
+				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_CROPS, 0, (int)ORDER::FRONTA), (int)TILESTATE::HollowWet);
+		}
+
+		break;
+	case (int)TILESTATE::POTATO:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+		{
+
+		}
+
+		break;
+	case (int)TILESTATE::CORN:
+
+		if (nullptr != GroundTiles_[PosY][PosX]
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+		{
+
+		}
+
+		break;
+	default:
+		break;
 	}
-	else
-	{
-		// 타일 생성
-		SetTile(PosX, PosY,
-			TileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, _TileMapImageName, 0, (int)ORDER::FRONTA), (int)TILESTATE::Hollow);
-	}
+
 }
 
 // 생성한 타일맵 정보를 플레이어에게 저장
-void Player::SetTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
+void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
 {
-	AllTiles_[y][x] = _TileMap;
-	AllTiles_[y][x]->SetTileState_(_TileState);
+	GroundTiles_[y][x] = _TileMap;
+	GroundTiles_[y][x]->SetTileState(_TileState);
+}
+
+void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
+{
+	EnvironmentTiles_[y][x] = _TileMap;
+	EnvironmentTiles_[y][x]->SetTileState(_TileState);
+	EnvironmentTiles_[y][x]->SetLevel(0);
 }

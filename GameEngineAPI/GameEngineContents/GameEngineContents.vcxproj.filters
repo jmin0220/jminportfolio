@@ -77,9 +77,6 @@
     <ClCompile Include="FarmBuilding.cpp">
       <Filter>02Play</Filter>
     </ClCompile>
-    <ClCompile Include="FarmBuildingLevel.cpp">
-      <Filter>00Level\PlayLevel</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>02Play</Filter>
     </ClCompile>
@@ -172,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="FarmBuilding.h">
       <Filter>02Play</Filter>
-    </ClInclude>
-    <ClInclude Include="FarmBuildingLevel.h">
-      <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
     <ClInclude Include="BeachLevel.h">
       <Filter>00Level\PlayLevel</Filter>

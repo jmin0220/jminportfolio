@@ -28,7 +28,8 @@ TownLevel::TownLevel()
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 
 	TileRangeSetting(120, 110);
-	this->Player_->SetAllTiles(this->AllTiles_);
+	this->Player_->SetGroundTiles(this->GroundTiles_);
+	this->Player_->SetEnvironmentTiles(this->EnvironmentTiles_);
 }
 
 TownLevel::~TownLevel() 

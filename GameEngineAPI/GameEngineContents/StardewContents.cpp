@@ -1,7 +1,6 @@
 #include "StardewContents.h"
 #include "TitleLevel.h"
 #include "FarmLevel.h"
-#include "FarmBuildingLevel.h"
 #include "TownLevel.h"
 #include "BeachLevel.h"
 #include "EndingLevel.h"
@@ -127,6 +126,8 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_ICON);
+	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET1);
 	Image->Cut({ 48, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
@@ -148,8 +149,10 @@ void StardewContents::GameInit()
 	}
 
 	// Renderer->RenderPivot::BOT:
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_SEED);
+	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_CROPS);
-	Image->Cut({ 48, 96 });
+	Image->Cut({ 64, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_MAPLETREE);
 	Image->Cut({ 144, 312 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_OAKTREE);
@@ -159,9 +162,9 @@ void StardewContents::GameInit()
 
 	// Renderer->RenderPivot::CENTER:
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FISHING);
-	Image->Cut({ 72, 72 });
+	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FORAGE);
-	Image->Cut({ 72, 72 });
+	Image->Cut({ 48, 48 });
 
 
 	// ÆùÆ®

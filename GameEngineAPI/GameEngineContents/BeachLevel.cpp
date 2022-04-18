@@ -25,7 +25,8 @@ BeachLevel::BeachLevel()
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 
 	TileRangeSetting(104, 49);
-	this->Player_->SetAllTiles(this->AllTiles_);
+	this->Player_->SetGroundTiles(this->GroundTiles_);
+	this->Player_->SetEnvironmentTiles(this->EnvironmentTiles_);
 }
 
 BeachLevel::~BeachLevel() 
