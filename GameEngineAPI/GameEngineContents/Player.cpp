@@ -598,39 +598,39 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 
 	switch (_EnvironemntTileIndex)
 	{
-	case (int)TILESTATE::None:
+	case (int)TILESTATE::NONE:
 		break;
-	case (int)TILESTATE::Hollow:
+	case (int)TILESTATE::HOLLOW:
 		SetGroundTile(PosX, PosY,
-			LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::Hollow);
+			LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOW);
 
 		break;
-	case (int)TILESTATE::HollowWet:
+	case (int)TILESTATE::HOLLOWWET:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::Hollow)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOW)
 		{
 			// 鸥老 积己
 			SetGroundTile(PosX, PosY,
-				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HollowWet);
+				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
 		}
 
 		break;
 	case (int)TILESTATE::OAKTREE:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 			// 鸥老 积己
 			SetGroundTile(PosX, PosY,
-				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HollowWet);
+				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
 		}
 
 		break;
 	case (int)TILESTATE::MAPLETREE:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 
 		}
@@ -639,7 +639,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 	case (int)TILESTATE::PINETREE:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 
 		}
@@ -648,18 +648,18 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 	case (int)TILESTATE::PARSNIP:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 			// 鸥老 积己
 			SetEnvironmentTile(PosX, PosY,
-				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_CROPS, 0, (int)ORDER::FRONTA), (int)TILESTATE::HollowWet);
+				LevelEnvironmentTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_CROPS, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
 		}
 
 		break;
 	case (int)TILESTATE::POTATO:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 
 		}
@@ -668,7 +668,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 	case (int)TILESTATE::CORN:
 
 		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HollowWet)
+			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 
 		}
@@ -690,6 +690,7 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
 {
 	EnvironmentTiles_[y][x] = _TileMap;
+	GroundTiles_[y][x]->SetTileState((int)TILESTATE::PLANTED);
 	EnvironmentTiles_[y][x]->SetTileState(_TileState);
 	EnvironmentTiles_[y][x]->SetLevel(0);
 }

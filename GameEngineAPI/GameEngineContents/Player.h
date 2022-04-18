@@ -34,6 +34,11 @@ public:
 		LevelTileMap_ = _TileMap;
 	}
 
+	inline void SetEnvironmentTileMap(GameEngineRendererTileMap* _TileMap)
+	{
+		LevelEnvironmentTileMap_ = _TileMap;
+	}
+
 	// 다음 레벨 정보를 취득
 	inline std::string GetNextLevel()
 	{
@@ -153,6 +158,8 @@ private:
 
 	// 레벨의 타일맵을 저장
 	GameEngineRendererTileMap* LevelTileMap_;
+	// 작물등의 정보를 저장할 타일
+	GameEngineRendererTileMap* LevelEnvironmentTileMap_;
 
 	// 타일맵의 스테이터스를 저장
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;

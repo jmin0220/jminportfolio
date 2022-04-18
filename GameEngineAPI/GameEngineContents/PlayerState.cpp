@@ -43,12 +43,12 @@ void Player::ActionUpdate()
 		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
 		{
 			// 鸥老积己
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::Hollow);
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW);
 		}
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
 		{
 			// 鸥老积己
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::HollowWet);
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOWWET);
 		}
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
 		{
