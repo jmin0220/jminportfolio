@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineRendererTileMap.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineMath.h>
 
 class PlayerTileIndex : public Tile
 {
@@ -35,6 +36,16 @@ public:
 		return Level_;
 	}
 
+	inline void SetMaxLevel(int _MaxLevel)
+	{
+		MaxLevel_ = _MaxLevel;
+	}
+
+	inline int GetMaxLevel() const
+	{
+		return MaxLevel_;
+	}
+
 	// 매 프레임 업데이트
 	inline void AddAccTime()
 	{
@@ -62,6 +73,16 @@ public:
 		return IsTimeUpdate_;
 	}
 
+	inline void SetPos(float4 _Pos)
+	{
+		Pos_ = _Pos;
+	}
+
+	inline float4 GetPos()
+	{
+		return Pos_;
+	}
+
 private:
 	// 타일에 무엇이 있는지
 	int TileState_;
@@ -70,9 +91,13 @@ private:
 	int Hp_ = 0;
 	// 성장등의 변화가 있는 경우
 	int Level_ = 0;
+	// 성장의 최대치
+	int MaxLevel_ = 0;
 
 	// 시간체크
 	float AccTime_;
-
 	bool IsTimeUpdate_ = false;
+
+	// GrounTiles <-> EnvironmentTiles의 상태를 확인하기 위해 자신의 위치 정보를 가지고 있기
+	float4 Pos_;
 };

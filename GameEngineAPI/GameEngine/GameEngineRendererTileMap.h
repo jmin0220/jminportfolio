@@ -16,6 +16,17 @@ class GameEngineRendererTileMap;
 class Tile
 {
 	friend GameEngineRendererTileMap;
+public:
+	GameEngineRenderer* GetRenderer()
+	{
+		return Renderer;
+	}
+
+	GameEngineRenderer* SetRenderer(GameEngineRenderer* _Renderer)
+	{
+		Renderer = _Renderer;
+	}
+
 private:
 	GameEngineRenderer* Renderer;
 

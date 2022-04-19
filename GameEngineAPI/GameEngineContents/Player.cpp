@@ -80,6 +80,7 @@ void Player::Update()
 	ControlInventorySelectBoxWithMouse();
 
 	// TODO::타일맵 업데이트 함수 만들기
+	TileTimeUpdate();
 }
 
 // 상태 업데이트
@@ -508,6 +509,43 @@ bool Player::IsActionKeyUp()
 	return true;
 }
 
+void Player::TileTimeUpdate()
+{
+	for (std::vector<PlayerTileIndex*> Tiles: EnvironmentTiles_)
+	{
+		for (PlayerTileIndex* Tiles_: Tiles)
+		{
+			// 타일이 업데이트 활성화 상태일경우
+			if ( nullptr != Tiles_ && Tiles_->GetIsTimeUpdate() )
+			{
+				Tiles_->AddAccTime();
+
+				// 5초가 지났을 경우
+				// && 땅타일이 HollowWet인 경우
+				if (Tiles_->GetAccTime() >= 5.0f
+					&& GroundTiles_[Tiles_->GetPos().iy()][Tiles_->GetPos().ix()]->GetTileState() == (int)TILESTATE::HOLLOWWET)
+				{
+					// 1번 성장
+					Tiles_->SetLevel(Tiles_->GetLevel() + 1);
+					Tiles_->GetRenderer()->SetIndex(Tiles_->GetLevel());
+					Tiles_->ReSetAccTime();
+
+					// 설정한 최대 레벨에 도달했을 경우 시간 업데이트 끄기
+					if (Tiles_->GetLevel() >= Tiles_->GetMaxLevel())
+					{
+						Tiles_->SetLevel(Tiles_->GetMaxLevel());
+						Tiles_->SetIsTimeUpdate(false);
+					}
+				}
+				else if (Tiles_->GetAccTime() >= 5.0f)
+				{
+					Tiles_->ReSetAccTime();
+				}
+			}
+		}
+	}
+}
+
 // 마우스로 인벤토리 조작하기
 void Player::ControlInventorySelectBoxWithMouse()
 {
@@ -606,7 +644,6 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 	case (int)TILESTATE::HOLLOW:
 		SetGroundTile(PosX, PosY,
 			LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOW);
-
 		break;
 	case (int)TILESTATE::HOLLOWWET:
 
@@ -655,7 +692,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 		{
 			// 타일 생성
 			SetEnvironmentTile(PosX, PosY,
-				LevelEnvironmentTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_CROPS, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
+				LevelEnvironmentTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_CROPS, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET, 5);
 		}
 
 		break;
@@ -690,12 +727,13 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 	GroundTiles_[y][x]->SetTileState(_TileState);
 }
 
-void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState)
+void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState, int _MaxLevel /* = 0 */)
 {
 	EnvironmentTiles_[y][x] = _TileMap;
-	GroundTiles_[y][x]->SetTileState((int)TILESTATE::PLANTED);
 	EnvironmentTiles_[y][x]->SetTileState(_TileState);
 	EnvironmentTiles_[y][x]->SetLevel(0);
+	EnvironmentTiles_[y][x]->SetMaxLevel(_MaxLevel);
 	EnvironmentTiles_[y][x]->ReSetAccTime();
 	EnvironmentTiles_[y][x]->SetIsTimeUpdate(true);
+	EnvironmentTiles_[y][x]->SetPos({ static_cast<float>(x), static_cast<float>(y) });
 }

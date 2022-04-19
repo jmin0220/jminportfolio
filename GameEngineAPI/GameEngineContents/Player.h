@@ -165,7 +165,7 @@ private:
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
 	std::vector<std::vector<PlayerTileIndex*>> EnvironmentTiles_;
 	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
-	void SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
+	void SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState, int _MaxLevel = 0);
 public: 
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수
 	void SetGroundTiles(std::vector<std::vector<PlayerTileIndex*>> _GroundTiles)
@@ -182,4 +182,5 @@ private:
 	int PlayerTime_;
 
 	void TimeUpdate() {};
+	void TileTimeUpdate();
 };
