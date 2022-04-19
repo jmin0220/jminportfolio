@@ -41,13 +41,13 @@ TownLevel::~TownLevel()
 }
 
 
-void TownLevel::LevelChangeStart()
+void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 }
 
-void TownLevel::LevelChangeEnd()
+void TownLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 
 }

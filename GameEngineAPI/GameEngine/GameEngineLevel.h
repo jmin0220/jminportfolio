@@ -100,11 +100,14 @@ protected:
 
 	// 레벨이 변경될때 호출될 함수.
 	// 레벨이 시작될 때	
-	void ActorLevelChangeStart();
-	virtual void LevelChangeStart() {};
+	void ActorLevelChangeStart(GameEngineLevel* _PrevLevel);
+	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) {}
+
 	// 레벨이 종료될 때
-	void ActorLevelChangeEnd();
-	virtual void LevelChangeEnd() {};
+	void ActorLevelChangeEnd(GameEngineLevel* _NextLevel);
+	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) {}
+
+	void ObjectLevelMoveCheck(GameEngineLevel* _NextLevel);
 
 private:
 	static bool IsDebug;

@@ -38,12 +38,12 @@ BeachLevel::~BeachLevel()
 }
 
 
-void BeachLevel::LevelChangeStart()
+void BeachLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 }
 
-void BeachLevel::LevelChangeEnd()
+void BeachLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 
 }

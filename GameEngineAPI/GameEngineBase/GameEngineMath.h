@@ -4,6 +4,11 @@
 // Ό³Έν :
 class GameEngineMath
 {
+public:
+	static const float PIE;
+	static const float DEG;
+	static const float DegreeToRadian;
+
 private:
 	// constrcuter destructer
 	GameEngineMath();
@@ -23,6 +28,30 @@ private:
 
 class float4
 {
+public:
+	static float4 DegreeToDirectionFloat4(float _Degree)
+	{
+		return RadianToDirectionFloat4(_Degree * GameEngineMath::DegreeToRadian);
+	}
+
+	static float4 RadianToDirectionFloat4(float _Radian)
+	{
+		return { cosf(_Radian), sinf(_Radian) };
+	}
+
+	static float4 VectorRotationToDegreeZ(const float4& _Value, float _Degree)
+	{
+		return VectorRotationToRadianZ(_Value, _Degree * GameEngineMath::DegreeToRadian);
+	}
+
+	static float4 VectorRotationToRadianZ(const float4& _Value, float _Radian)
+	{
+		float4 Rot;
+		Rot.x = _Value.x * cosf(_Radian) - _Value.y * sinf(_Radian);
+		Rot.y = _Value.x * sinf(_Radian) + _Value.y * cosf(_Radian);
+		return Rot;
+	}
+
 public:
 	static float4 LEFT;
 	static float4 RIGHT;

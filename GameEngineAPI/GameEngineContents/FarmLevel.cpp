@@ -51,12 +51,12 @@ FarmLevel::~FarmLevel()
 }
 
 
-void FarmLevel::LevelChangeStart()
+void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	this->Player_->SetPosition(this->Player_->GetNextLevelPos());
 }
 
-void FarmLevel::LevelChangeEnd()
+void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 
 }

@@ -60,8 +60,8 @@ public:
 protected:
 	void Start() override;
 	void Update() override;
-	void LevelChangeStart() override;
-	void LevelChangeEnd() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	static char SelectBoxHotkey_;

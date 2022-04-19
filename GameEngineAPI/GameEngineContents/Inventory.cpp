@@ -350,7 +350,7 @@ void Inventory::CollisionInit()
 }
 
 // 레벨 전환
-void Inventory::LevelChangeStart()
+void Inventory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	// 이전 레벨의 정보를 가져오기
 	for (size_t i = 0; i < 36; i++)
@@ -372,7 +372,7 @@ void Inventory::LevelChangeStart()
 	}
 }
 
-void Inventory::LevelChangeEnd()
+void Inventory::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	// 다음 레벨에 정보를 넘겨주기
 	for (size_t i = 0; i < 36; i++)

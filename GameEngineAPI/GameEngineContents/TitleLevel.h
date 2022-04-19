@@ -16,7 +16,7 @@ public:
 	TitleLevel& operator=(TitleLevel&& _Other) noexcept = delete;
 
 protected:
-	void LevelChangeStart() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void Loading() override;
 	void Update() override;
 

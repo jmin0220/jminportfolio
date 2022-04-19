@@ -35,7 +35,7 @@ void TitleLevel::Update()
 	}
 }
 
-void TitleLevel::LevelChangeStart()
+void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	BackGround* backGround = CreateActor<BackGround>((int)ORDER::BACKGROUND);
 	backGround->GetRenderer()->SetImage(IMAGE_TITLE_BACKGOUND);

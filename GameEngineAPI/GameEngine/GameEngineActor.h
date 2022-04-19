@@ -62,6 +62,11 @@ public:
 		Position_ += _Value;
 	}
 
+	inline void NextLevelOn()
+	{
+		NextLevelOn_ = true;
+	}
+
 	void SetOrder(int _Order) override;
 
 protected:
@@ -69,8 +74,8 @@ protected:
 	virtual void Update() {};
 	virtual void Render() {};
 	
-	virtual void LevelChangeStart() {}
-	virtual void LevelChangeEnd() {}
+	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) {}
+	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) {}
 
 	void Release();
 
@@ -84,6 +89,13 @@ private:
 	GameEngineLevel* Level_;
 	float4 Position_;
 	float4 Scale_;
+
+	bool NextLevelOn_;
+
+	inline void NextLevelOff()
+	{
+		NextLevelOn_ = false;
+	}
 
 	// 액터가 생성된 레벨의 정보를 설정
 	inline void SetLevel(GameEngineLevel* _Level)
