@@ -180,6 +180,8 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_FONT);
+	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_FONT_NUMBER);
 	Image->Cut({ 24, 48 });
 

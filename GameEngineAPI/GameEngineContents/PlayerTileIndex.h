@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineRendererTileMap.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngine/GameEngineCollision.h>
 
 class PlayerTileIndex : public Tile
 {
@@ -83,6 +84,16 @@ public:
 		return Pos_;
 	}
 
+	inline GameEngineCollision* GetCollision()
+	{
+		return Collision_;
+	}
+
+	inline void SetCollision(GameEngineCollision* _Collision)
+	{
+		Collision_ = _Collision;
+	}
+
 private:
 	// 타일에 무엇이 있는지
 	int TileState_;
@@ -97,6 +108,9 @@ private:
 	// 시간체크
 	float AccTime_;
 	bool IsTimeUpdate_ = false;
+
+	// 마우스와의 충돌처리
+	GameEngineCollision* Collision_;
 
 	// GrounTiles <-> EnvironmentTiles의 상태를 확인하기 위해 자신의 위치 정보를 가지고 있기
 	float4 Pos_;

@@ -182,5 +182,5 @@ private:
 	int PlayerTime_;
 
 	void TimeUpdate() {};
-	void TileTimeUpdate();
+	void TileUpdate();
 };

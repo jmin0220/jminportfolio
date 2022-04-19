@@ -62,6 +62,7 @@
 #define IMAGE_TOOL_ICON "ToolIcon.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
+#define IMAGE_FONT "Font.bmp"
 #define IMAGE_FONT_NUMBER "FontNumber.bmp"
 
 #define IMAGE_ENVIRONMENT_SEED "Seed.bmp"
@@ -134,6 +135,7 @@
 #define COL_GROUP_INVENTORY_EXTEND_BAR "InventoryExtendBar"
 #define COL_GROUP_INVENTORY_BOX "InventoryBox"
 #define COL_GROUP_INVENTORY_EXTEND_BOX "InventoryExtendBox"
+#define COL_GROUP_TILE_ENVIRONMENT "EnvironmentTile"
 
 // ≈∏¿œ∏ 
 #define TILEMAP_SIZE 48

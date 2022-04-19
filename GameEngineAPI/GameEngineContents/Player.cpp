@@ -36,7 +36,7 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
@@ -80,7 +80,7 @@ void Player::Update()
 	ControlInventorySelectBoxWithMouse();
 
 	// TODO::타일맵 업데이트 함수 만들기
-	TileTimeUpdate();
+	TileUpdate();
 }
 
 // 상태 업데이트
@@ -509,12 +509,26 @@ bool Player::IsActionKeyUp()
 	return true;
 }
 
-void Player::TileTimeUpdate()
+void Player::TileUpdate()
 {
-	for (std::vector<PlayerTileIndex*> Tiles: EnvironmentTiles_)
+	for (std::vector<PlayerTileIndex*> Tiles : EnvironmentTiles_)
 	{
-		for (PlayerTileIndex* Tiles_: Tiles)
+		for (PlayerTileIndex* Tiles_ : Tiles)
 		{
+			// 플레이어의 위치에 따라서 렌더링 순서를 변경
+			if (nullptr != Tiles_
+				&& Tiles_->GetPos().iy() >= GetPosition().y / TILEMAP_SIZE)
+			{
+				Tiles_->GetRenderer()->SetOrder((int)ORDER::FRONTB);
+			}
+			else if (nullptr != Tiles_
+				&& Tiles_->GetPos().iy() < GetPosition().y / TILEMAP_SIZE)
+			{
+				Tiles_->GetRenderer()->SetOrder((int)ORDER::FRONTA);
+			}
+				
+
+			// 시간 관련 업데이트
 			// 타일이 업데이트 활성화 상태일경우
 			if ( nullptr != Tiles_ && Tiles_->GetIsTimeUpdate() )
 			{
@@ -662,8 +676,8 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 			// 타일 생성
-			SetGroundTile(PosX, PosY,
-				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
+			SetEnvironmentTile(PosX, PosY,
+				LevelEnvironmentTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_OAKTREE, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET, 4);
 		}
 
 		break;
@@ -736,4 +750,5 @@ void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _Ti
 	EnvironmentTiles_[y][x]->ReSetAccTime();
 	EnvironmentTiles_[y][x]->SetIsTimeUpdate(true);
 	EnvironmentTiles_[y][x]->SetPos({ static_cast<float>(x), static_cast<float>(y) });
+	//EnvironmentTiles_[y][x]->SetCollision(CreateCollision(COL_GROUP_TILE_ENVIRONMENT, { TILEMAP_SIZE, TILEMAP_SIZE }));
 }

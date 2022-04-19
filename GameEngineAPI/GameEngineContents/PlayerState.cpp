@@ -54,6 +54,11 @@ void Player::ActionUpdate()
 		{
 			// 隔风
 		}
+		else if (Inventory_->GetSelectedItem() == ITEM_NAME_OAKTREE)
+		{
+			// 鸥老积己
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::OAKTREE);
+		}
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_PARSNIP)
 		{
 			// 鸥老积己
