@@ -3,6 +3,9 @@
 #include "TileStateTable.h"
 #include "ItemTable.h"
 #include "Item.h"
+#include "Parsnip.h"
+#include "Oaktree.h"
+#include "Potato.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -64,6 +67,9 @@ void Player::Start()
 	PlayerKeyInit();
 	// 카메라 위치 초기화
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
+
+	// 플레이어의 충돌체 생성
+	SetCollision(CreateCollision(COL_GROUP_PLAYER, { 48, 48 }));
 }
 
 void Player::Update()
@@ -80,7 +86,7 @@ void Player::Update()
 	ControlInventorySelectBoxWithMouse();
 
 	// TODO::타일맵 업데이트 함수 만들기
-	TileUpdate();
+	CropsUpdate();
 }
 
 // 상태 업데이트
@@ -101,6 +107,34 @@ void Player::StateUpdate()
 		break;
 	default:
 		break;
+	}
+}
+
+
+void Player::SetCropsActorSize(int _X, int _Y)
+{
+	if (0 >= _X)
+	{
+		MsgBoxAssert("0개인 타일맵을 만들수 없습니다.");
+		return;
+	}
+
+	if (0 >= _Y)
+	{
+		MsgBoxAssert("0개인 타일맵을 만들수 없습니다.");
+		return;
+	}
+
+	EnvironmentActor_.resize(_Y);
+
+	for (size_t y = 0; y < EnvironmentActor_.size(); y++)
+	{
+		EnvironmentActor_[y].resize(_X);
+
+		for (size_t x = 0; x < EnvironmentActor_[y].size(); x++)
+		{
+			EnvironmentActor_[y][x] = nullptr;
+		}
 	}
 }
 
@@ -332,7 +366,7 @@ bool Player::ColRenderOrderCheck()
 }
 
 // 충돌체크
-void Player::ColWallCheck(float4 _MoveDir)
+void Player::ColCheck(float4 _MoveDir)
 {
 	// MoveDir은 오직 이동중에서만 갱신됨.
 	MoveDir_ = _MoveDir;
@@ -366,6 +400,11 @@ void Player::ColWallCheck(float4 _MoveDir)
 	if (RGB(0, 0, 0) != Color)
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
+
+		if (PlayerCollision_->CollisionCheck(COL_GROUP_TILE_ENVIRONMENT, CollisionType::Rect, CollisionType::Rect))
+		{
+			SetMove(-(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 2));
+		}
 	}
 
 
@@ -509,51 +548,52 @@ bool Player::IsActionKeyUp()
 	return true;
 }
 
-void Player::TileUpdate()
+void Player::CropsUpdate()
 {
-	for (std::vector<PlayerTileIndex*> Tiles : EnvironmentTiles_)
+	for (std::vector<Crops*> Actors : EnvironmentActor_)
 	{
-		for (PlayerTileIndex* Tiles_ : Tiles)
+		for (Crops* Actor_ : Actors)
 		{
 			// 플레이어의 위치에 따라서 렌더링 순서를 변경
-			if (nullptr != Tiles_
-				&& Tiles_->GetPos().iy() >= GetPosition().y / TILEMAP_SIZE)
+			if (nullptr != Actor_
+				&& Actor_->GetPosition().iy() >= GetPosition().y / TILEMAP_SIZE)
 			{
-				Tiles_->GetRenderer()->SetOrder((int)ORDER::FRONTB);
+				Actor_->GetRenderer()->SetOrder((int)ORDER::FRONTB);
 			}
-			else if (nullptr != Tiles_
-				&& Tiles_->GetPos().iy() < GetPosition().y / TILEMAP_SIZE)
+			else if (nullptr != Actor_
+				&& Actor_->GetPosition().iy() < GetPosition().y / TILEMAP_SIZE)
 			{
-				Tiles_->GetRenderer()->SetOrder((int)ORDER::FRONTA);
+				Actor_->GetRenderer()->SetOrder((int)ORDER::FRONTA);
 			}
 				
 
 			// 시간 관련 업데이트
 			// 타일이 업데이트 활성화 상태일경우
-			if ( nullptr != Tiles_ && Tiles_->GetIsTimeUpdate() )
+			if ( nullptr != Actor_ && Actor_->GetIsTimeUpdate() )
 			{
-				Tiles_->AddAccTime();
+				Actor_->AddAccTime(GameEngineTime::GetDeltaTime());
 
 				// 5초가 지났을 경우
 				// && 땅타일이 HollowWet인 경우
-				if (Tiles_->GetAccTime() >= 5.0f
-					&& GroundTiles_[Tiles_->GetPos().iy()][Tiles_->GetPos().ix()]->GetTileState() == (int)TILESTATE::HOLLOWWET)
+				if (Actor_->GetAccTime() >= 5.0f
+					// 생성시에 조정된 타일을 다시 되돌리기 위해 - TILEMAP_SIZE / 2만큼 조정
+					&& GroundTiles_[(Actor_->GetPosition().iy() - TILEMAP_SIZE / 2) / TILEMAP_SIZE][(Actor_->GetPosition().ix() - TILEMAP_SIZE / 2) / TILEMAP_SIZE]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 				{
 					// 1번 성장
-					Tiles_->SetLevel(Tiles_->GetLevel() + 1);
-					Tiles_->GetRenderer()->SetIndex(Tiles_->GetLevel());
-					Tiles_->ReSetAccTime();
+					Actor_->SetGrowLevel(Actor_->GetGrowLevel() + 1);
+					Actor_->GetRenderer()->SetIndex(Actor_->GetGrowLevel());
+					Actor_->ReSetAccTime();
 
 					// 설정한 최대 레벨에 도달했을 경우 시간 업데이트 끄기
-					if (Tiles_->GetLevel() >= Tiles_->GetMaxLevel())
+					if (Actor_->GetGrowLevel() >= Actor_->GetMaxLevel())
 					{
-						Tiles_->SetLevel(Tiles_->GetMaxLevel());
-						Tiles_->SetIsTimeUpdate(false);
+						Actor_->SetGrowLevel(Actor_->GetMaxLevel());
+						Actor_->SetIsTimeUpdate(false);
 					}
 				}
-				else if (Tiles_->GetAccTime() >= 5.0f)
+				else if (Actor_->GetAccTime() >= 5.0f)
 				{
-					Tiles_->ReSetAccTime();
+					Actor_->ReSetAccTime();
 				}
 			}
 		}
@@ -675,9 +715,8 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 		if (nullptr != GroundTiles_[PosY][PosX]
 			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
-			// 타일 생성
-			SetEnvironmentTile(PosX, PosY,
-				LevelEnvironmentTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_OAKTREE, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET, 4);
+			// Crop 생성
+			SetCropsActor(PosX, PosY, (int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), 4);
 		}
 
 		break;
@@ -704,9 +743,8 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 		if (nullptr != GroundTiles_[PosY][PosX]
 			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
-			// 타일 생성
-			SetEnvironmentTile(PosX, PosY,
-				LevelEnvironmentTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_ENVIRONMENT_CROPS, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET, 5);
+			// Crop 생성
+			SetCropsActor(PosX, PosY,(int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), 5);
 		}
 
 		break;
@@ -741,14 +779,15 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 	GroundTiles_[y][x]->SetTileState(_TileState);
 }
 
-void Player::SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState, int _MaxLevel /* = 0 */)
+void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, int _MaxLevel /* = 0 */)
 {
-	EnvironmentTiles_[y][x] = _TileMap;
-	EnvironmentTiles_[y][x]->SetTileState(_TileState);
-	EnvironmentTiles_[y][x]->SetLevel(0);
-	EnvironmentTiles_[y][x]->SetMaxLevel(_MaxLevel);
-	EnvironmentTiles_[y][x]->ReSetAccTime();
-	EnvironmentTiles_[y][x]->SetIsTimeUpdate(true);
-	EnvironmentTiles_[y][x]->SetPos({ static_cast<float>(x), static_cast<float>(y) });
-	//EnvironmentTiles_[y][x]->SetCollision(CreateCollision(COL_GROUP_TILE_ENVIRONMENT, { TILEMAP_SIZE, TILEMAP_SIZE }));
+	EnvironmentActor_[y][x] = _CropActor;
+	EnvironmentActor_[y][x]->SetCropState(_CropState);
+	EnvironmentActor_[y][x]->SetGrowLevel(0);
+	EnvironmentActor_[y][x]->SetMaxLevel(_MaxLevel);
+	EnvironmentActor_[y][x]->ReSetAccTime();
+	EnvironmentActor_[y][x]->SetIsTimeUpdate(true);
+	// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
+	EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
+	EnvironmentActor_[y][x]->CreateCollision(COL_GROUP_TILE_ENVIRONMENT, { TILEMAP_SIZE, TILEMAP_SIZE });
 }

@@ -1,7 +1,8 @@
 #pragma once
+#include "Crops.h"
 
 // Ό³Έν :
-class Potato
+class Potato : public Crops
 {
 public:
 	// constrcuter destructer
@@ -15,6 +16,7 @@ public:
 	Potato& operator=(Potato&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
 
 private:
 

@@ -3,7 +3,6 @@
 
 BackGround::BackGround()
 	: TileMap_(this)
-	, EnvironmentTileMap_(this)
 {
 }
 

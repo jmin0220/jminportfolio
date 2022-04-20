@@ -90,25 +90,25 @@ void Player::MoveUpdate()
 	{
 		PlayerAnimationChange(ANIM_WALK_RIGHT);
 
-		ColWallCheck(float4::RIGHT);
+		ColCheck(float4::RIGHT);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
 	{
 		PlayerAnimationChange(ANIM_WALK_LEFT);
 
-		ColWallCheck(float4::LEFT);
+		ColCheck(float4::LEFT);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
 	{
 		PlayerAnimationChange(ANIM_WALK_UP);
 
-		ColWallCheck(float4::UP);
+		ColCheck(float4::UP);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
 	{
 		PlayerAnimationChange(ANIM_WALK_DOWN);
 
-		ColWallCheck(float4::DOWN);
+		ColCheck(float4::DOWN);
 	}
 }
 

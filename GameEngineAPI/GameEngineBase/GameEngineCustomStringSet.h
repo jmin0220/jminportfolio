@@ -130,6 +130,7 @@
 #define MAP_BEACH_SIZE_W 4992.0f
 
 // ÄÃ¸®Àü
+#define COL_GROUP_PLAYER "PlayerCollision"
 #define COL_GROUP_MOUSE "Mouse"
 #define COL_GROUP_INVENTORY_BAR "InventoryBar"
 #define COL_GROUP_INVENTORY_EXTEND_BAR "InventoryExtendBar"

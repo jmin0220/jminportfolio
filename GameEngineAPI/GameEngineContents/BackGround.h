@@ -22,7 +22,6 @@ public:
 	}
 
 	GameEngineRendererTileMap TileMap_;
-	GameEngineRendererTileMap EnvironmentTileMap_;
 
 protected:
 	void Start() override;

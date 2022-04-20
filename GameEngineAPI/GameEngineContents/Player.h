@@ -10,6 +10,7 @@
 #include "EnergyBar.h"
 #include "Inventory.h"
 #include "PlayerTileIndex.h"
+#include "Crops.h"
 
 // 설명 :
 class GameEngineImage;
@@ -34,11 +35,6 @@ public:
 		LevelTileMap_ = _TileMap;
 	}
 
-	inline void SetEnvironmentTileMap(GameEngineRendererTileMap* _TileMap)
-	{
-		LevelEnvironmentTileMap_ = _TileMap;
-	}
-
 	// 다음 레벨 정보를 취득
 	inline std::string GetNextLevel()
 	{
@@ -56,6 +52,16 @@ public:
 		NextLevelPos_ = _Pos;
 	}
 
+	inline GameEngineCollision* GetCollision()
+	{
+		return PlayerCollision_;
+	}
+
+	inline void SetCollision(GameEngineCollision* _Collision)
+	{
+		PlayerCollision_ = _Collision;
+	}
+
 	// 플레이어 초기화
 	void PlayerInit();
 
@@ -69,6 +75,9 @@ private:
 	float Speed_; 
 	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.
 	float4 MoveDir_;
+
+	// 플레이어의 충돌체
+	GameEngineCollision* PlayerCollision_;
 
 	// 다음 레벨
 	std::string NextLevel_;
@@ -97,7 +106,7 @@ private:
 	float4 SetCheckPos(float4 _NextPos);
 
 	// 맵과의 충돌체크
-	void ColWallCheck(float4 _MoveDir);
+	void ColCheck(float4 _MoveDir);
 
 	// 현재 레벨
 	inline std::string GetCurrentLevel()
@@ -158,29 +167,27 @@ private:
 
 	// 레벨의 타일맵을 저장
 	GameEngineRendererTileMap* LevelTileMap_;
-	// 작물등의 정보를 저장할 타일
-	GameEngineRendererTileMap* LevelEnvironmentTileMap_;
+	// 작물등의 정보를 저장할 액터
+	Crops* LevelEnvironmentActor_;
 
 	// 타일맵의 스테이터스를 저장
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
-	std::vector<std::vector<PlayerTileIndex*>> EnvironmentTiles_;
+	std::vector<std::vector<Crops*>> EnvironmentActor_;
 	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
-	void SetEnvironmentTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState, int _MaxLevel = 0);
+	void SetCropsActor(int x, int y, int _CropState, Crops* _CropActor ,int _MaxLevel = 0);
+
 public: 
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수
 	void SetGroundTiles(std::vector<std::vector<PlayerTileIndex*>> _GroundTiles)
 	{
 		GroundTiles_ = _GroundTiles;
 	}
-	void SetEnvironmentTiles(std::vector<std::vector<PlayerTileIndex*>> _EnvironmentTiles)
-	{
-		EnvironmentTiles_ = _EnvironmentTiles;
-	}
+	void SetCropsActorSize(int _X, int _Y);
 
 	// TODO::시간 관련 
 private:
 	int PlayerTime_;
 
 	void TimeUpdate() {};
-	void TileUpdate();
+	void CropsUpdate();
 };

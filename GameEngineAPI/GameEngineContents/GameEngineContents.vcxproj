@@ -240,6 +240,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Oaktree.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Parsnip.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -357,6 +365,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Oaktree.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Parsnip.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

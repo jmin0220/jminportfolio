@@ -19,7 +19,6 @@ FarmLevel::FarmLevel()
 	BackGround_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_FARM_BACKGORUND);
 	BackGround_->TileMap_.TileRangeSetting(80, 65, { TILEMAP_SIZE, TILEMAP_SIZE });
-	BackGround_->EnvironmentTileMap_.TileRangeSetting(80, 65, { TILEMAP_SIZE, TILEMAP_SIZE });
 
 	BGBuilding_->GetRenderer()->SetPivot({ MAP_FARM_SIZE_W / 2, MAP_FARM_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_FARM_BUILDING);
@@ -35,12 +34,11 @@ FarmLevel::FarmLevel()
 
 	// 타일의 랜더를 저장
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
-	this->Player_->SetEnvironmentTileMap(&BackGround_->EnvironmentTileMap_);
 
 	// 타일의 상태를 저장
 	TileRangeSetting(80, 65);
 	this->Player_->SetGroundTiles(this->GroundTiles_);
-	this->Player_->SetEnvironmentTiles(this->EnvironmentTiles_);
+	this->Player_->SetCropsActorSize(80, 65);
 
 	// 플레이어가 처음 시작하는 맵이므로 PlayerInit를 한번 실행.
 	this->Player_->PlayerInit();

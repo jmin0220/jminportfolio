@@ -15,7 +15,6 @@ TownLevel::TownLevel()
 	BackGround_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_TOWN_BACKGORUND);
 	BackGround_->TileMap_.TileRangeSetting(120, 110, { TILEMAP_SIZE, TILEMAP_SIZE });
-	BackGround_->EnvironmentTileMap_.TileRangeSetting(80, 65, { TILEMAP_SIZE, TILEMAP_SIZE });
 
 	BGBuilding_->GetRenderer()->SetPivot({ MAP_TOWN_SIZE_W / 2, MAP_TOWN_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_TOWN_BUILDING);
@@ -28,12 +27,11 @@ TownLevel::TownLevel()
 
 	// 타일의 랜더를 저장
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
-	this->Player_->SetEnvironmentTileMap(&BackGround_->EnvironmentTileMap_);
 
 	// 타일의 상태를 저장
 	TileRangeSetting(120, 110);
 	this->Player_->SetGroundTiles(this->GroundTiles_);
-	this->Player_->SetEnvironmentTiles(this->EnvironmentTiles_);
+	this->Player_->SetCropsActorSize(120, 110);
 }
 
 TownLevel::~TownLevel() 

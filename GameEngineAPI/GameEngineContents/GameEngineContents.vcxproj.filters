@@ -89,6 +89,12 @@
     <ClCompile Include="Font.cpp">
       <Filter>99Etc</Filter>
     </ClCompile>
+    <ClCompile Include="Parsnip.cpp">
+      <Filter>02Play\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="Oaktree.cpp">
+      <Filter>02Play\Crop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -187,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>99Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Parsnip.h">
+      <Filter>02Play\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="Oaktree.h">
+      <Filter>02Play\Crop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
