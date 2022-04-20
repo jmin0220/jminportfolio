@@ -62,6 +62,16 @@ public:
 		PlayerCollision_ = _Collision;
 	}
 
+	inline GameEngineCollision* GetActionCollision()
+	{
+		return PlayerActionCollision_;
+	}
+
+	inline void SetActionCollision(GameEngineCollision* _Collision)
+	{
+		PlayerActionCollision_ = _Collision;
+	}
+
 	// 플레이어 초기화
 	void PlayerInit();
 
@@ -78,6 +88,8 @@ private:
 
 	// 플레이어의 충돌체
 	GameEngineCollision* PlayerCollision_;
+	GameEngineCollision* PlayerActionCollision_;
+	std::vector<GameEngineCollision*> ActionColResult_;
 
 	// 다음 레벨
 	std::string NextLevel_;
@@ -174,7 +186,7 @@ private:
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
 	std::vector<std::vector<Crops*>> EnvironmentActor_;
 	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
-	void SetCropsActor(int x, int y, int _CropState, Crops* _CropActor ,int _MaxLevel = 0);
+	void SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, std::string _ColGroup ,int _MaxLevel = 0);
 
 public: 
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수

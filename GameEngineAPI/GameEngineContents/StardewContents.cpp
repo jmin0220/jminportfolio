@@ -154,11 +154,11 @@ void StardewContents::GameInit()
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_CROPS);
 	Image->Cut({ 64, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_MAPLETREE);
-	Image->Cut({ 144, 312 });
+	Image->Cut({ 144, 624 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_OAKTREE);
-	Image->Cut({ 144, 312 });
+	Image->Cut({ 144, 624 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_PINETREE);
-	Image->Cut({ 144, 312 });
+	Image->Cut({ 144, 624 });
 
 	// Renderer->RenderPivot::CENTER:
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FISHING);

@@ -76,6 +76,11 @@ public:
 		return CropState_;
 	}
 
+	inline GameEngineActor* GetColActor()
+	{
+		return CollisionActor_;
+	}
+
 protected:
 	void Start() override {};
 

@@ -12,6 +12,11 @@
 #define ACTOR_TITLE_BUTTON_EXIT "TitleButtonExitGame"
 #define ACTOR_TITLE_LOGO "TitleLogo"
 
+// 플레이어 수치
+#define PLAYER_COL_SIZE 30
+#define PLAYER_ACTION_COL_SIZE 15
+#define PLAYER_ACTION_COL_LENG 24.0f
+
 // 디렉토리
 #define DIR_PARENT "GameEngineAPI"
 #define DIR_PLAYER "Player"
@@ -34,12 +39,6 @@
 #define IMAGE_ENERGYBAR_POS_H 591
 #define IMAGE_ENERGYBAR_POS_W 1249
 #define IMAGE_FARM_BUILDING "FarmBuildings.bmp"
-#define IMAGE_PLAYER_CLOTH "PlayerCloth.bmp"
-#define IMAGE_PLAYER_HAIR "PlayerHair.bmp"
-#define IMAGE_PLAYER_HAT "PlayerHat.bmp"
-#define IMAGE_PLAYER_MASK "PlayerMask.bmp"
-#define IMAGE_PLAYER_MAN_BODY "PlayerManBody.bmp"
-#define IMAGE_PLAYER_WOMAN_BODY "PlayerWomanBody.bmp"
 #define IMAGE_PLAYER_MAN_TOTAL "PlayerManBodyTotal.bmp"
 #define IMAGE_INVENTORY_BAR "InventoryBar.bmp"
 #define IMAGE_INVENTORY_EXTEND "InventoryExtend.bmp"
@@ -131,12 +130,14 @@
 
 // 컬리전
 #define COL_GROUP_PLAYER "PlayerCollision"
+#define COL_GROUP_PLAYER_ACTION "PlayerActionCollision"
 #define COL_GROUP_MOUSE "Mouse"
 #define COL_GROUP_INVENTORY_BAR "InventoryBar"
 #define COL_GROUP_INVENTORY_EXTEND_BAR "InventoryExtendBar"
 #define COL_GROUP_INVENTORY_BOX "InventoryBox"
 #define COL_GROUP_INVENTORY_EXTEND_BOX "InventoryExtendBox"
-#define COL_GROUP_TILE_ENVIRONMENT "EnvironmentTile"
+#define COL_GROUP_CROPS "CropsCol"
+#define COL_GROUP_TREES "TreeCol"
 
 // 타일맵
 #define TILEMAP_SIZE 48

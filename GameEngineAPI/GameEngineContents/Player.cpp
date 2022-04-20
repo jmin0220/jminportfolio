@@ -69,7 +69,9 @@ void Player::Start()
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
 
 	// 플레이어의 충돌체 생성
-	SetCollision(CreateCollision(COL_GROUP_PLAYER, { 48, 48 }));
+	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
+	SetActionCollision(CreateCollision(COL_GROUP_PLAYER_ACTION, { PLAYER_ACTION_COL_SIZE, PLAYER_ACTION_COL_SIZE }, { PLAYER_ACTION_COL_LENG, 0.0f}));
+	GetActionCollision()->Off();
 }
 
 void Player::Update()
@@ -113,18 +115,6 @@ void Player::StateUpdate()
 
 void Player::SetCropsActorSize(int _X, int _Y)
 {
-	if (0 >= _X)
-	{
-		MsgBoxAssert("0개인 타일맵을 만들수 없습니다.");
-		return;
-	}
-
-	if (0 >= _Y)
-	{
-		MsgBoxAssert("0개인 타일맵을 만들수 없습니다.");
-		return;
-	}
-
 	EnvironmentActor_.resize(_Y);
 
 	for (size_t y = 0; y < EnvironmentActor_.size(); y++)
@@ -401,7 +391,7 @@ void Player::ColCheck(float4 _MoveDir)
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
 
-		if (PlayerCollision_->CollisionCheck(COL_GROUP_TILE_ENVIRONMENT, CollisionType::Rect, CollisionType::Rect))
+		if (PlayerCollision_->CollisionCheck(COL_GROUP_CROPS, CollisionType::Rect, CollisionType::Rect))
 		{
 			SetMove(-(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 2));
 		}
@@ -556,12 +546,12 @@ void Player::CropsUpdate()
 		{
 			// 플레이어의 위치에 따라서 렌더링 순서를 변경
 			if (nullptr != Actor_
-				&& Actor_->GetPosition().iy() >= GetPosition().y / TILEMAP_SIZE)
+				&& Actor_->GetPosition().iy() >= GetPosition().y)
 			{
 				Actor_->GetRenderer()->SetOrder((int)ORDER::FRONTB);
 			}
 			else if (nullptr != Actor_
-				&& Actor_->GetPosition().iy() < GetPosition().y / TILEMAP_SIZE)
+				&& Actor_->GetPosition().iy() < GetPosition().y)
 			{
 				Actor_->GetRenderer()->SetOrder((int)ORDER::FRONTA);
 			}
@@ -716,7 +706,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 			// Crop 생성
-			SetCropsActor(PosX, PosY, (int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), 4);
+			SetCropsActor(PosX, PosY, (int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), COL_GROUP_TREES, 4);
 		}
 
 		break;
@@ -744,7 +734,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
 			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
 		{
 			// Crop 생성
-			SetCropsActor(PosX, PosY,(int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), 5);
+			SetCropsActor(PosX, PosY,(int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), COL_GROUP_CROPS, 5);
 		}
 
 		break;
@@ -779,7 +769,7 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 	GroundTiles_[y][x]->SetTileState(_TileState);
 }
 
-void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, int _MaxLevel /* = 0 */)
+void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, std::string _ColGroup, int _MaxLevel /* = 0 */)
 {
 	EnvironmentActor_[y][x] = _CropActor;
 	EnvironmentActor_[y][x]->SetCropState(_CropState);
@@ -789,5 +779,5 @@ void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, int 
 	EnvironmentActor_[y][x]->SetIsTimeUpdate(true);
 	// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
 	EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
-	EnvironmentActor_[y][x]->CreateCollision(COL_GROUP_TILE_ENVIRONMENT, { TILEMAP_SIZE, TILEMAP_SIZE });
+	EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
 }

@@ -11,6 +11,9 @@
 
 void Player::IdleUpdate()
 {
+	// Idle 상태에서는 액션충돌체 끄기
+	GetActionCollision()->Off();
+
 	// 액션은 이동보다 우선순위가 높음.
 	if (true == IsActionKeyDown())
 	{
@@ -39,9 +42,14 @@ void Player::ActionUpdate()
 	{
 		float4 CheckLength = MoveDir_ * 24;
 		float4 Pos = { GetPosition().x + CheckLength.x, GetPosition().y + CheckLength.y + 12.0f };
-		
+
+		// 액션이 끝나는 순간에만 액션충돌체 켜기
+		GetActionCollision()->On();
+
 		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
 		{
+			// TODO::농작물일경우 부셔짐 처리
+
 			// 타일생성
 			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW);
 		}
@@ -89,24 +97,28 @@ void Player::MoveUpdate()
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
 	{
 		PlayerAnimationChange(ANIM_WALK_RIGHT);
+		GetActionCollision()->SetPivot({ PLAYER_ACTION_COL_LENG , 0.0f});
 
 		ColCheck(float4::RIGHT);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
 	{
 		PlayerAnimationChange(ANIM_WALK_LEFT);
+		GetActionCollision()->SetPivot({ -PLAYER_ACTION_COL_LENG , 0.0f });
 
 		ColCheck(float4::LEFT);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
 	{
 		PlayerAnimationChange(ANIM_WALK_UP);
+		GetActionCollision()->SetPivot({ 0.0f, -PLAYER_ACTION_COL_LENG });
 
 		ColCheck(float4::UP);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
 	{
 		PlayerAnimationChange(ANIM_WALK_DOWN);
+		GetActionCollision()->SetPivot({ 0.0f, PLAYER_ACTION_COL_LENG });
 
 		ColCheck(float4::DOWN);
 	}
