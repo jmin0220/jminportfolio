@@ -40,7 +40,7 @@ public:
 
 	inline GameEngineRect GetRect()
 	{
-		return GameEngineRect(GetActor()->GetPosition() + Pivot_, Scale_);
+		return GameEngineRect(GetActor()->GetPosition() + Pivot_ + NextPos_, Scale_);
 	}
 
 	void CameraEffectOff()

@@ -41,7 +41,7 @@ void Player::ActionUpdate()
 	if (true == RendererBody_->IsEndAnimation())
 	{
 		float4 CheckLength = MoveDir_ * 24;
-		float4 Pos = { GetPosition().x + CheckLength.x, GetPosition().y + CheckLength.y + 12.0f };
+		float4 Pos = { GetPosition().x + CheckLength.x + MoveDir_.x * 48.0f, GetPosition().y + CheckLength.y + 12.0f };
 
 		// 액션이 끝나는 순간에만 액션충돌체 켜기
 		GetActionCollision()->On();

@@ -386,15 +386,15 @@ void Player::ColCheck(float4 _MoveDir)
 
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 	
+	if (PlayerCollision_->NextPostCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect))
+	{
+		MoveDir_ = float4::ZERO;
+	}
+
 	// 충돌판정
 	if (RGB(0, 0, 0) != Color)
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
-
-		if (PlayerCollision_->CollisionCheck(COL_GROUP_CROPS, CollisionType::Rect, CollisionType::Rect))
-		{
-			SetMove(-(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 2));
-		}
 	}
 
 

@@ -83,6 +83,8 @@ void Inventory::Start()
 
 	InitKey();
 	CollisionInit();
+
+
 }
 
 void Inventory::Update()
@@ -328,6 +330,7 @@ void Inventory::CollisionInit()
 
 	ColInventoryBar_ = CreateCollision(COL_GROUP_INVENTORY_BAR, { 800, 96 }, { IMAGE_INVENTORYBAR_POS_DOWN_X, IMAGE_INVENTORYBAR_POS_DOWN_Y });
 	ColInventoryExtBar_ = CreateCollision(COL_GROUP_INVENTORY_EXTEND_BAR, { 848, 272 }, { IMAGE_INVENTORY_EXT_POS_X, IMAGE_INVENTORY_EXT_POS_Y });
+	ColInventoryExtBar_->Off();
 
 	for (size_t i = 0; i < 12; i++)
 	{
@@ -345,6 +348,7 @@ void Inventory::CollisionInit()
 			PosY = IMAGE_INVENTORY_EXT_POS_Y - (83 - (64 * (float)j)) + 4 * j;
 
 			ColInventoryExtendBox_[i] = CreateCollision(COL_GROUP_INVENTORY_EXTEND_BOX, {64, 64}, {PosX, PosY});
+			ColInventoryExtendBox_[i]->Off();
 		}
 	}
 }
