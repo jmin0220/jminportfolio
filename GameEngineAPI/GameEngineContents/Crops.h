@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include "Item.h"
 
 // 설명 :
 class Crops : public GameEngineActor
@@ -83,10 +84,10 @@ public:
 	}
 
 	void Destroy();
+	virtual Item* CreateItem() { return nullptr;  };
 
 protected:
 	void Start() override {};
-	virtual void CreateItem() {};
 
 	// Hp가 있는 아이템의 경우
 	int Hp_ = 0;

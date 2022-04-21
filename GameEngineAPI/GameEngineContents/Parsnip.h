@@ -15,9 +15,9 @@ public:
 	Parsnip& operator=(const Parsnip& _Other) = delete;
 	Parsnip& operator=(Parsnip&& _Other) noexcept = delete;
 
+	Item* CreateItem() override;
 protected:
 	void Start() override;
-	void CreateItem() override;
 
 private:
 

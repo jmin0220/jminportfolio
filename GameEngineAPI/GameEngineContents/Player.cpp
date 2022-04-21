@@ -27,10 +27,13 @@ Player::Player()
 	, ItemSelectOrigin(-1)
 	, ItemSelectTarget(-1)
 {
+	PlayerRandom_ = new GameEngineRandom();
 }
 
 Player::~Player() 
 {
+	delete PlayerRandom_;
+	PlayerRandom_ = nullptr;
 }
 
 void Player::PlayerInit()
@@ -86,6 +89,9 @@ void Player::Update()
 
 	// 농작물 업데이트
 	CropsUpdate();
+
+	// 아이템 업데이트
+	ItemUpdate();
 
 	// 상태 업데이트
 	StateUpdate();
@@ -777,8 +783,36 @@ void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, std:
 		EnvironmentActor_[y][x]->SetMaxLevel(_MaxLevel);
 		EnvironmentActor_[y][x]->ReSetAccTime();
 		EnvironmentActor_[y][x]->SetIsTimeUpdate(true);
+
 		// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
 		EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
 		EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+	}
+}
+
+void Player::ItemUpdate()
+{
+	float4 Dir = { 0.0f, 0.0f }; 
+	float Check = 0.0f;
+
+	for (Item* _item : ItemList_)
+	{
+		Dir = this->GetPosition() - _item->GetPosition();
+		Check = Dir.Len2D();
+
+		// TODO::아이템과 플레이어가 가까워질경우 아이템을 없애고 플레이어 인벤토리에 추가
+		if (Check <= 20)
+		{
+			//_item->GetItemRenderer().Off();
+			// Inventory_->AddItemToInventory(_item->GetItemName());
+
+			continue;
+		}
+		// 아이템과 플레이어의 거리가 너무 멀리 있을경우 움직이지 않음.
+		else if (Check <= 70)
+		{
+			Dir.Normal2D();
+			_item->SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
+		}
 	}
 }

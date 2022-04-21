@@ -65,6 +65,16 @@ void Player::ActionUpdate()
 					{
 						ResultCrops->Destroy();
 
+						if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
+						{
+							int ItemNum = PlayerRandom_->RandomInt(1, 4);
+
+							for (size_t i = 0; i < ItemNum; i++)
+							{
+								AddItem(ResultCrops->CreateItem());
+							}
+						}
+
 						// 파괴처리 후 배열을 nullptr로 초기화
 						for (size_t i = 0; i < EnvironmentActor_.size(); i++)
 						{
@@ -96,6 +106,7 @@ void Player::ActionUpdate()
 			// 타일생성
 			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOWWET);
 		}
+		// Axe를 들고 있는경우
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
 		{
 			// TODO::나무일경우 부셔짐 처리
@@ -113,6 +124,16 @@ void Player::ActionUpdate()
 					if (ResultCrops->GetHp() <= 0)
 					{
 						ResultCrops->Destroy();
+
+						if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
+						{
+							int ItemNum = PlayerRandom_->RandomInt(1, 4);
+
+							for (size_t i = 0; i < ItemNum; i++)
+							{
+								AddItem(ResultCrops->CreateItem());
+							}
+						}
 
 						// 파괴처리 후 배열을 nullptr로 초기화
 						for (size_t i = 0; i < EnvironmentActor_.size(); i++)

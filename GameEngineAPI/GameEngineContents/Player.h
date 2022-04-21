@@ -113,6 +113,8 @@ private:
 	void PlayerKeyInit();
 	// 카메라 업데이트
 	void UpdateCamera();
+	// 아이템 업데이트
+	void ItemUpdate();
 
 	// 플레이어가 움직일때 충돌감지
 	float4 SetCheckPos(float4 _NextPos);
@@ -182,7 +184,12 @@ private:
 	// 작물등의 정보를 저장할 액터
 	Crops* LevelEnvironmentActor_;
 	// 필드에 보이는 아이템의 정보를 저장할 액터
-	std::list<GameEngineActor*> ItemList_;
+	std::list<Item*> ItemList_;
+
+	inline void AddItem(Item* _Actor)
+	{
+		ItemList_.push_back(_Actor);
+	};
 
 	// 타일맵의 스테이터스를 저장
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
@@ -203,4 +210,6 @@ private:
 
 	void TimeUpdate() {};
 	void CropsUpdate();
+
+	GameEngineRandom* PlayerRandom_;
 };

@@ -16,17 +16,14 @@ void Parsnip::Start()
 	Renderer_->SetIndex(0);
 }
 
-void Parsnip::CreateItem()
+Item* Parsnip::CreateItem()
 {
-	int ItemNum = RandomItem_->RandomInt(1, 4);
+	// 수정예정
+	GameEngineActor* NewItem = this->GetLevel()->CreateActor<Parsnip>();
+	float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
+	float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
 
-	for (size_t i = 0; i < ItemNum; i++)
-	{
-		GameEngineActor* NewItem = this->GetLevel()->CreateActor<Parsnip>();
-		float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
-		float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
+	NewItem->SetPosition({ PosX, PosY });
 
-		NewItem->SetPosition({ PosX, PosY });
-
-	}
+	return static_cast<Item*>(NewItem);
 }
