@@ -72,6 +72,8 @@
 #define IMAGE_ENVIRONMENT_OAKTREE "OakTree.bmp"
 #define IMAGE_ENVIRONMENT_PINETREE "PineTree.bmp"
 
+#define IMAGE_ITEM_FORAGE "Forage.bmp"
+
 #define IMAGE_TILESET_DIRT "Dirt.bmp"
 #define IMAGE_TILESET_DIRTWATERED "DirtWatered.bmp"
 
@@ -201,3 +203,5 @@
 #define ITEM_NAME_PUFFERFISH "PufferFish"
 #define ITEM_NAME_ANCHOVY "Anchovy"
 #define ITEM_NAME_TUNA "Tuna"
+// 필드 아이템
+#define ITEM_NAME_MINITREE "MiniTree"

@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 // 설명 :
 class Crops : public GameEngineActor
@@ -81,10 +82,11 @@ public:
 		return CollisionActor_;
 	}
 
-	virtual void Destroy() {};
+	void Destroy();
 
 protected:
 	void Start() override {};
+	virtual void CreateItem() {};
 
 	// Hp가 있는 아이템의 경우
 	int Hp_ = 0;
@@ -103,6 +105,8 @@ protected:
 
 	// 충돌처리를 위한 액터
 	GameEngineActor* CollisionActor_;
+
+	GameEngineRandom* RandomItem_;
 private:
 
 

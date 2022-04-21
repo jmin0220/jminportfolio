@@ -68,9 +68,6 @@
     <ClCompile Include="FarmLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>02Play</Filter>
-    </ClCompile>
     <ClCompile Include="TownLevel.cpp">
       <Filter>00Level\PlayLevel</Filter>
     </ClCompile>
@@ -94,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="Oaktree.cpp">
       <Filter>02Play\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniTree.cpp">
+      <Filter>02Play\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +170,6 @@
     <ClInclude Include="FarmLevel.h">
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>02Play</Filter>
-    </ClInclude>
     <ClInclude Include="TownLevel.h">
       <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
@@ -199,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="Oaktree.h">
       <Filter>02Play\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniTree.h">
+      <Filter>02Play\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +240,9 @@
     </Filter>
     <Filter Include="99Etc">
       <UniqueIdentifier>{c903b0a6-d41e-4c61-bdfe-4afd2c65f5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Items">
+      <UniqueIdentifier>{4a2ebd00-c729-47aa-89a5-bd701691126a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

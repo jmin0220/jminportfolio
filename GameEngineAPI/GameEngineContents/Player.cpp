@@ -387,7 +387,9 @@ void Player::ColCheck(float4 _MoveDir)
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 	
 	// 충돌판정
-	if (RGB(0, 0, 0) != Color && !PlayerCollision_->NextPostCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect))
+	if (RGB(0, 0, 0) != Color 
+		&& !PlayerCollision_->NextPostCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect)
+		&& !PlayerCollision_->NextPostCollisionCheck(COL_GROUP_TREES, CheckLength, CollisionType::Rect, CollisionType::Rect))
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
 	}
@@ -766,13 +768,17 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 
 void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, std::string _ColGroup, int _MaxLevel /* = 0 */)
 {
-	EnvironmentActor_[y][x] = _CropActor;
-	EnvironmentActor_[y][x]->SetCropState(_CropState);
-	EnvironmentActor_[y][x]->SetGrowLevel(0);
-	EnvironmentActor_[y][x]->SetMaxLevel(_MaxLevel);
-	EnvironmentActor_[y][x]->ReSetAccTime();
-	EnvironmentActor_[y][x]->SetIsTimeUpdate(true);
-	// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
-	EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
-	EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+	// 해당 위치가 비어있을때만 생성
+	if (nullptr == EnvironmentActor_[y][x])
+	{
+		EnvironmentActor_[y][x] = _CropActor;
+		EnvironmentActor_[y][x]->SetCropState(_CropState);
+		EnvironmentActor_[y][x]->SetGrowLevel(0);
+		EnvironmentActor_[y][x]->SetMaxLevel(_MaxLevel);
+		EnvironmentActor_[y][x]->ReSetAccTime();
+		EnvironmentActor_[y][x]->SetIsTimeUpdate(true);
+		// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
+		EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
+		EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+	}
 }

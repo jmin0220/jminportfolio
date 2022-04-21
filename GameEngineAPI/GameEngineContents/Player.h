@@ -181,6 +181,8 @@ private:
 	GameEngineRendererTileMap* LevelTileMap_;
 	// 작물등의 정보를 저장할 액터
 	Crops* LevelEnvironmentActor_;
+	// 필드에 보이는 아이템의 정보를 저장할 액터
+	std::list<GameEngineActor*> ItemList_;
 
 	// 타일맵의 스테이터스를 저장
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
@@ -196,7 +198,6 @@ public:
 	}
 	void SetCropsActorSize(int _X, int _Y);
 
-	// TODO::시간 관련 
 private:
 	int PlayerTime_;
 

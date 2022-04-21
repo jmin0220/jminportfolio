@@ -16,7 +16,17 @@ void Parsnip::Start()
 	Renderer_->SetIndex(0);
 }
 
-void Parsnip::Destroy()
+void Parsnip::CreateItem()
 {
-	this->Death();
+	int ItemNum = RandomItem_->RandomInt(1, 4);
+
+	for (size_t i = 0; i < ItemNum; i++)
+	{
+		GameEngineActor* NewItem = this->GetLevel()->CreateActor<Parsnip>();
+		float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
+		float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
+
+		NewItem->SetPosition({ PosX, PosY });
+
+	}
 }
