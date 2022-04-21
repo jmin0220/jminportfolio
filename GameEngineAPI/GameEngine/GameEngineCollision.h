@@ -43,6 +43,15 @@ public:
 		return GameEngineRect(GetActor()->GetPosition() + Pivot_, Scale_);
 	}
 
+	void CameraEffectOff()
+	{
+		IsCameraEffect_ = false;
+	}
+
+	void CameraEffectOn()
+	{
+		IsCameraEffect_ = true;
+	}
 
 	// 충돌한 대상이 있는지 없는지만 체크하는 함수
 	bool CollisionCheck(
@@ -72,6 +81,7 @@ private:
 	float4 Pivot_;
 	float4 Scale_;
 	float4 NextPos_;
+	bool IsCameraEffect_;
 
 	std::string CollisionName_;
 

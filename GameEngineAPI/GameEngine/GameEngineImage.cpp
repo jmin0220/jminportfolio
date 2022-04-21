@@ -219,6 +219,11 @@ void GameEngineImage::PlgCopy(GameEngineImage* _Other, const float4& _CopyPos,
 {
 	// 3개의 포인트를 넣어줘야 합니다.
 
+	if (_Angle == 180.0f)
+	{
+		_Angle = 180.00001f;
+	}
+
 	POINT RotPoint[3];
 
 	GameEngineRect Rect = GameEngineRect(float4::ZERO, _CopyScale);

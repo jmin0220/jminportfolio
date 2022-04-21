@@ -51,6 +51,12 @@ void GameEngineRenderer::SetImage(const std::string& _Name)
 	SetImageScale();
 }
 
+void GameEngineRenderer::SetImageAnimationReset(const std::string& _Name)
+{
+	SetImage(_Name);
+	CurrentAnimation_ = nullptr;
+}
+
 void GameEngineRenderer::SetRotationFilter(const std::string& _Name)
 {
 	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Name);
@@ -106,7 +112,7 @@ void GameEngineRenderer::Render()
 		float4 Scale = RenderScale_.Half();
 		Scale.y *= 2.0f;
 
-		if (Alpha_ == 255)
+		if (Alpha_ != 255)
 		{
 			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
 		}

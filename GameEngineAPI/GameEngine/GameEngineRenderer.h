@@ -123,6 +123,8 @@ public:
 
 	void SetIndex(size_t _Index, const float4& _Scale = { -1.0f, -1.0f });
 
+	void SetImageAnimationReset(const std::string& _Name);
+
 	// 렌더러가 생성된 후의 Order설정
 	void SetOrder(int _Order) override;
 

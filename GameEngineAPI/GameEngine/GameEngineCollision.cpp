@@ -125,7 +125,13 @@ bool GameEngineCollision::NextPostCollisionCheck(
 
 void GameEngineCollision::DebugRender()
 {
-	GameEngineRect DebugRect(GetActor()->GetCameraEffectPosition() + Pivot_, Scale_);
+	float4 Pos = GetActor()->GetPosition();
+
+	if (true == IsCameraEffect_)
+	{
+		Pos = GetActor()->GetCameraEffectPosition();
+	}
+	GameEngineRect DebugRect(Pos + Pivot_, Scale_);
 
 	Rectangle(
 		GameEngine::BackBufferDC(),
