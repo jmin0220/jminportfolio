@@ -42,6 +42,7 @@ GameEngineCollision::~GameEngineCollision()
 {
 }
 
+// 충돌만 체크
 bool GameEngineCollision::CollisionCheck(
 	const std::string& _TargetGroup,
 	CollisionType _This /*= CollisionType::Circle*/,
@@ -79,6 +80,49 @@ bool GameEngineCollision::CollisionCheck(
 	return false;
 }
 
+// 다음 위치로 이동했을 때 충돌체 체크
+bool GameEngineCollision::NextPostCollisionCheck(
+	const std::string& _TargetGroup,
+	float4 _NextPos,
+	CollisionType _This /*= CollisionType::Circle*/,
+	CollisionType _Target /*= CollisionType::Circle*/
+)
+{
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
+
+	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
+	{
+		// MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
+
+		return false;
+	}
+
+	if (nullptr == CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)])
+	{
+		MsgBoxAssert("처리할수 없는 충돌체크 조합입니다.");
+		return false;
+	}
+
+	std::list<GameEngineCollision*>& TargetGroup = FindTargetGroup->second;
+
+	std::list<GameEngineCollision*>::iterator StartIter = TargetGroup.begin();
+	std::list<GameEngineCollision*>::iterator EndIter = TargetGroup.end();
+
+	NextPos_ = _NextPos;
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
+		{
+			return true;
+		}
+	}
+
+	NextPosReset();
+
+	return false;
+}
+
 void GameEngineCollision::DebugRender()
 {
 	GameEngineRect DebugRect(GetActor()->GetCameraEffectPosition() + Pivot_, Scale_);
@@ -93,6 +137,7 @@ void GameEngineCollision::DebugRender()
 
 }
 
+// 충돌의 결과를 반환
 bool GameEngineCollision::CollisionResult(
 	const std::string& _TargetGroup,
 	std::vector<GameEngineCollision*>& _ColResult,

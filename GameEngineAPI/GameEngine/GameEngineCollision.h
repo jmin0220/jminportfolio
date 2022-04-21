@@ -51,6 +51,13 @@ public:
 		CollisionType _Target = CollisionType::Circle
 	);
 
+	bool NextPostCollisionCheck(
+		const std::string& _TargetGroup,
+		float4 NextPos,
+		CollisionType _This = CollisionType::Circle,
+		CollisionType _Target = CollisionType::Circle
+	);
+
 	bool CollisionResult(
 		const std::string& _TargetGroup,
 		std::vector<GameEngineCollision*>& _ColResult,
@@ -64,6 +71,12 @@ private:
 	friend class FrameAnimation;
 	float4 Pivot_;
 	float4 Scale_;
+	float4 NextPos_;
 
 	std::string CollisionName_;
+
+	void NextPosReset()
+	{
+		NextPos_ = float4::ZERO;
+	}
 };
