@@ -81,6 +81,8 @@ public:
 		return CollisionActor_;
 	}
 
+	virtual void Destroy() {};
+
 protected:
 	void Start() override {};
 

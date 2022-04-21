@@ -15,6 +15,7 @@ public:
 	Oaktree& operator=(const Oaktree& _Other) = delete;
 	Oaktree& operator=(Oaktree&& _Other) noexcept = delete;
 
+	void Destroy() override;
 protected:
 	void Start() override;
 

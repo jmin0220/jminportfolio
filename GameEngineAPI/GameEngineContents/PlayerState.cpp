@@ -41,7 +41,7 @@ void Player::ActionUpdate()
 	if (true == RendererBody_->IsEndAnimation())
 	{
 		float4 CheckLength = MoveDir_ * 24;
-		float4 Pos = { GetPosition().x + CheckLength.x + MoveDir_.x * 48.0f, GetPosition().y + CheckLength.y + 12.0f };
+		float4 Pos = { GetPosition().x + CheckLength.x + MoveDir_.x * 30.0f, GetPosition().y + CheckLength.y + 16.0f };
 
 		// 액션이 끝나는 순간에만 액션충돌체 켜기
 		GetActionCollision()->On();
@@ -49,9 +49,46 @@ void Player::ActionUpdate()
 		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
 		{
 			// TODO::농작물일경우 부셔짐 처리
+			if (GetActionCollision()->CollisionResult(COL_GROUP_CROPS, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
+			{
+				std::vector<GameEngineCollision*>::iterator StartIter = ActionColResult_.begin();
+				std::vector<GameEngineCollision*>::iterator EndIter = ActionColResult_.end();
 
-			// 타일생성
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW);
+				for (; StartIter != EndIter; ++StartIter)
+				{
+					Crops* ResultCrops = static_cast<Crops*>(StartIter[0]->GetActor());
+					ResultCrops->SetHp(ResultCrops->GetHp() - 1);
+
+					// Hp가 0이 되면 파괴
+					if (ResultCrops->GetHp() <= 0)
+					{
+						ResultCrops->Destroy();
+
+						// 파괴처리 후 배열을 nullptr로 초기화
+						for (size_t i = 0; i < EnvironmentActor_.size(); i++)
+						{
+							for (size_t j = 0; j < EnvironmentActor_[i].size(); j++)
+							{
+								if (ResultCrops == EnvironmentActor_[i][j])
+								{
+									EnvironmentActor_[i][j] = nullptr;
+									break;
+								}
+							}
+						}
+
+					}
+				}
+
+				// 충돌 결과 초기화
+				ActionColResult_.clear();
+
+			}
+			else
+			{
+				// 타일생성
+				CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW);
+			}
 		}
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
 		{

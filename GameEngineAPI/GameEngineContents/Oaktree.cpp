@@ -16,3 +16,8 @@ void Oaktree::Start()
 	Renderer_->SetIndex(0);
 	Renderer_->SetPivotType(RenderPivot::CENTER);
 }
+
+void Oaktree::Destroy()
+{
+	this->Death();
+}
