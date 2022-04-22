@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayLevel.h"
+#include "ItemTable.h"
 #include "TileStateTable.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -49,7 +50,7 @@ void Player::ActionUpdate()
 		// Hoe를 들고 있는경우
 		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
 		{
-			// TODO::농작물일경우 부셔짐 처리
+			// 농작물일경우 부셔짐 처리
 			if (GetActionCollision()->CollisionResult(COL_GROUP_CROPS, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
 			{
 				std::vector<GameEngineCollision*>::iterator StartIter = ActionColResult_.begin();
@@ -91,20 +92,20 @@ void Player::ActionUpdate()
 					}
 				}
 
-				// 충돌 결과 초기화
-				ActionColResult_.clear();
+			// 충돌 결과 초기화
+			ActionColResult_.clear();
 
 			}
 			else
 			{
 				// 타일생성
-				CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW);
+				CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW, 0);
 			}
 		}
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOWWET);
+			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOWWET, 0);
 		}
 		// Axe를 들고 있는경우
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
@@ -159,19 +160,23 @@ void Player::ActionUpdate()
 				}
 			}
 
-				// 충돌 결과 초기화
-				ActionColResult_.clear();
+			// 충돌 결과 초기화
+			ActionColResult_.clear();
 		}
-		else if (Inventory_->GetSelectedItem() == ITEM_NAME_OAKTREE)
+		// 나무, 씨앗일경우
+		else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItem())
+		&& StringtoItemTable(Inventory_->GetSelectedItem()) <= (int)ITEMTABLE::CORN)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::OAKTREE);
+			CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItem()), 1);
 		}
-		else if (Inventory_->GetSelectedItem() == ITEM_NAME_PARSNIP)
-		{
-			// 타일생성
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::PARSNIP);
-		}
+		//// 씨앗일경우
+		//else if ((int)ITEMTABLE::PARSNIP <= StringtoItemTable(Inventory_->GetSelectedItem())
+		//		&& StringtoItemTable(Inventory_->GetSelectedItem()) <= (int)ITEMTABLE::CORN)
+		//{
+		//	// 타일생성
+		//	CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItem()));
+		//}
 
 		// Idle로 상태 전환
 		StateChange(PlayerState::Idle);

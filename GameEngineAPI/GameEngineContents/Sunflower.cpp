@@ -1,26 +1,26 @@
-#include "Parsnip.h"
+#include "Sunflower.h"
 #include "ContentsEnums.h"
 #include "ParsnipFruit.h"
 
-Parsnip::Parsnip()
+Sunflower::Sunflower() 
 {
 }
 
-Parsnip::~Parsnip() 
+Sunflower::~Sunflower() 
 {
 }
 
-void Parsnip::Start()
+void Sunflower::Start()
 {
 	Hp_ = 1;
-	RenderCropsIndex_ = 0;
+	RenderCropsIndex_ = 96;
 	Renderer_ = CreateRenderer(IMAGE_ENVIRONMENT_CROPS, (int)ORDER::FRONTA);
 	Renderer_->SetIndex(RenderCropsIndex_);
 	SetGrowLevel(0);
 	SetMaxLevel(5);
 }
 
-Item* Parsnip::CreateItem()
+Item* Sunflower::CreateItem()
 {
 	Item* NewItem = this->GetLevel()->CreateActor<ParsnipFruit>();
 	float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
@@ -30,27 +30,3 @@ Item* Parsnip::CreateItem()
 
 	return NewItem;
 }
-
-
-/*
-Parsnip
-Couliflower
-Garlic
-Rhubarb
-Tomato
-HotPepper
-Radish		
-Starfruit	
-Eggplant	
-Pumpkin	
-Yam	
-Beet	
-Sunflower	
-GreenBean	
-Potato	6
-Kale	5
-Melon	6
-Blueberry	7
-RedCabbage	6
-Corn	7
-*/

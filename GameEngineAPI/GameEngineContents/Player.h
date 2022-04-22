@@ -177,7 +177,9 @@ private:
 	// 타일의 랜더러는 각 레벨의 타일맵이 가지고 있지만,
 	// 해당 위치의 '상태'는 해당 레벨의 플레이어가 가지고 있음.
 	// 보이는 것과 상태가 일치하지 않을 수도 있다.
-	void CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex);
+	// _TileActorSelecter = 0 -> Tile
+	// _TileActorSelecter = 1 -> Actor
+	void CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _TileActorSelecter);
 
 	// 레벨의 타일맵을 저장
 	GameEngineRendererTileMap* LevelTileMap_;
@@ -195,7 +197,7 @@ private:
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
 	std::vector<std::vector<Crops*>> EnvironmentActor_;
 	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
-	void SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, std::string _ColGroup ,int _MaxLevel = 0);
+	void SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup);
 
 public: 
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수

@@ -181,6 +181,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Beet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Blueberry.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Bream.h">
       <SubType>
       </SubType>
@@ -194,7 +202,19 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsEnums.h" />
+    <ClInclude Include="Corn.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Couliflower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Crops.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Eggplant.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -226,6 +246,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Garlic.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Greenbean.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Hotpepper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Inventory.h">
       <SubType>
       </SubType>
@@ -235,6 +267,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ItemTable.h" />
+    <ClInclude Include="Kale.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Melon.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MiniTree.h">
       <SubType>
       </SubType>
@@ -269,6 +309,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Pumpkin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Radish.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Redcabbage.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Rhubarb.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Slime.h">
       <SubType>
       </SubType>
@@ -278,6 +334,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Starfruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Sunflower.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -302,7 +366,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Tomato.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TownLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Yam.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -313,6 +385,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="BeachLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Beet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Blueberry.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -328,7 +408,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Corn.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Couliflower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Crops.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Eggplant.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -360,11 +452,31 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Garlic.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Greenbean.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Hotpepper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Item.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Kale.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Melon.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -402,6 +514,22 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Pumpkin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Radish.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Redcabbage.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Rhubarb.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Slime.cpp">
       <SubType>
       </SubType>
@@ -411,6 +539,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Starfruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Sunflower.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -434,11 +570,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Tomato.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TownLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="ItemTable.cpp" />
+    <ClCompile Include="Yam.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

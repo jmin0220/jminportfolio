@@ -1,11 +1,7 @@
 #include "Player.h"
 #include "PlayLevel.h"
 #include "TileStateTable.h"
-#include "ItemTable.h"
 #include "Item.h"
-#include "Parsnip.h"
-#include "Oaktree.h"
-#include "Potato.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -15,6 +11,31 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
 #include <cstring>
+
+#pragma region Crops
+#include "ItemTable.h"
+#include "Oaktree.h"
+#include "Parsnip.h"
+#include "Couliflower.h"
+#include "Garlic.h"
+#include "Rhubarb.h"
+#include "Tomato.h"
+#include "Hotpepper.h"
+#include "Radish.h"
+#include "Starfruit.h"
+#include "Eggplant.h"
+#include "Pumpkin.h"
+#include "Yam.h"
+#include "Beet.h"
+#include "Sunflower.h"
+#include "Greenbean.h"
+#include "Potato.h"
+#include "Kale.h"
+#include "Melon.h"
+#include "Blueberry.h"
+#include "Redcabbage.h"
+#include "Corn.h"
+#pragma endregion Crops
 
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 int Player::Gold_ = 1234560;
@@ -42,6 +63,8 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 
@@ -566,7 +589,7 @@ void Player::CropsUpdate()
 				{
 					// 1번 성장
 					Actor_->SetGrowLevel(Actor_->GetGrowLevel() + 1);
-					Actor_->GetRenderer()->SetIndex(Actor_->GetGrowLevel());
+					Actor_->GetRenderer()->SetIndex(Actor_->GetCropsRenderIndex() + Actor_->GetGrowLevel());
 					Actor_->ReSetAccTime();
 
 					// 설정한 최대 레벨에 도달했을 경우 시간 업데이트 끄기
@@ -671,90 +694,113 @@ void Player::ControlInventorySelectBoxWithMouse()
 }
 
 // 타일맵 생성
-void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex)
+void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _TileActorSelecter)
 {
 	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
 	int PosY = static_cast<int>(_Pos.y / TILEMAP_SIZE);
 
-	switch (_EnvironemntTileIndex)
+	if (_TileActorSelecter == 0)
 	{
-	case (int)TILESTATE::NONE:
-		break;
-	case (int)TILESTATE::HOLLOW:
-		SetGroundTile(PosX, PosY,
-			LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOW);
-		break;
-	case (int)TILESTATE::HOLLOWWET:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOW)
+		switch (_EnvironemntTileIndex)
 		{
-			// 타일 생성
+		case (int)TILESTATE::NONE:
+			break;
+		case (int)TILESTATE::HOLLOW:
 			SetGroundTile(PosX, PosY,
-				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
+				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOW);
+			break;
+		case (int)TILESTATE::HOLLOWWET:
+
+			if (nullptr != GroundTiles_[PosY][PosX]
+				&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOW)
+			{
+				// 타일 생성
+				SetGroundTile(PosX, PosY,
+					LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
+			}
+			break;
+		default:
+			break;
 		}
 
-		break;
-	case (int)TILESTATE::OAKTREE:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
-		{
-			// Crop 생성
-			SetCropsActor(PosX, PosY, (int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), COL_GROUP_TREES, 4);
-		}
-
-		break;
-	case (int)TILESTATE::MAPLETREE:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
-		{
-
-		}
-
-		break;
-	case (int)TILESTATE::PINETREE:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
-		{
-
-		}
-
-		break;
-	case (int)TILESTATE::PARSNIP:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
-		{
-			// Crop 생성
-			SetCropsActor(PosX, PosY,(int)TILESTATE::HOLLOWWET, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), COL_GROUP_CROPS, 5);
-		}
-
-		break;
-	case (int)TILESTATE::POTATO:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
-		{
-
-		}
-
-		break;
-	case (int)TILESTATE::CORN:
-
-		if (nullptr != GroundTiles_[PosY][PosX]
-			&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOWWET)
-		{
-
-		}
-
-		break;
-	default:
-		break;
 	}
-
+	else if(_TileActorSelecter == 1
+		    && nullptr != GroundTiles_[PosY][PosX])
+	{
+		switch (_EnvironemntTileIndex)
+		{
+		case (int)ITEMTABLE::OAKTREE:
+			// Crop 생성
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), COL_GROUP_TREES);
+			break;
+		case (int)ITEMTABLE::MAPLETREE:
+			break;
+		case (int)ITEMTABLE::PINETREE:
+			break;
+		case (int)ITEMTABLE::PARSNIP:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::COULIFLOWER:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Couliflower>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::GARLIC:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Garlic>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::RHUBARB:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Rhubarb>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::TOMATO:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Tomato>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::HOTPEPPER:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Hotpepper>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::RADISH:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Radish>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::STARFRUIT:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Starfruit>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::EGGPLANT:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Eggplant>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::PUMPKIN:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Pumpkin>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::YAM:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Yam>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::BEET:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Beet>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::SUNFLOWER:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Sunflower>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::GREENBEAN:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Greenbean>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::POTATO:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Potato>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::KALE:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Kale>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::MELON:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Melon>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::BLUEBERRY:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Blueberry>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::REDCABBAGE:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Redcabbage>()), COL_GROUP_CROPS);
+			break;
+		case (int)ITEMTABLE::CORN:
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Corn>()), COL_GROUP_CROPS);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 // 생성한 타일맵 정보를 플레이어에게 저장
@@ -764,15 +810,12 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 	GroundTiles_[y][x]->SetTileState(_TileState);
 }
 
-void Player::SetCropsActor(int x, int y, int _CropState, Crops* _CropActor, std::string _ColGroup, int _MaxLevel /* = 0 */)
+void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup)
 {
 	// 해당 위치가 비어있을때만 생성
 	if (nullptr == EnvironmentActor_[y][x])
 	{
 		EnvironmentActor_[y][x] = _CropActor;
-		EnvironmentActor_[y][x]->SetCropState(_CropState);
-		EnvironmentActor_[y][x]->SetGrowLevel(0);
-		EnvironmentActor_[y][x]->SetMaxLevel(_MaxLevel);
 		EnvironmentActor_[y][x]->ReSetAccTime();
 		EnvironmentActor_[y][x]->SetIsTimeUpdate(true);
 

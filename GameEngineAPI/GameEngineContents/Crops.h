@@ -68,19 +68,19 @@ public:
 		return Renderer_;
 	}
 
-	inline void SetCropState(int _CropState)
-	{
-		CropState_ = _CropState;
-	}
-
-	inline int GetCropState()
-	{
-		return CropState_;
-	}
-
 	inline GameEngineActor* GetColActor()
 	{
 		return CollisionActor_;
+	}
+
+	inline int GetCropsRenderIndex()
+	{
+		return RenderCropsIndex_;
+	}
+
+	inline void SetCropsRenderIndex(int _Index)
+	{
+		RenderCropsIndex_ = _Index;
 	}
 
 	void Destroy();
@@ -95,8 +95,8 @@ protected:
 	int Level_ = 0;
 	// 성장의 최대치
 	int MaxLevel_ = 0;
-	// 농작물의 종류
-	int CropState_;
+	// 이미지에서의 인덱스
+	int RenderCropsIndex_ = 0;
 
 	GameEngineRenderer* Renderer_;
 
