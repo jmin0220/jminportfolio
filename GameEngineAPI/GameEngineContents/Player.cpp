@@ -44,14 +44,6 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 
 	Inventory_->InventoryInit();
 }
@@ -803,8 +795,11 @@ void Player::ItemUpdate()
 		// TODO::아이템과 플레이어가 가까워질경우 아이템을 없애고 플레이어 인벤토리에 추가
 		if (Check <= 20)
 		{
-			//_item->GetItemRenderer().Off();
-			// Inventory_->AddItemToInventory(_item->GetItemName());
+			// 아이템을 넣는것에 성공했을 경우 아이템을 파괴
+			if (1 == Inventory_->AddItemToInventory(StringtoItemTable(_item->GetItemName())))
+			{
+				_item->Death();
+			}
 
 			continue;
 		}

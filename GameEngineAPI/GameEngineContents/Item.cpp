@@ -22,6 +22,7 @@ void Item::SetIconRendererInfo(int _ItemNum)
 	{
 	case (int)ITEMTABLE::EMPTY:
 		IconRenderer_->SetImage(IMAGE_INVENTORY_EMPTY);
+		IndexNum_ = -1;
 		ItemName_ = ITEM_NAME_EMPTY;
 		break;
 	case (int)ITEMTABLE::HOE:
@@ -84,11 +85,21 @@ void Item::SetIconRendererInfo(int _ItemNum)
 		IndexNum_ = 2;
 		ItemName_ = ITEM_NAME_TUNA;
 		break;
+	case (int)ITEMTABLE::MINITREE:
+		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);
+		IndexNum_ = 39;
+		ItemName_ = ITEM_NAME_MINITREE;
+		break;
 	default:
 		IconRenderer_->SetImage(IMAGE_INVENTORY_EMPTY);
+		IndexNum_ = -1;
 		ItemName_ = ITEM_NAME_EMPTY;
 		break;
 	}
 
-	IconRenderer_->SetIndex(IndexNum_);
+	// IndexNum_ == -1 ->이미지가 잘려져있지 않음
+	if (IndexNum_ != -1)
+	{
+		IconRenderer_->SetIndex(IndexNum_);
+	}
 }

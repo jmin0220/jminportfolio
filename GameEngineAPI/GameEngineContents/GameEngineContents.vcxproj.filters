@@ -98,6 +98,9 @@
     <ClCompile Include="MiniTree.cpp">
       <Filter>02Play\Items</Filter>
     </ClCompile>
+    <ClCompile Include="ItemTable.cpp">
+      <Filter>99Etc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />

@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <GameEngineBase/GameEngineCustomStringSet.h>
+#include <GameEngineBase/GameEngineString.h>
 
 
 enum class ITEMTABLE
@@ -21,4 +24,9 @@ enum class ITEMTABLE
 	PUFFERFISH,
 	TUNA,
 	ANCHOVY,
+	// 아이템
+	MINITREE,
 };
+
+// 아이템을 인벤토리에 추가할때 문자열로 된 아이템을 enum으로 변환하여 리턴
+int StringtoItemTable(std::string _Name);
