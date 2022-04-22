@@ -101,6 +101,9 @@
     <ClCompile Include="ItemTable.cpp">
       <Filter>99Etc</Filter>
     </ClCompile>
+    <ClCompile Include="ParsnipFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -207,6 +210,9 @@
       <Filter>02Play\Items</Filter>
     </ClInclude>
     <ClInclude Include="MiniTree.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ParsnipFruit.h">
       <Filter>02Play\Items</Filter>
     </ClInclude>
   </ItemGroup>

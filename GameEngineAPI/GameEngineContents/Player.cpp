@@ -792,7 +792,6 @@ void Player::ItemUpdate()
 		Dir = this->GetPosition() - _item->GetPosition();
 		Check = Dir.Len2D();
 
-		// TODO::아이템과 플레이어가 가까워질경우 아이템을 없애고 플레이어 인벤토리에 추가
 		if (Check <= 20)
 		{
 			// 아이템을 넣는것에 성공했을 경우 아이템을 파괴

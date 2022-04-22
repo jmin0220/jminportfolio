@@ -165,6 +165,8 @@ void StardewContents::GameInit()
 	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FORAGE);
 	Image->Cut({ 48, 48 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_FRUIT);
+	Image->Cut({ 48, 48 });
 
 
 	// ÆùÆ®

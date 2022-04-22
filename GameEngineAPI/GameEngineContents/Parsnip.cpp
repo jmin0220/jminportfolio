@@ -1,5 +1,6 @@
 #include "Parsnip.h"
 #include "ContentsEnums.h"
+#include "ParsnipFruit.h"
 
 Parsnip::Parsnip()
 {
@@ -19,11 +20,11 @@ void Parsnip::Start()
 Item* Parsnip::CreateItem()
 {
 	// 수정예정
-	GameEngineActor* NewItem = this->GetLevel()->CreateActor<Parsnip>();
+	Item* NewItem = this->GetLevel()->CreateActor<ParsnipFruit>();
 	float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
 	float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
 
 	NewItem->SetPosition({ PosX, PosY });
 
-	return static_cast<Item*>(NewItem);
+	return NewItem;
 }

@@ -65,6 +65,7 @@ void Player::ActionUpdate()
 					{
 						ResultCrops->Destroy();
 
+						// 최대 성장 상태에서 파괴되었을경우 아이템 생성
 						if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
 						{
 							int ItemNum = PlayerRandom_->RandomInt(1, 4);
@@ -87,7 +88,6 @@ void Player::ActionUpdate()
 								}
 							}
 						}
-
 					}
 				}
 
@@ -109,7 +109,7 @@ void Player::ActionUpdate()
 		// Axe를 들고 있는경우
 		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
 		{
-			// TODO::나무일경우 부셔짐 처리
+			// 나무일경우 부셔짐 처리
 			if (GetActionCollision()->CollisionResult(COL_GROUP_TREES, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
 			{
 				std::vector<GameEngineCollision*>::iterator StartIter = ActionColResult_.begin();
@@ -125,6 +125,7 @@ void Player::ActionUpdate()
 					{
 						ResultCrops->Destroy();
 
+						// 최대 성장 상태에서 파괴되었을경우 아이템 생성
 						if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
 						{
 							int ItemNum = PlayerRandom_->RandomInt(1, 4);
@@ -147,8 +148,14 @@ void Player::ActionUpdate()
 								}
 							}
 						}
+					}
+					else if (ResultCrops->GetHp() <= 4)
+					{
+						// Hp가 4이하일경우 나무 밑둥만 남기기
+						ResultCrops->SetGrowLevel(5);
 
 					}
+
 				}
 			}
 
