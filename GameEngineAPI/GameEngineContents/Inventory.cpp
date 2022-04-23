@@ -321,24 +321,24 @@ void Inventory::SwapItem(int _Origin, int _Target)
 	SwapItem_->GetIconRenderer().SetImage(InventoryList_[_Target]->GetIconRenderer().GetImage()->GetNameCopy());
 	SwapItem_->SetItemName(InventoryList_[_Target]->GetItemName());
 	SwapItem_->SetIndexNum(InventoryList_[_Target]->GetIndexNum());
-	SwapItem_->Font_[0] = InventoryList_[_Target]->Font_[0];
-	SwapItem_->Font_[1] = InventoryList_[_Target]->Font_[1];
+	SwapItem_->Counter_ = InventoryList_[_Target]->Counter_;
+	SwapItem_->Countable = InventoryList_[_Target]->Countable;
 
 	InventoryList_[_Target]->GetItemRenderer().SetImage(InventoryList_[_Origin]->GetItemRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Target]->GetIconRenderer().SetImage(InventoryList_[_Origin]->GetIconRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Target]->SetItemName(InventoryList_[_Origin]->GetItemName());
 	InventoryList_[_Target]->SetIndexNum(InventoryList_[_Origin]->GetIndexNum());
 	InventoryList_[_Target]->GetIconRenderer().SetIndex(InventoryList_[_Origin]->GetIndexNum());
-	InventoryList_[_Target]->Font_[0] = InventoryList_[_Origin]->Font_[0];
-	InventoryList_[_Target]->Font_[1] = InventoryList_[_Origin]->Font_[1];
+	InventoryList_[_Target]->Counter_ = InventoryList_[_Origin]->Counter_;
+	InventoryList_[_Target]->Countable = InventoryList_[_Origin]->Countable;
 
 	InventoryList_[_Origin]->GetItemRenderer().SetImage(SwapItem_->GetItemRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Origin]->GetIconRenderer().SetImage(SwapItem_->GetIconRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Origin]->SetItemName(SwapItem_->GetItemName());
 	InventoryList_[_Origin]->SetIndexNum(SwapItem_->GetIndexNum());
 	InventoryList_[_Origin]->GetIconRenderer().SetIndex(SwapItem_->GetIndexNum());
-	InventoryList_[_Origin]->Font_[0] = SwapItem_->Font_[0];
-	InventoryList_[_Origin]->Font_[1] = SwapItem_->Font_[1];
+	InventoryList_[_Origin]->Counter_ = SwapItem_->Counter_;
+	InventoryList_[_Origin]->Countable = SwapItem_->Countable;
 }
 
 // ÄÃ¸®Àü

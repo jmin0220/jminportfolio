@@ -70,6 +70,23 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
 
 	Inventory_->InventoryInit();
 }

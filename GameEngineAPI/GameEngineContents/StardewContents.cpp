@@ -175,7 +175,7 @@ void StardewContents::GameInit()
 	}
 
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_FONT);
-	Image->Cut({ 48, 48 });
+	Image->Cut({ 24, 24 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_FONT_NUMBER);
 	Image->Cut({ 24, 48 });
 
