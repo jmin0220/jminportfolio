@@ -67,6 +67,9 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
 
 	Inventory_->InventoryInit();
 }

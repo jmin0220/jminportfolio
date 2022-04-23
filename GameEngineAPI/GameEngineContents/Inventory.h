@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include "Font.h"
 #include <string>
 #include <cstring>
 #include <GameEngine/GameEngineActor.h>

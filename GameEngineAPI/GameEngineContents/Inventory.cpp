@@ -65,6 +65,11 @@ void Inventory::Start()
 			InventoryList_[i]->GetIconRenderer().CameraEffectOff();
 			InventoryList_[i]->GetIconRenderer().SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X - (352 - (64 * (float)i)), IMAGE_INVENTORYBAR_POS_DOWN_Y - 22 });
 			InventoryList_[i]->SetItemName(ITEM_NAME_EMPTY);
+			InventoryList_[i]->Counter_ = "0";
+
+			// Font 생성
+			InventoryList_[i]->Font_[0] = this->GetLevel()->CreateActor<Font>((int)ORDER::UIFONT);
+			InventoryList_[i]->Font_[1] = this->GetLevel()->CreateActor<Font>((int)ORDER::UIFONT);
 
 			if (i < 12)
 			{
@@ -248,6 +253,7 @@ void Inventory::ItemPosCalc()
 				PosY = IMAGE_INVENTORYBAR_POS_DOWN_Y + 6;
 
 				InventoryList_[i]->GetIconRenderer().SetPivot({ PosX, PosY });
+				InventoryList_[i]->SetItemNum();
 			}
 			else
 			{
@@ -270,9 +276,10 @@ void Inventory::ItemPosCalc()
 			for (size_t j = 0; j < 3; j++)
 			{
 				PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)i));
-				PosY = IMAGE_INVENTORY_EXT_POS_Y - (83 - (64 * (float)j)) + 4 * j;
+				PosY = IMAGE_INVENTORY_EXT_POS_Y - (58 - (64 * (float)j)) + 4 * j;
 
 				InventoryList_[i + (12 * j)]->GetIconRenderer().SetPivot({ PosX, PosY });
+				InventoryList_[i]->SetItemNum();
 				InventoryList_[i + (12 * j)]->GetIconRenderer().On();
 			}
 		}
@@ -288,9 +295,15 @@ int Inventory::AddItemToInventory(int _ItemNum)
 	{
 		// 아이콘은 인벤토리에서 아이템의 위치를 표시
 		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
-		if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
+		// 겹쳐질 수 있으거나, 비어있거나.
+		if ((StringtoItemTable(InventoryList_[i]->GetItemName()) == _ItemNum
+			&& InventoryList_[i]->Countable == true)
+			|| InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
 		{
+
 			InventoryList_[i]->SetIconRendererInfo(_ItemNum);
+			InventoryList_[i]->AddCounter();
+			InventoryList_[i]->SetItemNum();
 
 			InsertSuccessFlg = 1;
 			break;
@@ -308,18 +321,24 @@ void Inventory::SwapItem(int _Origin, int _Target)
 	SwapItem_->GetIconRenderer().SetImage(InventoryList_[_Target]->GetIconRenderer().GetImage()->GetNameCopy());
 	SwapItem_->SetItemName(InventoryList_[_Target]->GetItemName());
 	SwapItem_->SetIndexNum(InventoryList_[_Target]->GetIndexNum());
+	SwapItem_->Font_[0] = InventoryList_[_Target]->Font_[0];
+	SwapItem_->Font_[1] = InventoryList_[_Target]->Font_[1];
 
 	InventoryList_[_Target]->GetItemRenderer().SetImage(InventoryList_[_Origin]->GetItemRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Target]->GetIconRenderer().SetImage(InventoryList_[_Origin]->GetIconRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Target]->SetItemName(InventoryList_[_Origin]->GetItemName());
 	InventoryList_[_Target]->SetIndexNum(InventoryList_[_Origin]->GetIndexNum());
 	InventoryList_[_Target]->GetIconRenderer().SetIndex(InventoryList_[_Origin]->GetIndexNum());
+	InventoryList_[_Target]->Font_[0] = InventoryList_[_Origin]->Font_[0];
+	InventoryList_[_Target]->Font_[1] = InventoryList_[_Origin]->Font_[1];
 
 	InventoryList_[_Origin]->GetItemRenderer().SetImage(SwapItem_->GetItemRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Origin]->GetIconRenderer().SetImage(SwapItem_->GetIconRenderer().GetImage()->GetNameCopy());
 	InventoryList_[_Origin]->SetItemName(SwapItem_->GetItemName());
 	InventoryList_[_Origin]->SetIndexNum(SwapItem_->GetIndexNum());
 	InventoryList_[_Origin]->GetIconRenderer().SetIndex(SwapItem_->GetIndexNum());
+	InventoryList_[_Origin]->Font_[0] = SwapItem_->Font_[0];
+	InventoryList_[_Origin]->Font_[1] = SwapItem_->Font_[1];
 }
 
 // 컬리전

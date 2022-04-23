@@ -4,6 +4,7 @@
 
 Item::Item() 
 	: ClickedFlg(false)
+	, Countable(true)
 {
 	ItemName_ = "Empty";
 }
@@ -16,6 +17,30 @@ void Item::Start()
 {
 }
 
+void Item::SetItemNum()
+{
+	if (true == Countable)
+	{
+
+		for (size_t i = 0; i < Counter_.size(); i++)
+		{
+			Font_[i]->RendererFontOn();
+			Font_[i]->GetFont(Counter_[i]);
+			Font_[i]->GetRendererFont()->SetPivot({IconRenderer_->GetPivot().x + IMAGE_SIZE_EMPTY / 2
+				                                 , IconRenderer_->GetPivot().y + IMAGE_SIZE_EMPTY / 2
+				                                 + ( 4 - ( 8 * i))});
+		}
+	}
+}
+
+void Item::AddCounter()
+{
+	if (true == Countable)
+	{
+		Counter_ = std::to_string(stoi(Counter_) + 1);
+	}
+}
+
 void Item::SetIconRendererInfo(int _ItemNum)
 {
 	switch (_ItemNum)
@@ -23,21 +48,25 @@ void Item::SetIconRendererInfo(int _ItemNum)
 	case (int)ITEMTABLE::EMPTY:
 		IconRenderer_->SetImage(IMAGE_INVENTORY_EMPTY);
 		IndexNum_ = -1;
+		Countable = false;
 		ItemName_ = ITEM_NAME_EMPTY;
 		break;
 	case (int)ITEMTABLE::HOE:
 		IconRenderer_->SetImage(IMAGE_TOOL_ICON);
 		IndexNum_ = 0;
+		Countable = false;
 		ItemName_ = ITEM_NAME_HOE;
 		break;
 	case (int)ITEMTABLE::AXE:
 		IconRenderer_->SetImage(IMAGE_TOOL_ICON);
 		IndexNum_ = 1;
+		Countable = false;
 		ItemName_ = ITEM_NAME_AXE;
 		break;
 	case (int)ITEMTABLE::WATERINGCAN:
 		IconRenderer_->SetImage(IMAGE_TOOL_ICON);
 		IndexNum_ = 2;
+		Countable = false;
 		ItemName_ = ITEM_NAME_WATERINGCAN;
 		break;
 	/// ³ª¹« ///////////////////////////////////////////////////////////////
@@ -286,6 +315,7 @@ void Item::SetIconRendererInfo(int _ItemNum)
 	default:
 		IconRenderer_->SetImage(IMAGE_INVENTORY_EMPTY);
 		IndexNum_ = -1;
+		Countable = false;
 		ItemName_ = ITEM_NAME_EMPTY;
 		break;
 	}

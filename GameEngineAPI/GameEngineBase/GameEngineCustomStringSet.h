@@ -63,6 +63,7 @@
 #define IMAGE_FULL_SIZE_W 1280
 #define IMAGE_FONT "Font.bmp"
 #define IMAGE_FONT_NUMBER "FontNumber.bmp"
+#define IMAGE_SIZE_EMPTY 64
 
 #define IMAGE_ENVIRONMENT_SEED "Seed.bmp"
 #define IMAGE_ENVIRONMENT_CROPS "Crops.bmp"

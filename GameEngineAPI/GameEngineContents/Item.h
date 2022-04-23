@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Font.h"
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -61,7 +62,17 @@ public:
 		IndexNum_ = _IndexNum;
 	}
 
+	void AddCounter();
+
+	void SetItemNum();
+
 	bool ClickedFlg;
+	Font* Font_[2];
+
+	// 겹쳐질 수 있는 아이템인가
+	bool Countable;
+	// 얼마나 겹쳐져있는가
+	std::string Counter_;
 
 protected:
 	// 아이템이 필드에서 보일때 이미지
@@ -69,10 +80,6 @@ protected:
 	// 아이템이 인벤토리에 들어가있을때의 아이콘 이미지
 	GameEngineRenderer* IconRenderer_;
 
-	// 겹쳐질 수 있는 아이템인가
-	bool Countable;
-	// 얼마나 겹쳐져있는가
-	int Counter_;
 
 	std::string ItemName_;
 	int IndexNum_;

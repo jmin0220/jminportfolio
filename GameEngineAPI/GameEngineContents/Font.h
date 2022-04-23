@@ -17,12 +17,41 @@ public:
 	Font& operator=(const Font& _Other) = delete;
 	Font& operator=(Font&& _Other) noexcept = delete;
 
+	GameEngineRenderer* GetFont(char _Char);
 	GameEngineRenderer* GetNumberFont(int _Index);
+
+	inline void RendererFontOff()
+	{
+		RendererFont_->Off();
+	}
+	inline void RendererFontOn()
+	{
+		RendererFont_->On();
+	}
+	inline void RendererNumberOff()
+	{
+		RendererNumber_->Off();
+	}
+	inline void RendererNumberOn()
+	{
+		RendererNumber_->On();
+	}
+
+	inline GameEngineRenderer* GetRendererFont()
+	{
+		return RendererFont_;
+	}
+
+	inline GameEngineRenderer* RendererNumber()
+	{
+		return RendererNumber_;
+	}
 
 protected:
 	void Start() override;
 
-private:
+	GameEngineRenderer* RendererFont_;
 	GameEngineRenderer* RendererNumber_;
+private:
 };
 

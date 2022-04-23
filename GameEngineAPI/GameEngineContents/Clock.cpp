@@ -21,6 +21,8 @@ void Clock::Start()
 	for (size_t i = 0; i < 8; i++)
 	{
 		GoldFont_[i] = this->GetLevel()->CreateActor<Font>((int)ORDER::UIFONT);
+		GoldFont_[i]->RendererFontOff();
+		GoldFont_[i]->RendererNumberOn();
 	}
 }
 
