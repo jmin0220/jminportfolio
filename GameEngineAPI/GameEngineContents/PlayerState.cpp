@@ -127,7 +127,7 @@ void Player::ActionUpdate()
 						ResultCrops->Destroy();
 
 						// 최대 성장 상태에서 파괴되었을경우 아이템 생성
-						if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
+						if (ResultCrops->GetMaxLevel() <= ResultCrops->GetGrowLevel())
 						{
 							int ItemNum = PlayerRandom_->RandomInt(1, 4);
 
@@ -150,11 +150,19 @@ void Player::ActionUpdate()
 							}
 						}
 					}
-					else if (ResultCrops->GetHp() <= 4)
+					else if (ResultCrops->GetHp() == 4)
 					{
 						// Hp가 4이하일경우 나무 밑둥만 남기기
 						ResultCrops->SetGrowLevel(5);
+						ResultCrops->GetRenderer()->SetIndex(ResultCrops->GetCropsRenderIndex() + ResultCrops->GetGrowLevel());
 
+						// 밑둥만 남는 순간 한번 아이템 생성
+						int ItemNum = PlayerRandom_->RandomInt(1, 4);
+
+						for (size_t i = 0; i < ItemNum; i++)
+						{
+							AddItem(ResultCrops->CreateItem());
+						}
 					}
 
 				}
@@ -170,13 +178,6 @@ void Player::ActionUpdate()
 			// 타일생성
 			CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItem()), 1);
 		}
-		//// 씨앗일경우
-		//else if ((int)ITEMTABLE::PARSNIP <= StringtoItemTable(Inventory_->GetSelectedItem())
-		//		&& StringtoItemTable(Inventory_->GetSelectedItem()) <= (int)ITEMTABLE::CORN)
-		//{
-		//	// 타일생성
-		//	CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItem()));
-		//}
 
 		// Idle로 상태 전환
 		StateChange(PlayerState::Idle);

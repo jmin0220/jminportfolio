@@ -16,7 +16,4 @@ void ParsnipFruit::Start()
 	SetItemRenderer(*CreateRenderer(IMAGE_ENVIRONMENT_FRUIT, (int)ORDER::FRONTA));
 	GetItemRenderer().SetIndex(IndexNum_);
 	SetItemName(ITEM_NAME_PARSNIP_FRUIT);
-	SetIconRenderer(*CreateRenderer(IMAGE_ENVIRONMENT_FRUIT, (int)ORDER::FRONTA));
-	GetIconRenderer().SetIndex(IndexNum_);
-	GetIconRenderer().Off();
 }

@@ -69,6 +69,11 @@ protected:
 	// 아이템이 인벤토리에 들어가있을때의 아이콘 이미지
 	GameEngineRenderer* IconRenderer_;
 
+	// 겹쳐질 수 있는 아이템인가
+	bool Countable;
+	// 얼마나 겹쳐져있는가
+	int Counter_;
+
 	std::string ItemName_;
 	int IndexNum_;
 

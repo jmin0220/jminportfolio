@@ -16,6 +16,8 @@ void Oaktree::Start()
 	Hp_ = 7;
 	Renderer_ = CreateRenderer(IMAGE_ENVIRONMENT_OAKTREE, (int)ORDER::FRONTA);
 	Renderer_->SetIndex(0);
+	SetGrowLevel(0);
+	SetMaxLevel(4);
 }
 
 Item* Oaktree::CreateItem()

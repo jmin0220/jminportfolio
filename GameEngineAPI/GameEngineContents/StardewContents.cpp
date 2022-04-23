@@ -38,18 +38,6 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
-	// TODO::삭제
-	//GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_CLOTH);
-	//Image->Cut({ 24, 24 }); 
-	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAIR);
-	//Image->Cut({ 48, 96 }); 
-	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_HAT);
-	//Image->Cut({ 60, 60 }); 
-	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MASK);
-	//Image->Cut({ 48, 48 });
-	//Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_BODY);
-	//Image->Cut({ 48, 96 });
-
 	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find(IMAGE_PLAYER_MAN_TOTAL);
 	Image->Cut({ 48, 96 });
 
@@ -113,6 +101,10 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	// 실제론 자르지 않지만 인벤토리 처리를 위해 자르기 처리
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_INVENTORY_EMPTY);
+	Image->Cut({ 64, 64 });
+
 	// 툴
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
@@ -148,11 +140,11 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
-	// Renderer->RenderPivot::BOT:
+
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_SEED);
 	Image->Cut({ 48, 48 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_CROPS);
-	Image->Cut({ 64, 96 });
+	Image->Cut({ 64, 128 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_MAPLETREE);
 	Image->Cut({ 144, 624 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ENVIRONMENT_OAKTREE);
