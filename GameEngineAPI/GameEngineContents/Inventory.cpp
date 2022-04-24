@@ -159,6 +159,16 @@ void Inventory::ExtendInventoryOn()
 
 			// 인벤토리바 위치
 			RendererInven_->SetPivot({ IMAGE_INVENTORY_EXT_POS_X , IMAGE_INVENTORY_EXT_POS_Y });
+
+			// 컬리전 조정
+			for (size_t i = 0; i < 12; i++)
+			{
+				ColInventoryNormalBox_[i]->On();
+			}
+			for (size_t i = 0; i < 36; i++)
+			{
+				ColInventoryExtendBox_[i]->Off();
+			}
 		}
 		else
 		{
@@ -167,6 +177,16 @@ void Inventory::ExtendInventoryOn()
 
 			// 인벤토리바 위치
 			RendererInven_->SetPivot({ IMAGE_INVENTORYBAR_POS_DOWN_X, IMAGE_INVENTORYBAR_POS_DOWN_Y });
+
+			// 컬리전 조정
+			for (size_t i = 0; i < 12; i++)
+			{
+				ColInventoryNormalBox_[i]->Off();
+			}
+			for (size_t i = 0; i < 36; i++)
+			{
+				ColInventoryExtendBox_[i]->On();
+			}
 		}
 
 		ItemPosCalc();
@@ -271,16 +291,23 @@ void Inventory::ItemPosCalc()
 	}
 	else
 	{
-		for (size_t i = 0; i < 12; i++)
+		for (size_t i = 0; i < 3; i++)
 		{
-			for (size_t j = 0; j < 3; j++)
+			for (size_t j = 0; j < 12; j++)
 			{
-				PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)i));
-				PosY = IMAGE_INVENTORY_EXT_POS_Y - (58 - (64 * (float)j)) + 4 * j;
+				if (false == InventoryList_[j + (12 * i)]->ClickedFlg)
+				{
+					PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)j));
+					PosY = IMAGE_INVENTORY_EXT_POS_Y - (58 - (64 * (float)i));
 
-				InventoryList_[i + (12 * j)]->GetIconRenderer().SetPivot({ PosX, PosY });
-				InventoryList_[i]->SetItemNum();
-				InventoryList_[i + (12 * j)]->GetIconRenderer().On();
+					InventoryList_[j + (12 * i)]->GetIconRenderer().SetPivot({ PosX, PosY });
+					InventoryList_[j + (12 * i)]->SetItemNum();
+					InventoryList_[j + (12 * i)]->GetIconRenderer().On();
+				}
+				else
+				{
+					continue;
+				}
 			}
 		}
 	}
@@ -359,15 +386,15 @@ void Inventory::CollisionInit()
 		ColInventoryNormalBox_[i] = CreateCollision(COL_GROUP_INVENTORY_BOX, {64, 64}, { PosX, PosY });
 	}
 
-	for (size_t i = 0; i < 12; i++)
+	for (size_t i = 0; i < 3; i++)
 	{
-		for (size_t j = 0; j < 3; j++)
+		for (size_t j = 0; j < 12; j++)
 		{
-			PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)i));
-			PosY = IMAGE_INVENTORY_EXT_POS_Y - (83 - (64 * (float)j)) + 4 * j;
+			PosX = IMAGE_INVENTORY_EXT_POS_X - (352 - (64 * (float)j));
+			PosY = IMAGE_INVENTORY_EXT_POS_Y - (58 - (64 * (float)i));
 
-			ColInventoryExtendBox_[i] = CreateCollision(COL_GROUP_INVENTORY_EXTEND_BOX, {64, 64}, {PosX, PosY});
-			ColInventoryExtendBox_[i]->Off();
+			ColInventoryExtendBox_[j + (12 * i)] = CreateCollision(COL_GROUP_INVENTORY_EXTEND_BOX, {64, 64}, {PosX, PosY});
+			ColInventoryExtendBox_[j + (12 * i)]->Off();
 		}
 	}
 }

@@ -631,85 +631,171 @@ void Player::CropsUpdate()
 // 마우스로 인벤토리 조작하기
 void Player::ControlInventorySelectBoxWithMouse()
 {
-	if (true == IsActionKeyDown()
-		&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
+	// 인벤토리가 축소되었을때
+	if (false == Inventory_->GetExtendFlg())
 	{
-		std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
-		std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
-
-		for (; StartIter != EndIter; ++StartIter)
+		if (true == IsActionKeyDown()
+			&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
 		{
-			for (size_t i = 0; i < 12; i++)
-			{
-				if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
-				{
-					ItemSelectOrigin = i;
-					Inventory_->GetInventoryList()[i]->ClickedFlg = true;
+			std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
+			std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
 
-					break;
+			for (; StartIter != EndIter; ++StartIter)
+			{
+				for (size_t i = 0; i < 12; i++)
+				{
+					if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
+					{
+						ItemSelectOrigin = i;
+						Inventory_->GetInventoryList()[i]->ClickedFlg = true;
+
+						break;
+					}
+				}
+			}
+
+			InventoryClickFlg_ = true;
+			// 충돌 결과 초기화
+			MouseColResult_.clear();
+		}
+
+		// 기존에 아이템이 선택되어있으면서 마우스를 누르고 있는 상태
+		if (true == IsActionKeyPress() && ItemSelectOrigin != -1)
+		{
+			// 아이템을 마우스에 따라다니도록 이동
+			Inventory_->GetInventoryList()[ItemSelectOrigin]->GetIconRenderer().SetPivot(Mouse_->GetPosition());
+		}
+
+
+		if (true == IsActionKeyUp()
+			&& ItemSelectOrigin != -1
+			&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
+		{
+			// Collision배열에서 Collision의 순서는 실제 인벤토리의 아이템 순서와 항상 동일함.
+			// 인벤토리 1칸은 충돌체 1칸이고, 충돌한 충돌체의 정보를 알아낼 수 있음.
+			// 마우스와 충돌체가 충돌한 시점에서 가져온 충돌체의 정보를 비교하여,
+			// 0번부터 12번까지 검색해서 마우스와 충돌한 충돌체와 동일한 충돌체를 가지고 있는 
+			// Item의 번호로 SetItem함수를 호출함.
+			std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
+			std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
+
+			for (; StartIter != EndIter; ++StartIter)
+			{
+				for (size_t i = 0; i < 12; i++)
+				{
+					if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
+					{
+						ItemSelectTarget = i;
+
+						if (ItemSelectOrigin == ItemSelectTarget)
+						{
+							Inventory_->SelectItem(i);
+							Inventory_->GetInventoryList()[i]->ClickedFlg = false;
+						}
+						else if (ItemSelectOrigin != ItemSelectTarget)
+						{
+							Inventory_->SwapItem(ItemSelectOrigin, ItemSelectTarget);
+							Inventory_->SelectItem(ItemSelectTarget);
+						}
+
+						// 충돌 결과 초기화
+						MouseColResult_.clear();
+						Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
+						Inventory_->GetInventoryList()[ItemSelectTarget]->ClickedFlg = false;
+						ItemSelectOrigin = -1, ItemSelectTarget = -1;
+
+						return;
+					}
 				}
 			}
 		}
-
-		InventoryClickFlg_ = true;
-		// 충돌 결과 초기화
-		MouseColResult_.clear();
-	}
-
-	// 기존에 아이템이 선택되어있으면서 마우스를 누르고 있는 상태
-	if (true == IsActionKeyPress() && ItemSelectOrigin != -1)
-	{
-		// 아이템을 마우스에 따라다니도록 이동
-		Inventory_->GetInventoryList()[ItemSelectOrigin]->GetIconRenderer().SetPivot(Mouse_->GetPosition());
-	}
-
-
-	if (true == IsActionKeyUp() 
-		&& ItemSelectOrigin != -1
-		&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
-	{
-		// Collision배열에서 Collision의 순서는 실제 인벤토리의 아이템 순서와 항상 동일함.
-		// 인벤토리 1칸은 충돌체 1칸이고, 충돌한 충돌체의 정보를 알아낼 수 있음.
-		// 마우스와 충돌체가 충돌한 시점에서 가져온 충돌체의 정보를 비교하여,
-		// 0번부터 12번까지 검색해서 마우스와 충돌한 충돌체와 동일한 충돌체를 가지고 있는 
-		// Item의 번호로 SetItem함수를 호출함.
-		std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
-		std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
-
-		for (; StartIter != EndIter; ++StartIter)
+		else if (true == IsActionKeyUp())
 		{
-			for (size_t i = 0; i < 12; i++)
+			Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
+			InventoryClickFlg_ = false;
+		}
+	}
+	// 인벤토리가 확장되었을때
+	else
+	{
+		if (true == IsActionKeyDown()
+			&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_EXTEND_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
+		{
+			std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
+			std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
+
+			for (; StartIter != EndIter; ++StartIter)
 			{
-				if (Inventory_->GetInventoryNormalCol()[i] == *StartIter)
+				for (size_t i = 0; i < 36; i++)
 				{
-					ItemSelectTarget = i;
-
-					if (ItemSelectOrigin == ItemSelectTarget)
+					if (Inventory_->GetInventoryExtendCol()[i] == *StartIter)
 					{
-						Inventory_->SelectItem(i);
-						Inventory_->GetInventoryList()[i]->ClickedFlg = false;
+						ItemSelectOrigin = i;
+						Inventory_->GetInventoryList()[i]->ClickedFlg = true;
+
+						break;
 					}
-					else if (ItemSelectOrigin != ItemSelectTarget)
+				}
+			}
+
+			InventoryClickFlg_ = true;
+			// 충돌 결과 초기화
+			MouseColResult_.clear();
+		}
+
+		// 기존에 아이템이 선택되어있으면서 마우스를 누르고 있는 상태
+		if (true == IsActionKeyPress() && ItemSelectOrigin != -1)
+		{
+			// 아이템을 마우스에 따라다니도록 이동
+			Inventory_->GetInventoryList()[ItemSelectOrigin]->GetIconRenderer().SetPivot(Mouse_->GetPosition());
+		}
+
+
+		if (true == IsActionKeyUp()
+			&& ItemSelectOrigin != -1
+			&& Mouse_->GetCollision()->CollisionResult(COL_GROUP_INVENTORY_EXTEND_BOX, MouseColResult_, CollisionType::Rect, CollisionType::Rect))
+		{
+			// Collision배열에서 Collision의 순서는 실제 인벤토리의 아이템 순서와 항상 동일함.
+			// 인벤토리 1칸은 충돌체 1칸이고, 충돌한 충돌체의 정보를 알아낼 수 있음.
+			// 마우스와 충돌체가 충돌한 시점에서 가져온 충돌체의 정보를 비교하여,
+			// 0번부터 36번까지 검색해서 마우스와 충돌한 충돌체와 동일한 충돌체를 가지고 있는 
+			// Item의 번호로 SetItem함수를 호출함.
+			std::vector<GameEngineCollision*>::iterator StartIter = MouseColResult_.begin();
+			std::vector<GameEngineCollision*>::iterator EndIter = MouseColResult_.end();
+
+			for (; StartIter != EndIter; ++StartIter)
+			{
+				for (size_t i = 0; i < 36; i++)
+				{
+					if (Inventory_->GetInventoryExtendCol()[i] == *StartIter)
 					{
-						Inventory_->SwapItem(ItemSelectOrigin, ItemSelectTarget);
-						Inventory_->SelectItem(ItemSelectTarget);
+						ItemSelectTarget = i;
+
+						if (ItemSelectOrigin == ItemSelectTarget)
+						{
+							Inventory_->GetInventoryList()[i]->ClickedFlg = false;
+						}
+						else if (ItemSelectOrigin != ItemSelectTarget)
+						{
+							Inventory_->SwapItem(ItemSelectOrigin, ItemSelectTarget);
+						}
+
+						// 충돌 결과 초기화
+						MouseColResult_.clear();
+						Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
+						Inventory_->GetInventoryList()[ItemSelectTarget]->ClickedFlg = false;
+						ItemSelectOrigin = -1, ItemSelectTarget = -1;
+
+						return;
 					}
-
-					// 충돌 결과 초기화
-					MouseColResult_.clear();
-					Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
-					Inventory_->GetInventoryList()[ItemSelectTarget]->ClickedFlg = false;
-					ItemSelectOrigin = -1, ItemSelectTarget = -1;
-
-					return;
 				}
 			}
 		}
-	}
-	else if (true == IsActionKeyUp())
-	{
-		Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
-		InventoryClickFlg_ = false;
+		else if (true == IsActionKeyUp())
+		{
+			Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
+			InventoryClickFlg_ = false;
+		}
 	}
 }
 

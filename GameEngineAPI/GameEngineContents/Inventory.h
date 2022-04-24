@@ -50,7 +50,7 @@ public:
 		return ColInventoryNormalBox_;
 	}
 
-	inline GameEngineCollision** GetInventoryExtandCol()
+	inline GameEngineCollision** GetInventoryExtendCol()
 	{
 		return ColInventoryExtendBox_;
 	}
