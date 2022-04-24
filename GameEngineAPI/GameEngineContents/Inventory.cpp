@@ -321,22 +321,35 @@ int Inventory::AddItemToInventory(int _ItemNum)
 {
 	int InsertSuccessFlg = 0;
 
+	// 아이콘은 인벤토리에서 아이템의 위치를 표시
+	// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
+	// 겹쳐질 수 있거나, 비어있거나.
 	for (size_t i = 0; i < 36; i++)
 	{
-		// 아이콘은 인벤토리에서 아이템의 위치를 표시
-		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
-		// 겹쳐질 수 있거나, 비어있거나.
+		// 이미 같은 이름의 아이템이 존재할경우 
 		if ((StringtoItemTable(InventoryList_[i]->GetItemName()) == _ItemNum
-			&& InventoryList_[i]->Countable == true)
-			|| InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
+			&& InventoryList_[i]->Countable == true))
 		{
-
 			InventoryList_[i]->SetIconRendererInfo(_ItemNum);
 			InventoryList_[i]->AddCounter();
 			InventoryList_[i]->SetItemNum();
 
 			InsertSuccessFlg = 1;
-			break;
+			return InsertSuccessFlg;
+		}
+	}
+
+	for (size_t i = 0; i < 36; i++)
+	{
+		// 같은 이름의 아이템이 존재하지 않을경우 빈곳에 집어넣는다
+		if (InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
+		{
+			InventoryList_[i]->SetIconRendererInfo(_ItemNum);
+			InventoryList_[i]->AddCounter();
+			InventoryList_[i]->SetItemNum();
+
+			InsertSuccessFlg = 1;
+			return InsertSuccessFlg;
 		}
 	}
 
