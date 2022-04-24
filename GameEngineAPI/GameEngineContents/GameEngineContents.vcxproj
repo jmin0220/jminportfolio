@@ -185,7 +185,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BeetFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Blueberry.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BlueberryFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -206,7 +214,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CornFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Couliflower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CouliflowerFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -215,6 +231,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Eggplant.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EggplantFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -250,11 +270,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GarlicFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Greenbean.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GreenbeanFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Hotpepper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="HotpepperFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -271,7 +303,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="KaleFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Melon.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MelonFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -309,7 +349,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PotatoFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Pumpkin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PumpkinFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -317,11 +365,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RadishFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Redcabbage.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RedcabbageFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Rhubarb.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="RhubarbFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -341,7 +401,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="StarfruitFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Sunflower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SunflowerFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -370,11 +438,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TomatoFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TownLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Yam.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="YamFruit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -392,7 +468,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BeetFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Blueberry.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BlueberryFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -412,7 +496,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CornFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Couliflower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CouliflowerFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -421,6 +513,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Eggplant.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EggplantFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -456,11 +552,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GarlicFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Greenbean.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GreenbeanFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Hotpepper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="HotpepperFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -476,7 +584,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="KaleFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Melon.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MelonFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -514,7 +630,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PotatoFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Pumpkin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PumpkinFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -522,11 +646,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="RadishFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Redcabbage.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="RedcabbageFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Rhubarb.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="RhubarbFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -546,7 +682,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="StarfruitFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Sunflower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SunflowerFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -574,12 +718,20 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TomatoFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TownLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="ItemTable.cpp" />
     <ClCompile Include="Yam.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="YamFruit.cpp">
       <SubType>
       </SubType>
     </ClCompile>

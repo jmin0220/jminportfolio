@@ -62,11 +62,11 @@ void Player::PlayerInit()
 	// 인벤토리 초기설정
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);

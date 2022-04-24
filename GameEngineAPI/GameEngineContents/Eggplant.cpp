@@ -1,6 +1,6 @@
 #include "Eggplant.h"
 #include "ContentsEnums.h"
-#include "ParsnipFruit.h"
+#include "EggplantFruit.h"
 
 Eggplant::Eggplant() 
 {
@@ -22,7 +22,7 @@ void Eggplant::Start()
 
 Item* Eggplant::CreateItem()
 {
-	Item* NewItem = this->GetLevel()->CreateActor<ParsnipFruit>();
+	Item* NewItem = this->GetLevel()->CreateActor<EggplantFruit>();
 	float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
 	float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
 

@@ -1,6 +1,6 @@
 #include "Corn.h"
 #include "ContentsEnums.h"
-#include "ParsnipFruit.h"
+#include "CornFruit.h"
 
 Corn::Corn() 
 {
@@ -22,7 +22,7 @@ void Corn::Start()
 
 Item* Corn::CreateItem()
 {
-	Item* NewItem = this->GetLevel()->CreateActor<ParsnipFruit>();
+	Item* NewItem = this->GetLevel()->CreateActor<CornFruit>();
 	float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
 	float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
 

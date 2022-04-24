@@ -1,6 +1,6 @@
 #include "Hotpepper.h"
 #include "ContentsEnums.h"
-#include "ParsnipFruit.h"
+#include "HotpepperFruit.h"
 
 Hotpepper::Hotpepper() 
 {
@@ -22,7 +22,7 @@ void Hotpepper::Start()
 
 Item* Hotpepper::CreateItem()
 {
-	Item* NewItem = this->GetLevel()->CreateActor<ParsnipFruit>();
+	Item* NewItem = this->GetLevel()->CreateActor<HotpepperFruit>();
 	float PosX = RandomItem_->RandomFloat(GetPosition().x - 30.0f, GetPosition().x + 30.0f);
 	float PosY = RandomItem_->RandomFloat(GetPosition().y - 30.0f, GetPosition().y + 30.0f);
 

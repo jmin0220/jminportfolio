@@ -158,6 +158,63 @@
     <ClCompile Include="Corn.cpp">
       <Filter>02Play\Crop</Filter>
     </ClCompile>
+    <ClCompile Include="CouliflowerFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="GarlicFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="RhubarbFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HotpepperFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="RadishFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="StarfruitFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="EggplantFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="PumpkinFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="YamFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BeetFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="SunflowerFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenbeanFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="PotatoFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="KaleFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MelonFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BlueberryFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="RedcabbageFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="CornFruit.cpp">
+      <Filter>02Play\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -322,6 +379,63 @@
     </ClInclude>
     <ClInclude Include="Corn.h">
       <Filter>02Play\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="CouliflowerFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="GarlicFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RhubarbFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="TomatoFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="HotpepperFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RadishFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="StarfruitFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="EggplantFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="PumpkinFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="YamFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BeetFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="SunflowerFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenbeanFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="PotatoFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="KaleFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="MelonFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BlueberryFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RedcabbageFruit.h">
+      <Filter>02Play\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="CornFruit.h">
+      <Filter>02Play\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
