@@ -41,6 +41,14 @@ void Item::AddCounter()
 	}
 }
 
+void Item::SubCounter()
+{
+	if (true == Countable)
+	{
+		Counter_ = std::to_string(stoi(Counter_) - 1);
+	}
+}
+
 void Item::SetIconRendererInfo(int _ItemNum)
 {
 	switch (_ItemNum)

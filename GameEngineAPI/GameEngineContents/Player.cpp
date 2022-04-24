@@ -928,6 +928,16 @@ void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGrou
 		// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
 		EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
 		EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+
+
+		// 사용된 아이템의 숫자를 감소
+		Inventory_->GetInventoryList()[Inventory_->GetSelectedItemNum()]->SubCounter();
+
+		// 아이템이 0개이하일경우 아이템을 없앰
+		if (stoi(Inventory_->GetInventoryList()[Inventory_->GetSelectedItemNum()]->Counter_) <= 0)
+		{
+			Inventory_->DeleteItem(Inventory_->GetSelectedItemNum());
+		}
 	}
 }
 

@@ -63,6 +63,7 @@ public:
 	}
 
 	void AddCounter();
+	void SubCounter();
 
 	void SetItemNum();
 

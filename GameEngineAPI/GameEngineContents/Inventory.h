@@ -25,9 +25,14 @@ public:
 	void SetPos(float4 _Pos);
 	int AddItemToInventory(int _ItemNum);
 
-	inline std::string GetSelectedItem()
+	inline std::string GetSelectedItemName()
 	{
-		return SelectedItem_;
+		return SelectedItemName_;
+	}
+
+	inline int GetSelectedItemNum()
+	{
+		return SelectedItemNumber_;
 	}
 
 	inline Item** GetInventoryList()
@@ -55,6 +60,8 @@ public:
 		return ColInventoryExtendBox_;
 	}
 
+	void DeleteItem(int i);
+
 	void SelectItem(int i);
 	Item* SwapItem_;
 	void SwapItem(int _Origin, int _Target);
@@ -66,7 +73,8 @@ protected:
 
 private:
 	static char SelectBoxHotkey_;
-	static std::string SelectedItem_;
+	static std::string SelectedItemName_;
+	static int SelectedItemNumber_;
 	static float4 Pos_;
 	static bool ExtendFlg_;
 	static Item* InventorySaver_[36];

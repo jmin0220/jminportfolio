@@ -11,7 +11,8 @@
 char Inventory::SelectBoxHotkey_;
 float4 Inventory::Pos_;
 bool Inventory::ExtendFlg_;
-std::string Inventory::SelectedItem_;
+std::string Inventory::SelectedItemName_;
+int Inventory::SelectedItemNumber_;
 Item* Inventory::InventorySaver_[36];
 
 Inventory::Inventory() 
@@ -91,7 +92,6 @@ void Inventory::Start()
 
 
 }
-
 void Inventory::Update()
 {
 	// 인벤토리창 On/Off
@@ -108,6 +108,7 @@ void Inventory::InventoryInit()
 {
 	if (InventoryList_[0]->GetItemName() != ITEM_NAME_EMPTY)
 	{
+		// TODO::버그가 생기는 위치?
 		memcpy(InventorySaver_, InventoryList_, sizeof(InventoryList_));
 	}
 
@@ -143,7 +144,8 @@ void Inventory::SelectItem(int i)
 	if (false == ExtendFlg_)
 	{
 		SelectBoxHotkey_ = i;
-		SelectedItem_ = InventoryList_[i]->GetItemName();
+		SelectedItemName_ = InventoryList_[i]->GetItemName();
+		SelectedItemNumber_ = i;
 	}
 }
 
@@ -323,7 +325,7 @@ int Inventory::AddItemToInventory(int _ItemNum)
 	{
 		// 아이콘은 인벤토리에서 아이템의 위치를 표시
 		// 아이콘이 Empty일경우 해당 인벤토리칸은 비어있어야 함.
-		// 겹쳐질 수 있으거나, 비어있거나.
+		// 겹쳐질 수 있거나, 비어있거나.
 		if ((StringtoItemTable(InventoryList_[i]->GetItemName()) == _ItemNum
 			&& InventoryList_[i]->Countable == true)
 			|| InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy() == GameEngineString::ToUpperReturn(IMAGE_INVENTORY_EMPTY))
@@ -342,6 +344,19 @@ int Inventory::AddItemToInventory(int _ItemNum)
 	// 못넣었으면 0
 	return InsertSuccessFlg;
 }
+
+// 인벤토리에서 아이템 삭제
+void Inventory::DeleteItem(int i)
+{
+	InventoryList_[i]->GetIconRenderer().SetImage(IMAGE_INVENTORY_EMPTY);
+	InventoryList_[i]->GetItemRenderer().SetImage(IMAGE_INVENTORY_EMPTY);
+	InventoryList_[i]->SetItemName(ITEM_NAME_EMPTY);
+	InventoryList_[i]->Font_[0]->GetRendererFont()->Off();
+	InventoryList_[i]->Font_[1]->GetRendererFont()->Off();
+	InventoryList_[i]->Countable = false;
+	InventoryList_[i]->Counter_ = "0";
+}
+
 
 // 아이템 이동
 void Inventory::SwapItem(int _Origin, int _Target)

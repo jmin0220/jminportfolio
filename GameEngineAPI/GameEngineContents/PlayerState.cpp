@@ -48,7 +48,7 @@ void Player::ActionUpdate()
 		GetActionCollision()->On();
 
 		// Hoe를 들고 있는경우
-		if (Inventory_->GetSelectedItem() == ITEM_NAME_HOE)
+		if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
 		{
 			// 농작물일경우 부셔짐 처리
 			if (GetActionCollision()->CollisionResult(COL_GROUP_CROPS, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
@@ -102,13 +102,13 @@ void Player::ActionUpdate()
 				CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW, 0);
 			}
 		}
-		else if (Inventory_->GetSelectedItem() == ITEM_NAME_WATERINGCAN)
+		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
 		{
 			// 타일생성
 			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOWWET, 0);
 		}
 		// Axe를 들고 있는경우
-		else if (Inventory_->GetSelectedItem() == ITEM_NAME_AXE)
+		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
 		{
 			// 나무일경우 부셔짐 처리
 			if (GetActionCollision()->CollisionResult(COL_GROUP_TREES, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
@@ -172,11 +172,11 @@ void Player::ActionUpdate()
 			ActionColResult_.clear();
 		}
 		// 나무, 씨앗일경우
-		else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItem())
-		&& StringtoItemTable(Inventory_->GetSelectedItem()) <= (int)ITEMTABLE::CORN)
+		else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
+		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItem()), 1);
+			CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItemName()), 1);
 		}
 
 		// Idle로 상태 전환
