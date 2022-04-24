@@ -264,7 +264,6 @@ void Inventory::ItemPosCalc()
 
 	if (false == ExtendFlg_)
 	{
-
 		for (size_t i = 0; i < 12; i++)
 		{
 			if (false == InventoryList_[i]->ClickedFlg)
@@ -286,6 +285,8 @@ void Inventory::ItemPosCalc()
 			if (false == InventoryList_[i]->ClickedFlg)
 			{
 				InventoryList_[i]->GetIconRenderer().Off();
+				InventoryList_[i]->Font_[0]->GetRendererFont()->Off();
+				InventoryList_[i]->Font_[1]->GetRendererFont()->Off();
 			}
 		}
 	}
@@ -342,6 +343,7 @@ int Inventory::AddItemToInventory(int _ItemNum)
 	return InsertSuccessFlg;
 }
 
+// 아이템 이동
 void Inventory::SwapItem(int _Origin, int _Target)
 {
 	SwapItem_->GetItemRenderer().SetImage(InventoryList_[_Target]->GetItemRenderer().GetImage()->GetNameCopy());
@@ -366,6 +368,13 @@ void Inventory::SwapItem(int _Origin, int _Target)
 	InventoryList_[_Origin]->GetIconRenderer().SetIndex(SwapItem_->GetIndexNum());
 	InventoryList_[_Origin]->Counter_ = SwapItem_->Counter_;
 	InventoryList_[_Origin]->Countable = SwapItem_->Countable;
+
+	// 교환한것들의 폰트를 끄기
+	// 꺼진 폰트 렌더러는 SetItemNum에서 다시 켜질것
+	InventoryList_[_Origin]->Font_[0]->GetRendererFont()->Off();
+	InventoryList_[_Origin]->Font_[1]->GetRendererFont()->Off();
+	InventoryList_[_Target]->Font_[0]->GetRendererFont()->Off();
+	InventoryList_[_Target]->Font_[1]->GetRendererFont()->Off();
 }
 
 // 컬리전
