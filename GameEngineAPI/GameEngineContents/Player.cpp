@@ -253,6 +253,11 @@ void Player::PlayerAnimationInit()
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_DOWN, 10 * oneline, 10 * oneline + 4, 0.1f, true);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_UP, 11 * oneline, 11 * oneline + 3, 0.1f, true);
 
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_RIGHT, 12 * oneline, 12 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_LEFT, 13 * oneline, 13 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_DOWN, 14 * oneline, 14 * oneline + 3, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_UP, 15 * oneline, 15 * oneline + 3, 0.1f, true);
+
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
 }
 
@@ -576,6 +581,7 @@ bool Player::IsActionKeyUp()
 	return true;
 }
 
+// 농작물 성장 및 파괴 등
 void Player::CropsUpdate()
 {
 	for (std::vector<Crops*> Actors : EnvironmentActor_)
@@ -916,6 +922,7 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 	GroundTiles_[y][x]->SetTileState(_TileState);
 }
 
+// 농작물 설치
 void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup)
 {
 	// 해당 위치가 비어있을때만 생성
@@ -941,6 +948,7 @@ void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGrou
 	}
 }
 
+// 필드에 떨어져있는 아이템들
 void Player::ItemUpdate()
 {
 	float4 Dir = { 0.0f, 0.0f }; 

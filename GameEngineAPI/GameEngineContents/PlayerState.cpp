@@ -255,23 +255,48 @@ void Player::IdleStart()
 
 void Player::ActionStart()
 {
-	// TODO::문자열 분리 후 결합하여 애니메이션으로 넘겨줌.
+	std::string Anim = ANIM_KEYWARD_IDLE;
+	std::string Dir = "";
+
+	// Hoe를 들고 있는경우
+	if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
+	{
+		Anim = ANIM_KEYWARD_HIT_HORIZON;
+	}
+	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
+	{
+		Anim = ANIM_KEYWARD_WATERING;
+	}
+	// Axe를 들고 있는경우
+	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
+	{
+		Anim = ANIM_KEYWARD_HIT_HORIZON;
+	}
+	else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
+		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
+	{
+		// 씨앗 심기용 애니메이션?
+		Anim = ANIM_KEYWARD_IDLE;
+	}
+
 	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
-		PlayerAnimationChange(ANIM_HIT_HORIZON_RIGHT);
+		Dir = ANIM_KEYWARD_DIR_RIGHT;
 	}
-	if (float4::LEFT.CompareInt2D(MoveDir_))
+	else if (float4::LEFT.CompareInt2D(MoveDir_))
 	{
-		PlayerAnimationChange(ANIM_HIT_HORIZON_LEFT);
+		Dir = ANIM_KEYWARD_DIR_LEFT;
 	}
-	if (float4::UP.CompareInt2D(MoveDir_))
+	else if (float4::UP.CompareInt2D(MoveDir_))
 	{
-		PlayerAnimationChange(ANIM_HIT_HORIZON_UP);
+		Dir = ANIM_KEYWARD_DIR_UP;
 	}
-	if (float4::DOWN.CompareInt2D(MoveDir_))
+	else if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
-		PlayerAnimationChange(ANIM_HIT_HORIZON_DOWN);
+		Dir = ANIM_KEYWARD_DIR_DOWN;
 	}
+
+	PlayerAnimationChange(Anim + Dir);
 }
 
 void Player::MoveStart()

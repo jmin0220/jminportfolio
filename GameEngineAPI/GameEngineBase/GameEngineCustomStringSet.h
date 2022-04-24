@@ -166,6 +166,16 @@
 
 
 // 애니메이션
+#define ANIM_KEYWARD_IDLE "Idle"
+#define ANIM_KEYWARD_WALK "Walk"
+#define ANIM_KEYWARD_HIT_HORIZON "HitHorizon"
+#define ANIM_KEYWARD_HIT_VERTICAL "HitVertical"
+#define ANIM_KEYWARD_WATERING "Watering"
+#define ANIM_KEYWARD_DIR_RIGHT "Right"
+#define ANIM_KEYWARD_DIR_LEFT "Left"
+#define ANIM_KEYWARD_DIR_UP "Up"
+#define ANIM_KEYWARD_DIR_DOWN "Down"
+
 #define ANIM_IDLE_DOWN "IdleDown"
 #define ANIM_IDLE_RIGHT "IdleRight"
 #define ANIM_IDLE_LEFT "IdleLeft"
@@ -185,6 +195,11 @@
 #define ANIM_HIT_VERTICAL_RIGHT "HitVerticalRight"
 #define ANIM_HIT_VERTICAL_LEFT "HitVerticalLeft"
 #define ANIM_HIT_VERTICAL_UP "HitVerticalUp"
+// 물주기
+#define ANIM_WATERING_DOWN "WateringDown"
+#define ANIM_WATERING_RIGHT "WateringRight"
+#define ANIM_WATERING_LEFT "WateringLeft"
+#define ANIM_WATERING_UP "WateringUp"
 
 
 // 아이템
