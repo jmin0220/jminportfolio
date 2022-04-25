@@ -11,6 +11,7 @@
 #include "Inventory.h"
 #include "PlayerTileIndex.h"
 #include "Crops.h"
+#include "FishingGame.h"
 
 // 설명 :
 class GameEngineImage;
@@ -155,13 +156,21 @@ private:
 	// 현재 상태
 	PlayerState CurState_;
 
-	void IdleUpdate();
-	void ActionUpdate();
-	void MoveUpdate();
-
 	void IdleStart();
 	void ActionStart();
+	void FishingStart();
 	void MoveStart();
+
+	void IdleUpdate();
+	void ActionUpdate();
+	void FishingUpdate();
+	void MoveUpdate();
+
+public:
+	Inventory* GetInventory()
+	{
+		return Inventory_;
+	}
 
 private:
 	// 인터페이스
@@ -214,4 +223,5 @@ private:
 	void CropsUpdate();
 
 	GameEngineRandom* PlayerRandom_;
+	FishingGame* FishingGame_;
 };

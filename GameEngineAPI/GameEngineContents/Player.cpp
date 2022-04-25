@@ -67,26 +67,7 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP_FRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::FISHINGROD);
 
 	Inventory_->InventoryInit();
 }
@@ -98,6 +79,7 @@ void Player::Start()
 	Mouse_ = this->GetLevel()->CreateActor<Mouse>((int)ORDER::UIMOUSE);
 	Clock_ = this->GetLevel()->CreateActor<Clock>((int)ORDER::UI);
 	EnergyBar_ = this->GetLevel()->CreateActor<EnergyBar>((int)ORDER::UI);
+	FishingGame_ = this->GetLevel()->CreateActor<FishingGame>((int)ORDER::UI);
 
 	// 애니메이션 초기화
 	PlayerAnimationInit();
@@ -105,6 +87,8 @@ void Player::Start()
 	PlayerKeyInit();
 	// 카메라 위치 초기화
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
+	// 레벨에 액터를 저장
+	GetLevel()->RegistActor(ACTOR_PLAYER, this);
 
 	// 플레이어의 충돌체 생성
 	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
@@ -119,7 +103,7 @@ void Player::Update()
 	// 카메라 갱신
 	UpdateCamera();
 
-	// 마우스 클릭 이벤트
+	// 인벤토리&마우스 이벤트
 	ControlInventorySelectBoxWithMouse();
 
 	// 농작물 업데이트
@@ -145,6 +129,9 @@ void Player::StateUpdate()
 		break;
 	case PlayerState::Move:
 		MoveUpdate();
+		break;
+	case PlayerState::Fishing:
+		FishingUpdate();
 		break;
 	case PlayerState::Max:
 		break;
@@ -183,13 +170,9 @@ void Player::StateChange(PlayerState _State)
 			// 마우스가 인벤토리 바와 겹쳐있을 경우 상태를 Action으로 변경하지 않음
 			if (InventoryClickFlg_ == true || 
 				(false == Inventory_->GetExtendFlg()
-				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect)))
-			{
-				return;
-			}
-			else if(InventoryClickFlg_ == true || 
-				(true == Inventory_->GetExtendFlg()
-				&&true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect)))
+				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect))
+			 || (true == Inventory_->GetExtendFlg()
+				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect)))
 			{
 				return;
 			}
@@ -197,6 +180,9 @@ void Player::StateChange(PlayerState _State)
 			{
 				ActionStart();
 			}
+			break;
+		case PlayerState::Fishing:
+			FishingStart();
 			break;
 		case PlayerState::Move:
 			MoveStart();

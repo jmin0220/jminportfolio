@@ -18,8 +18,16 @@ void Player::IdleUpdate()
 	// 액션은 이동보다 우선순위가 높음.
 	if (true == IsActionKeyDown())
 	{
-		StateChange(PlayerState::Action);
-		return;
+		if (Inventory_->GetSelectedItemName() == ITEM_NAME_FISHINGROD)
+		{
+			StateChange(PlayerState::Fishing);
+			return;
+		}
+		else
+		{
+			StateChange(PlayerState::Action);
+			return;
+		}
 	}
 
 	if (true == IsMoveKeyDown())
@@ -184,6 +192,17 @@ void Player::ActionUpdate()
 	}
 }
 
+// 낚시 업데이트
+void Player::FishingUpdate()
+{
+	if (true == FishingGame_->GameUpdate())
+	{
+		FishingGame_->GameEnd();
+		// Idle로 상태 전환
+		StateChange(PlayerState::Idle);
+	}
+}
+
 // 이동했을때 상태
 void Player::MoveUpdate()
 {
@@ -297,6 +316,13 @@ void Player::ActionStart()
 	}
 
 	PlayerAnimationChange(Anim + Dir);
+}
+
+void Player::FishingStart()
+{
+	// TODO::낚시를 던질때 충돌맵을 호출해서 낚시를 할 수 있는 곳이면 게임 스타트
+	// 애니메이션은 무조건 출력
+	FishingGame_->GameStart();
 }
 
 void Player::MoveStart()

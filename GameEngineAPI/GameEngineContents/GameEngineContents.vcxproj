@@ -262,6 +262,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FishingBar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FishingGame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FishingPowerbar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FishingRod.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Font.h">
       <SubType>
       </SubType>
@@ -541,6 +557,22 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Fishes.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FishingBar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FishingGame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FishingPowerbar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FishingRod.cpp">
       <SubType>
       </SubType>
     </ClCompile>

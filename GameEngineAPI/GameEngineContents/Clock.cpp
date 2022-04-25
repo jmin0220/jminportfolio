@@ -15,7 +15,7 @@ void Clock::Start()
 {
 	// Clock인터페이스렌더링
 	SetPosition({ IMAGE_CLOCK_POS_W, IMAGE_CLOCK_POS_H });
-	GameEngineRenderer* Renderer = CreateRendererToScale("Clock.bmp", { IMAGE_CLOCK_SIZE_W, IMAGE_CLOCK_SIZE_H });
+	GameEngineRenderer* Renderer = CreateRendererToScale(IMAGE_CLOCK, { IMAGE_CLOCK_SIZE_W, IMAGE_CLOCK_SIZE_H });
 	Renderer->CameraEffectOff();
 
 	for (size_t i = 0; i < 8; i++)

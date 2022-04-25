@@ -36,10 +36,10 @@
       <Filter>02Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Fishes.cpp">
-      <Filter>02Play\Fish</Filter>
+      <Filter>02Play\Fishing</Filter>
     </ClCompile>
     <ClCompile Include="Bream.cpp">
-      <Filter>02Play\Fish</Filter>
+      <Filter>02Play\Fishing</Filter>
     </ClCompile>
     <ClCompile Include="TitleButtonNewGame.cpp">
       <Filter>01Title</Filter>
@@ -215,6 +215,18 @@
     <ClCompile Include="CornFruit.cpp">
       <Filter>02Play\Items</Filter>
     </ClCompile>
+    <ClCompile Include="FishingRod.cpp">
+      <Filter>02Play\Fishing</Filter>
+    </ClCompile>
+    <ClCompile Include="FishingGame.cpp">
+      <Filter>02Play\Fishing</Filter>
+    </ClCompile>
+    <ClCompile Include="FishingPowerbar.cpp">
+      <Filter>02Play\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="FishingBar.cpp">
+      <Filter>02Play\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -252,10 +264,10 @@
       <Filter>02Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Fishes.h">
-      <Filter>02Play\Fish</Filter>
+      <Filter>02Play\Fishing</Filter>
     </ClInclude>
     <ClInclude Include="Bream.h">
-      <Filter>02Play\Fish</Filter>
+      <Filter>02Play\Fishing</Filter>
     </ClInclude>
     <ClInclude Include="TitleButtonNewGame.h">
       <Filter>01Title</Filter>
@@ -437,6 +449,18 @@
     <ClInclude Include="CornFruit.h">
       <Filter>02Play\Items</Filter>
     </ClInclude>
+    <ClInclude Include="FishingRod.h">
+      <Filter>02Play\Fishing</Filter>
+    </ClInclude>
+    <ClInclude Include="FishingGame.h">
+      <Filter>02Play\Fishing</Filter>
+    </ClInclude>
+    <ClInclude Include="FishingPowerbar.h">
+      <Filter>02Play\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="FishingBar.h">
+      <Filter>02Play\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">
@@ -460,9 +484,6 @@
     <Filter Include="02Play\Crop">
       <UniqueIdentifier>{cbe1d534-e6ca-40d4-b9ee-84bc78cd49a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02Play\Fish">
-      <UniqueIdentifier>{c7f33d1d-1ff1-4e68-b48e-1f7d050c6159}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02Play\Interface">
       <UniqueIdentifier>{7d14fb72-1e23-44d8-b8f7-4fb4669f4c58}</UniqueIdentifier>
     </Filter>
@@ -474,6 +495,9 @@
     </Filter>
     <Filter Include="02Play\Items">
       <UniqueIdentifier>{4a2ebd00-c729-47aa-89a5-bd701691126a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Fishing">
+      <UniqueIdentifier>{c7f33d1d-1ff1-4e68-b48e-1f7d050c6159}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

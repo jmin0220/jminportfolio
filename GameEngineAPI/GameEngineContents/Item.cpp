@@ -77,6 +77,12 @@ void Item::SetIconRendererInfo(int _ItemNum)
 		Countable = false;
 		ItemName_ = ITEM_NAME_WATERINGCAN;
 		break;
+	case (int)ITEMTABLE::FISHINGROD:
+		IconRenderer_->SetImage(IMAGE_TOOL_ICON);
+		IndexNum_ = 3;
+		Countable = false;
+		ItemName_ = ITEM_NAME_FISHINGROD;
+		break;
 	/// ³ª¹« ///////////////////////////////////////////////////////////////
 	case (int)ITEMTABLE::OAKTREE:
 		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);

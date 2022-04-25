@@ -12,6 +12,7 @@ enum class ITEMTABLE
 	HOE,			
 	AXE,
 	WATERINGCAN,
+	FISHINGROD,
 	// ³ª¹«
 	OAKTREE,
 	MAPLETREE,

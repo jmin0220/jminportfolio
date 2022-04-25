@@ -21,7 +21,6 @@ class GameEngineRandom
 	//std::uniform_int_distribution<int> Uniform;
 
 public:
-	// 
 	int RandomInt(int _Min, int _Max)
 	{
 		std::uniform_int_distribution<int> Uniform(_Min, _Max);

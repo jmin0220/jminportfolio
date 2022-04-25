@@ -104,6 +104,8 @@ void StardewContents::GameInit()
 	// 실제론 자르지 않지만 인벤토리 처리를 위해 자르기 처리
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_INVENTORY_EMPTY);
 	Image->Cut({ 64, 64 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_FISHING_PROGRESS);
+	Image->Cut({ 12, 432 });
 
 	// 툴
 	ResourcesDir.MoveParent(DIR_PARENT);

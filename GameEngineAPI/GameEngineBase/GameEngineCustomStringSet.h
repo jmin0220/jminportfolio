@@ -36,6 +36,7 @@
 #define IMAGE_CLOCK_POS_W 1125
 #define IMAGE_CLOCK_SIZE_H 236
 #define IMAGE_CLOCK_SIZE_W 288
+#define IMAGE_CLOCK "Clock.bmp"
 #define IMAGE_ENERGYBAR_POS_H 591
 #define IMAGE_ENERGYBAR_POS_W 1249
 #define IMAGE_FARM_BUILDING "FarmBuildings.bmp"
@@ -64,6 +65,15 @@
 #define IMAGE_FONT "Font.bmp"
 #define IMAGE_FONT_NUMBER "FontNumber.bmp"
 #define IMAGE_SIZE_EMPTY 64
+
+#define IMAGE_FISHING_MAX "FishingMax.bmp"
+#define IMAGE_FISHING_HIT "FishingHit.bmp"
+#define IMAGE_FISHING_FISHINGBAR "Fishingbar.bmp"
+#define IMAGE_FISHING_POWERBAR "FishingPowerbar.bmp"
+#define IMAGE_FISHING_PROGRESS "FishingProgress.bmp"
+#define IMAGE_FISHING_FISH_HITBOX "FishinghitBox.bmp"
+#define IMAGE_FISHING_CATCH_HITBOX "Fishinghitbox.bmp"
+#define IMAGE_FISHING_LURE "lure.bmp"
 
 #define IMAGE_ENVIRONMENT_SEED "Seed.bmp"
 #define IMAGE_ENVIRONMENT_CROPS "Crops.bmp"
@@ -142,6 +152,8 @@
 #define COL_GROUP_INVENTORY_EXTEND_BOX "InventoryExtendBox"
 #define COL_GROUP_CROPS "CropsCol"
 #define COL_GROUP_TREES "TreeCol"
+#define COL_GROUP_FISH_HITBOX "FishHitBox"
+#define COL_GROUP_CATCH_HITBOX "CatchHitBox"
 
 // Å¸ÀÏ¸Ê
 #define TILEMAP_SIZE 48
@@ -208,6 +220,7 @@
 #define ITEM_NAME_HOE "Hoe"
 #define ITEM_NAME_AXE "Axe"
 #define ITEM_NAME_WATERINGCAN "WateringCan"
+#define ITEM_NAME_FISHINGROD "FishingRod"
 // ³ª¹«
 #define ITEM_NAME_OAKTREE "OakTree"
 #define ITEM_NAME_MAPLETREE "MapleTree"
