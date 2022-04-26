@@ -48,52 +48,47 @@ void Player::ActionUpdate()
 {
 	// 애니메이션이 종료되면 액션 실행 후 Idle로 전환
 	if (true == RendererBody_->IsEndAnimation())
-	{		
-		//{ GetPosition().x + CheckLength.x + MoveDir_.x * 30.0f, GetPosition().y + CheckLength.y + 16.0f };
-
+	{
 		// 액션이 끝나는 순간에만 액션충돌체 켜기
 		GetActionCollision()->On();
 
 		// Hoe를 들고 있는경우
 		if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
 		{
+			// 플레이어에서 너무 멀리 떨어져있는 타일을 선택했을 경우, 플레이어가 바라보고 있는 방향의 타일맵에 Dirt를 생성
+			// 플레이어 근처에서 선택할경우, 해당방향으로 변경되면서, 선택한 타일맵에 Dirt를 생성
+
 			// 농작물일경우 부셔짐 처리
-			if (GetActionCollision()->CollisionResult(COL_GROUP_CROPS, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
+			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr)
 			{
-				std::vector<GameEngineCollision*>::iterator StartIter = ActionColResult_.begin();
-				std::vector<GameEngineCollision*>::iterator EndIter = ActionColResult_.end();
+				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
+				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
 
-				for (; StartIter != EndIter; ++StartIter)
+				// Hp가 0이 되면 파괴
+				if (ResultCrops->GetHp() <= 0)
 				{
-					Crops* ResultCrops = static_cast<Crops*>(StartIter[0]->GetActor());
-					ResultCrops->SetHp(ResultCrops->GetHp() - 1);
+					ResultCrops->Destroy();
 
-					// Hp가 0이 되면 파괴
-					if (ResultCrops->GetHp() <= 0)
+					// 최대 성장 상태에서 파괴되었을경우 아이템 생성
+					if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
 					{
-						ResultCrops->Destroy();
+						int ItemNum = PlayerRandom_->RandomInt(1, 4);
 
-						// 최대 성장 상태에서 파괴되었을경우 아이템 생성
-						if (ResultCrops->GetMaxLevel() == ResultCrops->GetGrowLevel())
+						for (size_t i = 0; i < ItemNum; i++)
 						{
-							int ItemNum = PlayerRandom_->RandomInt(1, 4);
-
-							for (size_t i = 0; i < ItemNum; i++)
-							{
-								AddItem(ResultCrops->CreateItem());
-							}
+							AddItem(ResultCrops->CreateItem());
 						}
+					}
 
-						// 파괴처리 후 배열을 nullptr로 초기화
-						for (size_t i = 0; i < EnvironmentActor_.size(); i++)
+					// 파괴처리 후 배열을 nullptr로 초기화
+					for (size_t i = 0; i < EnvironmentActor_.size(); i++)
+					{
+						for (size_t j = 0; j < EnvironmentActor_[i].size(); j++)
 						{
-							for (size_t j = 0; j < EnvironmentActor_[i].size(); j++)
+							if (ResultCrops == EnvironmentActor_[i][j])
 							{
-								if (ResultCrops == EnvironmentActor_[i][j])
-								{
-									EnvironmentActor_[i][j] = nullptr;
-									break;
-								}
+								EnvironmentActor_[i][j] = nullptr;
+								break;
 							}
 						}
 					}
@@ -117,53 +112,21 @@ void Player::ActionUpdate()
 		// Axe를 들고 있는경우
 		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
 		{
+			// 플레이어가 선택한 위치에 있는 액터를 파괴
 			// 나무일경우 부셔짐 처리
-			if (GetActionCollision()->CollisionResult(COL_GROUP_TREES, ActionColResult_, CollisionType::Rect, CollisionType::Rect))
+			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr)
 			{
-				std::vector<GameEngineCollision*>::iterator StartIter = ActionColResult_.begin();
-				std::vector<GameEngineCollision*>::iterator EndIter = ActionColResult_.end();
+				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
+				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
 
-				for (; StartIter != EndIter; ++StartIter)
+				// Hp가 0이 되면 파괴
+				if (ResultCrops->GetHp() <= 0)
 				{
-					Crops* ResultCrops = static_cast<Crops*>(StartIter[0]->GetActor());
-					ResultCrops->SetHp(ResultCrops->GetHp() - 1);
+					ResultCrops->Destroy();
 
-					// Hp가 0이 되면 파괴
-					if (ResultCrops->GetHp() <= 0)
+					// 최대 성장 상태에서 파괴되었을경우 아이템 생성
+					if (ResultCrops->GetMaxLevel() <= ResultCrops->GetGrowLevel())
 					{
-						ResultCrops->Destroy();
-
-						// 최대 성장 상태에서 파괴되었을경우 아이템 생성
-						if (ResultCrops->GetMaxLevel() <= ResultCrops->GetGrowLevel())
-						{
-							int ItemNum = PlayerRandom_->RandomInt(1, 4);
-
-							for (size_t i = 0; i < ItemNum; i++)
-							{
-								AddItem(ResultCrops->CreateItem());
-							}
-						}
-
-						// 파괴처리 후 배열을 nullptr로 초기화
-						for (size_t i = 0; i < EnvironmentActor_.size(); i++)
-						{
-							for (size_t j = 0; j < EnvironmentActor_[i].size(); j++)
-							{
-								if (ResultCrops == EnvironmentActor_[i][j])
-								{
-									EnvironmentActor_[i][j] = nullptr;
-									break;
-								}
-							}
-						}
-					}
-					else if (ResultCrops->GetHp() == 4)
-					{
-						// Hp가 4이하일경우 나무 밑둥만 남기기
-						ResultCrops->SetGrowLevel(5);
-						ResultCrops->GetRenderer()->SetIndex(ResultCrops->GetCropsRenderIndex() + ResultCrops->GetGrowLevel());
-
-						// 밑둥만 남는 순간 한번 아이템 생성
 						int ItemNum = PlayerRandom_->RandomInt(1, 4);
 
 						for (size_t i = 0; i < ItemNum; i++)
@@ -172,6 +135,32 @@ void Player::ActionUpdate()
 						}
 					}
 
+					// 파괴처리 후 배열을 nullptr로 초기화
+					for (size_t i = 0; i < EnvironmentActor_.size(); i++)
+					{
+						for (size_t j = 0; j < EnvironmentActor_[i].size(); j++)
+						{
+							if (ResultCrops == EnvironmentActor_[i][j])
+							{
+								EnvironmentActor_[i][j] = nullptr;
+								break;
+							}
+						}
+					}
+				}
+				else if (ResultCrops->GetHp() == 4)
+				{
+					// Hp가 4이하일경우 나무 밑둥만 남기기
+					ResultCrops->SetGrowLevel(5);
+					ResultCrops->GetRenderer()->SetIndex(ResultCrops->GetCropsRenderIndex() + ResultCrops->GetGrowLevel());
+
+					// 밑둥만 남는 순간 한번 아이템 생성
+					int ItemNum = PlayerRandom_->RandomInt(1, 4);
+
+					for (size_t i = 0; i < ItemNum; i++)
+					{
+						AddItem(ResultCrops->CreateItem());
+					}
 				}
 			}
 
