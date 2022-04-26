@@ -48,9 +48,8 @@ void Player::ActionUpdate()
 {
 	// 애니메이션이 종료되면 액션 실행 후 Idle로 전환
 	if (true == RendererBody_->IsEndAnimation())
-	{
-		float4 CheckLength = MoveDir_ * 24;
-		float4 Pos = { GetPosition().x + CheckLength.x + MoveDir_.x * 30.0f, GetPosition().y + CheckLength.y + 16.0f };
+	{		
+		//{ GetPosition().x + CheckLength.x + MoveDir_.x * 30.0f, GetPosition().y + CheckLength.y + 16.0f };
 
 		// 액션이 끝나는 순간에만 액션충돌체 켜기
 		GetActionCollision()->On();
@@ -107,13 +106,13 @@ void Player::ActionUpdate()
 			else
 			{
 				// 타일생성
-				CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOW, 0);
+				CreatePlayerTileIndex(CurserPosOnTileMap_, (int)TILESTATE::HOLLOW, 0);
 			}
 		}
 		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, (int)TILESTATE::HOLLOWWET, 0);
+			CreatePlayerTileIndex(CurserPosOnTileMap_, (int)TILESTATE::HOLLOWWET, 0);
 		}
 		// Axe를 들고 있는경우
 		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
@@ -184,7 +183,7 @@ void Player::ActionUpdate()
 		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
 		{
 			// 타일생성
-			CreatePlayerTileIndex(Pos, StringtoItemTable(Inventory_->GetSelectedItemName()), 1);
+			CreatePlayerTileIndex(CurserPosOnTileMap_, StringtoItemTable(Inventory_->GetSelectedItemName()), 1);
 		}
 
 		// Idle로 상태 전환
@@ -274,6 +273,7 @@ void Player::IdleStart()
 
 void Player::ActionStart()
 {
+	CurserPosOnTileMap_ = Mouse_->GetCurserPosOnTilemap();
 	std::string Anim = ANIM_KEYWARD_IDLE;
 	std::string Dir = "";
 

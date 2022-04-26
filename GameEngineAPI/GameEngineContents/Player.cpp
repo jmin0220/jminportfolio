@@ -794,8 +794,8 @@ void Player::ControlInventorySelectBoxWithMouse()
 // Å¸ÀÏ¸Ê »ý¼º
 void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _TileActorSelecter)
 {
-	int PosX = static_cast<int>(_Pos.x / TILEMAP_SIZE);
-	int PosY = static_cast<int>(_Pos.y / TILEMAP_SIZE);
+	int PosX = _Pos.x; // static_cast<int>(_Pos.x / TILEMAP_SIZE);
+	int PosY = _Pos.y; // static_cast<int>(_Pos.y / TILEMAP_SIZE);
 
 	if (_TileActorSelecter == 0)
 	{

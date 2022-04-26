@@ -134,6 +134,7 @@ private:
 	bool InventoryClickFlg_;
 	int ItemSelectOrigin, ItemSelectTarget;
 	Mouse* Mouse_;
+	float4 CurserPosOnTileMap_;
 	std::vector<GameEngineCollision*> MouseColResult_;
 
 	bool IsMoveKeyDown();

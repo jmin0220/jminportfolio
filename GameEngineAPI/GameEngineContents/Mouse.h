@@ -50,6 +50,11 @@ public:
 		return PressMouse_;
 	}
 
+	inline float4 GetCurserPosOnTilemap()
+	{
+		return CurserPosOnTilemap_;
+	}
+
 private:
 
 	// 마우스 포인터의 정보
