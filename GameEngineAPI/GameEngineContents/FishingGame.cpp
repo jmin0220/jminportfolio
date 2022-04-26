@@ -31,6 +31,7 @@ bool FishingGame::GameUpdate()
 {
 	bool FishingEndFlg = false;
 	int UpdateResult = 0;
+	this->AddAccTime(GameEngineTime::GetDeltaTime());
 
 	switch (PhaseFlg_)
 	{
@@ -40,27 +41,46 @@ bool FishingGame::GameUpdate()
 		break;
 	// 낚시를 던질때 힘조절
 	case 1:
+
 		if (true == FishingPowerbar_->GameUpdate())
 		{
 			PhaseFlg_ = 2;
+			FishingPowerbar_->GameEnd();
+			Fishingbar_->GameStart();
 		}
+
+		this->ReSetAccTime();
 		break;
 	// 낚시게임중
 	case 2:
+		// 다음 페이즈에 넘어갈때까지 1초 딜레이
+		if (this->GetAccTime() <= 1.0)
+		{
+			break;
+		}
+
 		UpdateResult = Fishingbar_->GameUpdate();
 
 		// 낚시 성공
 		if (1 == UpdateResult)
 		{
 			PhaseFlg_ = 3;
+			Fishingbar_->GameEnd();
 		}
 		else if (2 == UpdateResult)
 		{
 			PhaseFlg_ = 4;
+			Fishingbar_->GameEnd();
 		}
 		break;
 	// 결과 & 아이템 얻기
 	case 3:
+		// 다음 페이즈에 넘어갈때까지 1초 딜레이
+		if (this->GetAccTime() <= 1.0)
+		{
+			break;
+		}
+
 		FishType_ = FishRandom_->RandomInt((int)ITEMTABLE::PUFFERFISH, (int)ITEMTABLE::ANCHOVY);
 
 		static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER))->GetInventory()->AddItemToInventory(FishType_);
@@ -89,6 +109,7 @@ void FishingGame::GameStart()
 
 	// 게임 시작
 	PhaseFlg_ = 1;
+	FishingPowerbar_->GameStart();
 }
 
 void FishingGame::GameEnd()

@@ -12,7 +12,7 @@
 #define ACTOR_TITLE_BUTTON_EXIT "TitleButtonExitGame"
 #define ACTOR_TITLE_LOGO "TitleLogo"
 
-// 플레이어 수치
+// 수치
 #define PLAYER_COL_SIZE 30
 #define PLAYER_ACTION_COL_SIZE 15
 #define PLAYER_ACTION_COL_LENG 24.0f
@@ -72,7 +72,7 @@
 #define IMAGE_FISHING_POWERBAR "FishingPowerbar.bmp"
 #define IMAGE_FISHING_PROGRESS "FishingProgress.bmp"
 #define IMAGE_FISHING_FISH_HITBOX "FishinghitBox.bmp"
-#define IMAGE_FISHING_CATCH_HITBOX "Fishinghitbox.bmp"
+#define IMAGE_FISHING_CATCH_HITBOX "Catchhitbox.bmp"
 #define IMAGE_FISHING_LURE "lure.bmp"
 
 #define IMAGE_ENVIRONMENT_SEED "Seed.bmp"

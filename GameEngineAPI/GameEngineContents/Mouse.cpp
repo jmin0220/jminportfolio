@@ -40,6 +40,8 @@ void Mouse::Update()
 
 	CursorPos_.x = static_cast<float>(pt.x);
 	CursorPos_.y = static_cast<float>(pt.y);
+	CurserPosOnTilemap_.x = static_cast<float>(pt.x) / TILEMAP_SIZE;
+	CurserPosOnTilemap_.y = static_cast<float>(pt.y) / TILEMAP_SIZE;
 
 	MousePoint_->GetActor()->SetPosition(CursorPos_);
 }

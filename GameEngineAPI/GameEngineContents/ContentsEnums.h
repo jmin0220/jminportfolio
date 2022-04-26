@@ -22,3 +22,10 @@ enum class PlayerState
 	Move,
 	Max,
 };
+
+enum class LureState
+{
+	Idle,
+	MoveUp,
+	MoveDown,
+};

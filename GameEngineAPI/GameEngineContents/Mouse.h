@@ -56,6 +56,8 @@ private:
 	POINT pt;
 	// 마우스 포인터 위치
 	float4 CursorPos_;
+	// 타일맵에서의 포인터 위치
+	float4 CurserPosOnTilemap_;
 	// 포인터 렌더러
 	GameEngineRenderer* MousePoint_;
 	// 포인터 충돌체

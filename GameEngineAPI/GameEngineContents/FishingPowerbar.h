@@ -16,7 +16,9 @@ public:
 	FishingPowerbar& operator=(const FishingPowerbar& _Other) = delete;
 	FishingPowerbar& operator=(FishingPowerbar&& _Other) noexcept = delete;
 
+	void GameStart();
 	bool GameUpdate();
+	void GameEnd();
 
 protected:
 	void Start() override;
