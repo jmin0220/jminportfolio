@@ -87,6 +87,8 @@ private:
 	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.
 	float4 MoveDir_;
 
+	float4 GetPositionOnTilemap();
+
 	// 플레이어의 충돌체
 	GameEngineCollision* PlayerCollision_;
 	GameEngineCollision* PlayerActionCollision_;

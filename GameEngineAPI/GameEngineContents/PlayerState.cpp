@@ -262,7 +262,6 @@ void Player::IdleStart()
 
 void Player::ActionStart()
 {
-	CurserPosOnTileMap_ = Mouse_->GetCurserPosOnTilemap();
 	std::string Anim = ANIM_KEYWARD_IDLE;
 	std::string Dir = "";
 
@@ -305,6 +304,38 @@ void Player::ActionStart()
 	}
 
 	PlayerAnimationChange(Anim + Dir);
+
+
+	// 마우스 클릭하는 포지션
+	CurserPosOnTileMap_ = Mouse_->GetCurserPosOnTilemap();
+
+	    // 클릭 위치가 오른쪽으로 멀리 떨어져있음
+	if (GetPositionOnTilemap().x + 1 < CurserPosOnTileMap_.x
+		// 왼쪽으로 멀리 떨어져있음
+		|| GetPositionOnTilemap().x - 1 > CurserPosOnTileMap_.x
+		// 위쪽으로 멀리 떨어져있음
+		|| GetPositionOnTilemap().y - 1 > CurserPosOnTileMap_.y
+		// 아래쪽으로 멀리 떨어져있음
+		|| GetPositionOnTilemap().y + 1 < CurserPosOnTileMap_.y)
+	{
+		// 플레이어가 보고 있는 방향의 바로 앞 타일을 선택함
+		if (MoveDir_.CompareInt2D(float4::RIGHT))
+		{
+			CurserPosOnTileMap_ = {GetPositionOnTilemap().x + 1.0f, GetPositionOnTilemap().y };
+		}
+		else if (MoveDir_.CompareInt2D(float4::LEFT))
+		{
+			CurserPosOnTileMap_ = { GetPositionOnTilemap().x - 1.0f, GetPositionOnTilemap().y };
+		}
+		else if (MoveDir_.CompareInt2D(float4::UP))
+		{
+			CurserPosOnTileMap_ = { GetPositionOnTilemap().x, GetPositionOnTilemap().y - 1.0f };
+		}
+		else if (MoveDir_.CompareInt2D(float4::DOWN))
+		{
+			CurserPosOnTileMap_ = { GetPositionOnTilemap().x, GetPositionOnTilemap().y + 1.0f };
+		}
+	}
 }
 
 void Player::FishingStart()

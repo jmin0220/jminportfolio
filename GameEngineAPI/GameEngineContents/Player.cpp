@@ -387,6 +387,16 @@ bool Player::ColRenderOrderCheck()
 	}
 }
 
+float4 Player::GetPositionOnTilemap()
+{
+	float4 tmp;
+	
+	tmp.x = static_cast<int>(GetPosition().x / TILEMAP_SIZE);
+	tmp.y = static_cast<int>(GetPosition().y / TILEMAP_SIZE);
+
+	return tmp;
+}
+
 // 충돌체크
 void Player::ColCheck(float4 _MoveDir)
 {
