@@ -34,6 +34,7 @@ LRESULT CALLBACK GameEngineWindow::MessageProcess(HWND hWnd, UINT message, WPARA
     }
     case WM_MOUSEWHEEL:
     {
+        // ÈÙ ÀÔ·Â
         GameEngineInput::GetInst()->WheelValue = (SHORT)HIWORD(wParam);
         break;
     }

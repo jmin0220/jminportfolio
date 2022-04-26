@@ -420,8 +420,8 @@ void Player::ColCheck(float4 _MoveDir)
 	
 	// 충돌판정
 	if (RGB(0, 0, 0) != Color 
-		&& !PlayerCollision_->NextPostCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect)
-		&& !PlayerCollision_->NextPostCollisionCheck(COL_GROUP_TREES, CheckLength, CollisionType::Rect, CollisionType::Rect))
+		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect)
+		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_TREES, CheckLength, CollisionType::Rect, CollisionType::Rect))
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
 	}
