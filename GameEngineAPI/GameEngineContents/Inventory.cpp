@@ -368,6 +368,9 @@ void Inventory::DeleteItem(int i)
 	InventoryList_[i]->Font_[1]->GetRendererFont()->Off();
 	InventoryList_[i]->Countable = false;
 	InventoryList_[i]->Counter_ = "0";
+
+	// 삭제된 칸을 다시 선택함으로서 기존 설정을 초기화
+	SelectItem(i);
 }
 
 
