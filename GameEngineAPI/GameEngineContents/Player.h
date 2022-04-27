@@ -107,6 +107,7 @@ private:
 
 	// 맵에서 사용될 충돌용 이미지
 	GameEngineImage* MapColImage_;
+	GameEngineImage* MapColOrderImage_;
 
 	// 애니메이션 초기화
 	void PlayerAnimationInit();
@@ -121,6 +122,8 @@ private:
 
 	// 플레이어가 움직일때 충돌감지
 	float4 SetCheckPos(float4 _NextPos);
+
+	void GetMapColImage();
 
 	// 맵과의 충돌체크
 	void ColCheck(float4 _MoveDir);
@@ -162,11 +165,13 @@ private:
 	void IdleStart();
 	void ActionStart();
 	void FishingStart();
+	void ShopStart();
 	void MoveStart();
 
 	void IdleUpdate();
 	void ActionUpdate();
 	void FishingUpdate();
+	void ShopUpdate();
 	void MoveUpdate();
 
 public:

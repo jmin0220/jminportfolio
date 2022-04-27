@@ -173,10 +173,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="animals.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="BeachLevel.h">
       <SubType>
       </SubType>
@@ -198,10 +194,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Bream.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Chiecken.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -401,6 +393,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SeedShop.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SeedShopLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Slime.h">
       <SubType>
       </SubType>
@@ -472,10 +472,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="animals.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="BeachLevel.cpp">
       <SubType>
       </SubType>
@@ -497,10 +493,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Bream.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Chiecken.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -695,6 +687,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="RhubarbFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SeedShop.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SeedShopLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

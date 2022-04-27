@@ -20,12 +20,6 @@
     <ClCompile Include="EndingCredit.cpp">
       <Filter>03Ending</Filter>
     </ClCompile>
-    <ClCompile Include="animals.cpp">
-      <Filter>02Play\Animal</Filter>
-    </ClCompile>
-    <ClCompile Include="Chiecken.cpp">
-      <Filter>02Play\Animal</Filter>
-    </ClCompile>
     <ClCompile Include="Crops.cpp">
       <Filter>02Play\Crop</Filter>
     </ClCompile>
@@ -227,6 +221,12 @@
     <ClCompile Include="FishingBar.cpp">
       <Filter>02Play\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="SeedShopLevel.cpp">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="SeedShop.cpp">
+      <Filter>02Play\Shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -247,12 +247,6 @@
     </ClInclude>
     <ClInclude Include="EndingCredit.h">
       <Filter>03Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="animals.h">
-      <Filter>02Play\Animal</Filter>
-    </ClInclude>
-    <ClInclude Include="Chiecken.h">
-      <Filter>02Play\Animal</Filter>
     </ClInclude>
     <ClInclude Include="Crops.h">
       <Filter>02Play\Crop</Filter>
@@ -461,6 +455,12 @@
     <ClInclude Include="FishingBar.h">
       <Filter>02Play\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="SeedShopLevel.h">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="SeedShop.h">
+      <Filter>02Play\Shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">
@@ -477,9 +477,6 @@
     </Filter>
     <Filter Include="03Ending">
       <UniqueIdentifier>{333692ca-fce9-4319-ac1f-1e5a2d15c802}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02Play\Animal">
-      <UniqueIdentifier>{c7d29261-0e1c-472e-b384-de69a59243ce}</UniqueIdentifier>
     </Filter>
     <Filter Include="02Play\Crop">
       <UniqueIdentifier>{cbe1d534-e6ca-40d4-b9ee-84bc78cd49a5}</UniqueIdentifier>
@@ -498,6 +495,9 @@
     </Filter>
     <Filter Include="02Play\Fishing">
       <UniqueIdentifier>{c7f33d1d-1ff1-4e68-b48e-1f7d050c6159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Shop">
+      <UniqueIdentifier>{c7d29261-0e1c-472e-b384-de69a59243ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

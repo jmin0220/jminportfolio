@@ -30,6 +30,7 @@
 #define DIR_MAP "Map"
 #define DIR_BUILDING "Building"
 #define DIR_FONT "Font"
+#define DIR_SEEDSHOP "SeedShop"
 
 // 이미지
 #define IMAGE_CLOCK_POS_H 129
@@ -142,6 +143,15 @@
 #define MAP_BEACH_SIZE_H 2397.0f
 #define MAP_BEACH_SIZE_W 4992.0f
 
+// 씨앗상점
+#define MAP_SEEDSHOP_BACKGROUND "SeedShopBack.bmp"
+#define MAP_SEEDSHOP_BUILDING "SeedShopBuilding.bmp"
+#define MAP_SEEDSHOP_FRONT "SeedShopFront.bmp"
+#define MAP_SEEDSHOP_COLLISION "SeedShopBuildingCollision.bmp"
+#define MAP_SEEDSHOP_RENDER_ORDER_COLLISION "SeedShopFrontCollision.bmp"
+#define MAP_SEEDSHOP_SIZE_H 1537.0f
+#define MAP_SEEDSHOP_SIZE_W 2016.0f
+
 // 컬리전
 #define COL_GROUP_PLAYER "PlayerCollision"
 #define COL_GROUP_PLAYER_ACTION "PlayerActionCollision"
@@ -166,6 +176,7 @@
 #define LEVEL_FARM "FarmLevel"
 #define LEVEL_BEACH "BeachLevel"
 #define LEVEL_PLAY "PlayLevel"
+#define LEVEL_SEEDSHOP "SeedShopLevel"
 #define LEVEL_ENDING "EndingLevel"
 
 // 윈도우

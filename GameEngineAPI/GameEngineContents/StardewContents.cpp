@@ -3,6 +3,7 @@
 #include "FarmLevel.h"
 #include "TownLevel.h"
 #include "BeachLevel.h"
+#include "SeedShopLevel.h"
 #include "EndingLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -182,6 +183,19 @@ void StardewContents::GameInit()
 	Image->Cut({ 24, 48 });
 
 
+	// SeedShop
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_SEEDSHOP);
+
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
 	//사운드
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
@@ -201,6 +215,7 @@ void StardewContents::GameInit()
 	CreateLevel<FarmLevel>(LEVEL_FARM);
 	CreateLevel<TownLevel>(LEVEL_TOWN);
 	CreateLevel<BeachLevel>(LEVEL_BEACH);
+	CreateLevel<SeedShopLevel>(LEVEL_SEEDSHOP);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨

@@ -135,6 +135,9 @@ void Player::StateUpdate()
 	case PlayerState::Fishing:
 		FishingUpdate();
 		break;
+	case PlayerState::Shop:
+		ShopUpdate();
+		break;
 	case PlayerState::Max:
 		break;
 	default:
@@ -188,6 +191,9 @@ void Player::StateChange(PlayerState _State)
 			break;
 		case PlayerState::Move:
 			MoveStart();
+			break;
+		case PlayerState::Shop:
+			ShopStart();
 			break;
 		case PlayerState::Max:
 			break;
@@ -289,6 +295,11 @@ void Player::UpdateCamera()
 		CurrentLevelH = MAP_BEACH_SIZE_H;
 		CurrentLevelW = MAP_BEACH_SIZE_W;
 	}
+	else if (GetCurrentLevel() == LEVEL_SEEDSHOP)
+	{
+		CurrentLevelH = MAP_SEEDSHOP_SIZE_H;
+		CurrentLevelW = MAP_SEEDSHOP_SIZE_W;
+	}
 
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();
 
@@ -317,28 +328,12 @@ void Player::UpdateCamera()
 // 플레이어의 위치에 따라서 Front맵의 렌더링 순서를 유동적으로 변경
 bool Player::ColRenderOrderCheck()
 {
-	// 컬리전맵 취득
-	if (GetCurrentLevel() == LEVEL_FARM)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_RENDER_ORDER_COLLISION);
-	}
-	else if (GetCurrentLevel() == LEVEL_TOWN)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_RENDER_ORDER_COLLISION);
-	}
-	else if (GetCurrentLevel() == LEVEL_BEACH)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_RENDER_ORDER_COLLISION);
-	}
-
-	if (nullptr == MapColImage_)
-	{
-		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
-	}
+	// 컬리전 취득
+	GetMapColImage();
 
 	// 왼쪽
 	float4 CheckPos = { GetPosition().x - (TILEMAP_SIZE), GetPosition().y };
-	int Color = MapColImage_->GetImagePixel(CheckPos);
+	int Color = MapColOrderImage_->GetImagePixel(CheckPos);
 
 	// 충돌판정
 	if (RGB(255, 0, 0) == Color)
@@ -348,7 +343,7 @@ bool Player::ColRenderOrderCheck()
 
 	// 오른쪽
 	CheckPos = { GetPosition().x + (TILEMAP_SIZE), GetPosition().y };
-	Color = MapColImage_->GetImagePixel(CheckPos);
+	Color = MapColOrderImage_->GetImagePixel(CheckPos);
 
 	// 충돌판정
 	if (RGB(255, 0, 0) == Color)
@@ -358,7 +353,7 @@ bool Player::ColRenderOrderCheck()
 
 	// 위
 	CheckPos = { GetPosition().x, GetPosition().y - ((TILEMAP_SIZE) / 2) };
-	Color = MapColImage_->GetImagePixel(CheckPos);
+	Color = MapColOrderImage_->GetImagePixel(CheckPos);
 
 	// 충돌판정
 	if (RGB(255, 0, 0) == Color)
@@ -368,7 +363,7 @@ bool Player::ColRenderOrderCheck()
 
 	// 아래
 	CheckPos = { GetPosition().x, GetPosition().y + ((TILEMAP_SIZE) / 2) };
-	Color = MapColImage_->GetImagePixel(CheckPos);
+	Color = MapColOrderImage_->GetImagePixel(CheckPos);
 
 	if (RGB(255, 0, 0) == Color)
 	{
@@ -377,7 +372,7 @@ bool Player::ColRenderOrderCheck()
 
 	// 플레이어의 위치
 	CheckPos = GetPosition();
-	Color = MapColImage_->GetImagePixel(CheckPos);
+	Color = MapColOrderImage_->GetImagePixel(CheckPos);
 
 	if (RGB(255, 0, 0) == Color)
 	{
@@ -399,6 +394,36 @@ float4 Player::GetPositionOnTilemap()
 	return tmp;
 }
 
+void Player::GetMapColImage()
+{
+	// 컬리전맵 취득
+	if (GetCurrentLevel() == LEVEL_FARM)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_RENDER_ORDER_COLLISION);
+	}
+	else if (GetCurrentLevel() == LEVEL_TOWN)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_RENDER_ORDER_COLLISION);
+	}
+	else if (GetCurrentLevel() == LEVEL_BEACH)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_RENDER_ORDER_COLLISION);
+	}
+	else if (GetCurrentLevel() == LEVEL_BEACH)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_SEEDSHOP_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_SEEDSHOP_RENDER_ORDER_COLLISION);
+	}
+
+	if (nullptr == MapColImage_)
+	{
+		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+	}
+}
+
 // 충돌체크
 void Player::ColCheck(float4 _MoveDir)
 {
@@ -407,23 +432,7 @@ void Player::ColCheck(float4 _MoveDir)
 	float4 CheckLength = MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_;
 
 	// 컬리전맵 취득
-	if (GetCurrentLevel() == LEVEL_FARM)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_COLLISION); 
-	}
-	else if (GetCurrentLevel() == LEVEL_TOWN)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_COLLISION);
-	}
-	else if (GetCurrentLevel() == LEVEL_BEACH)
-	{
-		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_COLLISION);
-	}
-
-	if (nullptr == MapColImage_)
-	{
-		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
-	}
+	GetMapColImage();
 
 	float4 NextPos = GetPosition() + CheckLength;
 	float4 CheckPos = SetCheckPos(NextPos);
@@ -450,17 +459,23 @@ void Player::ColCheck(float4 _MoveDir)
 	}
 	else if (GetCurrentLevel() == LEVEL_TOWN)
 	{
-		// 타운으로 이동
+		// 농장으로 이동
 		if (RGB(255, 0, 0) == Color)
 		{
-			// 농장으로 이동
 			SetNextLevelPos({ 3730.0f, 850.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
+		// 해변으로 이동
 		else if (RGB(0, 255, 0) == Color)
 		{
 			SetNextLevelPos({ 1870.0f, 50.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_BEACH);
+		}
+		// 씨앗상점으로 이동
+		else if (RGB(255, 255, 0) == Color)
+		{
+			SetNextLevelPos({ 310.0f, 1314.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_SEEDSHOP);
 		}
 	}
 	else if (GetCurrentLevel() == LEVEL_BEACH)
@@ -468,6 +483,14 @@ void Player::ColCheck(float4 _MoveDir)
 		if (RGB(255, 0, 0) == Color)
 		{
 			SetNextLevelPos({ 2620.0f, 5180.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
+		}
+	}
+	else if (GetCurrentLevel() == LEVEL_SEEDSHOP)
+	{
+		if (RGB(255, 0, 0) == Color)
+		{
+			SetNextLevelPos({ 2112.0f, 2778.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
 		}
 	}

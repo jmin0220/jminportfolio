@@ -23,17 +23,20 @@ Inventory::Inventory()
 
 Inventory::~Inventory() 
 {
-	for (size_t i = 0; i < 36; i++)
-	{
-		delete InventoryList_[i];
-		InventoryList_[i] = nullptr;
-	}
+	//for (size_t i = 0; i < 36; i++)
+	//{
+	//	if (nullptr == InventoryList_[i])
+	//	{
+	//		delete InventoryList_[i];
+	//		InventoryList_[i] = nullptr;
+	//	}
+	//}
 
-	if (nullptr != SwapItem_)
-	{
-		delete SwapItem_;
-		SwapItem_ = nullptr;
-	}
+	//if (nullptr != SwapItem_)
+	//{
+	//	delete SwapItem_;
+	//	SwapItem_ = nullptr;
+	//}
 }
 
 void Inventory::Start()
@@ -60,7 +63,7 @@ void Inventory::Start()
 		{
 			// 인벤에 아이템의 정보를 집어넣음.
 			// 비어있는 인벤토리 생성
-			InventoryList_[i] = new Item;
+			InventoryList_[i] = this->GetLevel()->CreateActor<Item>();
 			InventoryList_[i]->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
 			InventoryList_[i]->SetItemRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::PLAYER));
 			InventoryList_[i]->GetIconRenderer().CameraEffectOff();
@@ -83,7 +86,7 @@ void Inventory::Start()
 		}
 	}
 
-	SwapItem_ = new Item;
+	SwapItem_ = this->GetLevel()->CreateActor<Item>();
 	SwapItem_->SetItemRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
 	SwapItem_->SetIconRenderer(*CreateRenderer(IMAGE_INVENTORY_EMPTY, (int)ORDER::UIICONS));
 
