@@ -219,7 +219,11 @@ void Player::FishingUpdate()
 
 void Player::ShopUpdate()
 {
-
+	if (true == SeedShop_->ShopUpdate())
+	{
+		// Idle로 상태 전환
+		StateChange(PlayerState::Idle);
+	}
 }
 
 // 이동했을때 상태
@@ -395,7 +399,7 @@ void Player::FishingStart()
 
 void Player::ShopStart()
 {
-
+	SeedShop_->ShopStart();
 }
 
 void Player::MoveStart()

@@ -31,7 +31,7 @@ void Clock::SetGold(int _Num)
 	for (size_t i = 8; i > 0; i--)
 	{
 		GoldFont_[i - 1]->GetNumberFont(_Num % 10);
-		GoldFont_[i - 1]->SetPosition({ // IMAGE_CLOCK_POS_W - (144.0f + 48.0f * i)
+		GoldFont_[i - 1]->SetPosition({ 
 									 IMAGE_CLOCK_POS_W - 91 + (24.0f * i)
 			                       , IMAGE_CLOCK_POS_H + 92});
 

@@ -12,6 +12,7 @@
 #include "PlayerTileIndex.h"
 #include "Crops.h"
 #include "FishingGame.h"
+#include "SeedShop.h"
 
 // 설명 :
 class GameEngineImage;
@@ -180,6 +181,11 @@ public:
 		return Inventory_;
 	}
 
+	inline int GetGold()
+	{
+		return Gold_;
+	}
+
 private:
 	// 인터페이스
 	Inventory* Inventory_;
@@ -227,9 +233,10 @@ public:
 private:
 	int PlayerTime_;
 
-	void TimeUpdate() {};
 	void CropsUpdate();
 
 	GameEngineRandom* PlayerRandom_;
+
 	FishingGame* FishingGame_;
+	SeedShop* SeedShop_;
 };

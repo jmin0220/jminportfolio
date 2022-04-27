@@ -1,6 +1,7 @@
 #pragma once
 // 액터
 #define ACTOR_PLAYER "Player"
+#define ACTOR_MOUSE "Mouse"
 
 #define ACTOR_UI_CLOCK "Clock"
 #define ACTOR_UI_ENERGYBAR "EnergyBar"
@@ -87,6 +88,13 @@
 
 #define IMAGE_ITEM_FORAGE "Forage.bmp"
 
+#define IMAGE_SEEDSHOP_INTERFACE "ShopInterface.bmp"
+#define IMAGE_SEEDSHOP_STOCK_PARSNIP "ParsnipStock.bmp"
+#define IMAGE_SEEDSHOP_STOCK_POTATO "PotatoStock.bmp"
+#define IMAGE_SEEDSHOP_STOCK_KALE "KaleStock.bmp"
+#define IMAGE_SEEDSHOP_STOCK_GREENBEAN "GreenBeanStock.bmp"
+#define IMAGE_SEEDSHOP_STOCK_CAULIFLOWER "CauliflowerStock.bmp"
+
 #define IMAGE_TILESET_DIRT "Dirt.bmp"
 #define IMAGE_TILESET_DIRTWATERED "DirtWatered.bmp"
 
@@ -97,6 +105,7 @@
 #define KEY_MOVE_DOWN "MoveDown"
 #define KEY_INTERACT "Interact"
 #define KEY_INVEN_EXTEND "InventoryExtend"
+#define KEY_CLOSE "CloseShop"
 
 // 인벤토리 선택 단축키
 #define KEY_INVEN_SELECT_1 "INVEN_SEL_1"
@@ -164,6 +173,10 @@
 #define COL_GROUP_TREES "TreeCol"
 #define COL_GROUP_FISH_HITBOX "FishHitBox"
 #define COL_GROUP_CATCH_HITBOX "CatchHitBox"
+#define COL_GROUP_STOCK1 "Stock1"
+#define COL_GROUP_STOCK2 "Stock2"
+#define COL_GROUP_STOCK3 "Stock3"
+#define COL_GROUP_STOCK4 "Stock4"
 
 // 타일맵
 #define TILEMAP_SIZE 48

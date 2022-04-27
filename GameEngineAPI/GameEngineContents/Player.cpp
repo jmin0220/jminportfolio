@@ -89,6 +89,7 @@ void Player::Start()
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
 	// 레벨에 액터를 저장
 	GetLevel()->RegistActor(ACTOR_PLAYER, this);
+	GetLevel()->RegistActor(ACTOR_MOUSE, Mouse_);
 	// YSort켜기
 	GetLevel()->YSortOn((int)ORDER::PLAYER);
 
@@ -96,6 +97,9 @@ void Player::Start()
 	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
 	SetActionCollision(CreateCollision(COL_GROUP_PLAYER_ACTION, { PLAYER_ACTION_COL_SIZE, PLAYER_ACTION_COL_SIZE }, { PLAYER_ACTION_COL_LENG, 0.0f}));
 	GetActionCollision()->Off();
+
+	// 씨앗상점 레벨에서만 SeedShop 액터를 생성
+	SeedShop_ = GetLevel()->CreateActor<SeedShop>();
 }
 
 void Player::Update()
@@ -412,7 +416,7 @@ void Player::GetMapColImage()
 		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_COLLISION);
 		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_RENDER_ORDER_COLLISION);
 	}
-	else if (GetCurrentLevel() == LEVEL_BEACH)
+	else if (GetCurrentLevel() == LEVEL_SEEDSHOP)
 	{
 		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_SEEDSHOP_COLLISION);
 		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_SEEDSHOP_RENDER_ORDER_COLLISION);

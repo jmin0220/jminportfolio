@@ -22,7 +22,7 @@ StardewContents::~StardewContents()
 void StardewContents::GameInit()
 {
 	// 윈도우의 초기 크기 세팅
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { WINDOW_SIZE_W, WINDOW_SIZE_H });
 
 	// 플레이어 이미지
 	GameEngineDirectory ResourcesDir;

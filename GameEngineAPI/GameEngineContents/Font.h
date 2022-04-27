@@ -42,7 +42,7 @@ public:
 		return RendererFont_;
 	}
 
-	inline GameEngineRenderer* RendererNumber()
+	inline GameEngineRenderer* GetRendererNumber()
 	{
 		return RendererNumber_;
 	}
