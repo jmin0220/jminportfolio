@@ -78,6 +78,11 @@ public:
 		return RenderImagePivot_;
 	}
 
+	inline float4 GetSortingPivot()
+	{
+		return GetActor()->GetPosition() + RenderPivot_ + SortingPivot;
+	}
+
 	// 알파값
 	inline void SetAlpha(unsigned int _Alpha)
 	{
@@ -154,6 +159,8 @@ private:
 	float4 RenderImageScale_;
 	// 복사하려는 대상의 기준점
 	float4 RenderImagePivot_;
+
+	float4 SortingPivot;	// 복사받으려는 이미지 한칸의 크기
 
 	unsigned int TransColor_;
 	unsigned int Alpha_;

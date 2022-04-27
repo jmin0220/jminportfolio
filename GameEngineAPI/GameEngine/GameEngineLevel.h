@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <map>
+#include <set>
 #include <vector>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
@@ -93,6 +94,12 @@ public:
 
 	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
 
+	// 이 오더는 sort를 하겠다.
+	void YSortOn(int _SortOrder)
+	{
+		IsYSort_.insert(_SortOrder);
+	}
+
 protected:
 	// 시점함수. 엔진에서 어떠한 사건이 일어나는 시점, 단계.
 	virtual void Loading() = 0;
@@ -125,6 +132,9 @@ private:
 	void ActorRelease();
 
 	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
+
+	// 존재하냐 안하냐
+	std::set<int> IsYSort_;
 
 	void AddRenderer(GameEngineRenderer* _Renderer);
 

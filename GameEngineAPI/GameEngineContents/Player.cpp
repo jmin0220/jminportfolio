@@ -89,6 +89,8 @@ void Player::Start()
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
 	// 레벨에 액터를 저장
 	GetLevel()->RegistActor(ACTOR_PLAYER, this);
+	// YSort켜기
+	GetLevel()->YSortOn((int)ORDER::PLAYER);
 
 	// 플레이어의 충돌체 생성
 	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
@@ -578,19 +580,6 @@ void Player::CropsUpdate()
 	{
 		for (Crops* Actor_ : Actors)
 		{
-			// 플레이어의 위치에 따라서 렌더링 순서를 변경
-			if (nullptr != Actor_
-				&& Actor_->GetPosition().iy() >= GetPosition().y)
-			{
-				Actor_->GetRenderer()->SetOrder((int)ORDER::FRONTB);
-			}
-			else if (nullptr != Actor_
-				&& Actor_->GetPosition().iy() < GetPosition().y)
-			{
-				Actor_->GetRenderer()->SetOrder((int)ORDER::FRONTA);
-			}
-				
-
 			// 시간 관련 업데이트
 			// 타일이 업데이트 활성화 상태일경우
 			if ( nullptr != Actor_ && Actor_->GetIsTimeUpdate() )
@@ -925,6 +914,8 @@ void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGrou
 		// 타일의 중앙으로 위치를 맞추기위해 TILEMAP_SIZE / 2만큼 조정
 		EnvironmentActor_[y][x]->SetPosition({ static_cast<float>(x * TILEMAP_SIZE + TILEMAP_SIZE / 2), static_cast<float>(y * TILEMAP_SIZE + TILEMAP_SIZE / 2) });
 		EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+
+		EnvironmentActor_[y][x]->GetRenderer()->SetOrder((int)ORDER::PLAYER);
 
 
 		// 사용된 아이템의 숫자를 감소

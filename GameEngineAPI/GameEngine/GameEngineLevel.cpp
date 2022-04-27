@@ -168,6 +168,11 @@ void GameEngineLevel::ActorLevelChangeEnd(GameEngineLevel* _NextLevel) {
 	}
 }
 
+bool SortY(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
+{
+	return _Left->GetSortingPivot().y < _Right->GetSortingPivot().y;
+}
+
 void GameEngineLevel::ActorRender()
 {	
 	// 랜더러 랜더
@@ -181,6 +186,13 @@ void GameEngineLevel::ActorRender()
 		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
 			std::list<GameEngineRenderer*>& Group = GroupStart->second;
+
+			// 그 그룹간에만 소팅이 됩니다
+			if (IsYSort_.end() != IsYSort_.find(GroupStart->first))
+			{
+				Group.sort(SortY);
+			}
+
 			StartRenderer = Group.begin();
 			EndRenderer = Group.end();
 			for (; StartRenderer != EndRenderer; ++StartRenderer)
