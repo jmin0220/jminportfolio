@@ -451,6 +451,10 @@ void Inventory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		// 이미지 인덱스 복사 및 설정
 		InventoryList_[i]->SetIndexNum(InventorySaver_[i]->GetIndexNum());
 
+		// 수량
+		InventoryList_[i]->Countable = InventorySaver_[i]->Countable;
+		InventoryList_[i]->Counter_ = InventorySaver_[i]->Counter_;
+
 		// 이미지가 비어있지 않을 경우에만 인덱스 설정 하기
 		if (InventoryList_[i]->GetItemName() != ITEM_NAME_EMPTY)
 		{
@@ -472,5 +476,9 @@ void Inventory::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		InventorySaver_[i]->SetItemName(InventoryList_[i]->GetItemName());
 		// 이미지 인덱스 복사
 		InventorySaver_[i]->SetIndexNum(InventoryList_[i]->GetIndexNum());
+
+		// 수량
+		InventorySaver_[i]->Countable = InventoryList_[i]->Countable;
+		InventorySaver_[i]->Counter_ = InventoryList_[i]->Counter_;
 	}
 }

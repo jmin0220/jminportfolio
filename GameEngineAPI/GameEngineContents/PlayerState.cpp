@@ -20,7 +20,36 @@ void Player::IdleUpdate()
 	{
 		if (Inventory_->GetSelectedItemName() == ITEM_NAME_FISHINGROD)
 		{
-			StateChange(PlayerState::Fishing);
+			//낚시를 던질때 충돌맵을 호출해서 낚시를 할 수 있는 곳이면 게임 스타트
+			// 컬리전맵 취득
+			if (GetCurrentLevel() == LEVEL_FARM)
+			{
+				MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_FARM_COLLISION);
+			}
+			else if (GetCurrentLevel() == LEVEL_TOWN)
+			{
+				MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_TOWN_COLLISION);
+			}
+			else if (GetCurrentLevel() == LEVEL_BEACH)
+			{
+				MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_BEACH_COLLISION);
+			}
+
+			if (nullptr == MapColImage_)
+			{
+				MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+			}
+
+			float4 CheckLength = MoveDir_ * 50.0f;
+			float4 NextPos = GetPosition() + CheckLength;
+			float4 CheckPos = SetCheckPos(NextPos);
+			int Color = MapColImage_->GetImagePixel(CheckPos);
+
+			if (RGB(0, 0, 255) == Color)
+			{
+				StateChange(PlayerState::Fishing);
+			}
+
 			return;
 		}
 		else
@@ -358,7 +387,6 @@ void Player::ActionStart()
 
 void Player::FishingStart()
 {
-	// TODO::낚시를 던질때 충돌맵을 호출해서 낚시를 할 수 있는 곳이면 게임 스타트
 	// 애니메이션은 무조건 출력
 	FishingGame_->GameStart();
 }

@@ -429,7 +429,7 @@ void Player::ColCheck(float4 _MoveDir)
 	int Color = MapColImage_->GetImagePixel(CheckPos);
 	
 	// 충돌판정
-	if (RGB(0, 0, 0) != Color 
+	if (RGB(0, 0, 0) != Color && RGB(0, 0, 255) != Color
 		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect)
 		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_TREES, CheckLength, CollisionType::Rect, CollisionType::Rect))
 	{
@@ -445,12 +445,6 @@ void Player::ColCheck(float4 _MoveDir)
 			SetNextLevelPos({ 200.0f, 2600.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
 		}
-		else if (RGB(0, 255, 0) == Color)
-		{
-			// 안할수도
-			//SetNextLevelPos({ MAP_FARMBUILDING_SIZE_W / 2, MAP_FARMBUILDING_SIZE_H / 2 });
-			//GameEngine::GetInst().ChangeLevel(LEVEL_FARMBUILDING);
-		}
 	}
 	else if (GetCurrentLevel() == LEVEL_TOWN)
 	{
@@ -461,7 +455,7 @@ void Player::ColCheck(float4 _MoveDir)
 			SetNextLevelPos({ 3730.0f, 850.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
-		else if (RGB(0, 0, 255) == Color)
+		else if (RGB(0, 255, 0) == Color)
 		{
 			SetNextLevelPos({ 1870.0f, 50.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_BEACH);
