@@ -717,7 +717,7 @@ void Player::ControlInventorySelectBoxWithMouse()
 				}
 			}
 		}
-		else if (true == IsActionKeyUp())
+		else if (true == IsActionKeyUp() && ItemSelectOrigin != -1)
 		{
 			Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
 			InventoryClickFlg_ = false;
@@ -799,7 +799,7 @@ void Player::ControlInventorySelectBoxWithMouse()
 				}
 			}
 		}
-		else if (true == IsActionKeyUp())
+		else if (true == IsActionKeyUp() && ItemSelectOrigin != -1)
 		{
 			Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
 			InventoryClickFlg_ = false;

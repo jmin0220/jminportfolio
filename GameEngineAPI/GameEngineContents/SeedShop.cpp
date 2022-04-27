@@ -15,5 +15,5 @@ void SeedShop::Start()
 
 bool SeedShop::ShopUpdate()
 {
-
+	return true;
 }
