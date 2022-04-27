@@ -35,7 +35,7 @@ void Item::SetItemNum()
 
 void Item::AddCounter()
 {
-	if (true == Countable)
+	if (true == Countable && stoi(Counter_) < 99)
 	{
 		Counter_ = std::to_string(stoi(Counter_) + 1);
 	}

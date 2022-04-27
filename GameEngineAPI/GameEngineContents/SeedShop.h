@@ -26,10 +26,13 @@ protected:
 private:
 	// 상점 인터페이스
 	GameEngineRenderer* SeedShopInterfaceRender_;
-	GameEngineRenderer* SeedShopStockList_[5];
 
 	// 상품
+	GameEngineRenderer* SeedShopStockList_[5];
 	GameEngineCollision* StockCollision_[5];
+	int StockPrice_[5];
+	int StockType_[5];
+
 	std::vector<GameEngineCollision*> ResultCol_;
 
 	// 플레이어가 가지고 있는 돈

@@ -186,6 +186,11 @@ public:
 		return Gold_;
 	}
 
+	inline void SetGold(int _Gold)
+	{
+		Gold_ = _Gold;
+	}
+
 private:
 	// 인터페이스
 	Inventory* Inventory_;
