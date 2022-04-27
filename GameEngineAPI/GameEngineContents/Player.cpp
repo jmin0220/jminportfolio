@@ -86,10 +86,13 @@ void Player::Start()
 	// 키설정 초기화
 	PlayerKeyInit();
 	// 카메라 위치 초기화
-	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();;
+	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();
+
 	// 레벨에 액터를 저장
 	GetLevel()->RegistActor(ACTOR_PLAYER, this);
 	GetLevel()->RegistActor(ACTOR_MOUSE, Mouse_);
+	GetLevel()->RegistActor(ACTOR_INVENTORY, Inventory_);
+
 	// YSort켜기
 	GetLevel()->YSortOn((int)ORDER::PLAYER);
 

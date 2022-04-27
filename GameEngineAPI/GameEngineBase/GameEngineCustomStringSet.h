@@ -2,6 +2,7 @@
 // ¾×ÅÍ
 #define ACTOR_PLAYER "Player"
 #define ACTOR_MOUSE "Mouse"
+#define ACTOR_INVENTORY "Inventory"
 
 #define ACTOR_UI_CLOCK "Clock"
 #define ACTOR_UI_ENERGYBAR "EnergyBar"
@@ -165,6 +166,7 @@
 #define COL_GROUP_PLAYER "PlayerCollision"
 #define COL_GROUP_PLAYER_ACTION "PlayerActionCollision"
 #define COL_GROUP_MOUSE "Mouse"
+#define COL_GROUP_STOCK "Stock"
 #define COL_GROUP_INVENTORY_BAR "InventoryBar"
 #define COL_GROUP_INVENTORY_EXTEND_BAR "InventoryExtendBar"
 #define COL_GROUP_INVENTORY_BOX "InventoryBox"
@@ -173,10 +175,6 @@
 #define COL_GROUP_TREES "TreeCol"
 #define COL_GROUP_FISH_HITBOX "FishHitBox"
 #define COL_GROUP_CATCH_HITBOX "CatchHitBox"
-#define COL_GROUP_STOCK1 "Stock1"
-#define COL_GROUP_STOCK2 "Stock2"
-#define COL_GROUP_STOCK3 "Stock3"
-#define COL_GROUP_STOCK4 "Stock4"
 
 // Å¸ÀÏ¸Ê
 #define TILEMAP_SIZE 48

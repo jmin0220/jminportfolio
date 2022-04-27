@@ -29,10 +29,14 @@ private:
 	GameEngineRenderer* SeedShopStockList_[5];
 
 	// 상품
-	GameEngineRenderer* StockRenderer_;
-	GameEngineCollision* StockCollision_[4];
+	GameEngineCollision* StockCollision_[5];
+	std::vector<GameEngineCollision*> ResultCol_;
 
 	// 플레이어가 가지고 있는 돈
 	Font* GoldFont_[8];
+
+	int StockTop_;
+	int StockBot_;
+	int StockMax_;
 };
 

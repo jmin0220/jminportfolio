@@ -5,7 +5,10 @@
 #include "Player.h"
 #include <GameEngineBase/GameEngineInput.h>
 
-SeedShop::SeedShop() 
+SeedShop::SeedShop()
+	: StockTop_(0),
+	StockBot_(3),
+	StockMax_(4)
 {
 }
 
@@ -30,15 +33,12 @@ void SeedShop::Start()
 	SeedShopStockList_[3]->Off();
 	SeedShopStockList_[4]->Off();
 
-	StockCollision_[0] = CreateCollision(COL_GROUP_STOCK1, { 1048.0f, 106.0f});
-	StockCollision_[1] = CreateCollision(COL_GROUP_STOCK2, { 1048.0f, 106.0f });
-	StockCollision_[2] = CreateCollision(COL_GROUP_STOCK3, { 1048.0f, 106.0f });
-	StockCollision_[3] = CreateCollision(COL_GROUP_STOCK4, { 1048.0f, 106.0f });
+	for (int i = 0; i <= StockMax_; i++)
+	{
+		StockCollision_[i] = CreateCollision(COL_GROUP_STOCK, { 1048.0f, 106.0f });
 
-	StockCollision_[0]->Off();
-	StockCollision_[1]->Off();
-	StockCollision_[2]->Off();
-	StockCollision_[3]->Off();
+		StockCollision_[i]->Off();
+	}
 
 	for (size_t i = 0; i < 8; i++)
 	{
@@ -59,57 +59,88 @@ void SeedShop::Start()
 void SeedShop::ShopStart()
 {
 	float4 tmpPos = GetLevel()->GetCameraPos();
-	int Num = static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER))->GetGold();
 	
 	// 상점 틀 
 	SeedShopInterfaceRender_->On();
 	SeedShopInterfaceRender_->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
+}
 
-	// 메뉴
-	SeedShopStockList_[0]->On();
-	SeedShopStockList_[1]->On();
-	SeedShopStockList_[2]->On();
-	SeedShopStockList_[3]->On();
-	SeedShopStockList_[4]->On();
+bool SeedShop::ShopUpdate()
+{
+	float4 tmpPos = GetLevel()->GetCameraPos();
+	int Num = static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER))->GetGold();
 
-	SeedShopStockList_[0]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	SeedShopStockList_[1]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	SeedShopStockList_[2]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	SeedShopStockList_[3]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	SeedShopStockList_[4]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
+	// 휠을 위로
+	if (120 == GameEngineInput::GetInst()->GetMouseWheel())
+	{
+		if (StockTop_ > 0)
+		{
+			StockTop_--;
+			StockBot_--;
+		}
+	}
+	// 휠을 아래로
+	if (-120 == GameEngineInput::GetInst()->GetMouseWheel())
+	{
+		if (StockBot_ < StockMax_)
+		{
+			StockTop_++;
+			StockBot_++;
+		}
+	}
 
-	// 마우스와의 충돌 판정
-	StockCollision_[0]->On();
-	StockCollision_[1]->On();
-	StockCollision_[2]->On();
-	StockCollision_[3]->On();
+	// 한번 모두 Off
+	for (int i = 0; i <= StockMax_; i++)
+	{
+		SeedShopStockList_[i]->Off();
+	}
 
-	StockCollision_[0]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	StockCollision_[1]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	StockCollision_[2]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
-	StockCollision_[3]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
+	int stockPos = 0;
+	// 화면에 나오는 것들만 On
+	for (int i = StockTop_; i <= StockBot_; i++)
+	{
+		// 메뉴
+		SeedShopStockList_[i]->On();
+		SeedShopStockList_[i]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 - 287 + (107 * stockPos) });
 
+		// 충돌체
+		StockCollision_[i]->On();
+		StockCollision_[i]->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 - 287 + (107 * stockPos) });
 
+		stockPos++;
+	}
+
+	// 플레이어가 가지고 있는 돈
 	for (size_t i = 8; i > 0; i--)
 	{
 		GoldFont_[i - 1]->RendererNumberOn();
 		GoldFont_[i - 1]->GetNumberFont(Num % 10);
 		GoldFont_[i - 1]->SetPosition({
 									 tmpPos.x + 117 + (24.0f * i)
-								   , tmpPos.y - 47});
+								   , tmpPos.y - 47 });
 
 		Num /= 10;
 	}
-}
 
-bool SeedShop::ShopUpdate()
-{
+
+
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
 	{
+		GameEngineCollision* MouseCol = static_cast<Mouse*>(GetLevel()->FindActor(ACTOR_MOUSE))->GetCollision();
+
 		for (size_t i = 0; i < 4; i++)
 		{
-			if (StockCollision_[i]->CollisionCheck(COL_GROUP_MOUSE))
+			if (true == MouseCol->CollisionResult(COL_GROUP_STOCK, ResultCol_))
 			{
+				std::vector<GameEngineCollision*>::iterator StartCol = ResultCol_.begin();
+				std::vector<GameEngineCollision*>::iterator EndCol = ResultCol_.end();
+
+				for (; StartCol != EndCol; StartCol)
+				{
+					// 몰루
+					//StartCol[0]->GetActor()->
+				}
+
 				static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER))->GetInventory()->AddItemToInventory(0);
 				break;
 			}
