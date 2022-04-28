@@ -816,6 +816,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 {
 	int PosX = _Pos.x; // static_cast<int>(_Pos.x / TILEMAP_SIZE);
 	int PosY = _Pos.y; // static_cast<int>(_Pos.y / TILEMAP_SIZE);
+	int Color = 0;
 
 	if (_TileActorSelecter == 0)
 	{
@@ -824,8 +825,16 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 		case (int)TILESTATE::NONE:
 			break;
 		case (int)TILESTATE::HOLLOW:
-			SetGroundTile(PosX, PosY,
-				LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOW);
+			// 땅을 팔수록 설정되어있는 위치에만 땅을 팔수 있도록
+			GetMapColImage();
+			Color = MapColImage_->GetImagePixel({ (float)PosX, (float)PosY });
+
+			if (RGB(255, 255, 255) == Color)
+			{
+				SetGroundTile(PosX, PosY,
+					LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRT, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOW);
+			}
+
 			break;
 		case (int)TILESTATE::HOLLOWWET:
 
