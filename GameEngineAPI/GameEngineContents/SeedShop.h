@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include "Font.h"
+#include "Inventory.h"
 
 // 설명 :
 class SeedShop : public GameEngineActor
@@ -37,7 +38,9 @@ private:
 
 	// 플레이어가 가지고 있는 돈
 	Font* GoldFont_[8];
+	Inventory* ShopInventory_;
 
+	// 메뉴에 포함될 범위
 	int StockTop_;
 	int StockBot_;
 	int StockMax_;

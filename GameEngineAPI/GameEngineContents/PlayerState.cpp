@@ -222,6 +222,7 @@ void Player::ShopUpdate()
 	if (true == SeedShop_->ShopUpdate())
 	{
 		// Idle로 상태 전환
+		SeedShop_->Death();
 		StateChange(PlayerState::Idle);
 	}
 }
@@ -399,6 +400,8 @@ void Player::FishingStart()
 
 void Player::ShopStart()
 {
+	// 씨앗상점 레벨에서만 SeedShop 액터를 생성
+	SeedShop_ = GetLevel()->CreateActor<SeedShop>();
 	SeedShop_->ShopStart();
 }
 

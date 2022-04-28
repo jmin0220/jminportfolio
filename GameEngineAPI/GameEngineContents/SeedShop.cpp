@@ -62,6 +62,8 @@ void SeedShop::Start()
 		GoldFont_[i]->RendererNumberOff();
 	}
 
+	ShopInventory_ = this->GetLevel()->CreateActor<Inventory>();
+
 	// 키설정
 	if (false == GameEngineInput::GetInst()->IsKey(KEY_CLOSE))
 	{
@@ -73,7 +75,7 @@ void SeedShop::Start()
 void SeedShop::ShopStart()
 {
 	float4 tmpPos = GetLevel()->GetCameraPos();
-	
+
 	// 상점 틀 
 	SeedShopInterfaceRender_->On();
 	SeedShopInterfaceRender_->SetPivot({ tmpPos.x + WINDOW_SIZE_W / 2, tmpPos.y + WINDOW_SIZE_H / 2 });
@@ -127,6 +129,7 @@ bool SeedShop::ShopUpdate()
 	}
 
 	// 연속 동작 방지
+	// 씨앗 구매
 	if (this->GetAccTime() >= 0.1f)
 	{
 		if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
@@ -151,6 +154,7 @@ bool SeedShop::ShopUpdate()
 								tmpPlayer->SetGold(Num - StockPrice_[i]);
 								// 인벤토리에 아이템 추가
 								tmpPlayer->GetInventory()->AddItemToInventory(StockType_[i]);
+								tmpPlayer->GetInventory()->InventoryUpload();
 
 								this->ReSetAccTime();
 
@@ -166,6 +170,26 @@ bool SeedShop::ShopUpdate()
 		}
 	}
 
+	// 아래에 나오는 인벤토리 창
+	// 렌더링용으로 복사
+	// memcpy(Inventory_->GetInventoryList(), tmpPlayer->GetInventory()->GetInventoryList(), sizeof(tmpPlayer->GetInventory()->GetInventoryList()));
+
+	float PosX = 0.0f, PosY = 0.0f;
+	ShopInventory_->InventoryDownload();
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		for (size_t j = 0; j < 12; j++)
+		{
+			PosX = IMAGE_INVENTORY_EXT_POS_X - (228 - (64 * (float)j));
+			PosY = IMAGE_INVENTORY_EXT_POS_Y - (30 - (68 * (float)i));
+
+			ShopInventory_->GetInventoryList()[j + (12 * i)]->GetIconRenderer().SetPivot({ PosX, PosY });
+			ShopInventory_->GetInventoryList()[j + (12 * i)]->SetItemNum((int)ORDER::SEEDSHOP_FONT);
+			ShopInventory_->GetInventoryList()[j + (12 * i)]->GetIconRenderer().On();
+			ShopInventory_->GetInventoryList()[j + (12 * i)]->GetIconRenderer().SetOrder((int)ORDER::SEEDSHOP_ICONS);
+		}
+	}
 
 	// 플레이어가 가지고 있는 돈
 	for (size_t i = 8; i > 0; i--)
@@ -175,11 +199,8 @@ bool SeedShop::ShopUpdate()
 		GoldFont_[i - 1]->SetPosition({
 									 tmpPos.x + 117 + (24.0f * i)
 								   , tmpPos.y - 47 });
-
 		Num /= 10;
 	}
-
-
 
 	// ESC로 종료
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_CLOSE))
@@ -196,6 +217,9 @@ bool SeedShop::ShopUpdate()
 		{
 			GoldFont_[i]->RendererNumberOff();
 		}
+
+		ShopInventory_->Death();
+		ShopInventory_->FontDeath();
 
 		return true;
 	}

@@ -23,20 +23,6 @@ Inventory::Inventory()
 
 Inventory::~Inventory() 
 {
-	//for (size_t i = 0; i < 36; i++)
-	//{
-	//	if (nullptr == InventoryList_[i])
-	//	{
-	//		delete InventoryList_[i];
-	//		InventoryList_[i] = nullptr;
-	//	}
-	//}
-
-	//if (nullptr != SwapItem_)
-	//{
-	//	delete SwapItem_;
-	//	SwapItem_ = nullptr;
-	//}
 }
 
 void Inventory::Start()
@@ -445,7 +431,38 @@ void Inventory::CollisionInit()
 // 레벨 전환
 void Inventory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	// 이전 레벨의 정보를 가져오기
+	InventoryDownload();
+}
+
+void Inventory::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	InventoryUpload();
+}
+
+void Inventory::InventoryUpload()
+{
+	// 정보를 넘겨주기
+	for (size_t i = 0; i < 36; i++)
+	{
+		// 아이템 렌더러의 이미지를 복사
+		InventorySaver_[i]->GetItemRenderer().SetImage(InventoryList_[i]->GetItemRenderer().GetImage()->GetNameCopy());
+		// 아이콘 렌더러의 이미지를 복사
+		InventorySaver_[i]->GetIconRenderer().SetImage(InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy());
+		// 해당 인벤토리에 들어있는 아이템 이름을 복사
+		InventorySaver_[i]->SetItemName(InventoryList_[i]->GetItemName());
+		// 이미지 인덱스 복사
+		InventorySaver_[i]->SetIndexNum(InventoryList_[i]->GetIndexNum());
+
+		// 수량
+		InventorySaver_[i]->Countable = InventoryList_[i]->Countable;
+		InventorySaver_[i]->Counter_ = InventoryList_[i]->Counter_;
+	}
+}
+
+
+void Inventory::InventoryDownload()
+{
+	// 정보를 가져오기
 	for (size_t i = 0; i < 36; i++)
 	{
 		// 아이템 렌더러의 이미지를 복사
@@ -469,22 +486,11 @@ void Inventory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 }
 
-void Inventory::LevelChangeEnd(GameEngineLevel* _NextLevel)
+void Inventory::FontDeath()
 {
-	// 다음 레벨에 정보를 넘겨주기
-	for (size_t i = 0; i < 36; i++)
+	for (int i = 0; i < 36; i++)
 	{
-		// 아이템 렌더러의 이미지를 복사
-		InventorySaver_[i]->GetItemRenderer().SetImage(InventoryList_[i]->GetItemRenderer().GetImage()->GetNameCopy());
-		// 아이콘 렌더러의 이미지를 복사
-		InventorySaver_[i]->GetIconRenderer().SetImage(InventoryList_[i]->GetIconRenderer().GetImage()->GetNameCopy());
-		// 해당 인벤토리에 들어있는 아이템 이름을 복사
-		InventorySaver_[i]->SetItemName(InventoryList_[i]->GetItemName());
-		// 이미지 인덱스 복사
-		InventorySaver_[i]->SetIndexNum(InventoryList_[i]->GetIndexNum());
-
-		// 수량
-		InventorySaver_[i]->Countable = InventoryList_[i]->Countable;
-		InventorySaver_[i]->Counter_ = InventoryList_[i]->Counter_;
+		InventoryList_[i]->Font_[0]->Death();
+		InventoryList_[i]->Font_[1]->Death();
 	}
 }

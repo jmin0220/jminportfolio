@@ -65,6 +65,12 @@ public:
 	void SelectItem(int i);
 	Item* SwapItem_;
 	void SwapItem(int _Origin, int _Target);
+
+	void InventoryUpload();
+	void InventoryDownload();
+
+	void FontDeath();
+
 protected:
 	void Start() override;
 	void Update() override;

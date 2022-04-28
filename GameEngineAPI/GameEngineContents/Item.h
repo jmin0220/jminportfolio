@@ -66,6 +66,7 @@ public:
 	void SubCounter();
 
 	void SetItemNum();
+	void SetItemNum(int _Order);
 
 	bool ClickedFlg;
 	Font* Font_[2];

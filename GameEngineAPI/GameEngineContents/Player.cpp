@@ -63,11 +63,11 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::FISHINGROD);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::FISHINGROD);
 
 	Inventory_->InventoryInit();
 }
@@ -100,9 +100,6 @@ void Player::Start()
 	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
 	SetActionCollision(CreateCollision(COL_GROUP_PLAYER_ACTION, { PLAYER_ACTION_COL_SIZE, PLAYER_ACTION_COL_SIZE }, { PLAYER_ACTION_COL_LENG, 0.0f}));
 	GetActionCollision()->Off();
-
-	// 씨앗상점 레벨에서만 SeedShop 액터를 생성
-	SeedShop_ = GetLevel()->CreateActor<SeedShop>();
 }
 
 void Player::Update()

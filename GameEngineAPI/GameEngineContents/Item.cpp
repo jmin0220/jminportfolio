@@ -33,6 +33,20 @@ void Item::SetItemNum()
 	}
 }
 
+
+void Item::SetItemNum(int _Order)
+{
+	SetItemNum();
+
+	if (true == Countable)
+	{
+		for (int i = Counter_.size(); i > 0; i--)
+		{
+			Font_[i - 1]->GetRendererFont()->SetOrder(_Order);
+		}
+	}
+}
+
 void Item::AddCounter()
 {
 	if (true == Countable && stoi(Counter_) < 99)
