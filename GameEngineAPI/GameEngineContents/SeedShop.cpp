@@ -140,7 +140,7 @@ bool SeedShop::ShopUpdate()
 
 				for (; StartCol != EndCol; StartCol++)
 				{
-					for (int i = 0; i < StockMax_; i++)
+					for (int i = 0; i <= StockMax_; i++)
 					{
 						if (StockCollision_[i] == *StartCol)
 						{
@@ -153,12 +153,15 @@ bool SeedShop::ShopUpdate()
 								tmpPlayer->GetInventory()->AddItemToInventory(StockType_[i]);
 
 								this->ReSetAccTime();
-							}
 
-							break;
+								break;
+							}
 						}
 					}
 				}
+
+				// 결과 초기화
+				ResultCol_.clear();
 			}
 		}
 	}

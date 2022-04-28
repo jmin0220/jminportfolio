@@ -116,7 +116,7 @@ void GameEngine::EngineLoop()
 	CurrentLevel_->ActorRender();
 
 	// 충돌 처리 디버깅
- 	//CurrentLevel_->CollisionDebugRender();
+ 	// CurrentLevel_->CollisionDebugRender();
 
 	// 백버퍼를 메인DC에 복사
 	WindowMainImage_->BitCopy(BackBufferImage_);
