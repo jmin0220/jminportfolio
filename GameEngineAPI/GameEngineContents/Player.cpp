@@ -827,7 +827,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 		case (int)TILESTATE::HOLLOW:
 			// 땅을 팔수록 설정되어있는 위치에만 땅을 팔수 있도록
 			GetMapColImage();
-			Color = MapColImage_->GetImagePixel({ (float)PosX, (float)PosY });
+			Color = MapColImage_->GetImagePixel({ (float)(PosX * TILEMAP_SIZE)  , (float)(PosY * TILEMAP_SIZE) });
 
 			if (RGB(255, 255, 255) == Color)
 			{
