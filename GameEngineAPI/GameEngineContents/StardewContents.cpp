@@ -127,6 +127,10 @@ void StardewContents::GameInit()
 	Image->Cut({ 48, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
 	Image->Cut({ 48, 96 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
+	Image->Cut({ 48, 96 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_ANIM);
+	Image->Cut({ 196, 196 });
 
 
 

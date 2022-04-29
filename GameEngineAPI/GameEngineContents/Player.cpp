@@ -257,18 +257,64 @@ void Player::PlayerAnimationInit()
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 5, 0.1f, true);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP, 15 * oneline, 15 * oneline + 5, 0.1f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline + 5, 12 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline + 5, 13 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline + 5, 14 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline + 5, 15 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline, 12 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline, 13 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline, 14 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline, 15 * oneline, 0.1f, true);
 
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
+
+
+	// 장비 렌더링 및 애니메이션 설정
+	RendererTool_ = CreateRenderer(IMAGE_TOOL_ANIM, (int)ORDER::TOOLB);
+	RendererTool_->SetPivot({ 0.0f, -24.0f, });
+
+	// 평상시, 아무것도 없는 칸을 가리킴
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_IDLE, 5, 5, 0.2f, false);
+
+	// 곡괭이
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_RIGHT, 0, 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_LEFT, 1 * oneline, 1 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_DOWN, 2 * oneline, 2 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_UP, 3 * oneline, 3 * oneline + 3, 0.1f, true);
+
+	// 도끼
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_RIGHT, 4 * oneline, 4 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_LEFT, 5 * oneline, 5 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_DOWN, 6 * oneline, 6 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_UP, 7 * oneline, 7 * oneline + 3, 0.1f, true);
+
+	// 물뿌리개
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_RIGHT, 8 * oneline, 8 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_LEFT, 9 * oneline, 9 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_DOWN, 10 * oneline, 10 * oneline + 3, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_UP, 11 * oneline, 11 * oneline + 3, 0.1f, true);
+
+	// 낚싯대
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_UP, 12 * oneline, 12 * oneline + 5, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_RIGHT, 13 * oneline, 13 * oneline + 5, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 5, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_DOWN, 5, 5, 1.0f, true);
+
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_RIGHT, 15 * oneline, 15 * oneline, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_LEFT, 15 * oneline + 1, 15 * oneline + 1, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_DOWN, 12 * oneline, 12 * oneline, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_UP, 5, 5, 1.0f, true);
+
+	// 아무것도 없는 상태로 시작
+	RendererTool_->ChangeAnimation(TOOL_ANIM_IDLE);
+
 }
 
 // 애니메이션 전환
 void Player::PlayerAnimationChange(const std::string& _Name)
 {
 	RendererBody_->ChangeAnimation(_Name);
+}
+
+void Player::ToolAnimationChange(const std::string& _Name)
+{
+	RendererTool_->ChangeAnimation(_Name);
 }
 
 // 조작키 초기화

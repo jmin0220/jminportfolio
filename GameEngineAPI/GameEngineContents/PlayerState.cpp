@@ -63,7 +63,8 @@ void Player::IdleUpdate()
 					Dir = ANIM_KEYWORD_DIR_DOWN;
 				}
 
-				PlayerAnimationChange(ANIM_KEYWORD_FISHING + Dir);
+				PlayerAnimationChange(ANIM_KEYWORD_FISHING + Dir); 
+				ToolAnimationChange(ANIM_KEYWORD_TOOL_FISHING + Dir);
 
 				StateChange(PlayerState::Fishing);
 			}
@@ -325,6 +326,8 @@ void Player::IdleStart()
 	{
 		PlayerAnimationChange(ANIM_IDLE_DOWN);
 	}
+
+	ToolAnimationChange(TOOL_ANIM_IDLE);
 }
 
 void Player::ActionStart()
@@ -380,29 +383,36 @@ void Player::ActionStart()
 	}
 
 	std::string Anim = ANIM_KEYWORD_IDLE;
+	std::string ToolAnim = ANIM_KEYWORD_TOOL_IDLE;
 	std::string Dir = "";
+	RendererTool_->SetOrder((int)ORDER::TOOLB);
 
 	// Hoe를 들고 있는경우
 	if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
 	{
 		Anim = ANIM_KEYWORD_HIT_HORIZON;
+		ToolAnim = ANIM_KEYWORD_TOOL_HOE;
 	}
 	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
 	{
 		Anim = ANIM_KEYWORD_WATERING;
+		ToolAnim = ANIM_KEYWORD_TOOL_WATERING;
 	}
 	// Axe를 들고 있는경우
 	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
 	{
 		Anim = ANIM_KEYWORD_HIT_HORIZON;
+		ToolAnim = ANIM_KEYWORD_TOOL_AXE;
 	}
 	else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
 		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
 	{
 		// 씨앗 심기용 애니메이션?
 		Anim = ANIM_KEYWORD_IDLE;
+		ToolAnim = ANIM_KEYWORD_TOOL_IDLE;
 	}
 
+	// 플레이어의 방향에 따라 애니메이션의 방향을 설정
 	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
 		Dir = ANIM_KEYWORD_DIR_RIGHT;
@@ -414,13 +424,25 @@ void Player::ActionStart()
 	else if (float4::UP.CompareInt2D(MoveDir_))
 	{
 		Dir = ANIM_KEYWORD_DIR_UP;
+		RendererTool_->SetOrder((int)ORDER::TOOLA);
 	}
 	else if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
 		Dir = ANIM_KEYWORD_DIR_DOWN;
 	}
 
+	// 플레이어 애니메이션 전환
 	PlayerAnimationChange(Anim + Dir);
+
+	// 툴 애니메이션 전환
+	if (ToolAnim == ANIM_KEYWORD_TOOL_IDLE)
+	{
+		ToolAnimationChange(ToolAnim);
+	}
+	else
+	{
+		ToolAnimationChange(ToolAnim + Dir);
+	}
 }
 
 void Player::FishingStart()

@@ -87,6 +87,7 @@ public:
 
 	// 애니메이션 전환
 	void PlayerAnimationChange(const std::string& _Name);
+	void ToolAnimationChange(const std::string& _Name);
 private:
 	void Start() override;
 	void Update() override;
@@ -113,6 +114,8 @@ private:
 
 	// 플레이어 자신의 렌더러
 	GameEngineRenderer* RendererBody_;
+	// 플레이어 장비의 렌더러
+	GameEngineRenderer* RendererTool_;
 
 	// 맵에서 사용될 충돌용 이미지
 	GameEngineImage* MapColImage_;

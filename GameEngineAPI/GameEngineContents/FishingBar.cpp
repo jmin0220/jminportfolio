@@ -128,7 +128,7 @@ int FishingBar::GameUpdate()
 
 			if (ProgressLevel_ >= 100)
 			{
-				ProgressLevel_ = 100;
+				ProgressLevel_ = 101;
 			}
 
 			ProgressRenderer_->SetIndex(ProgressLevel_ - 1);
@@ -139,7 +139,7 @@ int FishingBar::GameUpdate()
 
 			if (ProgressLevel_ <= 0)
 			{
-				ProgressLevel_ = 0;
+				ProgressLevel_ = 1;
 			}
 
 			ProgressRenderer_->SetIndex(ProgressLevel_ - 1);

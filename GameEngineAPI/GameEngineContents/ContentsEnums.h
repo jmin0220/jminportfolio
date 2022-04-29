@@ -5,7 +5,9 @@ enum class ORDER
 	BACKGROUND,		// 배경
 	BUIDING,		// 배경
 	FRONTA,			// 플레이어의 뒤에 렌더링될 경우의 Front배경 (Default)
+	TOOLA,
 	PLAYER,
+	TOOLB,
 	FRONTB,			// 플레이어를 가릴 경우의 Front 배경
 	ALWAYSFRONT,	// 배경
 	UI,
