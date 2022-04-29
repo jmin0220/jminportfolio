@@ -200,15 +200,17 @@
 
 
 // 애니메이션
-#define ANIM_KEYWARD_IDLE "Idle"
-#define ANIM_KEYWARD_WALK "Walk"
-#define ANIM_KEYWARD_HIT_HORIZON "HitHorizon"
-#define ANIM_KEYWARD_HIT_VERTICAL "HitVertical"
-#define ANIM_KEYWARD_WATERING "Watering"
-#define ANIM_KEYWARD_DIR_RIGHT "Right"
-#define ANIM_KEYWARD_DIR_LEFT "Left"
-#define ANIM_KEYWARD_DIR_UP "Up"
-#define ANIM_KEYWARD_DIR_DOWN "Down"
+#define ANIM_KEYWORD_IDLE "Idle"
+#define ANIM_KEYWORD_WALK "Walk"
+#define ANIM_KEYWORD_HIT_HORIZON "HitHorizon"
+#define ANIM_KEYWORD_HIT_VERTICAL "HitVertical"
+#define ANIM_KEYWORD_WATERING "Watering"
+#define ANIM_KEYWORD_FISHING "Fishing"
+#define ANIM_KEYWORD_FISHING_WAIT "FishingWait"
+#define ANIM_KEYWORD_DIR_RIGHT "Right"
+#define ANIM_KEYWORD_DIR_LEFT "Left"
+#define ANIM_KEYWORD_DIR_UP "Up"
+#define ANIM_KEYWORD_DIR_DOWN "Down"
 
 #define ANIM_IDLE_DOWN "IdleDown"
 #define ANIM_IDLE_RIGHT "IdleRight"
@@ -224,16 +226,21 @@
 #define ANIM_HIT_HORIZON_RIGHT "HitHorizonRight"
 #define ANIM_HIT_HORIZON_LEFT "HitHorizonLeft"
 #define ANIM_HIT_HORIZON_UP "HitHorizonUp"
-// 가로로 휘두르기
-#define ANIM_HIT_VERTICAL_DOWN "HitVerticalDown"
-#define ANIM_HIT_VERTICAL_RIGHT "HitVerticalRight"
-#define ANIM_HIT_VERTICAL_LEFT "HitVerticalLeft"
-#define ANIM_HIT_VERTICAL_UP "HitVerticalUp"
 // 물주기
 #define ANIM_WATERING_DOWN "WateringDown"
 #define ANIM_WATERING_RIGHT "WateringRight"
 #define ANIM_WATERING_LEFT "WateringLeft"
 #define ANIM_WATERING_UP "WateringUp"
+// 낚시
+#define ANIM_FISHING_DOWN "FishingDown"
+#define ANIM_FISHING_RIGHT "FishingRight"
+#define ANIM_FISHING_LEFT "FishingLeft"
+#define ANIM_FISHING_UP "FishingUp"
+
+#define ANIM_FISHING_DOWN_WAIT "FishingWaitDown"
+#define ANIM_FISHING_RIGHT_WAIT "FishingWaitRight"
+#define ANIM_FISHING_LEFT_WAIT "FishingWaitLeft"
+#define ANIM_FISHING_UP_WAIT "FishingWaitUp"
 
 
 // 아이템

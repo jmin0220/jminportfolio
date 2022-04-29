@@ -74,11 +74,19 @@ public:
 		PlayerActionCollision_ = _Collision;
 	}
 
+	inline float4 GetMoveDir() const
+	{
+		return MoveDir_;
+	}
+
 	// 플레이어 초기화
 	void PlayerInit();
 
 	// 플레이어의 위치에 따라서 Front레이어의 랜더 순서를 유동적으로 전환
 	bool ColRenderOrderCheck();
+
+	// 애니메이션 전환
+	void PlayerAnimationChange(const std::string& _Name);
 private:
 	void Start() override;
 	void Update() override;
@@ -112,8 +120,6 @@ private:
 
 	// 애니메이션 초기화
 	void PlayerAnimationInit();
-	// 애니메이션 전환
-	void PlayerAnimationChange(const std::string& _Name);
 	// 키 초기화
 	void PlayerKeyInit();
 	// 카메라 업데이트
@@ -244,4 +250,5 @@ private:
 
 	FishingGame* FishingGame_;
 	SeedShop* SeedShop_;
+	bool FishingGameFlg;
 };

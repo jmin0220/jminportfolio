@@ -47,6 +47,7 @@ Player::Player()
 	, InventoryClickFlg_(false)
 	, ItemSelectOrigin(-1)
 	, ItemSelectTarget(-1)
+	, FishingGameFlg(false)
 {
 	PlayerRandom_ = new GameEngineRandom();
 }
@@ -241,20 +242,25 @@ void Player::PlayerAnimationInit()
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WALK_LEFT, 2 * oneline, 2 * oneline + 3, 0.2f, true);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WALK_UP, 3 * oneline, 3 * oneline + 3, 0.2f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_VERTICAL_DOWN, 4 * oneline, 4 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_VERTICAL_RIGHT, 5 * oneline, 5 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_VERTICAL_LEFT, 6 * oneline, 6 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_VERTICAL_UP, 7 * oneline, 7 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_RIGHT, 4 * oneline, 4 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_LEFT, 5 * oneline, 5 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_DOWN, 6 * oneline, 6 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_UP, 7 * oneline, 7 * oneline + 3, 0.1f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_RIGHT, 8 * oneline, 8 * oneline + 4, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_LEFT, 9 * oneline, 9 * oneline + 4, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_DOWN, 10 * oneline, 10 * oneline + 4, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_HIT_HORIZON_UP, 11 * oneline, 11 * oneline + 3, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_RIGHT, 8 * oneline, 8 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_LEFT, 9 * oneline, 9 * oneline + 4, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_DOWN, 10 * oneline, 10 * oneline + 3, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_UP, 11 * oneline, 11 * oneline + 3, 0.1f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_RIGHT, 12 * oneline, 12 * oneline + 4, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_LEFT, 13 * oneline, 13 * oneline + 4, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_DOWN, 14 * oneline, 14 * oneline + 3, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_UP, 15 * oneline, 15 * oneline + 3, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN, 12 * oneline, 12 * oneline + 6, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT, 13 * oneline, 13 * oneline + 6, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 6, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP, 15 * oneline, 15 * oneline, 0.1f, true);
+
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline + 6, 12 * oneline + 6, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline + 6, 13 * oneline + 6, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline + 6, 14 * oneline + 6, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline, 15 * oneline, 0.1f, true);
 
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
 }

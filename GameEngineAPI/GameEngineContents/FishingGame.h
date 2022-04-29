@@ -38,5 +38,6 @@ private:
 
 	GameEngineRenderer* FontMax_;
 	GameEngineRenderer* FontHit_;
+
 };
 

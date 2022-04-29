@@ -18,11 +18,11 @@ FishingGame::~FishingGame()
 
 void FishingGame::Start()
 {
-	FontMax_ = CreateRenderer(IMAGE_FISHING_MAX, (int)ORDER::UI);
+	FontMax_ = CreateRenderer(IMAGE_FISHING_MAX, (int)ORDER::FISHINGUI);
 	FontMax_->SetPivot({ -50.0f, 0.0f });
 	FontMax_->Off();
 
-	FontHit_ = CreateRenderer(IMAGE_FISHING_HIT, (int)ORDER::UI);
+	FontHit_ = CreateRenderer(IMAGE_FISHING_HIT, (int)ORDER::FISHINGUI);
 	FontHit_->SetPivot({ -50.0f, 0.0f });
 	FontHit_->Off();
 }
@@ -32,12 +32,33 @@ bool FishingGame::GameUpdate()
 	bool FishingEndFlg = false;
 	int UpdateResult = 0;
 	this->AddAccTime(GameEngineTime::GetDeltaTime());
+	Player*	TmpPlayer_ = static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER));
+	std::string Dir = "";
 
 	switch (PhaseFlg_)
 	{
-	// 게임종료
+	// 플레이어 애니메이션 설정
 	case 0:
-		FishingEndFlg = true;
+		if (float4::RIGHT.CompareInt2D(TmpPlayer_->GetMoveDir()))
+		{
+			Dir = ANIM_KEYWORD_DIR_RIGHT;
+		}
+		else if (float4::LEFT.CompareInt2D(TmpPlayer_->GetMoveDir()))
+		{
+			Dir = ANIM_KEYWORD_DIR_LEFT;
+		}
+		else if (float4::UP.CompareInt2D(TmpPlayer_->GetMoveDir()))
+		{
+			Dir = ANIM_KEYWORD_DIR_UP;
+		}
+		else if (float4::DOWN.CompareInt2D(TmpPlayer_->GetMoveDir()))
+		{
+			Dir = ANIM_KEYWORD_DIR_DOWN;
+		}
+
+		TmpPlayer_->PlayerAnimationChange(ANIM_KEYWORD_FISHING_WAIT + Dir);
+
+		PhaseFlg_ = 1;
 		break;
 	// 낚시를 던질때 힘조절
 	case 1:
@@ -83,11 +104,11 @@ bool FishingGame::GameUpdate()
 
 		FishType_ = FishRandom_->RandomInt((int)ITEMTABLE::PUFFERFISH, (int)ITEMTABLE::ANCHOVY);
 
-		static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER))->GetInventory()->AddItemToInventory(FishType_);
+		TmpPlayer_->GetInventory()->AddItemToInventory(FishType_);
 
-		PhaseFlg_ = 0;
+		PhaseFlg_ = 4;
 		break;
-	// 실패
+	// 게임 종료
 	case 4:
 		FishingEndFlg = true;
 		break;
@@ -108,7 +129,7 @@ void FishingGame::GameStart()
 	FishingPowerbar_ = GetLevel()->CreateActor<FishingPowerbar>();
 
 	// 게임 시작
-	PhaseFlg_ = 1;
+	PhaseFlg_ = 0;
 	FishingPowerbar_->GameStart();
 }
 

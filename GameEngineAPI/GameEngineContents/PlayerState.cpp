@@ -44,6 +44,27 @@ void Player::IdleUpdate()
 
 			if (RGB(0, 0, 255) == Color)
 			{
+				std::string Dir = "";
+
+				if (float4::RIGHT.CompareInt2D(MoveDir_))
+				{
+					Dir = ANIM_KEYWORD_DIR_RIGHT;
+				}
+				else if (float4::LEFT.CompareInt2D(MoveDir_))
+				{
+					Dir = ANIM_KEYWORD_DIR_LEFT;
+				}
+				else if (float4::UP.CompareInt2D(MoveDir_))
+				{
+					Dir = ANIM_KEYWORD_DIR_UP;
+				}
+				else if (float4::DOWN.CompareInt2D(MoveDir_))
+				{
+					Dir = ANIM_KEYWORD_DIR_DOWN;
+				}
+
+				PlayerAnimationChange(ANIM_KEYWORD_FISHING + Dir);
+
 				StateChange(PlayerState::Fishing);
 			}
 
@@ -209,11 +230,21 @@ void Player::ActionUpdate()
 // 낚시 업데이트
 void Player::FishingUpdate()
 {
-	if (true == FishingGame_->GameUpdate())
+	// 낚싯대 던지기 애니메이션이 종료되면
+	if (true == RendererBody_->IsEndAnimation() && FishingGameFlg == false)
 	{
-		FishingGame_->GameEnd();
-		// Idle로 상태 전환
-		StateChange(PlayerState::Idle);
+		FishingGameFlg = true;
+	}
+
+	if (true == FishingGameFlg)
+	{
+		if (true == FishingGame_->GameUpdate())
+		{
+			FishingGame_->GameEnd();
+			FishingGameFlg = false;
+			// Idle로 상태 전환
+			StateChange(PlayerState::Idle);
+		}
 	}
 }
 
@@ -348,45 +379,45 @@ void Player::ActionStart()
 		}
 	}
 
-	std::string Anim = ANIM_KEYWARD_IDLE;
+	std::string Anim = ANIM_KEYWORD_IDLE;
 	std::string Dir = "";
 
 	// Hoe를 들고 있는경우
 	if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
 	{
-		Anim = ANIM_KEYWARD_HIT_HORIZON;
+		Anim = ANIM_KEYWORD_HIT_HORIZON;
 	}
 	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
 	{
-		Anim = ANIM_KEYWARD_WATERING;
+		Anim = ANIM_KEYWORD_WATERING;
 	}
 	// Axe를 들고 있는경우
 	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
 	{
-		Anim = ANIM_KEYWARD_HIT_HORIZON;
+		Anim = ANIM_KEYWORD_HIT_HORIZON;
 	}
 	else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
 		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
 	{
 		// 씨앗 심기용 애니메이션?
-		Anim = ANIM_KEYWARD_IDLE;
+		Anim = ANIM_KEYWORD_IDLE;
 	}
 
 	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
-		Dir = ANIM_KEYWARD_DIR_RIGHT;
+		Dir = ANIM_KEYWORD_DIR_RIGHT;
 	}
 	else if (float4::LEFT.CompareInt2D(MoveDir_))
 	{
-		Dir = ANIM_KEYWARD_DIR_LEFT;
+		Dir = ANIM_KEYWORD_DIR_LEFT;
 	}
 	else if (float4::UP.CompareInt2D(MoveDir_))
 	{
-		Dir = ANIM_KEYWARD_DIR_UP;
+		Dir = ANIM_KEYWORD_DIR_UP;
 	}
 	else if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
-		Dir = ANIM_KEYWARD_DIR_DOWN;
+		Dir = ANIM_KEYWORD_DIR_DOWN;
 	}
 
 	PlayerAnimationChange(Anim + Dir);

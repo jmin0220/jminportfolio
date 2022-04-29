@@ -20,16 +20,16 @@ FishingBar::~FishingBar()
 
 void FishingBar::Start()
 {
-	Renderer_ = CreateRenderer(IMAGE_FISHING_FISHINGBAR, (int)ORDER::UI);
+	Renderer_ = CreateRenderer(IMAGE_FISHING_FISHINGBAR, (int)ORDER::FISHINGUI);
 	Renderer_->Off();
 
-	ProgressRenderer_ = CreateRenderer(IMAGE_FISHING_PROGRESS, (int)ORDER::UIICONS);
+	ProgressRenderer_ = CreateRenderer(IMAGE_FISHING_PROGRESS, (int)ORDER::FISHINGICONS);
 	ProgressRenderer_->Off();
 
-	CatchboxRenderer_ = CreateRenderer(IMAGE_FISHING_CATCH_HITBOX, (int)ORDER::UIICONS);
+	CatchboxRenderer_ = CreateRenderer(IMAGE_FISHING_CATCH_HITBOX, (int)ORDER::FISHINGICONS);
 	CatchboxRenderer_->Off();
 
-	LureRenderer_ = CreateRenderer(IMAGE_FISHING_FISH_HITBOX, (int)ORDER::UIFONT);
+	LureRenderer_ = CreateRenderer(IMAGE_FISHING_FISH_HITBOX, (int)ORDER::FISHINGLURE);
 	LureRenderer_->Off();
 
 	LureHitbox_ = CreateCollision(COL_GROUP_FISH_HITBOX, { 30.0f, 30.0f });
@@ -125,11 +125,23 @@ int FishingBar::GameUpdate()
 		if (true == CatchHitbox_->CollisionCheck(COL_GROUP_FISH_HITBOX, CollisionType::Rect, CollisionType::Rect))
 		{
 			ProgressLevel_++;
+
+			if (ProgressLevel_ >= 100)
+			{
+				ProgressLevel_ = 100;
+			}
+
 			ProgressRenderer_->SetIndex(ProgressLevel_ - 1);
 		}
 		else
 		{
 			ProgressLevel_ -= 2;
+
+			if (ProgressLevel_ <= 0)
+			{
+				ProgressLevel_ = 0;
+			}
+
 			ProgressRenderer_->SetIndex(ProgressLevel_ - 1);
 		}
 

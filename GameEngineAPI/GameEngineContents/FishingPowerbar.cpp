@@ -15,7 +15,7 @@ FishingPowerbar::~FishingPowerbar()
 
 void FishingPowerbar::Start()
 {
-	BarRenderer_ = CreateRenderer(IMAGE_FISHING_POWERBAR, (int)ORDER::UI);
+	BarRenderer_ = CreateRenderer(IMAGE_FISHING_POWERBAR, (int)ORDER::FISHINGUI);
 	BarRenderer_->Off();
 }
 
@@ -60,7 +60,7 @@ bool FishingPowerbar::GameUpdate()
 	}
 
 	// 마우스를 뗐을경우 페이즈2로 넘어감
-	if (true == GameEngineInput::GetInst()->IsUp(KEY_INTERACT))
+	if (true == GameEngineInput::GetInst()->IsUp(KEY_INTERACT) || true == GameEngineInput::GetInst()->IsFree(KEY_INTERACT))
 	{
 		EndFlg = true;
 	}
