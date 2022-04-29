@@ -252,15 +252,15 @@ void Player::PlayerAnimationInit()
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_DOWN, 10 * oneline, 10 * oneline + 3, 0.1f, true);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_WATERING_UP, 11 * oneline, 11 * oneline + 3, 0.1f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN, 12 * oneline, 12 * oneline + 6, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT, 13 * oneline, 13 * oneline + 6, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 6, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP, 15 * oneline, 15 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN, 12 * oneline, 12 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT, 13 * oneline, 13 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP, 15 * oneline, 15 * oneline + 5, 0.1f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline + 6, 12 * oneline + 6, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline + 6, 13 * oneline + 6, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline + 6, 14 * oneline + 6, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline, 15 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline + 5, 12 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline + 5, 13 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline + 5, 14 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline + 5, 15 * oneline + 5, 0.1f, true);
 
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
 }
