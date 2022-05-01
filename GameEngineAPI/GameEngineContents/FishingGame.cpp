@@ -57,7 +57,6 @@ bool FishingGame::GameUpdate()
 		}
 
 		TmpPlayer_->PlayerAnimationChange(ANIM_KEYWORD_FISHING_WAIT + Dir);
-		TmpPlayer_->ToolAnimationChange(ANIM_KEYWORD_TOOL_FISHING_WAIT + Dir);
 
 		PhaseFlg_ = 1;
 		break;
