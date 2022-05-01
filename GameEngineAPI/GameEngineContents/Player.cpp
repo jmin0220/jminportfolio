@@ -40,7 +40,7 @@
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 int Player::Gold_ = 1234560;
 
-Player::Player() 
+Player::Player()
 	:Speed_(500.0f)
 	, MoveDir_(float4::DOWN)
 	, NextLevel_("")
@@ -52,7 +52,7 @@ Player::Player()
 	PlayerRandom_ = new GameEngineRandom();
 }
 
-Player::~Player() 
+Player::~Player()
 {
 	delete PlayerRandom_;
 	PlayerRandom_ = nullptr;
@@ -99,7 +99,7 @@ void Player::Start()
 
 	// 플레이어의 충돌체 생성
 	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
-	SetActionCollision(CreateCollision(COL_GROUP_PLAYER_ACTION, { PLAYER_ACTION_COL_SIZE, PLAYER_ACTION_COL_SIZE }, { PLAYER_ACTION_COL_LENG, 0.0f}));
+	SetActionCollision(CreateCollision(COL_GROUP_PLAYER_ACTION, { PLAYER_ACTION_COL_SIZE, PLAYER_ACTION_COL_SIZE }, { PLAYER_ACTION_COL_LENG, 0.0f }));
 	GetActionCollision()->Off();
 }
 
@@ -178,11 +178,11 @@ void Player::StateChange(PlayerState _State)
 			break;
 		case PlayerState::Action:
 			// 마우스가 인벤토리 바와 겹쳐있을 경우 상태를 Action으로 변경하지 않음
-			if (InventoryClickFlg_ == true || 
+			if (InventoryClickFlg_ == true ||
 				(false == Inventory_->GetExtendFlg()
-				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect))
-			 || (true == Inventory_->GetExtendFlg()
-				&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect)))
+					&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_BAR, CollisionType::Rect, CollisionType::Rect))
+				|| (true == Inventory_->GetExtendFlg()
+					&& true == Mouse_->GetCollision()->CollisionCheck(COL_GROUP_INVENTORY_EXTEND_BAR, CollisionType::Rect, CollisionType::Rect)))
 			{
 				return;
 			}
@@ -257,18 +257,64 @@ void Player::PlayerAnimationInit()
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 5, 0.1f, true);
 	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP, 15 * oneline, 15 * oneline + 5, 0.1f, true);
 
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline + 5, 12 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline + 5, 13 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline + 5, 14 * oneline + 5, 0.1f, true);
-	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline + 5, 15 * oneline + 5, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_DOWN_WAIT, 12 * oneline, 12 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_RIGHT_WAIT, 13 * oneline, 13 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_LEFT_WAIT, 14 * oneline, 14 * oneline, 0.1f, true);
+	RendererBody_->CreateAnimation(IMAGE_PLAYER_MAN_TOTAL, ANIM_FISHING_UP_WAIT, 15 * oneline, 15 * oneline, 0.1f, true);
 
 	RendererBody_->ChangeAnimation(ANIM_IDLE_DOWN);
+
+
+	// 장비 렌더링 및 애니메이션 설정
+	RendererTool_ = CreateRenderer(IMAGE_TOOL_ANIM, (int)ORDER::TOOLB);
+	RendererTool_->SetPivot({ 0.0f, -24.0f, });
+
+	// 평상시, 아무것도 없는 칸을 가리킴
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_IDLE, 5, 5, 0.2f, false);
+
+	// 곡괭이
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_RIGHT, 0, 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_LEFT, 1 * oneline, 1 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_DOWN, 2 * oneline, 2 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_HOE_UP, 3 * oneline, 3 * oneline + 3, 0.1f, true);
+
+	// 도끼
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_RIGHT, 4 * oneline, 4 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_LEFT, 5 * oneline, 5 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_DOWN, 6 * oneline, 6 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_AXE_UP, 7 * oneline, 7 * oneline + 3, 0.1f, true);
+
+	// 물뿌리개
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_RIGHT, 8 * oneline, 8 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_LEFT, 9 * oneline, 9 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_DOWN, 10 * oneline, 10 * oneline + 3, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_WATERINGCAN_UP, 11 * oneline, 11 * oneline + 3, 0.1f, true);
+
+	// 낚싯대
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_UP, 12 * oneline, 12 * oneline + 5, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_RIGHT, 13 * oneline, 13 * oneline + 5, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_LEFT, 14 * oneline, 14 * oneline + 5, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_DOWN, 5, 5, 1.0f, true);
+
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_RIGHT, 15 * oneline, 15 * oneline, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_LEFT, 15 * oneline + 1, 15 * oneline + 1, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_DOWN, 12 * oneline, 12 * oneline, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_UP, 5, 5, 1.0f, true);
+
+	// 아무것도 없는 상태로 시작
+	RendererTool_->ChangeAnimation(TOOL_ANIM_IDLE);
+
 }
 
 // 애니메이션 전환
 void Player::PlayerAnimationChange(const std::string& _Name)
 {
 	RendererBody_->ChangeAnimation(_Name);
+}
+
+void Player::ToolAnimationChange(const std::string& _Name)
+{
+	RendererTool_->ChangeAnimation(_Name);
 }
 
 // 조작키 초기화
@@ -397,7 +443,7 @@ bool Player::ColRenderOrderCheck()
 float4 Player::GetPositionOnTilemap()
 {
 	float4 tmp;
-	
+
 	tmp.x = static_cast<int>(GetPosition().x / TILEMAP_SIZE);
 	tmp.y = static_cast<int>(GetPosition().y / TILEMAP_SIZE);
 
@@ -448,7 +494,7 @@ void Player::ColCheck(float4 _MoveDir)
 	float4 CheckPos = SetCheckPos(NextPos);
 
 	int Color = MapColImage_->GetImagePixel(CheckPos);
-	
+
 	// 충돌판정
 	if (RGB(0, 0, 0) != Color && RGB(0, 0, 255) != Color
 		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect)
@@ -498,7 +544,7 @@ void Player::ColCheck(float4 _MoveDir)
 	}
 	else if (GetCurrentLevel() == LEVEL_SEEDSHOP)
 	{
-		if (RGB(0, 255, 0) == Color)
+		if (RGB(255, 0, 0) == Color)
 		{
 			SetNextLevelPos({ 2112.0f, 2778.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
@@ -615,7 +661,7 @@ void Player::CropsUpdate()
 		{
 			// 시간 관련 업데이트
 			// 타일이 업데이트 활성화 상태일경우
-			if ( nullptr != Actor_ && Actor_->GetIsTimeUpdate() )
+			if (nullptr != Actor_ && Actor_->GetIsTimeUpdate())
 			{
 				Actor_->AddAccTime(GameEngineTime::GetDeltaTime());
 
@@ -857,8 +903,8 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 		}
 
 	}
-	else if(_TileActorSelecter == 1
-		    && nullptr != GroundTiles_[PosY][PosX])
+	else if (_TileActorSelecter == 1
+		&& nullptr != GroundTiles_[PosY][PosX])
 	{
 		switch (_EnvironemntTileIndex)
 		{
@@ -974,13 +1020,13 @@ void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGrou
 // 필드에 떨어져있는 아이템들
 void Player::ItemUpdate()
 {
-	float4 Dir = { 0.0f, 0.0f }; 
+	float4 Dir = { 0.0f, 0.0f };
 	float Check = 0.0f;
 
 	std::list<Item*>::iterator Start = ItemList_.begin();
 	std::list<Item*>::iterator End = ItemList_.end();
 
-	for (;Start != End; ++Start)
+	for (; Start != End; )
 	{
 		Dir = this->GetPosition() - (*Start)->GetPosition();
 		Check = Dir.Len2D();
@@ -992,9 +1038,8 @@ void Player::ItemUpdate()
 			{
 				(*Start)->Death();
 				Start = ItemList_.erase(Start);
+				continue;
 			}
-
-			continue;
 		}
 		// 아이템과 플레이어의 거리가 너무 멀리 있을경우 움직이지 않음.
 		else if (Check <= 70)
@@ -1002,5 +1047,7 @@ void Player::ItemUpdate()
 			Dir.Normal2D();
 			(*Start)->SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
 		}
+
+		++Start;
 	}
 }

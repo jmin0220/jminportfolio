@@ -2,7 +2,7 @@
 #include "Player.h"
 #include <GameEngineBase/GameEngineInput.h>
 
-FishingBar::FishingBar() 
+FishingBar::FishingBar()
 	: SuccessFlg_(false)
 	, ProgressLevel_(40)
 	, CatchBoxMoveSpeedY_(0.0f)
@@ -14,7 +14,7 @@ FishingBar::FishingBar()
 {
 }
 
-FishingBar::~FishingBar() 
+FishingBar::~FishingBar()
 {
 }
 
@@ -42,15 +42,15 @@ void FishingBar::Start()
 void FishingBar::GameStart()
 {
 	Pivot_ = static_cast<Player*>(this->GetLevel()->FindActor(ACTOR_PLAYER))->GetPosition();
-	
+
 	Renderer_->On();
 	ProgressRenderer_->On();
 	CatchboxRenderer_->On();
 	LureRenderer_->On();
 
 	Renderer_->SetPivot({ Pivot_.x + 100.0f, Pivot_.y });
-	ProgressRenderer_->SetPivot({ Pivot_.x + 143.0f, Pivot_.y});
-	CatchboxRenderer_->SetPivot({ Pivot_.x + 106.0f, Pivot_.y});
+	ProgressRenderer_->SetPivot({ Pivot_.x + 143.0f, Pivot_.y });
+	CatchboxRenderer_->SetPivot({ Pivot_.x + 106.0f, Pivot_.y });
 	LureRenderer_->SetPivot({ Pivot_.x + 106.0f, Pivot_.y });
 
 	Random_ = new GameEngineRandom;
@@ -76,7 +76,7 @@ int FishingBar::GameUpdate()
 	if (true == GameEngineInput::GetInst()->IsDown(KEY_INTERACT))
 	{
 		CatchBoxMoveSpeedY_ += 4.0f;
-		
+
 		// 최대속도
 		if (CatchBoxMoveSpeedY_ >= 25.0f)
 		{
@@ -128,7 +128,7 @@ int FishingBar::GameUpdate()
 
 			if (ProgressLevel_ >= 100)
 			{
-				ProgressLevel_ = 100;
+				ProgressLevel_ = 101;
 			}
 
 			ProgressRenderer_->SetIndex(ProgressLevel_ - 1);
@@ -139,7 +139,7 @@ int FishingBar::GameUpdate()
 
 			if (ProgressLevel_ <= 0)
 			{
-				ProgressLevel_ = 0;
+				ProgressLevel_ = 1;
 			}
 
 			ProgressRenderer_->SetIndex(ProgressLevel_ - 1);
@@ -163,7 +163,7 @@ int FishingBar::GameUpdate()
 }
 
 void FishingBar::LureUpdate()
-{	
+{
 
 	LureRenderer_->SetPivot({ Pivot_.x + 106.0f, Pivot_.y + LurePosY_ });
 	LureHitbox_->SetPivot({ Pivot_.x + 106.0f,  Pivot_.y + LurePosY_ });

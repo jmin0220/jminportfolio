@@ -11,11 +11,11 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineSound.h>
 
-StardewContents::StardewContents() 
+StardewContents::StardewContents()
 {
 }
 
-StardewContents::~StardewContents() 
+StardewContents::~StardewContents()
 {
 }
 
@@ -94,7 +94,7 @@ void StardewContents::GameInit()
 	ResourcesDir.Move(DIR_RESOURCES);
 	ResourcesDir.Move(DIR_IMAGE);
 	ResourcesDir.Move(DIR_INTERFACE);
-		
+
 	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
@@ -127,6 +127,10 @@ void StardewContents::GameInit()
 	Image->Cut({ 48, 96 });
 	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
 	Image->Cut({ 48, 96 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_SET2);
+	Image->Cut({ 48, 96 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_TOOL_ANIM);
+	Image->Cut({ 196, 196 });
 
 
 

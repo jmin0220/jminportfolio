@@ -63,6 +63,7 @@
 #define IMAGE_TOOL_SET1 "Tools_set1.bmp"
 #define IMAGE_TOOL_SET2 "Tools_set2.bmp"
 #define IMAGE_TOOL_ICON "ToolIcon.bmp"
+#define IMAGE_TOOL_ANIM "ToolAnim.bmp"
 #define IMAGE_FULL_SIZE_H 720
 #define IMAGE_FULL_SIZE_W 1280
 #define IMAGE_FONT "Font.bmp"
@@ -207,6 +208,16 @@
 #define ANIM_KEYWORD_WATERING "Watering"
 #define ANIM_KEYWORD_FISHING "Fishing"
 #define ANIM_KEYWORD_FISHING_WAIT "FishingWait"
+#define ANIM_KEYWORD_HIT_HORIZON "HitHorizon"
+#define ANIM_KEYWORD_HIT_VERTICAL "HitVertical"
+
+#define ANIM_KEYWORD_TOOL_IDLE "ToolIdle"
+#define ANIM_KEYWORD_TOOL_HOE "Hoe"
+#define ANIM_KEYWORD_TOOL_AXE "Axe"
+#define ANIM_KEYWORD_TOOL_WATERING "ToolWatering"
+#define ANIM_KEYWORD_TOOL_FISHING "ToolFishing"
+#define ANIM_KEYWORD_TOOL_FISHING_WAIT "ToolFishingWait"
+
 #define ANIM_KEYWORD_DIR_RIGHT "Right"
 #define ANIM_KEYWORD_DIR_LEFT "Left"
 #define ANIM_KEYWORD_DIR_UP "Up"
@@ -241,6 +252,31 @@
 #define ANIM_FISHING_RIGHT_WAIT "FishingWaitRight"
 #define ANIM_FISHING_LEFT_WAIT "FishingWaitLeft"
 #define ANIM_FISHING_UP_WAIT "FishingWaitUp"
+
+#define TOOL_ANIM_IDLE "ToolIdle"
+#define TOOL_ANIM_HOE_RIGHT "HoeRight"
+#define TOOL_ANIM_HOE_LEFT "HoeLeft"
+#define TOOL_ANIM_HOE_DOWN "HoeDown"
+#define TOOL_ANIM_HOE_UP "HoeUp"
+
+#define TOOL_ANIM_AXE_RIGHT "AxeRight"
+#define TOOL_ANIM_AXE_LEFT "AxeLeft"
+#define TOOL_ANIM_AXE_DOWN "AxeDown"
+#define TOOL_ANIM_AXE_UP "AxeUp"
+
+#define TOOL_ANIM_WATERINGCAN_RIGHT "ToolWateringRight"
+#define TOOL_ANIM_WATERINGCAN_LEFT "ToolWateringLeft"
+#define TOOL_ANIM_WATERINGCAN_DOWN "ToolWateringDown"
+#define TOOL_ANIM_WATERINGCAN_UP "ToolWateringUp"
+
+#define TOOL_ANIM_FISHING_RIGHT "ToolFishingRight"
+#define TOOL_ANIM_FISHING_LEFT "ToolFishingLeft"
+#define TOOL_ANIM_FISHING_DOWN "ToolFishingDown"
+#define TOOL_ANIM_FISHING_UP "ToolFishingUp"
+#define TOOL_ANIM_FISHING_WAIT_RIGHT "ToolFishingWaitRight"
+#define TOOL_ANIM_FISHING_WAIT_LEFT "ToolFishingWaitLeft"
+#define TOOL_ANIM_FISHING_WAIT_DOWN "ToolFishingWaitDown"
+#define TOOL_ANIM_FISHING_WAIT_UP "ToolFishingWaitUp"
 
 
 // æ∆¿Ã≈€

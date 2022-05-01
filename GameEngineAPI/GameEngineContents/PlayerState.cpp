@@ -33,7 +33,7 @@ void Player::IdleUpdate()
 
 			return;
 		}
-		
+
 		if (Inventory_->GetSelectedItemName() == ITEM_NAME_FISHINGROD)
 		{
 			//낚시를 던질때 충돌맵을 호출해서 낚시를 할 수 있는 곳이면 게임 스타트
@@ -64,6 +64,7 @@ void Player::IdleUpdate()
 				}
 
 				PlayerAnimationChange(ANIM_KEYWORD_FISHING + Dir);
+				ToolAnimationChange(ANIM_KEYWORD_TOOL_FISHING + Dir);
 
 				StateChange(PlayerState::Fishing);
 			}
@@ -141,8 +142,8 @@ void Player::ActionUpdate()
 					}
 				}
 
-			// 충돌 결과 초기화
-			ActionColResult_.clear();
+				// 충돌 결과 초기화
+				ActionColResult_.clear();
 
 			}
 			else
@@ -216,7 +217,7 @@ void Player::ActionUpdate()
 		}
 		// 나무, 씨앗일경우
 		else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
-		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
+			&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
 		{
 			// 타일생성
 			CreatePlayerTileIndex(CurserPosOnTileMap_, StringtoItemTable(Inventory_->GetSelectedItemName()), 1);
@@ -277,7 +278,7 @@ void Player::MoveUpdate()
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
 	{
 		PlayerAnimationChange(ANIM_WALK_RIGHT);
-		GetActionCollision()->SetPivot({ PLAYER_ACTION_COL_LENG , 0.0f});
+		GetActionCollision()->SetPivot({ PLAYER_ACTION_COL_LENG , 0.0f });
 
 		ColCheck(float4::RIGHT);
 	}
@@ -325,6 +326,8 @@ void Player::IdleStart()
 	{
 		PlayerAnimationChange(ANIM_IDLE_DOWN);
 	}
+
+	ToolAnimationChange(TOOL_ANIM_IDLE);
 }
 
 void Player::ActionStart()
@@ -332,7 +335,7 @@ void Player::ActionStart()
 	// 마우스 클릭하는 포지션
 	CurserPosOnTileMap_ = Mouse_->GetCurserPosOnTilemap();
 
-	    // 클릭 위치가 오른쪽으로 멀리 떨어져있음
+	// 클릭 위치가 오른쪽으로 멀리 떨어져있음
 	if (GetPositionOnTilemap().x + 1 < CurserPosOnTileMap_.x
 		// 왼쪽으로 멀리 떨어져있음
 		|| GetPositionOnTilemap().x - 1 > CurserPosOnTileMap_.x
@@ -344,7 +347,7 @@ void Player::ActionStart()
 		// 플레이어가 보고 있는 방향의 바로 앞 타일을 선택함
 		if (MoveDir_.CompareInt2D(float4::RIGHT))
 		{
-			CurserPosOnTileMap_ = {GetPositionOnTilemap().x + 1.0f, GetPositionOnTilemap().y };
+			CurserPosOnTileMap_ = { GetPositionOnTilemap().x + 1.0f, GetPositionOnTilemap().y };
 		}
 		else if (MoveDir_.CompareInt2D(float4::LEFT))
 		{
@@ -380,29 +383,36 @@ void Player::ActionStart()
 	}
 
 	std::string Anim = ANIM_KEYWORD_IDLE;
+	std::string ToolAnim = ANIM_KEYWORD_TOOL_IDLE;
 	std::string Dir = "";
+	RendererTool_->SetOrder((int)ORDER::TOOLB);
 
 	// Hoe를 들고 있는경우
 	if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
 	{
 		Anim = ANIM_KEYWORD_HIT_HORIZON;
+		ToolAnim = ANIM_KEYWORD_TOOL_HOE;
 	}
 	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
 	{
 		Anim = ANIM_KEYWORD_WATERING;
+		ToolAnim = ANIM_KEYWORD_TOOL_WATERING;
 	}
 	// Axe를 들고 있는경우
 	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_AXE)
 	{
 		Anim = ANIM_KEYWORD_HIT_HORIZON;
+		ToolAnim = ANIM_KEYWORD_TOOL_AXE;
 	}
 	else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
 		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
 	{
 		// 씨앗 심기용 애니메이션?
 		Anim = ANIM_KEYWORD_IDLE;
+		ToolAnim = ANIM_KEYWORD_TOOL_IDLE;
 	}
 
+	// 플레이어의 방향에 따라 애니메이션의 방향을 설정
 	if (float4::RIGHT.CompareInt2D(MoveDir_))
 	{
 		Dir = ANIM_KEYWORD_DIR_RIGHT;
@@ -414,13 +424,25 @@ void Player::ActionStart()
 	else if (float4::UP.CompareInt2D(MoveDir_))
 	{
 		Dir = ANIM_KEYWORD_DIR_UP;
+		RendererTool_->SetOrder((int)ORDER::TOOLA);
 	}
 	else if (float4::DOWN.CompareInt2D(MoveDir_))
 	{
 		Dir = ANIM_KEYWORD_DIR_DOWN;
 	}
 
+	// 플레이어 애니메이션 전환
 	PlayerAnimationChange(Anim + Dir);
+
+	// 툴 애니메이션 전환
+	if (ToolAnim == ANIM_KEYWORD_TOOL_IDLE)
+	{
+		ToolAnimationChange(ToolAnim);
+	}
+	else
+	{
+		ToolAnimationChange(ToolAnim + Dir);
+	}
 }
 
 void Player::FishingStart()

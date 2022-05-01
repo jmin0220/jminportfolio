@@ -10,7 +10,7 @@ FishingGame::FishingGame()
 	FishRandom_ = new GameEngineRandom();
 }
 
-FishingGame::~FishingGame() 
+FishingGame::~FishingGame()
 {
 	delete FishRandom_;
 	FishRandom_ = nullptr;
@@ -32,12 +32,12 @@ bool FishingGame::GameUpdate()
 	bool FishingEndFlg = false;
 	int UpdateResult = 0;
 	this->AddAccTime(GameEngineTime::GetDeltaTime());
-	Player*	TmpPlayer_ = static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER));
+	Player* TmpPlayer_ = static_cast<Player*>(GetLevel()->FindActor(ACTOR_PLAYER));
 	std::string Dir = "";
 
 	switch (PhaseFlg_)
 	{
-	// 플레이어 애니메이션 설정
+		// 플레이어 애니메이션 설정
 	case 0:
 		if (float4::RIGHT.CompareInt2D(TmpPlayer_->GetMoveDir()))
 		{
@@ -57,10 +57,11 @@ bool FishingGame::GameUpdate()
 		}
 
 		TmpPlayer_->PlayerAnimationChange(ANIM_KEYWORD_FISHING_WAIT + Dir);
+		TmpPlayer_->ToolAnimationChange(ANIM_KEYWORD_TOOL_FISHING_WAIT + Dir);
 
 		PhaseFlg_ = 1;
 		break;
-	// 낚시를 던질때 힘조절
+		// 낚시를 던질때 힘조절
 	case 1:
 
 		if (true == FishingPowerbar_->GameUpdate())
@@ -72,7 +73,7 @@ bool FishingGame::GameUpdate()
 
 		this->ReSetAccTime();
 		break;
-	// 낚시게임중
+		// 낚시게임중
 	case 2:
 		// 다음 페이즈에 넘어갈때까지 1초 딜레이
 		if (this->GetAccTime() <= 1.0)
@@ -94,7 +95,7 @@ bool FishingGame::GameUpdate()
 			Fishingbar_->GameEnd();
 		}
 		break;
-	// 결과 & 아이템 얻기
+		// 결과 & 아이템 얻기
 	case 3:
 		// 다음 페이즈에 넘어갈때까지 1초 딜레이
 		if (this->GetAccTime() <= 1.0)
@@ -108,7 +109,7 @@ bool FishingGame::GameUpdate()
 
 		PhaseFlg_ = 4;
 		break;
-	// 게임 종료
+		// 게임 종료
 	case 4:
 		FishingEndFlg = true;
 		break;

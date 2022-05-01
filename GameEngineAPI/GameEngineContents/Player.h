@@ -87,12 +87,13 @@ public:
 
 	// 애니메이션 전환
 	void PlayerAnimationChange(const std::string& _Name);
+	void ToolAnimationChange(const std::string& _Name);
 private:
 	void Start() override;
 	void Update() override;
 
 	// 속도
-	float Speed_; 
+	float Speed_;
 	// 플레이어는 마지막으로 보고 있던 방향의 정보를 가지고 있어야 함.
 	float4 MoveDir_;
 
@@ -113,6 +114,8 @@ private:
 
 	// 플레이어 자신의 렌더러
 	GameEngineRenderer* RendererBody_;
+	// 플레이어 장비의 렌더러
+	GameEngineRenderer* RendererTool_;
 
 	// 맵에서 사용될 충돌용 이미지
 	GameEngineImage* MapColImage_;
@@ -233,7 +236,7 @@ private:
 	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
 	void SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup);
 
-public: 
+public:
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수
 	void SetGroundTiles(std::vector<std::vector<PlayerTileIndex*>> _GroundTiles)
 	{
