@@ -1,4 +1,5 @@
 #include "GameEngineDirectory.h"
+#include "GameEngineDebug.h"
 #include "GameEngineFile.h"
 #include "GameEngineString.h"
 
@@ -7,7 +8,7 @@ GameEngineDirectory::GameEngineDirectory()
 	SetCurrentPath();
 }
 
-GameEngineDirectory::GameEngineDirectory(const std::string& _Path)
+GameEngineDirectory::GameEngineDirectory(const char* _Path)
 {
 	Path_ = _Path;
 	if (false == IsExits())
@@ -15,6 +16,25 @@ GameEngineDirectory::GameEngineDirectory(const std::string& _Path)
 		MsgBoxAssert("존재하지 않는 폴더로 디렉토리를 초기화하려고 했습니다.");
 	}
 }
+GameEngineDirectory::GameEngineDirectory(std::filesystem::path _Path)
+{
+	Path_ = _Path;
+	if (false == IsExits())
+	{
+		MsgBoxAssert("존재하지 않는 폴더로 디렉토리를 초기화하려고 했습니다.");
+	}
+}
+
+GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _Other)
+{
+	Path_ = _Other.Path_;
+	if (false == IsExits())
+	{
+		MsgBoxAssert("존재하지 않는 폴더로 디렉토리를 초기화하려고 했습니다.");
+	}
+}
+
+
 
 GameEngineDirectory::~GameEngineDirectory()
 {
@@ -51,7 +71,7 @@ void GameEngineDirectory::Move(const std::string& _Name)
 
 	if (false == std::filesystem::exists(CheckPath))
 	{
-		MsgBoxAssertString(_Name + " Path is not exist");
+		MsgBoxAssertString(_Name + " Path is not exists");
 		return;
 	}
 
@@ -64,7 +84,6 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 
 	std::string Ext = _Ext;
 
-	// 확장자를 항상 일관된 형식으로 유지
 	if (Ext != "")
 	{
 		GameEngineString::ToUpper(Ext);
@@ -75,7 +94,7 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 	}
 
 	std::vector<GameEngineFile> Return;
-
+	// 디렉토리까지 다나오니까 File
 	for (const std::filesystem::directory_entry& Entry : DirIter)
 	{
 		if (true == Entry.is_directory())
@@ -101,4 +120,22 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 
 	return Return;
 
+}
+
+std::vector<GameEngineDirectory> GameEngineDirectory::GetAllDirectory()
+{
+	std::filesystem::directory_iterator DirIter(Path_);
+
+	std::vector<GameEngineDirectory> Return;
+	// 디렉토리까지 다나오니까 File
+	for (const std::filesystem::directory_entry& Entry : DirIter)
+	{
+		if (true == Entry.is_directory())
+		{
+			Return.push_back(GameEngineDirectory(Entry.path()));
+			continue;
+		}
+	}
+
+	return Return;
 }

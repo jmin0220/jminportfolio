@@ -498,7 +498,7 @@ void Player::ColCheck(float4 _MoveDir)
 	}
 	else if (GetCurrentLevel() == LEVEL_SEEDSHOP)
 	{
-		if (RGB(255, 0, 0) == Color)
+		if (RGB(0, 255, 0) == Color)
 		{
 			SetNextLevelPos({ 2112.0f, 2778.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
@@ -977,17 +977,21 @@ void Player::ItemUpdate()
 	float4 Dir = { 0.0f, 0.0f }; 
 	float Check = 0.0f;
 
-	for (Item* _item : ItemList_)
+	std::list<Item*>::iterator Start = ItemList_.begin();
+	std::list<Item*>::iterator End = ItemList_.end();
+
+	for (;Start != End; ++Start)
 	{
-		Dir = this->GetPosition() - _item->GetPosition();
+		Dir = this->GetPosition() - (*Start)->GetPosition();
 		Check = Dir.Len2D();
 
 		if (Check <= 20)
 		{
 			// 아이템을 넣는것에 성공했을 경우 아이템을 파괴
-			if (1 == Inventory_->AddItemToInventory(StringtoItemTable(_item->GetItemName())))
+			if (1 == Inventory_->AddItemToInventory(StringtoItemTable((*Start)->GetItemName())))
 			{
-				_item->Death();
+				(*Start)->Death();
+				Start = ItemList_.erase(Start);
 			}
 
 			continue;
@@ -996,7 +1000,7 @@ void Player::ItemUpdate()
 		else if (Check <= 70)
 		{
 			Dir.Normal2D();
-			_item->SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
+			(*Start)->SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
 		}
 	}
 }

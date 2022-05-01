@@ -122,6 +122,14 @@ void GameEngine::EngineLoop()
 	WindowMainImage_->BitCopy(BackBufferImage_);
 
 	CurrentLevel_->ActorRelease();
+
+	// 레벨 리셋
+	if (true == CurrentLevel_->IsReset)
+	{
+		CurrentLevel_->Reset();
+		CurrentLevel_->UserResetEnd();
+		CurrentLevel_->IsReset = false;
+	}
 }
 
 // 프로그램 종료

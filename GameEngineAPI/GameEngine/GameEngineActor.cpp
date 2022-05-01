@@ -6,6 +6,7 @@
 
 GameEngineActor::GameEngineActor() 
 	: Level_(nullptr)
+	, IsResetIgnore(false)
 {
 }
 

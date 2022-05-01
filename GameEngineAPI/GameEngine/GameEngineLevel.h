@@ -73,6 +73,11 @@ public:
 		return CameraPos_;
 	}
 
+	inline void ResetOn()
+	{
+		IsReset = true;
+	}
+
 	inline void MoveCameraPos(const float4& _Value)
 	{
 		CameraPos_ += _Value;
@@ -116,8 +121,12 @@ protected:
 
 	void ObjectLevelMoveCheck(GameEngineLevel* _NextLevel);
 
+	void Reset();
+
+	virtual void UserResetEnd() {}
 private:
 	static bool IsDebug;
+	bool IsReset;
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
 
 	std::map<std::string, GameEngineActor*> RegistActor_;

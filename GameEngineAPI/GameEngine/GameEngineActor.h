@@ -31,6 +31,11 @@ public:
 		return Level_;
 	}
 
+	inline void ResetIgnoreOn()
+	{
+		IsResetIgnore = true;
+	}
+
 	// 화면에서 액터의 위치
 	inline float4 GetCameraEffectPosition()
 	{
@@ -91,6 +96,7 @@ private:
 	float4 Scale_;
 
 	bool NextLevelOn_;
+	bool IsResetIgnore;
 
 	inline void NextLevelOff()
 	{
