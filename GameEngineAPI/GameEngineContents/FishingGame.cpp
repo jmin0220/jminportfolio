@@ -69,6 +69,7 @@ bool FishingGame::GameUpdate()
 			PhaseFlg_ = 2;
 			FishingPowerbar_->GameEnd();
 			Fishingbar_->GameStart();
+			Sound_ = GameEngineSound::SoundPlayControl(SOUND_REEL);
 		}
 
 		this->ReSetAccTime();
@@ -88,11 +89,15 @@ bool FishingGame::GameUpdate()
 		{
 			PhaseFlg_ = 3;
 			Fishingbar_->GameEnd();
+
+			Sound_.Stop();
 		}
 		else if (2 == UpdateResult)
 		{
 			PhaseFlg_ = 4;
 			Fishingbar_->GameEnd();
+			
+			Sound_.Stop();
 		}
 		break;
 		// 결과 & 아이템 얻기
@@ -132,6 +137,7 @@ void FishingGame::GameStart()
 	// 게임 시작
 	PhaseFlg_ = 0;
 	FishingPowerbar_->GameStart();
+
 }
 
 void FishingGame::GameEnd()

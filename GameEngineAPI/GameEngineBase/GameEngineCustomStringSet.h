@@ -343,7 +343,7 @@
 // »ç¿îµå
 #define SOUND_AXE "axe.wav"
 #define SOUND_COINS "coins.wav"
-#define SOUND_FASTREEL "fastReel.wav"
+#define SOUND_REEL "slowReel.wav"
 #define SOUND_FISHBITE "fishBite.wav"
 #define SOUND_FISHESCAPE "fishEscape.wav"
 #define SOUND_FISHHIT "FishHit.wav"

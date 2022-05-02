@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineBase/GameEngineSound.h>
 #include "FishingBar.h"
 #include "FishingPowerbar.h"
 
@@ -38,6 +39,8 @@ private:
 
 	GameEngineRenderer* FontMax_;
 	GameEngineRenderer* FontHit_;
+
+	GameEngineSoundPlayer Sound_;
 
 };
 
