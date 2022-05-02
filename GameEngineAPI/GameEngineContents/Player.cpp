@@ -768,6 +768,8 @@ void Player::ControlInventorySelectBoxWithMouse()
 						Inventory_->GetInventoryList()[ItemSelectTarget]->ClickedFlg = false;
 						ItemSelectOrigin = -1, ItemSelectTarget = -1;
 
+						InventoryClickFlg_ = false;
+
 						return;
 					}
 				}
@@ -849,6 +851,8 @@ void Player::ControlInventorySelectBoxWithMouse()
 						Inventory_->GetInventoryList()[ItemSelectOrigin]->ClickedFlg = false;
 						Inventory_->GetInventoryList()[ItemSelectTarget]->ClickedFlg = false;
 						ItemSelectOrigin = -1, ItemSelectTarget = -1;
+
+						InventoryClickFlg_ = false;
 
 						return;
 					}
