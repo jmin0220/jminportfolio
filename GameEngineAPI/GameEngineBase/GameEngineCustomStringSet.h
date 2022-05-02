@@ -337,3 +337,23 @@
 #define ITEM_NAME_BLUEBERRY_FRUIT "BlueberryFruit"
 #define ITEM_NAME_REDCABBAGE_FRUIT "RedCabbageFruit"
 #define ITEM_NAME_CORN_FRUIT "CornFruit"
+
+
+
+// »ç¿îµå
+#define SOUND_AXE "axe.wav"
+#define SOUND_COINS "coins.wav"
+#define SOUND_FASTREEL "fastReel.wav"
+#define SOUND_FISHBITE "fishBite.wav"
+#define SOUND_FISHESCAPE "fishEscape.wav"
+#define SOUND_FISHHIT "FishHit.wav"
+#define SOUND_FISHSLAP "fishSlap.wav"
+#define SOUND_HOE "hoe.wav"
+#define SOUND_HOEHIT "hoeHit.wav"
+#define SOUND_MOUSECLICK "mouseClick.wav"
+#define SOUND_PICKUPITEM "pickUpItem.wav"
+#define SOUND_SMALLSELCET "smallSelect.wav"
+#define SOUND_SPRINGDAY "spring_day.wav"
+#define SOUND_STUMPCRACK "stumpCrack.wav"
+#define SOUND_WATER "water_step1.wav"
+#define SOUND_WOODDYHIT "woodyHit.wav"

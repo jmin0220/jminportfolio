@@ -144,12 +144,13 @@ void Player::ActionUpdate()
 
 				// 충돌 결과 초기화
 				ActionColResult_.clear();
-
+				GameEngineSound::SoundPlayOneShot(SOUND_HOEHIT);
 			}
 			else
 			{
 				// 타일생성
 				CreatePlayerTileIndex(CurserPosOnTileMap_, (int)TILESTATE::HOLLOW, 0);
+				GameEngineSound::SoundPlayOneShot(SOUND_HOE);
 			}
 		}
 		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_WATERINGCAN)
@@ -212,6 +213,8 @@ void Player::ActionUpdate()
 				}
 			}
 
+			GameEngineSound::SoundPlayOneShot(SOUND_AXE);
+
 			// 충돌 결과 초기화
 			ActionColResult_.clear();
 		}
@@ -222,6 +225,7 @@ void Player::ActionUpdate()
 			// 타일생성
 			CreatePlayerTileIndex(CurserPosOnTileMap_, StringtoItemTable(Inventory_->GetSelectedItemName()), 1);
 		}
+
 
 		// Idle로 상태 전환
 		StateChange(PlayerState::Idle);

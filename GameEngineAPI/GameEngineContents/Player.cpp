@@ -897,6 +897,7 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 			if (nullptr != GroundTiles_[PosY][PosX]
 				&& GroundTiles_[PosY][PosX]->GetTileState() == (int)TILESTATE::HOLLOW)
 			{
+				GameEngineSound::SoundPlayOneShot(SOUND_WATER);
 				// 타일 생성
 				SetGroundTile(PosX, PosY,
 					LevelTileMap_->CreateTile<PlayerTileIndex>(PosX, PosY, IMAGE_TILESET_DIRTWATERED, 0, (int)ORDER::FRONTA), (int)TILESTATE::HOLLOWWET);
@@ -1042,6 +1043,9 @@ void Player::ItemUpdate()
 			{
 				(*Start)->Death();
 				Start = ItemList_.erase(Start);
+
+				GameEngineSound::SoundPlayOneShot(SOUND_PICKUPITEM);
+
 				continue;
 			}
 		}

@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineSound.h>
 #include "Mouse.h"
 #include "Item.h"
 #include "Clock.h"
@@ -121,6 +122,9 @@ private:
 	GameEngineImage* MapColImage_;
 	GameEngineImage* MapColOrderImage_;
 
+	// 사운드 오브젝트
+	GameEngineSound* SoundPlayer_;
+
 	// 애니메이션 초기화
 	void PlayerAnimationInit();
 	// 키 초기화
@@ -197,6 +201,7 @@ public:
 
 	inline void SetGold(int _Gold)
 	{
+		GameEngineSound::SoundPlayOneShot(SOUND_COINS);
 		Gold_ = _Gold;
 	}
 
