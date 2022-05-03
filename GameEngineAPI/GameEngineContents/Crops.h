@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineBase/GameEngineTime.h>
 #include "Item.h"
 
 // Ό³Έν :
@@ -86,6 +87,9 @@ public:
 	void Destroy();
 	virtual Item* CreateItem() { return nullptr;  };
 
+	void SetVibrate(bool _Flg);
+	void UpdateVibrate();
+
 protected:
 	void Start() override {};
 
@@ -108,6 +112,9 @@ protected:
 	GameEngineActor* CollisionActor_;
 
 	GameEngineRandom* RandomItem_;
+	GameEngineRandom* VibratePivot_;
+
+	bool VibrateFlg;
 private:
 
 

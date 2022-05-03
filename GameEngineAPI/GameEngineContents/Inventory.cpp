@@ -136,6 +136,8 @@ void Inventory::SelectItem(int i)
 		SelectedItemName_ = InventoryList_[i]->GetItemName();
 		SelectedItemNumber_ = i;
 	}
+
+	GameEngineSound::SoundPlayOneShot(SOUND_SMALLSELCET);
 }
 
 // 인벤토리 확장

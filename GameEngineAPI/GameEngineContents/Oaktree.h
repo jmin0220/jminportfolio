@@ -18,6 +18,7 @@ public:
 	Item* CreateItem() override;
 protected:
 	void Start() override;
+	void Update() override;
 
 private:
 

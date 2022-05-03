@@ -59,6 +59,8 @@ bool FishingGame::GameUpdate()
 		TmpPlayer_->PlayerAnimationChange(ANIM_KEYWORD_FISHING_WAIT + Dir);
 		TmpPlayer_->ToolAnimationChange(ANIM_KEYWORD_TOOL_FISHING_WAIT + Dir);
 
+		GameEngineSound::SoundPlayOneShot(SOUND_FISHBITE);
+
 		PhaseFlg_ = 1;
 		break;
 		// 낚시를 던질때 힘조절

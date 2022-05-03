@@ -30,3 +30,8 @@ Item* Oaktree::CreateItem()
 
 	return NewItem;
 }
+
+void Oaktree::Update()
+{
+	UpdateVibrate();
+}
