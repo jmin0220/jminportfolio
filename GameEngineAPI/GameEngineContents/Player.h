@@ -235,6 +235,8 @@ private:
 		ItemList_.push_back(_Actor);
 	};
 
+	void TileIndexSetting(int x, int y);
+
 	// 타일맵의 스테이터스를 저장
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
 	std::vector<std::vector<Crops*>> EnvironmentActor_;

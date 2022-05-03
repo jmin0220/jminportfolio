@@ -992,6 +992,261 @@ void Player::SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileSta
 {
 	GroundTiles_[y][x] = _TileMap;
 	GroundTiles_[y][x]->SetTileState(_TileState);
+	GroundTiles_[y][x]->SetIndexInfo(0);
+
+	TileIndexSetting(x, y);
+}
+
+void Player::TileIndexSetting(int x, int y)
+{
+	PlayerTileIndex* Up = GroundTiles_[y - 1][x];
+	PlayerTileIndex* Left = GroundTiles_[y][x - 1];
+	PlayerTileIndex* Right = GroundTiles_[y][x + 1];
+	PlayerTileIndex* Down = GroundTiles_[y + 1][x];
+
+	bool UpFlg = false, LeftFlg = false, RightFlg = false, DownFlg = false;
+	int PrevIndexInfo = GroundTiles_[y][x]->GetIndexInfo();
+
+	// 근접 타일들에 대한 정보 취득
+	if (nullptr != Up && 
+		(Up->GetTileState() == (int)TILESTATE::HOLLOW
+		|| Up->GetTileState() == (int)TILESTATE::HOLLOWWET))
+	{
+		UpFlg = true;
+	}
+	if (nullptr != Down && 
+		(Down->GetTileState() == (int)TILESTATE::HOLLOW
+		|| Down->GetTileState() == (int)TILESTATE::HOLLOWWET))
+	{
+		DownFlg = true;
+	}
+	if (nullptr != Left && 
+		(Left->GetTileState() == (int)TILESTATE::HOLLOW
+		|| Left->GetTileState() == (int)TILESTATE::HOLLOWWET))
+	{
+		LeftFlg = true;
+	}
+	if (nullptr != Right && 
+		(Right->GetTileState() == (int)TILESTATE::HOLLOW
+		|| Right->GetTileState() == (int)TILESTATE::HOLLOWWET))
+	{
+		RightFlg = true;
+	}
+
+
+	// 근접한 타일들의 정보에 따라서 인덱스 조절
+	// 아래 오른쪽
+	if (DownFlg == true && RightFlg == true && UpFlg == false && LeftFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(1);
+		GroundTiles_[y][x]->SetIndexInfo(1);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y + 1);
+		TileIndexSetting(x + 1, y);
+	}
+	// 왼쪽 오른쪽 아래
+	if (RightFlg == true && LeftFlg == true && DownFlg == true && UpFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(2);
+		GroundTiles_[y][x]->SetIndexInfo(2);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x - 1, y);
+		TileIndexSetting(x + 1, y);
+		TileIndexSetting(x, y + 1);
+	}
+	// 아래 왼쪽
+	if (DownFlg == true && LeftFlg == true && UpFlg == false && RightFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(3);
+		GroundTiles_[y][x]->SetIndexInfo(3);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y + 1);
+		TileIndexSetting(x - 1, y);
+	}
+	// 아래
+	if (DownFlg == true && UpFlg == false && RightFlg == false && LeftFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(4);
+		GroundTiles_[y][x]->SetIndexInfo(4);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y + 1);
+	}
+	// 위 오른쪽 아래
+	if (UpFlg == true && RightFlg == true && DownFlg == true && LeftFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(5);
+		GroundTiles_[y][x]->SetIndexInfo(5);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y + 1);
+		TileIndexSetting(x + 1, y);
+		TileIndexSetting(x, y - 1);
+	}
+	// 모든 방향
+	if (UpFlg == true && LeftFlg == true && RightFlg == true && DownFlg == true)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(6);
+		GroundTiles_[y][x]->SetIndexInfo(6);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+		TileIndexSetting(x, y + 1);
+		TileIndexSetting(x - 1, y);
+		TileIndexSetting(x + 1, y);
+	}
+	// 위 왼쪽 아래
+	if (UpFlg == true && LeftFlg == true && DownFlg == true && RightFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(7);
+		GroundTiles_[y][x]->SetIndexInfo(7);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+		TileIndexSetting(x - 1, y);
+		TileIndexSetting(x, y + 1);
+	}
+	// 위아래
+	if (UpFlg == true && DownFlg == true && RightFlg == false && LeftFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(8);
+		GroundTiles_[y][x]->SetIndexInfo(8);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+		TileIndexSetting(x, y + 1);
+	}
+	// 위 오른쪽
+	if (UpFlg == true && RightFlg == true && LeftFlg == false && DownFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(9);
+		GroundTiles_[y][x]->SetIndexInfo(9);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+		TileIndexSetting(x + 1, y);
+	}
+	// 위 왼쪽 오른쪽
+	if (UpFlg == true && LeftFlg == true && RightFlg == true && DownFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(10);
+		GroundTiles_[y][x]->SetIndexInfo(10);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+		TileIndexSetting(x - 1, y);
+		TileIndexSetting(x + 1, y);
+	}
+	//위 왼쪽
+	if (UpFlg == true && LeftFlg == true && DownFlg == false && RightFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(11);
+		GroundTiles_[y][x]->SetIndexInfo(11);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+		TileIndexSetting(x - 1, y);
+	}
+	// 위
+	if (UpFlg == true && LeftFlg == false && DownFlg == false && RightFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(12);
+		GroundTiles_[y][x]->SetIndexInfo(12);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x, y - 1);
+	}
+	// 오른쪽
+	if (RightFlg == true && UpFlg == false && DownFlg == false && LeftFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(13);
+		GroundTiles_[y][x]->SetIndexInfo(13);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x + 1, y);
+	}
+	// 왼쪽 오른쪽
+	if (RightFlg == true && LeftFlg == true && UpFlg == false && DownFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(14);
+		GroundTiles_[y][x]->SetIndexInfo(14);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x - 1, y);
+		TileIndexSetting(x + 1, y);
+	}
+	// 왼쪽
+	if (LeftFlg == true && UpFlg == false && RightFlg == false && DownFlg == false)
+	{
+		GroundTiles_[y][x]->GetRenderer()->SetIndex(15);
+		GroundTiles_[y][x]->SetIndexInfo(15);
+
+		if (PrevIndexInfo == GroundTiles_[y][x]->GetIndexInfo())
+		{
+			return;
+		}
+
+		TileIndexSetting(x - 1, y);
+	}
 }
 
 // 농작물 설치

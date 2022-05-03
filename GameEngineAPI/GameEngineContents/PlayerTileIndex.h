@@ -17,7 +17,17 @@ public:
 		return TileState_;
 	}
 
+	inline int GetIndexInfo() const
+	{
+		return IndexInfo_;
+	}
+	inline void SetIndexInfo(int _IndexInfo)
+	{
+		IndexInfo_ = _IndexInfo;
+	}
+
 private:
 	// 타일에 무엇이 있는지
 	int TileState_;
+	int IndexInfo_;
 };
