@@ -227,6 +227,9 @@
     <ClCompile Include="SeedShop.cpp">
       <Filter>02Play\Shop</Filter>
     </ClCompile>
+    <ClCompile Include="MineLevel.cpp">
+      <Filter>00Level\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -460,6 +463,9 @@
     </ClInclude>
     <ClInclude Include="SeedShop.h">
       <Filter>02Play\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="MineLevel.h">
+      <Filter>00Level\PlayLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

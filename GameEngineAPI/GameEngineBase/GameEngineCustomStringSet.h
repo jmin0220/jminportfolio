@@ -33,6 +33,7 @@
 #define DIR_BUILDING "Building"
 #define DIR_FONT "Font"
 #define DIR_SEEDSHOP "SeedShop"
+#define DIR_MINES "Mines"
 
 // 이미지
 #define IMAGE_CLOCK_POS_H 129
@@ -163,6 +164,15 @@
 #define MAP_SEEDSHOP_SIZE_H 1537.0f
 #define MAP_SEEDSHOP_SIZE_W 2016.0f
 
+// 광산
+#define MAP_MINES_BACKGROUND "MineBack.bmp"
+#define MAP_MINES_BUILDING "MineBuilding.bmp"
+#define MAP_MINES_FRONT "MineFront.bmp"
+#define MAP_MINES_COLLISION "MineBuildingCollision.bmp"
+#define MAP_MINES_RENDER_ORDER_COLLISION "MineFrontCollision.bmp"
+#define MAP_MINES_SIZE_H 961.0f
+#define MAP_MINES_SIZE_W 2600.0f
+
 // 컬리전
 #define COL_GROUP_PLAYER "PlayerCollision"
 #define COL_GROUP_PLAYER_ACTION "PlayerActionCollision"
@@ -189,6 +199,7 @@
 #define LEVEL_BEACH "BeachLevel"
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_SEEDSHOP "SeedShopLevel"
+#define LEVEL_MINES "MinesLevel"
 #define LEVEL_ENDING "EndingLevel"
 
 // 윈도우

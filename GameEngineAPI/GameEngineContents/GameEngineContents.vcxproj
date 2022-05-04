@@ -323,6 +323,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MineLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MiniTree.h">
       <SubType>
       </SubType>
@@ -617,6 +621,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MelonFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MineLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

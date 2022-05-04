@@ -4,6 +4,7 @@
 #include "TownLevel.h"
 #include "BeachLevel.h"
 #include "SeedShopLevel.h"
+#include "MineLevel.h"
 #include "EndingLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -200,6 +201,21 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+
+	// 광산
+	ResourcesDir.MoveParent(DIR_PARENT);
+	ResourcesDir.Move(DIR_RESOURCES);
+	ResourcesDir.Move(DIR_IMAGE);
+	ResourcesDir.Move(DIR_MINES);
+
+	AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+
+
 	//사운드
 	ResourcesDir.MoveParent(DIR_PARENT);
 	ResourcesDir.Move(DIR_RESOURCES);
@@ -220,6 +236,7 @@ void StardewContents::GameInit()
 	CreateLevel<TownLevel>(LEVEL_TOWN);
 	CreateLevel<BeachLevel>(LEVEL_BEACH);
 	CreateLevel<SeedShopLevel>(LEVEL_SEEDSHOP);
+	CreateLevel<MineLevel>(LEVEL_MINES);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨

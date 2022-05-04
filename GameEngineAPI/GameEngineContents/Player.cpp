@@ -356,6 +356,11 @@ void Player::UpdateCamera()
 		CurrentLevelH = MAP_SEEDSHOP_SIZE_H;
 		CurrentLevelW = MAP_SEEDSHOP_SIZE_W;
 	}
+	else if (GetCurrentLevel() == LEVEL_MINES)
+	{
+		CurrentLevelH = MAP_MINES_SIZE_H;
+		CurrentLevelW = MAP_MINES_SIZE_W;
+	}
 
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();
 
@@ -473,6 +478,11 @@ void Player::GetMapColImage()
 		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_SEEDSHOP_COLLISION);
 		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_SEEDSHOP_RENDER_ORDER_COLLISION);
 	}
+	else if (GetCurrentLevel() == LEVEL_MINES)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_MINES_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_MINES_RENDER_ORDER_COLLISION);
+	}
 
 	if (nullptr == MapColImage_)
 	{
@@ -512,6 +522,11 @@ void Player::ColCheck(float4 _MoveDir)
 			SetNextLevelPos({ 200.0f, 2600.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
 		}
+		else if (RGB(0, 255, 0) == Color)
+		{
+			SetNextLevelPos({ 890.0f, 610.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_MINES);
+		}
 	}
 	else if (GetCurrentLevel() == LEVEL_TOWN)
 	{
@@ -548,6 +563,14 @@ void Player::ColCheck(float4 _MoveDir)
 		{
 			SetNextLevelPos({ 2112.0f, 2778.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
+		}
+	}
+	else if (GetCurrentLevel() == LEVEL_MINES)
+	{
+		if (RGB(0, 255, 0) == Color)
+		{
+			SetNextLevelPos({ 1653.0f, 450.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
 	}
 }
