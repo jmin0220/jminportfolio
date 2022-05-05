@@ -572,6 +572,10 @@ void Player::ColCheck(float4 _MoveDir)
 			SetNextLevelPos({ 1653.0f, 450.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_FARM);
 		}
+		if (RGB(0, 255, 255) == Color)
+		{
+			// 광산 안쪽으로
+		}
 	}
 }
 
