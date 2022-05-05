@@ -217,6 +217,11 @@ void StardewContents::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ITEM_MINES);
+	Image->Cut({ 48, 48 });
+	Image = GameEngineImageManager::GetInst()->Find(IMAGE_ITEM_MINERAL);
+	Image->Cut({ 48, 48 });
+
 
 	//»ç¿îµå
 	ResourcesDir.MoveParent(DIR_PARENT);

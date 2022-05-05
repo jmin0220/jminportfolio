@@ -69,11 +69,6 @@ public:
 		return Renderer_;
 	}
 
-	inline GameEngineActor* GetColActor()
-	{
-		return CollisionActor_;
-	}
-
 	inline int GetCropsRenderIndex()
 	{
 		return RenderCropsIndex_;
@@ -107,9 +102,6 @@ protected:
 	// 시간 갱신을 체크하기 위한 플래그
 	// false일 경우 시간을 초기화
 	bool IsTimeUpdate_;
-
-	// 충돌처리를 위한 액터
-	GameEngineActor* CollisionActor_;
 
 	GameEngineRandom* RandomItem_;
 	GameEngineRandom* VibratePivot_;

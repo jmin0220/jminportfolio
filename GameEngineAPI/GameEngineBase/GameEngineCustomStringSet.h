@@ -90,6 +90,8 @@
 #define IMAGE_ENVIRONMENT_PINETREE "PineTree.bmp"
 
 #define IMAGE_ITEM_FORAGE "Forage.bmp"
+#define IMAGE_ITEM_MINES "Mines.bmp"
+#define IMAGE_ITEM_MINERAL "Mineral.bmp"
 
 #define IMAGE_SEEDSHOP_INTERFACE "ShopInterface.bmp"
 #define IMAGE_SEEDSHOP_STOCK_PARSNIP "ParsnipStock.bmp"
@@ -366,6 +368,12 @@
 #define ITEM_NAME_BLUEBERRY_FRUIT "BlueberryFruit"
 #define ITEM_NAME_REDCABBAGE_FRUIT "RedCabbageFruit"
 #define ITEM_NAME_CORN_FRUIT "CornFruit"
+
+#define ITEM_NAME_DIAMOND "Diamond"
+#define ITEM_NAME_RUBY "Ruby"
+#define ITEM_NAME_JADE "Jade"
+#define ITEM_NAME_AMETHYST "Amethyst"
+#define ITEM_NAME_TOPAZ "Topaz"
 
 
 

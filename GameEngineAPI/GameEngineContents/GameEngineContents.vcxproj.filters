@@ -14,9 +14,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>02Play</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>02Play\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="EndingCredit.cpp">
       <Filter>03Ending</Filter>
     </ClCompile>
@@ -26,13 +23,7 @@
     <ClCompile Include="Potato.cpp">
       <Filter>02Play\Crop</Filter>
     </ClCompile>
-    <ClCompile Include="Slime.cpp">
-      <Filter>02Play\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Fishes.cpp">
-      <Filter>02Play\Fishing</Filter>
-    </ClCompile>
-    <ClCompile Include="Bream.cpp">
       <Filter>02Play\Fishing</Filter>
     </ClCompile>
     <ClCompile Include="TitleButtonNewGame.cpp">
@@ -236,6 +227,24 @@
     <ClCompile Include="Cave2.cpp">
       <Filter>00Level\PlayLevel\Mine</Filter>
     </ClCompile>
+    <ClCompile Include="MineObject.cpp">
+      <Filter>02Play\Mines</Filter>
+    </ClCompile>
+    <ClCompile Include="Diamond.cpp">
+      <Filter>02Play\Mines</Filter>
+    </ClCompile>
+    <ClCompile Include="Ruby.cpp">
+      <Filter>02Play\Mines</Filter>
+    </ClCompile>
+    <ClCompile Include="Jade.cpp">
+      <Filter>02Play\Mines</Filter>
+    </ClCompile>
+    <ClCompile Include="Topaz.cpp">
+      <Filter>02Play\Mines</Filter>
+    </ClCompile>
+    <ClCompile Include="Amethyst.cpp">
+      <Filter>02Play\Mines</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StardewContents.h" />
@@ -251,9 +260,6 @@
     <ClInclude Include="Player.h">
       <Filter>02Play</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>02Play\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="EndingCredit.h">
       <Filter>03Ending</Filter>
     </ClInclude>
@@ -263,13 +269,7 @@
     <ClInclude Include="Potato.h">
       <Filter>02Play\Crop</Filter>
     </ClInclude>
-    <ClInclude Include="Slime.h">
-      <Filter>02Play\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Fishes.h">
-      <Filter>02Play\Fishing</Filter>
-    </ClInclude>
-    <ClInclude Include="Bream.h">
       <Filter>02Play\Fishing</Filter>
     </ClInclude>
     <ClInclude Include="TitleButtonNewGame.h">
@@ -479,6 +479,24 @@
     <ClInclude Include="Cave2.h">
       <Filter>00Level\PlayLevel\Mine</Filter>
     </ClInclude>
+    <ClInclude Include="MineObject.h">
+      <Filter>02Play\Mines</Filter>
+    </ClInclude>
+    <ClInclude Include="Diamond.h">
+      <Filter>02Play\Mines</Filter>
+    </ClInclude>
+    <ClInclude Include="Ruby.h">
+      <Filter>02Play\Mines</Filter>
+    </ClInclude>
+    <ClInclude Include="Jade.h">
+      <Filter>02Play\Mines</Filter>
+    </ClInclude>
+    <ClInclude Include="Topaz.h">
+      <Filter>02Play\Mines</Filter>
+    </ClInclude>
+    <ClInclude Include="Amethyst.h">
+      <Filter>02Play\Mines</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01Title">
@@ -489,9 +507,6 @@
     </Filter>
     <Filter Include="02Play">
       <UniqueIdentifier>{8a17fef8-a49d-44a1-a474-aeb93f329f2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02Play\Monster">
-      <UniqueIdentifier>{d36db7ee-75a8-497a-8869-08a3fe262001}</UniqueIdentifier>
     </Filter>
     <Filter Include="03Ending">
       <UniqueIdentifier>{333692ca-fce9-4319-ac1f-1e5a2d15c802}</UniqueIdentifier>
@@ -519,6 +534,9 @@
     </Filter>
     <Filter Include="00Level\PlayLevel\Mine">
       <UniqueIdentifier>{872861a0-95c1-4c14-86c7-06ad9b0d2f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Play\Mines">
+      <UniqueIdentifier>{94e0abd8-57df-4bae-b29f-b5ec97c1a92b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

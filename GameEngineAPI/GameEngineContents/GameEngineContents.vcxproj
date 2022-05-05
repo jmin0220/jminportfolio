@@ -173,6 +173,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Amethyst.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BeachLevel.h">
       <SubType>
       </SubType>
@@ -190,10 +194,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="BlueberryFruit.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Bream.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -227,6 +227,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Crops.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Diamond.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -315,6 +319,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ItemTable.h" />
+    <ClInclude Include="Jade.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Kale.h">
       <SubType>
       </SubType>
@@ -335,11 +343,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MiniTree.h">
+    <ClInclude Include="MineObject.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Monster.h">
+    <ClInclude Include="MiniTree.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -405,15 +413,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Ruby.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SeedShop.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="SeedShopLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Slime.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -470,6 +478,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Topaz.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TownLevel.h">
       <SubType>
       </SubType>
@@ -484,6 +496,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Amethyst.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BeachLevel.cpp">
       <SubType>
       </SubType>
@@ -501,10 +517,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="BlueberryFruit.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Bream.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -537,6 +549,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Crops.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Diamond.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -624,6 +640,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Jade.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Kale.cpp">
       <SubType>
       </SubType>
@@ -644,11 +664,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="MiniTree.cpp">
+    <ClCompile Include="MineObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
+    <ClCompile Include="MiniTree.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -714,15 +734,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Ruby.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SeedShop.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="SeedShopLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Slime.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -775,6 +795,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TomatoFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Topaz.cpp">
       <SubType>
       </SubType>
     </ClCompile>
