@@ -24,7 +24,7 @@ MineLevel::MineLevel()
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 
 	// 타일의 상태를 저장
-	TileRangeSetting(17, 74);
+	TileRangeSetting(20, 77);
 	this->Player_->SetGroundTiles(this->GroundTiles_);
 	this->Player_->SetCropsActorSize(20, 77);
 }

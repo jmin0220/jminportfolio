@@ -5,6 +5,8 @@
 #include "BeachLevel.h"
 #include "SeedShopLevel.h"
 #include "MineLevel.h"
+#include "Cave1.h"
+#include "Cave2.h"
 #include "EndingLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -237,6 +239,8 @@ void StardewContents::GameInit()
 	CreateLevel<BeachLevel>(LEVEL_BEACH);
 	CreateLevel<SeedShopLevel>(LEVEL_SEEDSHOP);
 	CreateLevel<MineLevel>(LEVEL_MINES);
+	CreateLevel<Cave1>(LEVEL_CAVE1);
+	CreateLevel<Cave2>(LEVEL_CAVE2);
 	CreateLevel<EndingLevel>(LEVEL_ENDING);
 
 	// 시작레벨

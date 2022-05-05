@@ -361,6 +361,16 @@ void Player::UpdateCamera()
 		CurrentLevelH = MAP_MINES_SIZE_H;
 		CurrentLevelW = MAP_MINES_SIZE_W;
 	}
+	else if (GetCurrentLevel() == LEVEL_CAVE1)
+	{
+		CurrentLevelH = MAP_CAVE1_SIZE_H;
+		CurrentLevelW = MAP_CAVE1_SIZE_W;
+	}
+	else if (GetCurrentLevel() == LEVEL_CAVE2)
+	{
+		CurrentLevelH = MAP_CAVE2_SIZE_H;
+		CurrentLevelW = MAP_CAVE2_SIZE_W;
+	}
 
 	CameraPos_ = GetPosition() - GameEngineWindow::GetInst().GetScale().Half();
 
@@ -483,6 +493,16 @@ void Player::GetMapColImage()
 		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_MINES_COLLISION);
 		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_MINES_RENDER_ORDER_COLLISION);
 	}
+	else if (GetCurrentLevel() == LEVEL_CAVE1)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_CAVE1_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_CAVE1_RENDER_ORDER_COLLISION);
+	}
+	else if (GetCurrentLevel() == LEVEL_CAVE2)
+	{
+		MapColImage_ = GameEngineImageManager::GetInst()->Find(MAP_CAVE2_COLLISION);
+		MapColOrderImage_ = GameEngineImageManager::GetInst()->Find(MAP_CAVE2_RENDER_ORDER_COLLISION);
+	}
 
 	if (nullptr == MapColImage_)
 	{
@@ -574,7 +594,29 @@ void Player::ColCheck(float4 _MoveDir)
 		}
 		if (RGB(0, 255, 255) == Color)
 		{
-			// 광산 안쪽으로
+			SetNextLevelPos({ 500.0f, 230.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_CAVE1);
+		}
+	}
+	else if (GetCurrentLevel() == LEVEL_CAVE1)
+	{
+		if (RGB(0, 255, 255) == Color)
+		{
+			SetNextLevelPos({ 2600.0f, 960.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_MINES);
+		}
+		if (RGB(0, 255, 0) == Color)
+		{
+			SetNextLevelPos({ 215.0f, 267.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_CAVE2);
+		}
+	}
+	else if (GetCurrentLevel() == LEVEL_CAVE2)
+	{
+		if (RGB(255, 0, 0) == Color)
+		{
+			SetNextLevelPos({ 910.0f, 320.0f });
+			GameEngine::GetInst().ChangeLevel(LEVEL_CAVE1);
 		}
 	}
 }

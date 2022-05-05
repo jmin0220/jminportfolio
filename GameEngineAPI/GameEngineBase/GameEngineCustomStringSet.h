@@ -173,6 +173,22 @@
 #define MAP_MINES_SIZE_H 961.0f
 #define MAP_MINES_SIZE_W 2600.0f
 
+#define MAP_CAVE1_BACKGROUND "Cave1Back.bmp"
+#define MAP_CAVE1_BUILDING "Cave1Building.bmp"
+#define MAP_CAVE1_FRONT "Cave1Front.bmp"
+#define MAP_CAVE1_COLLISION "Cave1BuildingCollision.bmp"
+#define MAP_CAVE1_RENDER_ORDER_COLLISION "Cave1FrontCollision.bmp"
+#define MAP_CAVE1_SIZE_H 960.0f
+#define MAP_CAVE1_SIZE_W 1280.0f
+
+#define MAP_CAVE2_BACKGROUND "Cave2Back.bmp"
+#define MAP_CAVE2_BUILDING "Cave2Building.bmp"
+#define MAP_CAVE2_FRONT "Cave2Front.bmp"
+#define MAP_CAVE2_COLLISION "Cave2BuildingCollision.bmp"
+#define MAP_CAVE2_RENDER_ORDER_COLLISION "Cave2FrontCollision.bmp"
+#define MAP_CAVE2_SIZE_H 1680.0f
+#define MAP_CAVE2_SIZE_W 1680.0f
+
 // 컬리전
 #define COL_GROUP_PLAYER "PlayerCollision"
 #define COL_GROUP_PLAYER_ACTION "PlayerActionCollision"
@@ -200,6 +216,8 @@
 #define LEVEL_PLAY "PlayLevel"
 #define LEVEL_SEEDSHOP "SeedShopLevel"
 #define LEVEL_MINES "MinesLevel"
+#define LEVEL_CAVE1 "Cave1Level"
+#define LEVEL_CAVE2 "Cave2Level"
 #define LEVEL_ENDING "EndingLevel"
 
 // 윈도우

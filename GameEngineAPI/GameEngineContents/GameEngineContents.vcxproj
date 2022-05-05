@@ -197,6 +197,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Cave1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Cave2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Clock.h">
       <SubType>
       </SubType>
@@ -497,6 +505,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Bream.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Cave1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Cave2.cpp">
       <SubType>
       </SubType>
     </ClCompile>

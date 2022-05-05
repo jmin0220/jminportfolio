@@ -228,7 +228,13 @@
       <Filter>02Play\Shop</Filter>
     </ClCompile>
     <ClCompile Include="MineLevel.cpp">
-      <Filter>00Level\PlayLevel</Filter>
+      <Filter>00Level\PlayLevel\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Cave1.cpp">
+      <Filter>00Level\PlayLevel\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Cave2.cpp">
+      <Filter>00Level\PlayLevel\Mine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -465,7 +471,13 @@
       <Filter>02Play\Shop</Filter>
     </ClInclude>
     <ClInclude Include="MineLevel.h">
-      <Filter>00Level\PlayLevel</Filter>
+      <Filter>00Level\PlayLevel\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Cave1.h">
+      <Filter>00Level\PlayLevel\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Cave2.h">
+      <Filter>00Level\PlayLevel\Mine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -504,6 +516,9 @@
     </Filter>
     <Filter Include="02Play\Shop">
       <UniqueIdentifier>{c7d29261-0e1c-472e-b384-de69a59243ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00Level\PlayLevel\Mine">
+      <UniqueIdentifier>{872861a0-95c1-4c14-86c7-06ad9b0d2f30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
