@@ -27,6 +27,7 @@ Cave2::Cave2()
 	TileRangeSetting(35, 35);
 	this->Player_->SetGroundTiles(this->GroundTiles_);
 	this->Player_->SetCropsActorSize(35, 35);
+	this->Player_->MineralInit(MAP_CAVE2_COLLISION);
 }
 
 Cave2::~Cave2() 

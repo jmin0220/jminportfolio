@@ -5,10 +5,14 @@
 #include "Jade.h"
 #include "Amethyst.h"
 #include "Topaz.h"
+#include <windows.h>
+
+int MineObject::PrevIndex_ = 0;
 
 MineObject::MineObject() 
 {
 	RandomItem_ = new GameEngineRandom();
+	ItemIndex_ = 0;
 }
 
 MineObject::~MineObject() 
@@ -19,30 +23,46 @@ MineObject::~MineObject()
 
 void MineObject::Start()
 {
+	// 생성될때 무작위 광석이 생성됨
 	Renderer_ = CreateRenderer(IMAGE_ITEM_MINES, (int)ORDER::FRONTA);
-	ItemIndex_ = RandomItem_->RandomInt(0, 4);
+
+	for (;;)
+	{
+		if (PrevIndex_ == ItemIndex_)
+		{
+			ItemIndex_ = RandomItem_->RandomInt(0, 4);
+		}
+		else
+		{
+			PrevIndex_ = ItemIndex_;
+			break;
+		}
+	}
+
+	Renderer_->SetIndex(ItemIndex_);
 }
 
 Item* MineObject::CreateItem()
 {
 	Item* NewItem = nullptr;
 
+	// 생성됐던 Index에 따라서 알맞는 아이템을 생성함
 	switch (ItemIndex_)
 	{
 	case 0:
-		this->GetLevel()->CreateActor<Diamond>();
+		NewItem = this->GetLevel()->CreateActor<Diamond>();
 		break;
 	case 1:
-		this->GetLevel()->CreateActor<Ruby>();
+		NewItem = this->GetLevel()->CreateActor<Ruby>();
 		break;
 	case 2:
-		this->GetLevel()->CreateActor<Jade>();
+		NewItem = this->GetLevel()->CreateActor<Jade>();
 		break;
 	case 3:
-		this->GetLevel()->CreateActor<Amethyst>();
+		NewItem = this->GetLevel()->CreateActor<Amethyst>();
 		break;
 	case 4:
-		this->GetLevel()->CreateActor<Topaz>();
+		NewItem = this->GetLevel()->CreateActor<Topaz>();
 		break;
 	}
 

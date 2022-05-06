@@ -211,6 +211,28 @@ int StringtoItemTable(std::string _Name)
 		return (int)ITEMTABLE::CORN_FRUIT;
 	}
 
+	/// ±¤¼® /////////////////////////////////////////////////////
+	if (ITEM_NAME_DIAMOND == _Name)
+	{
+		return (int)ITEMTABLE::DIAMOND;
+	}
+	if (ITEM_NAME_RUBY == _Name)
+	{
+		return (int)ITEMTABLE::RUBY;
+	}
+	if (ITEM_NAME_JADE == _Name)
+	{
+		return (int)ITEMTABLE::JADE;
+	}
+	if (ITEM_NAME_AMETHYST == _Name)
+	{
+		return (int)ITEMTABLE::AMETHYST;
+	}
+	if (ITEM_NAME_TOPAZ == _Name)
+	{
+		return (int)ITEMTABLE::TOPAZ;
+	}
+
 	// Default
 	return (int)ITEMTABLE::EMPTY;
 }

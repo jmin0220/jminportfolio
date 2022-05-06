@@ -85,6 +85,9 @@ public:
 	void SetVibrate(bool _Flg);
 	void UpdateVibrate();
 
+	// 0->hoe, 1->Axe, 2->pickax
+	int CropType_;
+
 protected:
 	void Start() override {};
 

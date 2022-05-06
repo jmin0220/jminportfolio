@@ -1,10 +1,10 @@
 #pragma once
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
-#include "Item.h"
+#include "Crops.h"
 
 // Ό³Έν :
-class MineObject : public Item
+class MineObject : public Crops
 {
 public:
 	// constrcuter destructer
@@ -22,6 +22,7 @@ protected:
 
 private:
 	int ItemIndex_;
+	static int PrevIndex_;
 	GameEngineRenderer* Renderer_;
 	Item* CreateItem();
 

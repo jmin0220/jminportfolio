@@ -12,7 +12,7 @@ Cave1::Cave1()
 	// 이미지의 좌상단이 0,0이 되도록
 	BackGround_->GetRenderer()->SetPivot({ MAP_CAVE1_SIZE_W / 2, MAP_CAVE1_SIZE_H / 2 });
 	BackGround_->GetRenderer()->SetImage(MAP_CAVE1_BACKGROUND);
-	BackGround_->TileMap_.TileRangeSetting(20, 20, { TILEMAP_SIZE, TILEMAP_SIZE });
+	BackGround_->TileMap_.TileRangeSetting(26, 20, { TILEMAP_SIZE, TILEMAP_SIZE });
 
 	BGBuilding_->GetRenderer()->SetPivot({ MAP_CAVE1_SIZE_W / 2, MAP_CAVE1_SIZE_H / 2 });
 	BGBuilding_->GetRenderer()->SetImage(MAP_CAVE1_BUILDING);
@@ -24,15 +24,15 @@ Cave1::Cave1()
 	this->Player_->SetTileMap(&BackGround_->TileMap_);
 
 	// 타일의 상태를 저장
-	TileRangeSetting(20, 20);
+	TileRangeSetting(26, 20);
 	this->Player_->SetGroundTiles(this->GroundTiles_);
-	this->Player_->SetCropsActorSize(20, 20);
+	this->Player_->SetCropsActorSize(26, 20);
+	this->Player_->MineralInit(MAP_CAVE1_COLLISION);
 }
 
 Cave1::~Cave1() 
 {
 }
-
 
 void Cave1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
@@ -41,12 +41,10 @@ void Cave1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void Cave1::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-
 }
 
 void Cave1::Loading()
 {
-
 }
 
 void Cave1::Update()

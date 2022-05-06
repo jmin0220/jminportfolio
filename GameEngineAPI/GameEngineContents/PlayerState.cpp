@@ -12,9 +12,6 @@
 
 void Player::IdleUpdate()
 {
-	// Idle 상태에서는 액션충돌체 끄기
-	GetActionCollision()->Off();
-
 	// 액션은 이동보다 우선순위가 높음.
 	if (true == IsActionKeyDown())
 	{
@@ -97,9 +94,6 @@ void Player::ActionUpdate()
 	// 애니메이션이 종료되면 액션 실행 후 Idle로 전환
 	if (true == RendererBody_->IsEndAnimation())
 	{
-		// 액션이 끝나는 순간에만 액션충돌체 켜기
-		GetActionCollision()->On();
-
 		// Hoe를 들고 있는경우
 		if (Inventory_->GetSelectedItemName() == ITEM_NAME_HOE)
 		{
@@ -107,7 +101,9 @@ void Player::ActionUpdate()
 			// 플레이어 근처에서 선택할경우, 해당방향으로 변경되면서, 선택한 타일맵에 Dirt를 생성
 
 			// 농작물일경우 부셔짐 처리
-			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr)
+			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr
+				&& (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 0
+					|| EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 2))
 			{
 				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
 				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
@@ -163,7 +159,8 @@ void Player::ActionUpdate()
 		{
 			// 플레이어가 선택한 위치에 있는 액터를 파괴
 			// 나무일경우 부셔짐 처리
-			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr)
+			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr
+				&& EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 1)
 			{
 				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
 				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
@@ -214,9 +211,6 @@ void Player::ActionUpdate()
 					}
 				}
 			}
-
-			GameEngineSound::SoundPlayOneShot(SOUND_AXE);
-
 			// 충돌 결과 초기화
 			ActionColResult_.clear();
 		}
@@ -284,28 +278,24 @@ void Player::MoveUpdate()
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_RIGHT))
 	{
 		PlayerAnimationChange(ANIM_WALK_RIGHT);
-		GetActionCollision()->SetPivot({ PLAYER_ACTION_COL_LENG , 0.0f });
 
 		ColCheck(float4::RIGHT);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_LEFT))
 	{
 		PlayerAnimationChange(ANIM_WALK_LEFT);
-		GetActionCollision()->SetPivot({ -PLAYER_ACTION_COL_LENG , 0.0f });
 
 		ColCheck(float4::LEFT);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_UP))
 	{
 		PlayerAnimationChange(ANIM_WALK_UP);
-		GetActionCollision()->SetPivot({ 0.0f, -PLAYER_ACTION_COL_LENG });
 
 		ColCheck(float4::UP);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress(KEY_MOVE_DOWN))
 	{
 		PlayerAnimationChange(ANIM_WALK_DOWN);
-		GetActionCollision()->SetPivot({ 0.0f, PLAYER_ACTION_COL_LENG });
 
 		ColCheck(float4::DOWN);
 	}

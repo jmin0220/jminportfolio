@@ -11,7 +11,7 @@ Jade::~Jade()
 
 void Jade::Start()
 {
-	IndexNum_ = 4;
+	IndexNum_ = 2;
 
 	SetItemRenderer(*CreateRenderer(IMAGE_ITEM_MINERAL, (int)ORDER::FRONTA));
 	GetItemRenderer().SetIndex(IndexNum_);

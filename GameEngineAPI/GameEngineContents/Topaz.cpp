@@ -11,7 +11,7 @@ Topaz::~Topaz()
 
 void Topaz::Start()
 {
-	IndexNum_ = 8;
+	IndexNum_ = 4;
 
 	SetItemRenderer(*CreateRenderer(IMAGE_ITEM_MINERAL, (int)ORDER::FRONTA));
 	GetItemRenderer().SetIndex(IndexNum_);

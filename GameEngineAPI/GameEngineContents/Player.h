@@ -65,16 +65,6 @@ public:
 		PlayerCollision_ = _Collision;
 	}
 
-	inline GameEngineCollision* GetActionCollision()
-	{
-		return PlayerActionCollision_;
-	}
-
-	inline void SetActionCollision(GameEngineCollision* _Collision)
-	{
-		PlayerActionCollision_ = _Collision;
-	}
-
 	inline float4 GetMoveDir() const
 	{
 		return MoveDir_;
@@ -102,7 +92,6 @@ private:
 
 	// 플레이어의 충돌체
 	GameEngineCollision* PlayerCollision_;
-	GameEngineCollision* PlayerActionCollision_;
 	std::vector<GameEngineCollision*> ActionColResult_;
 
 	// 다음 레벨
@@ -225,8 +214,6 @@ private:
 
 	// 레벨의 타일맵을 저장
 	GameEngineRendererTileMap* LevelTileMap_;
-	// 작물등의 정보를 저장할 액터
-	Crops* LevelEnvironmentActor_;
 	// 필드에 보이는 아이템의 정보를 저장할 액터
 	std::list<Item*> ItemList_;
 
@@ -241,7 +228,7 @@ private:
 	std::vector<std::vector<PlayerTileIndex*>> GroundTiles_;
 	std::vector<std::vector<Crops*>> EnvironmentActor_;
 	void SetGroundTile(int x, int y, PlayerTileIndex* _TileMap, int _TileState);
-	void SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup);
+	void SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup, int _CropType);
 
 public:
 	// 레벨에서 자신의 크기로 타일을 생성하여 플레이어에게 타일의 정보를 넘겨주기 위한 함수
@@ -251,6 +238,7 @@ public:
 	}
 	void SetCropsActorSize(int _X, int _Y);
 
+	void MineralInit(std::string _ColName);
 private:
 	int PlayerTime_;
 
@@ -261,4 +249,5 @@ private:
 	FishingGame* FishingGame_;
 	SeedShop* SeedShop_;
 	bool FishingGameFlg;
+
 };

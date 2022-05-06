@@ -11,7 +11,7 @@ Ruby::~Ruby()
 
 void Ruby::Start()
 {
-	IndexNum_ = 2;
+	IndexNum_ = 1;
 
 	SetItemRenderer(*CreateRenderer(IMAGE_ITEM_MINERAL, (int)ORDER::FRONTA));
 	GetItemRenderer().SetIndex(IndexNum_);

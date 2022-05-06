@@ -37,6 +37,13 @@
 #include "Corn.h"
 #pragma endregion Crops
 
+#include "MineObject.h"
+#include "Diamond.h"
+#include "Ruby.h"
+#include "Jade.h"
+#include "Amethyst.h"
+#include "Topaz.h"
+
 float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 int Player::Gold_ = 1234560;
 
@@ -99,8 +106,6 @@ void Player::Start()
 
 	// 플레이어의 충돌체 생성
 	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
-	SetActionCollision(CreateCollision(COL_GROUP_PLAYER_ACTION, { PLAYER_ACTION_COL_SIZE, PLAYER_ACTION_COL_SIZE }, { PLAYER_ACTION_COL_LENG, 0.0f }));
-	GetActionCollision()->Off();
 }
 
 void Player::Update()
@@ -528,7 +533,8 @@ void Player::ColCheck(float4 _MoveDir)
 	// 충돌판정
 	if (RGB(0, 0, 0) != Color && RGB(0, 0, 255) != Color
 		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_CROPS, CheckLength, CollisionType::Rect, CollisionType::Rect)
-		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_TREES, CheckLength, CollisionType::Rect, CollisionType::Rect))
+		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_TREES, CheckLength, CollisionType::Rect, CollisionType::Rect)
+		&& !PlayerCollision_->NextPosCollisionCheck(COL_GROUP_MINES, CheckLength, CollisionType::Rect, CollisionType::Rect))
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_);
 	}
@@ -984,71 +990,71 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 		{
 		case (int)ITEMTABLE::OAKTREE:
 			// Crop 생성
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), COL_GROUP_TREES);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), COL_GROUP_TREES, 1);
 			break;
 		case (int)ITEMTABLE::MAPLETREE:
 			break;
 		case (int)ITEMTABLE::PINETREE:
 			break;
 		case (int)ITEMTABLE::PARSNIP:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::COULIFLOWER:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Couliflower>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Couliflower>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::GARLIC:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Garlic>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Garlic>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::RHUBARB:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Rhubarb>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Rhubarb>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::TOMATO:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Tomato>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Tomato>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::HOTPEPPER:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Hotpepper>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Hotpepper>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::RADISH:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Radish>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Radish>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::STARFRUIT:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Starfruit>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Starfruit>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::EGGPLANT:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Eggplant>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Eggplant>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::PUMPKIN:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Pumpkin>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Pumpkin>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::YAM:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Yam>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Yam>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::BEET:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Beet>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Beet>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::SUNFLOWER:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Sunflower>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Sunflower>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::GREENBEAN:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Greenbean>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Greenbean>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::POTATO:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Potato>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Potato>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::KALE:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Kale>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Kale>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::MELON:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Melon>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Melon>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::BLUEBERRY:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Blueberry>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Blueberry>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::REDCABBAGE:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Redcabbage>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Redcabbage>()), COL_GROUP_CROPS, 0);
 			break;
 		case (int)ITEMTABLE::CORN:
-			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Corn>()), COL_GROUP_CROPS);
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Corn>()), COL_GROUP_CROPS, 0);
 			break;
 		default:
 			break;
@@ -1319,7 +1325,7 @@ void Player::TileIndexSetting(int x, int y)
 }
 
 // 농작물 설치
-void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup)
+void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGroup, int _CropType)
 {
 	// 해당 위치가 비어있을때만 생성
 	if (nullptr == EnvironmentActor_[y][x])
@@ -1333,7 +1339,7 @@ void Player::SetCropsActor(int x, int y, Crops* _CropActor, std::string _ColGrou
 		EnvironmentActor_[y][x]->CreateCollision(_ColGroup, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
 
 		EnvironmentActor_[y][x]->GetRenderer()->SetOrder((int)ORDER::PLAYER);
-
+		EnvironmentActor_[y][x]->CropType_ = _CropType;
 
 		// 사용된 아이템의 숫자를 감소
 		Inventory_->GetInventoryList()[Inventory_->GetSelectedItemNum()]->SubCounter();
@@ -1381,5 +1387,31 @@ void Player::ItemUpdate()
 		}
 
 		++Start;
+	}
+}
+
+// 광석 초기설정
+void Player::MineralInit(std::string _ColName)
+{
+	// 컬리전맵을 한번 순환하여 RGB(255, 0, 0)일경우 그 위치에 광석 생성
+	GameEngineImage* MineralInitImage_ = GameEngineImageManager::GetInst()->Find(_ColName);
+	float4 CheckPos = { 0.0f, 0.0f };
+	int Color = 0;
+	
+	// EnvironmentActor_[y][x]
+	for (int y = 0; y < EnvironmentActor_.size(); y++)
+	{
+		for (int x = 0; x < EnvironmentActor_[y].size(); x++)
+		{
+			CheckPos = { TILEMAP_SIZE * x + TILEMAP_SIZE / 2, TILEMAP_SIZE * y + TILEMAP_SIZE / 2 };
+			Color = MineralInitImage_->GetImagePixel(CheckPos);
+
+			if (RGB(255, 0, 0) == Color)
+			{
+				EnvironmentActor_[y][x] = static_cast<Crops*>(GetLevel()->CreateActor<MineObject>());
+				EnvironmentActor_[y][x]->SetPosition({ TILEMAP_SIZE * x + TILEMAP_SIZE / 2, TILEMAP_SIZE * y + TILEMAP_SIZE / 2 });
+				EnvironmentActor_[y][x]->CreateCollision(COL_GROUP_MINES, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+			}
+		}
 	}
 }

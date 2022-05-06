@@ -22,6 +22,5 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-
 };
 

@@ -64,6 +64,12 @@ enum class ITEMTABLE
 	BLUEBERRY_FRUIT,
 	REDCABBAGE_FRUIT,
 	CORN_FRUIT,
+	// 광석
+	DIAMOND,
+	RUBY,
+	JADE,
+	AMETHYST,
+	TOPAZ,
 };
 
 // 아이템을 인벤토리에 추가할때 문자열로 된 아이템을 enum으로 변환하여 리턴

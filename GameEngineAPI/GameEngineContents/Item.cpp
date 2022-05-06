@@ -387,6 +387,41 @@ void Item::SetIconRendererInfo(int _ItemNum)
 		Countable = true;
 		ItemName_ = ITEM_NAME_CORN_FRUIT;
 		break;
+
+
+	/// 광석에서 발생한 아이템  //////////////////////////////
+	case (int)ITEMTABLE::DIAMOND:
+		IconRenderer_->SetImage(IMAGE_ITEM_MINERAL);
+		IndexNum_ = 0;
+		Countable = true;
+		ItemName_ = ITEM_NAME_DIAMOND;
+		break;
+	case (int)ITEMTABLE::RUBY:
+		IconRenderer_->SetImage(IMAGE_ITEM_MINERAL);
+		IndexNum_ = 1;
+		Countable = true;
+		ItemName_ = ITEM_NAME_RUBY;
+		break;
+	case (int)ITEMTABLE::JADE:
+		IconRenderer_->SetImage(IMAGE_ITEM_MINERAL);
+		IndexNum_ = 2;
+		Countable = true;
+		ItemName_ = ITEM_NAME_JADE;
+		break;
+	case (int)ITEMTABLE::AMETHYST:
+		IconRenderer_->SetImage(IMAGE_ITEM_MINERAL);
+		IndexNum_ = 3;
+		Countable = true;
+		ItemName_ = ITEM_NAME_AMETHYST;
+		break;
+	case (int)ITEMTABLE::TOPAZ:
+		IconRenderer_->SetImage(IMAGE_ITEM_MINERAL);
+		IndexNum_ = 4;
+		Countable = true;
+		ItemName_ = ITEM_NAME_TOPAZ;
+		break;
+
+
 	default:
 		IconRenderer_->SetImage(IMAGE_INVENTORY_EMPTY);
 		IndexNum_ = -1;

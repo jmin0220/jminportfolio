@@ -2,6 +2,7 @@
 
 Crops::Crops() 
 	: VibrateFlg(false)
+	, CropType_(0)
 {
 	RandomItem_ = new GameEngineRandom();
 	VibratePivot_ = new GameEngineRandom();

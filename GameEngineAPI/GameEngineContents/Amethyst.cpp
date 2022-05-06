@@ -11,7 +11,7 @@ Amethyst::~Amethyst()
 
 void Amethyst::Start()
 {
-	IndexNum_ = 6;
+	IndexNum_ = 3;
 
 	SetItemRenderer(*CreateRenderer(IMAGE_ITEM_MINERAL, (int)ORDER::FRONTA));
 	GetItemRenderer().SetIndex(IndexNum_);

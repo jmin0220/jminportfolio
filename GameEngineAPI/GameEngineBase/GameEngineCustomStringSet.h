@@ -16,8 +16,6 @@
 
 // 수치
 #define PLAYER_COL_SIZE 30
-#define PLAYER_ACTION_COL_SIZE 15
-#define PLAYER_ACTION_COL_LENG 24.0f
 
 // 디렉토리
 #define DIR_PARENT "GameEngineAPI"
@@ -201,12 +199,13 @@
 #define COL_GROUP_INVENTORY_BOX "InventoryBox"
 #define COL_GROUP_INVENTORY_EXTEND_BOX "InventoryExtendBox"
 #define COL_GROUP_CROPS "CropsCol"
+#define COL_GROUP_MINES "MinesCol"
 #define COL_GROUP_TREES "TreeCol"
 #define COL_GROUP_FISH_HITBOX "FishHitBox"
 #define COL_GROUP_CATCH_HITBOX "CatchHitBox"
 
 // 타일맵
-#define TILEMAP_SIZE 48
+#define TILEMAP_SIZE 48.0f
 
 // 레벨
 #define LEVEL_CHANGE_FARM "LevelChangeFarm"
