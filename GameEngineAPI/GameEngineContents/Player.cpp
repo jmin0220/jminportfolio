@@ -15,6 +15,8 @@
 #pragma region Crops
 #include "ItemTable.h"
 #include "Oaktree.h"
+#include "Pinetree.h"
+#include "Mapletree.h"
 #include "Parsnip.h"
 #include "Couliflower.h"
 #include "Garlic.h"
@@ -76,6 +78,8 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::MAPLETREE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PINETREE);
 
 	Inventory_->InventoryInit();
 }
@@ -993,8 +997,12 @@ void Player::CreatePlayerTileIndex(float4 _Pos, int _EnvironemntTileIndex, int _
 			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Oaktree>()), COL_GROUP_TREES, 1);
 			break;
 		case (int)ITEMTABLE::MAPLETREE:
+			// Crop 持失
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Mapletree>()), COL_GROUP_TREES, 1);
 			break;
 		case (int)ITEMTABLE::PINETREE:
+			// Crop 持失
+			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Pinetree>()), COL_GROUP_TREES, 1);
 			break;
 		case (int)ITEMTABLE::PARSNIP:
 			SetCropsActor(PosX, PosY, static_cast<Crops*>(GetLevel()->CreateActor<Parsnip>()), COL_GROUP_CROPS, 0);

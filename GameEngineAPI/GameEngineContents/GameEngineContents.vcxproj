@@ -331,6 +331,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Mapletree.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Melon.h">
       <SubType>
       </SubType>
@@ -361,6 +365,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ParsnipFruit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Pinetree.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -652,6 +660,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Mapletree.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Melon.cpp">
       <SubType>
       </SubType>
@@ -682,6 +694,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ParsnipFruit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Pinetree.cpp">
       <SubType>
       </SubType>
     </ClCompile>

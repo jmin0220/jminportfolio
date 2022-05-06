@@ -128,6 +128,19 @@ int StringtoItemTable(std::string _Name)
 	}
 
 
+	/// 물고기 /////////////////////////////////////////////////////
+	if (ITEM_NAME_PUFFERFISH == _Name)
+	{
+		return (int)ITEMTABLE::PUFFERFISH;
+	}
+	if (ITEM_NAME_TUNA == _Name)
+	{
+		return (int)ITEMTABLE::TUNA;
+	}
+	if (ITEM_NAME_ANCHOVY == _Name)
+	{
+		return (int)ITEMTABLE::ANCHOVY;
+	}
 
 	/// 열매 /////////////////////////////////////////////////////
 	if (ITEM_NAME_PARSNIP_FRUIT == _Name)
