@@ -11,6 +11,7 @@ enum class ITEMTABLE
 	// 장비
 	HOE,			
 	AXE,
+	PICKAXE,
 	WATERINGCAN,
 	FISHINGROD,
 	// 나무

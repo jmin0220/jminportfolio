@@ -72,6 +72,7 @@ void Player::PlayerInit()
 	// 인벤토리 초기설정
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PICKAXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::FISHINGROD);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
@@ -309,6 +310,12 @@ void Player::PlayerAnimationInit()
 	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_LEFT, 15 * oneline + 1, 15 * oneline + 1, 0.1f, true);
 	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_DOWN, 12 * oneline, 12 * oneline, 0.1f, true);
 	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_FISHING_WAIT_UP, 5, 5, 1.0f, true);
+
+	// 곡괭이
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_PICKAXE_RIGHT, 16 * oneline, 16 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_PICKAXE_LEFT, 17 * oneline, 17 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_PICKAXE_DOWN, 18 * oneline, 18 * oneline + 4, 0.1f, true);
+	RendererTool_->CreateAnimation(IMAGE_TOOL_ANIM, TOOL_ANIM_PICKAXE_UP, 19 * oneline, 19 * oneline + 3, 0.1f, true);
 
 	// 아무것도 없는 상태로 시작
 	RendererTool_->ChangeAnimation(TOOL_ANIM_IDLE);
@@ -1391,7 +1398,7 @@ void Player::ItemUpdate()
 		else if (Check <= 70)
 		{
 			Dir.Normal2D();
-			(*Start)->SetMove(Dir * GameEngineTime::GetDeltaTime() * 100.0f);
+			(*Start)->SetMove(Dir * GameEngineTime::GetDeltaTime() * 300.0f);
 		}
 
 		++Start;
@@ -1419,6 +1426,7 @@ void Player::MineralInit(std::string _ColName)
 				EnvironmentActor_[y][x] = static_cast<Crops*>(GetLevel()->CreateActor<MineObject>());
 				EnvironmentActor_[y][x]->SetPosition({ TILEMAP_SIZE * x + TILEMAP_SIZE / 2, TILEMAP_SIZE * y + TILEMAP_SIZE / 2 });
 				EnvironmentActor_[y][x]->CreateCollision(COL_GROUP_MINES, { TILEMAP_SIZE - 18, TILEMAP_SIZE - 18 });
+				EnvironmentActor_[y][x]->CropType_ = 2;
 			}
 		}
 	}

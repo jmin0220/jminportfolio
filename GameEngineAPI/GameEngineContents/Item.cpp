@@ -97,6 +97,12 @@ void Item::SetIconRendererInfo(int _ItemNum)
 		Countable = false;
 		ItemName_ = ITEM_NAME_FISHINGROD;
 		break;
+	case (int)ITEMTABLE::PICKAXE:
+		IconRenderer_->SetImage(IMAGE_TOOL_ICON);
+		IndexNum_ = 4;
+		Countable = false;
+		ItemName_ = ITEM_NAME_PICKAXE;
+		break;
 	/// ³ª¹« ///////////////////////////////////////////////////////////////
 	case (int)ITEMTABLE::OAKTREE:
 		IconRenderer_->SetImage(IMAGE_ENVIRONMENT_FORAGE);

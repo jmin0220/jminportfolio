@@ -17,6 +17,10 @@ int StringtoItemTable(std::string _Name)
 	{
 		return (int)ITEMTABLE::AXE;
 	}
+	if (ITEM_NAME_PICKAXE == _Name)
+	{
+		return (int)ITEMTABLE::PICKAXE;
+	}
 	if (ITEM_NAME_WATERINGCAN == _Name)
 	{
 		return (int)ITEMTABLE::WATERINGCAN;

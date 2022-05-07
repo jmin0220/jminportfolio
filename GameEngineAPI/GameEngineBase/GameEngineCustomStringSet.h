@@ -244,6 +244,7 @@
 #define ANIM_KEYWORD_TOOL_IDLE "ToolIdle"
 #define ANIM_KEYWORD_TOOL_HOE "Hoe"
 #define ANIM_KEYWORD_TOOL_AXE "Axe"
+#define ANIM_KEYWORD_TOOL_PICKAXE "Pickaxe"
 #define ANIM_KEYWORD_TOOL_WATERING "ToolWatering"
 #define ANIM_KEYWORD_TOOL_FISHING "ToolFishing"
 #define ANIM_KEYWORD_TOOL_FISHING_WAIT "ToolFishingWait"
@@ -294,6 +295,11 @@
 #define TOOL_ANIM_AXE_DOWN "AxeDown"
 #define TOOL_ANIM_AXE_UP "AxeUp"
 
+#define TOOL_ANIM_PICKAXE_RIGHT "PickaxeRight"
+#define TOOL_ANIM_PICKAXE_LEFT "PickaxeLeft"
+#define TOOL_ANIM_PICKAXE_DOWN "PickaxeDown"
+#define TOOL_ANIM_PICKAXE_UP "PickaxeUp"
+
 #define TOOL_ANIM_WATERINGCAN_RIGHT "ToolWateringRight"
 #define TOOL_ANIM_WATERINGCAN_LEFT "ToolWateringLeft"
 #define TOOL_ANIM_WATERINGCAN_DOWN "ToolWateringDown"
@@ -316,6 +322,7 @@
 #define ITEM_NAME_AXE "Axe"
 #define ITEM_NAME_WATERINGCAN "WateringCan"
 #define ITEM_NAME_FISHINGROD "FishingRod"
+#define ITEM_NAME_PICKAXE "Pickaxe"
 // ³ª¹«
 #define ITEM_NAME_OAKTREE "OakTree"
 #define ITEM_NAME_MAPLETREE "MapleTree"

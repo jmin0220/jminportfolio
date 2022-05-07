@@ -40,6 +40,7 @@ void MineObject::Start()
 	}
 
 	Renderer_->SetIndex(ItemIndex_);
+	SetHp(3);
 }
 
 Item* MineObject::CreateItem()
@@ -72,4 +73,9 @@ Item* MineObject::CreateItem()
 	NewItem->SetPosition({ PosX, PosY });
 
 	return NewItem;
+}
+
+void MineObject::Update()
+{
+	UpdateVibrate();
 }

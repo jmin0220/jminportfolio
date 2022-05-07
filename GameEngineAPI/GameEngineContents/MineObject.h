@@ -19,11 +19,14 @@ public:
 
 protected:
 	void Start() override;
+	void Update() override;
 
 private:
 	int ItemIndex_;
+	// 광석이 중복으로 생성되는것을 방지하기 위해
 	static int PrevIndex_;
-	GameEngineRenderer* Renderer_;
+
+	// 파괴되었을때 아이템 생성
 	Item* CreateItem();
 
 	GameEngineRandom* RandomItem_;

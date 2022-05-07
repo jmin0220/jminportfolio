@@ -102,8 +102,7 @@ void Player::ActionUpdate()
 
 			// 농작물일경우 부셔짐 처리
 			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr
-				&& (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 0
-					|| EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 2))
+				&& (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 0))
 			{
 				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
 				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
@@ -213,6 +212,48 @@ void Player::ActionUpdate()
 			}
 			// 충돌 결과 초기화
 			ActionColResult_.clear();
+		}
+		// Pickaxe를 들고 있는경우
+		else if (Inventory_->GetSelectedItemName() == ITEM_NAME_PICKAXE)
+		{
+			if (EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x] != nullptr
+				&& EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x]->CropType_ == 2)
+			{
+				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
+				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
+				ResultCrops->SetVibrate(true);
+
+				// Hp가 0이 되면 파괴
+				if (ResultCrops->GetHp() <= 0)
+				{
+					ResultCrops->Destroy();
+
+					int ItemNum = PlayerRandom_->RandomInt(1, 4);
+
+					// 아이템 생성
+					for (size_t i = 0; i < ItemNum; i++)
+					{
+						AddItem(ResultCrops->CreateItem());
+					}
+
+					// 파괴처리 후 배열을 nullptr로 초기화
+					for (size_t i = 0; i < EnvironmentActor_.size(); i++)
+					{
+						for (size_t j = 0; j < EnvironmentActor_[i].size(); j++)
+						{
+							if (ResultCrops == EnvironmentActor_[i][j])
+							{
+								EnvironmentActor_[i][j] = nullptr;
+								break;
+							}
+						}
+					}
+				}
+
+				// 충돌 결과 초기화
+				ActionColResult_.clear();
+				GameEngineSound::SoundPlayOneShot(SOUND_HOEHIT);
+			}
 		}
 		// 나무, 씨앗일경우
 		else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
@@ -399,6 +440,12 @@ void Player::ActionStart()
 	{
 		Anim = ANIM_KEYWORD_HIT_HORIZON;
 		ToolAnim = ANIM_KEYWORD_TOOL_AXE;
+	}
+	// Axe를 들고 있는경우
+	else if (Inventory_->GetSelectedItemName() == ITEM_NAME_PICKAXE)
+	{
+		Anim = ANIM_KEYWORD_HIT_HORIZON;
+		ToolAnim = ANIM_KEYWORD_TOOL_PICKAXE;
 	}
 	else if ((int)ITEMTABLE::OAKTREE <= StringtoItemTable(Inventory_->GetSelectedItemName())
 		&& StringtoItemTable(Inventory_->GetSelectedItemName()) <= (int)ITEMTABLE::CORN)
