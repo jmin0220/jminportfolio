@@ -50,7 +50,7 @@ float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 int Player::Gold_ = 1234560;
 
 Player::Player()
-	:Speed_(500.0f)
+	:Speed_(200.0f)
 	, MoveDir_(float4::DOWN)
 	, NextLevel_("")
 	, InventoryClickFlg_(false)
@@ -611,7 +611,7 @@ void Player::ColCheck(float4 _MoveDir)
 		}
 		if (RGB(0, 255, 255) == Color)
 		{
-			SetNextLevelPos({ 500.0f, 230.0f });
+			SetNextLevelPos({ 660.0f, 230.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_CAVE1);
 		}
 	}
@@ -619,7 +619,7 @@ void Player::ColCheck(float4 _MoveDir)
 	{
 		if (RGB(0, 255, 255) == Color)
 		{
-			SetNextLevelPos({ 2600.0f, 960.0f });
+			SetNextLevelPos({ 1125.0f, 410.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_MINES);
 		}
 		if (RGB(0, 255, 0) == Color)
