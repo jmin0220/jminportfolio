@@ -385,6 +385,7 @@
 
 // »ç¿îµå
 #define SOUND_AXE "axe.wav"
+#define SOUND_BRICK "brick1.wav"
 #define SOUND_COINS "coins.wav"
 #define SOUND_REEL "slowReel.wav"
 #define SOUND_FISHBITE "fishBite.wav"

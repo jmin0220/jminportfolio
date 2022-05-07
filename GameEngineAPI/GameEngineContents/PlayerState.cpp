@@ -252,7 +252,7 @@ void Player::ActionUpdate()
 
 				// 충돌 결과 초기화
 				ActionColResult_.clear();
-				GameEngineSound::SoundPlayOneShot(SOUND_HOEHIT);
+				GameEngineSound::SoundPlayOneShot(SOUND_BRICK);
 			}
 		}
 		// 나무, 씨앗일경우
