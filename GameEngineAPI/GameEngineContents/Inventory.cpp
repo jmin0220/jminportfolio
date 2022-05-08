@@ -357,6 +357,7 @@ void Inventory::DeleteItem(int i)
 	InventoryList_[i]->SetItemName(ITEM_NAME_EMPTY);
 	InventoryList_[i]->Font_[0]->GetRendererFont()->Off();
 	InventoryList_[i]->Font_[1]->GetRendererFont()->Off();
+	InventoryList_[i]->SetIndexNum(0);
 	InventoryList_[i]->Countable = false;
 	InventoryList_[i]->Counter_ = "0";
 

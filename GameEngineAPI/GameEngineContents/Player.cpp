@@ -50,7 +50,7 @@ float4 Player::NextLevelPos_ = { 3200.0f, 820.0f };
 int Player::Gold_ = 1234560;
 
 Player::Player()
-	:Speed_(200.0f)
+	:Speed_(300.0f)
 	, MoveDir_(float4::DOWN)
 	, NextLevel_("")
 	, InventoryClickFlg_(false)
@@ -71,16 +71,22 @@ void Player::PlayerInit()
 {
 	// 인벤토리 초기설정
 	Inventory_->AddItemToInventory((int)ITEMTABLE::HOE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::AXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PICKAXE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::WATERINGCAN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::FISHINGROD);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PARSNIP);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::MAPLETREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PINETREE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::GARLIC);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::RHUBARB);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::TOMATO);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::HOTPEPPER);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::RADISH);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::STARFRUIT);
+	Inventory_->AddItemToInventory((int)ITEMTABLE::YAM);
 
 	Inventory_->InventoryInit();
 }
@@ -596,7 +602,7 @@ void Player::ColCheck(float4 _MoveDir)
 	}
 	else if (GetCurrentLevel() == LEVEL_SEEDSHOP)
 	{
-		if (RGB(255, 0, 0) == Color)
+		if (RGB(0, 255, 0) == Color)
 		{
 			SetNextLevelPos({ 2112.0f, 2778.0f });
 			GameEngine::GetInst().ChangeLevel(LEVEL_TOWN);
