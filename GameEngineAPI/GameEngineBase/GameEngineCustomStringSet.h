@@ -111,6 +111,7 @@
 #define KEY_CLOSE "CloseShop"
 #define KEY_DEBUG "DebugSwitch"
 #define KEY_FISHGAME_UP "FishgameUp"
+#define KEY_COLLISIONMAP_UP "ColMapUp"
 
 // 인벤토리 선택 단축키
 #define KEY_INVEN_SELECT_1 "INVEN_SEL_1"

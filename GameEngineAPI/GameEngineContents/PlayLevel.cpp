@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 PlayLevel::PlayLevel()
+	: ColMapFlg_(false)
 {
 	// Ä³¸¯ÅÍ
 	Player_ = CreateActor<Player>((int)ORDER::PLAYER);

@@ -38,6 +38,9 @@ protected:
 	BackGround* BGBuilding_;
 	BackGround* BGFront_;
 	BackGround* BGAlwaysFront_;
+	BackGround* BGCollisionMap_;
+
+	bool ColMapFlg_;
 
 	// 타일 초기화
 	void TileRangeSetting(int _X, int _Y);
