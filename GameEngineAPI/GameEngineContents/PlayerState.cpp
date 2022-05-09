@@ -164,12 +164,12 @@ void Player::ActionUpdate()
 				Crops* ResultCrops = EnvironmentActor_[CurserPosOnTileMap_.y][CurserPosOnTileMap_.x];
 				ResultCrops->SetHp(ResultCrops->GetHp() - 1);
 				ResultCrops->SetVibrate(true);
+				GameEngineSound::SoundPlayOneShot(SOUND_AXE);
 
 				// Hp가 0이 되면 파괴
 				if (ResultCrops->GetHp() <= 0)
 				{
 					ResultCrops->Destroy();
-					GameEngineSound::SoundPlayOneShot(SOUND_STUMPCRACK);
 
 					// 최대 성장 상태에서 파괴되었을경우 아이템 생성
 					if (ResultCrops->GetMaxLevel() <= ResultCrops->GetGrowLevel())

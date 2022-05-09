@@ -76,7 +76,6 @@ void Player::PlayerInit()
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PICKAXE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::FISHINGROD);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::OAKTREE);
-	Inventory_->AddItemToInventory((int)ITEMTABLE::MAPLETREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PINETREE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::KALE);
 	Inventory_->AddItemToInventory((int)ITEMTABLE::PUMPKIN);
