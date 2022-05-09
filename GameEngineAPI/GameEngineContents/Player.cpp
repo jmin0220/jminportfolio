@@ -115,7 +115,8 @@ void Player::Start()
 	GetLevel()->YSortOn((int)ORDER::PLAYER);
 
 	// 플레이어의 충돌체 생성
-	SetCollision(CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE }));
+	PlayerCollision_ = CreateCollision(COL_GROUP_PLAYER, { PLAYER_COL_SIZE, PLAYER_COL_SIZE });
+	PlayerCollision_->CameraEffectOn();
 }
 
 void Player::Update()
@@ -348,6 +349,7 @@ void Player::PlayerKeyInit()
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_RIGHT, 'D');
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_UP, 'W');
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_DOWN, 'S');
+		GameEngineInput::GetInst()->CreateKey(KEY_DEBUG, 'Z');
 	}
 }
 

@@ -3,6 +3,7 @@
 #include "ContentsEnums.h"
 #include "FarmBuilding.h"
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 FarmLevel::FarmLevel() 
 {
@@ -75,5 +76,11 @@ void FarmLevel::Update()
 	{
 		BGFront_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTB);
 		FarmBuilding_->GetRenderer()->GameEngineRenderer::SetOrder((int)ORDER::FRONTB);
+	}
+
+
+	if (true == GameEngineInput::GetInst()->IsDown(KEY_DEBUG))
+	{
+		GameEngineLevel::IsDebugModeSwitch();
 	}
 }

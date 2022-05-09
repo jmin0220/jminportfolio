@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngine/GameEngineCollision.h>
 #include "Item.h"
 
 // Ό³Έν :
@@ -111,7 +112,6 @@ protected:
 
 	bool VibrateFlg;
 private:
-
 
 };
 

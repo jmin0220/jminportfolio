@@ -109,6 +109,7 @@
 #define KEY_INTERACT "Interact"
 #define KEY_INVEN_EXTEND "InventoryExtend"
 #define KEY_CLOSE "CloseShop"
+#define KEY_DEBUG "DebugSwitch"
 
 // 인벤토리 선택 단축키
 #define KEY_INVEN_SELECT_1 "INVEN_SEL_1"

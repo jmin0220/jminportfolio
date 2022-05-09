@@ -329,6 +329,11 @@ void GameEngineLevel::ActorRender()
 
 void GameEngineLevel::CollisionDebugRender()
 {
+	if (false == IsDebug)
+	{
+		return;
+	}
+
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupStart = AllCollision_.begin();
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupEnd = AllCollision_.end();
 
