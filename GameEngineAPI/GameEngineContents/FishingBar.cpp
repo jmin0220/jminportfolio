@@ -186,19 +186,26 @@ void FishingBar::LureUpdate()
 
 	if (LureTimeCount_ >= 10)
 	{
-		int State = Random_->RandomInt(0, 7);
-
-		if (State >= 0 && State <= 2)
+		if (true == GameEngineInput::GetInst()->IsPress(KEY_FISHGAME_UP))
 		{
 			LureCurState_ = LureState::MoveUp;
 		}
-		else if (State >= 3 && State <= 5)
-		{
-			LureCurState_ = LureState::MoveDown;
-		}
 		else
 		{
-			LureCurState_ = LureState::Idle;
+			int State = Random_->RandomInt(0, 7);
+
+			if (State >= 0 && State <= 2)
+			{
+				LureCurState_ = LureState::MoveUp;
+			}
+			else if (State >= 3 && State <= 5)
+			{
+				LureCurState_ = LureState::MoveDown;
+			}
+			else
+			{
+				LureCurState_ = LureState::Idle;
+			}
 		}
 
 		LureTimeCount_ = 0;

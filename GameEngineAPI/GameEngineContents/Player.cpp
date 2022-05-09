@@ -350,6 +350,7 @@ void Player::PlayerKeyInit()
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_UP, 'W');
 		GameEngineInput::GetInst()->CreateKey(KEY_MOVE_DOWN, 'S');
 		GameEngineInput::GetInst()->CreateKey(KEY_DEBUG, 'Z');
+		GameEngineInput::GetInst()->CreateKey(KEY_FISHGAME_UP, 'Q');
 	}
 }
 
